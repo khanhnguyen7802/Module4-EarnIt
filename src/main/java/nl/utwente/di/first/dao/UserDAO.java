@@ -81,15 +81,14 @@ public class UserDAO {
             preparedStatement.setString(1, student.getEmail());
             preparedStatement.setString(2, student.getPassword());
 
-            query = "INSERT INTO student(email, first, last, birth, university, study, lvStudy) values (?, ?, ?, ?, ?, ?, ?)";
+            query = "INSERT INTO student(name, university, birth, study, skills, btw_num) values (?, ?, ?, ?, ?, ?)";
             preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, student.getEmail());
-            preparedStatement.setString(2, student.getName());
-            preparedStatement.setString(3, student.getName());
-            preparedStatement.setString(4, student.getBirth());
-            preparedStatement.setString(5, student.getUniversity());
-            preparedStatement.setString(6, student.getStudy());
-            preparedStatement.setString(7, student.getLvStudy());
+            preparedStatement.setString(1, student.getName());
+            preparedStatement.setString(2, student.getUniversity());
+            preparedStatement.setString(3, student.getBirth());
+            preparedStatement.setString(4, student.getStudy());
+            preparedStatement.setString(5, student.getSkills());
+            preparedStatement.setString(6, student.getBtw_num());
             if (preparedStatement.executeUpdate() != 0) {
                 return true;
             }
@@ -107,13 +106,13 @@ public class UserDAO {
             preparedStatement.setString(1, company.getEmail());
             preparedStatement.setString(2, company.getPassword());
 
-            query = "INSERT INTO company(email, name, location, field, contact) values (?, ?, ?, ?, ?)";
+            query = "INSERT INTO company(name, location, field, contact, kvk_num) values (?, ?, ?, ?, ?)";
             preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, company.getEmail());
-            preparedStatement.setString(2, company.getName());
-            preparedStatement.setString(3, company.getLocation());
-            preparedStatement.setString(4, company.getField());
-            preparedStatement.setString(5, company.getContact());
+            preparedStatement.setString(1, company.getName());
+            preparedStatement.setString(2, company.getLocation());
+            preparedStatement.setString(3, company.getField());
+            preparedStatement.setString(4, company.getContact());
+            preparedStatement.setString(5, company.getKvk_num());
             if (preparedStatement.executeUpdate() != 0) {
                 return true;
             }

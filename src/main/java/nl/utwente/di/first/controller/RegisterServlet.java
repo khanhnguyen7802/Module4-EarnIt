@@ -26,11 +26,13 @@ public class RegisterServlet extends HttpServlet {
         if (role.equals("STUDENT")) {
             Student student = new Student();
             student.setEmail(request.getParameter("email"));
-            student.setName(request.getParameter("name"));
             student.setPassword(request.getParameter("password"));
-            student.setBirth(request.getParameter("birth"));
+            student.setName(request.getParameter("name"));
             student.setUniversity(request.getParameter("university"));
-            student.setLvStudy(request.getParameter("lvStudy"));
+            student.setBirth(request.getParameter("birth"));
+            student.setStudy(request.getParameter("study"));
+            student.setSkills(request.getParameter("skills"));
+            student.setBtw_num(request.getParameter("btw_num"));
 
             boolean status = userDao.registerStudent(student);
             if (status) {
@@ -42,11 +44,12 @@ public class RegisterServlet extends HttpServlet {
         } else if (role.equals("COMPANY")) {
             Company company = new Company();
             company.setEmail(request.getParameter("email"));
-            company.setName(request.getParameter("name"));
             company.setPassword(request.getParameter("password"));
+            company.setName(request.getParameter("name"));
             company.setLocation(request.getParameter("location"));
             company.setField(request.getParameter("field"));
             company.setContact(request.getParameter("contact"));
+            company.setKvk_num(request.getParameter("kvk_num"));
 
             boolean status = userDao.registerCompany(company);
             if (status){
