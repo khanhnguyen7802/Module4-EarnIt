@@ -4,7 +4,9 @@ import nl.utwente.di.first.model.Company;
 import nl.utwente.di.first.model.Student;
 import nl.utwente.di.first.model.User;
 import nl.utwente.di.first.util.DBConnection;
+import nl.utwente.di.first.util.Security;
 
+import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 
 public class UserDAO {
@@ -13,25 +15,27 @@ public class UserDAO {
     }
 
     public String loginUser(User user) throws SQLException {
-        String email = user.getEmail(); // login data
-        String password = user.getPassword(); // login data
+        String email = user.getEmail(); // user input
+        String originalPassword = user.getPassword(); // user input
 
         try {
             Connection connection = DBConnection.createConnection();
-            String query = "SELECT email, password " +
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                    "SELECT * " +
                     "FROM \"user\" " +
-                    "WHERE email = ? AND password = ?";
-
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+                    "WHERE email = ?"
+            );
             preparedStatement.setString(1, email);
-            preparedStatement.setString(2, password);
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            if (resultSet.next()) {
-                String emailDB = resultSet.getString("email"); // data retrieved in database
-                String passwordDB = resultSet.getString("password"); // data retrieved in database
+            while(resultSet.next()) {
+                String emailDB = resultSet.getString("email"); // email in db
+                String passwordDB = resultSet.getString("password"); // hashed password in db
+                String salt = resultSet.getString("salt");
 
-                if (email.equals(emailDB) && password.equals(passwordDB)) {
+                String hashedFinalPassword = Security.saltSHA256(originalPassword, Security.toByteArray(salt));
+
+                if (email.equals(emailDB) && hashedFinalPassword.equals(passwordDB)) {
                     // TODO: Query from table "student"
                     String queryStudent = "SELECT email " +
                             "FROM student " +
@@ -67,6 +71,7 @@ public class UserDAO {
                     }
                 }
             }
+
         } catch(SQLException e){
                 throw new RuntimeException(e);
             }
@@ -76,23 +81,37 @@ public class UserDAO {
     public boolean registerStudent(Student student) {
         try {
             Connection connection = DBConnection.createConnection();
-            String query = "INSERT INTO \"user\"(email, password) values (?, ?)";
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, student.getEmail());
-            preparedStatement.setString(2, student.getPassword());
+            String finalHashedPassword = "";
+            byte[] salt = Security.getSalt();
+            String stringSalt = Security.toHex(salt); // this one to save into database
+            String passwordToHash = student.getPassword();
 
-            query = "INSERT INTO student(name, university, birth, study, skills, btw_num) values (?, ?, ?, ?, ?, ?)";
-            preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, student.getName());
-            preparedStatement.setString(2, student.getUniversity());
-            preparedStatement.setString(3, student.getBirth());
-            preparedStatement.setString(4, student.getStudy());
-            preparedStatement.setString(5, student.getSkills());
-            preparedStatement.setString(6, student.getBtw_num());
-            if (preparedStatement.executeUpdate() != 0) {
+            finalHashedPassword = Security.saltSHA256(passwordToHash, salt);
+
+            String insertUserQuery = "INSERT INTO \"user\"(email, password, salt) VALUES (?, ?, ?)";
+
+            PreparedStatement insertUserStatement = connection.prepareStatement(insertUserQuery);
+            insertUserStatement.setString(1, student.getEmail());
+            insertUserStatement.setString(2, finalHashedPassword);
+            insertUserStatement.setString(3, stringSalt);
+            insertUserStatement.execute();
+
+
+            String insertStudentQuery = "INSERT INTO student(name, university, birthdate, study, skills, btw_num) VALUES (?, ?, ?, ?, ?, ?)";
+            PreparedStatement insertStudentStatement = connection.prepareStatement(insertStudentQuery);
+            insertStudentStatement.setString(1, student.getName());
+            insertStudentStatement.setString(2, student.getUniversity());
+            insertStudentStatement.setString(3, student.getBirth());
+            insertStudentStatement.setString(4, student.getStudy());
+            insertStudentStatement.setString(5, student.getSkills());
+            insertStudentStatement.setString(6, student.getBtw_num());
+
+            if (insertStudentStatement.executeUpdate() != 0) {
                 return true;
             }
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
         return false;
@@ -101,22 +120,34 @@ public class UserDAO {
     public boolean registerCompany(Company company) {
         try {
             Connection connection = DBConnection.createConnection();
-            String query = "INSERT INTO accounts(email, password) values (?, ?)";
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, company.getEmail());
-            preparedStatement.setString(2, company.getPassword());
+            String finalHashedPassword = "";
+            byte[] salt = Security.getSalt();
+            String stringSalt = Security.toHex(salt); // this one to save into database
+            String passwordToHash = company.getPassword();
 
-            query = "INSERT INTO company(name, location, field, contact, kvk_num) values (?, ?, ?, ?, ?)";
-            preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, company.getName());
-            preparedStatement.setString(2, company.getLocation());
-            preparedStatement.setString(3, company.getField());
-            preparedStatement.setString(4, company.getContact());
-            preparedStatement.setString(5, company.getKvk_num());
-            if (preparedStatement.executeUpdate() != 0) {
+            finalHashedPassword = Security.saltSHA256(passwordToHash, salt);
+
+            String insertUserQuery = "INSERT INTO \"user\"(email, password, salt) VALUES (?, ?, ?)";
+
+            PreparedStatement insertUserStatement = connection.prepareStatement(insertUserQuery);
+            insertUserStatement.setString(1, company.getEmail());
+            insertUserStatement.setString(2, finalHashedPassword);
+            insertUserStatement.setString(3, stringSalt);
+            insertUserStatement.execute();
+
+            String insertCompanyQuery = "INSERT INTO company(name, location, field, contact, kvk_num) values (?, ?, ?, ?, ?)";
+            PreparedStatement insertCompanyStatement = connection.prepareStatement(insertCompanyQuery);
+            insertCompanyStatement.setString(1, company.getName());
+            insertCompanyStatement.setString(2, company.getLocation());
+            insertCompanyStatement.setString(3, company.getField());
+            insertCompanyStatement.setString(4, company.getContact());
+            insertCompanyStatement.setString(5, company.getKvk_num());
+            if (insertCompanyStatement.executeUpdate() != 0) {
                 return true;
             }
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
         return false;
