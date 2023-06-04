@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <title>Progress</title>
+  <style>
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 200px;
+      padding: 20px;
+      background-color: white;
+    }
+    .nav-link {
+      color: black;
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .nav-link i {
+      margin-right: 10px;
+    }
+    .settings {
+      margin-top: auto;
+    }
+    .content {
+      margin-left: 220px;
+      padding: 20px;
+    }
+    .content form .form-group {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <object data="src/assets/img/Earn It Logo.svg" width="150" height="150"> </object>
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link" href="#"><i class="fas fa-briefcase"></i> Jobs</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#"><i class="fas fa-chart-line"></i> Progress</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#"><i class="fas fa-bookmark"></i> Bookmarks</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#"><i class="fas fa-bell"></i> Notifications</a>
+      </li>    
+    </ul>
+    <ul class="nav flex-column settings">
+        <li class="nav-item">
+          <a class="nav-link" href="#"><i class="fas fa-cog"></i> Settings</a>
+        </li>
+      </ul>
+  </div>
+
+  <div class="content">
+    <h1>Progress</h1>
+    <form>
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" class="form-control" id="name" placeholder="Enter the name">
+      </div>
+      <div class="form-group">
+        <label for="hours">Hours:</label>
+        <input type="number" class="form-control" id="hours" placeholder="Enter the number of hours">
+      </div>
+      <div class="form-group">
+        <label for="date">Date:</label>
+        <input type="date" class="form-control" id="date">
+      </div>
+      <div class="form-group">
+        <label for="comment">Comment:</label>
+        <input type="text" class="form-control" id="comment" placeholder="Enter the comment">
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+
+  <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>
