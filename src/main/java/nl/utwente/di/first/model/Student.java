@@ -1,5 +1,6 @@
 package nl.utwente.di.first.model;
 
+
 public class Student extends User {
     String name;
     String birth;

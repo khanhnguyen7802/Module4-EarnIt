@@ -15,18 +15,19 @@ import java.util.HexFormat;
  */
 public class Security {
     public static void main(String[] args) throws NoSuchAlgorithmException {
-        String passwordToHash = "password";
-//        byte[] byteSalt = getSalt();
-//        String stringSalt = toHex(byteSalt);
-        String test = "4f7697e8aef26cfd2564b9534e394355";
-        String testHashedPassword = "3097b3d3eda2623854172066b5bb5221104f7aa4cd5fa2c8a42509458f526f93";
+        String passwordToHash = "username";
+        byte[] byteSalt = getSalt();
+        String stringSalt = toHex(byteSalt);
+        String salt1 = "4f7697e8aef26cfd2564b9534e394355"; // og pass = "password"
+        String testHashedPassword1 = "3097b3d3eda2623854172066b5bb5221104f7aa4cd5fa2c8a42509458f526f93";
+        String salt2 = "58e52a7d0d7a067b9a6a423e143c9c9f"; // og pass = "username"
+        String testHashedPassword2 = "172131e8105fd5e12fb4c70abb1a86e0fc82386982110d01d90e9de53b59d2df";
+        System.out.println("Convert from byte to Hex(String): " + stringSalt);
+//        byte[] backToByte = toByteArray(test);
 
-//        System.out.println("Convert from byte to Hex(String): " + stringSalt);
-        byte[] backToByte = toByteArray(test);
-
-        String securePassword = saltSHA256(passwordToHash, backToByte);
+        String securePassword = saltSHA256(passwordToHash, byteSalt);
         System.out.println(securePassword);
-        System.out.println("Compare equal: " + securePassword.equals(testHashedPassword));
+//        System.out.println("Compare equal: " + securePassword.equals(testHashedPassword));
 
     }
 

@@ -29,6 +29,7 @@ public class UserDAO {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while(resultSet.next()) {
+                // TODO: Authentication
                 String emailDB = resultSet.getString("email"); // email in db
                 String passwordDB = resultSet.getString("password"); // hashed password in db
                 String salt = resultSet.getString("salt");
@@ -36,39 +37,25 @@ public class UserDAO {
                 String hashedFinalPassword = Security.saltSHA256(originalPassword, Security.toByteArray(salt));
 
                 if (email.equals(emailDB) && hashedFinalPassword.equals(passwordDB)) {
-                    // TODO: Query from table "student"
-                    String queryStudent = "SELECT email " +
-                            "FROM student " +
-                            "WHERE email = ?";
-                    PreparedStatement studentStatement = connection.prepareStatement(queryStudent);
+                    // TODO: Return the actual role of user (Authorization)
+
+                    String query = "SELECT p.relname AS role " +
+                            "FROM \"user\" u, pg_class p " +
+                            "WHERE email = ? AND u.tableoid = p.oid";
+                    PreparedStatement studentStatement = connection.prepareStatement(query);
                     studentStatement.setString(1, email);
                     ResultSet returnResultSet = studentStatement.executeQuery(); // cannot use executeUpdate
 
-                    String emailStudentQuery = "";
-
                     if (returnResultSet.next()) {
-                        emailStudentQuery = returnResultSet.getString("email");
+                        String role = returnResultSet.getString("role");
+
+                        if (role.equals("student")) {
+                            return "STUDENT";
+                        } else if (role.equals("company")) {
+                            return "COMPANY";
+                        }
                     }
 
-                    // TODO: Query from table "company"
-                    String queryCompany = "SELECT email " +
-                            "FROM company " +
-                            "WHERE email = ?";
-                    PreparedStatement companyStatement = connection.prepareStatement(queryCompany);
-                    companyStatement.setString(1, email);
-                    returnResultSet = companyStatement.executeQuery(); // cannot use executeUpdate
-
-                    String emailCompanyQuery = "";
-
-                    if (returnResultSet.next()) {
-                        emailCompanyQuery = returnResultSet.getString("email");
-                    }
-
-                    if (emailStudentQuery.equals(emailDB)) {
-                        return "STUDENT";
-                    } else if (emailCompanyQuery.equals(emailDB)) {
-                        return "COMPANY";
-                    }
                 }
             }
 
@@ -88,23 +75,21 @@ public class UserDAO {
 
             finalHashedPassword = Security.saltSHA256(passwordToHash, salt);
 
-            String insertUserQuery = "INSERT INTO \"user\"(email, password, salt) VALUES (?, ?, ?)";
+            String query = "INSERT INTO student(email, password, salt, name, birthdate, university, study, skills) " +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
-            PreparedStatement insertUserStatement = connection.prepareStatement(insertUserQuery);
-            insertUserStatement.setString(1, student.getEmail());
-            insertUserStatement.setString(2, finalHashedPassword);
-            insertUserStatement.setString(3, stringSalt);
-            insertUserStatement.execute();
+            PreparedStatement insertStudentStatement = connection.prepareStatement(query);
+            insertStudentStatement.setString(1, student.getEmail());
+            insertStudentStatement.setString(2, finalHashedPassword);
+            insertStudentStatement.setString(3, stringSalt);
+            insertStudentStatement.setString(4, student.getName());
+            insertStudentStatement.setString(5, student.getBirth());
+            insertStudentStatement.setString(6, student.getUniversity());
+            insertStudentStatement.setString(7, student.getStudy());
+            insertStudentStatement.setString(8, student.getSkills());
 
+            insertStudentStatement.execute();
 
-            String insertStudentQuery = "INSERT INTO student(name, university, birthdate, study, skills, btw_num) VALUES (?, ?, ?, ?, ?, ?)";
-            PreparedStatement insertStudentStatement = connection.prepareStatement(insertStudentQuery);
-            insertStudentStatement.setString(1, student.getName());
-            insertStudentStatement.setString(2, student.getUniversity());
-            insertStudentStatement.setString(3, student.getBirth());
-            insertStudentStatement.setString(4, student.getStudy());
-            insertStudentStatement.setString(5, student.getSkills());
-            insertStudentStatement.setString(6, student.getBtw_num());
 
             if (insertStudentStatement.executeUpdate() != 0) {
                 return true;
@@ -127,21 +112,19 @@ public class UserDAO {
 
             finalHashedPassword = Security.saltSHA256(passwordToHash, salt);
 
-            String insertUserQuery = "INSERT INTO \"user\"(email, password, salt) VALUES (?, ?, ?)";
+            String query = "INSERT INTO company(email, password, salt, name, location, field, contact) " +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
-            PreparedStatement insertUserStatement = connection.prepareStatement(insertUserQuery);
-            insertUserStatement.setString(1, company.getEmail());
-            insertUserStatement.setString(2, finalHashedPassword);
-            insertUserStatement.setString(3, stringSalt);
-            insertUserStatement.execute();
+            PreparedStatement insertCompanyStatement = connection.prepareStatement(query);
+            insertCompanyStatement.setString(1, company.getEmail());
+            insertCompanyStatement.setString(2, finalHashedPassword);
+            insertCompanyStatement.setString(3, stringSalt);
+            insertCompanyStatement.setString(4, company.getName());
+            insertCompanyStatement.setString(5, company.getLocation());
+            insertCompanyStatement.setString(6, company.getField());
+            insertCompanyStatement.setString(7, company.getContact());
+            insertCompanyStatement.execute();
 
-            String insertCompanyQuery = "INSERT INTO company(name, location, field, contact, kvk_num) values (?, ?, ?, ?, ?)";
-            PreparedStatement insertCompanyStatement = connection.prepareStatement(insertCompanyQuery);
-            insertCompanyStatement.setString(1, company.getName());
-            insertCompanyStatement.setString(2, company.getLocation());
-            insertCompanyStatement.setString(3, company.getField());
-            insertCompanyStatement.setString(4, company.getContact());
-            insertCompanyStatement.setString(5, company.getKvk_num());
             if (insertCompanyStatement.executeUpdate() != 0) {
                 return true;
             }
