@@ -13,18 +13,15 @@ public class DBConnection {
         Connection connection = null;
 
         try {
-
-            try {
-                Class.forName("org.postgresql.Driver");
-            }
-            catch (ClassNotFoundException e) {
-                System.out.println("Error: " + e);
-            }
+            
+            Class.forName("org.postgresql.Driver");
 
             connection = DriverManager.getConnection(DB_URL, "dab_di22232b_116", "FsrnTKGS3P+pC/a+");
 
         } catch (SQLException e) {
             System.err.println("Error connecting: " + e);
+        } catch (ClassNotFoundException e) {
+            System.out.println("Error: " + e);
         }
 
         return connection;

@@ -29,7 +29,7 @@ public class LoginServlet extends HttpServlet {
         User user = new User();
         user.setEmail(email);
         user.setPassword(password);
-        UserDAO userDao = new UserDAO();
+        UserDAO userDao = UserDAO.instance;
 
         try {
             String role = userDao.loginUser(user);

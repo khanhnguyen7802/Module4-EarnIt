@@ -9,8 +9,9 @@ import nl.utwente.di.first.util.Security;
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 
-public class UserDAO {
-    public UserDAO() {
+public enum UserDAO {
+    instance;
+    private UserDAO() {
 
     }
 
@@ -59,9 +60,10 @@ public class UserDAO {
                 }
             }
 
-        } catch(SQLException e){
-                throw new RuntimeException(e);
-            }
+        } catch(SQLException e) {
+            // FIXME Runtime exceptions should be thrown as little as possible, error messages are much preferred.
+            throw new RuntimeException(e);
+        }
         return "INVALID";
     }
 
@@ -94,9 +96,8 @@ public class UserDAO {
             if (insertStudentStatement.executeUpdate() != 0) {
                 return true;
             }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (NoSuchAlgorithmException e) {
+        } catch (SQLException | NoSuchAlgorithmException e) {
+            // FIXME Runtime exceptions should be thrown as little as possible, error messages are much preferred.
             throw new RuntimeException(e);
         }
         return false;
@@ -128,9 +129,8 @@ public class UserDAO {
             if (insertCompanyStatement.executeUpdate() != 0) {
                 return true;
             }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (NoSuchAlgorithmException e) {
+        } catch (SQLException | NoSuchAlgorithmException e) {
+            // FIXME Runtime exceptions should be thrown as little as possible, error messages are much preferred.
             throw new RuntimeException(e);
         }
         return false;

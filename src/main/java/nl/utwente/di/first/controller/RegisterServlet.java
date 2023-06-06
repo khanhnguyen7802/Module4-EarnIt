@@ -21,7 +21,7 @@ public class RegisterServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String role = request.getParameter("role");
-        UserDAO userDao = new UserDAO();
+        UserDAO userDao = UserDAO.instance;
 
         if (role.equals("STUDENT")) {
             Student student = new Student();
