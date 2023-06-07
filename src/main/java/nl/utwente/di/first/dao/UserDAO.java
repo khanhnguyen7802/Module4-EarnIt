@@ -1,5 +1,6 @@
 package nl.utwente.di.first.dao;
 
+import jakarta.xml.bind.annotation.XmlRootElement;
 import nl.utwente.di.first.model.Company;
 import nl.utwente.di.first.model.Student;
 import nl.utwente.di.first.model.User;
@@ -9,6 +10,7 @@ import nl.utwente.di.first.util.Security;
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 
+@XmlRootElement
 public enum UserDAO {
     instance;
     private UserDAO() {

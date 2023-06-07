@@ -18,18 +18,16 @@ public class LoginResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.TEXT_PLAIN)
-    public String attemptLogin(@Context HttpServletRequest req, @FormParam("email") String email, @FormParam("password") String password) {
-        System.out.printf("A user tried to log in with the credentials: email: %s, password: %s%n", email, password);
-        User user = new User();
-        user.setEmail(email);
-        user.setPassword(password);
+    public String attemptLogin(@Context HttpServletRequest req, User user) {
+        System.out.printf("A user tried to log in with the credentials: email: %s, password: %s%n", user.getEmail(), user.getPassword());
         UserDAO userDao = UserDAO.instance;
+
         try {
             String role = userDao.loginUser(user);
             HttpSession session = req.getSession(); // creating a session
             if (!role.equals("INVALID")) {
                 session.setAttribute("role", role);
-                session.setAttribute("email", email);
+                session.setAttribute("email", user.getEmail());
             }
             return role;
         } catch (SQLException e) {
