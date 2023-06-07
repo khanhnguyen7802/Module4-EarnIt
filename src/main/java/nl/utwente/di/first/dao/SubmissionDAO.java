@@ -1,11 +1,9 @@
 package nl.utwente.di.first.dao;
 
-import nl.utwente.di.first.model.Student;
 import nl.utwente.di.first.model.Submission;
 import nl.utwente.di.first.util.DBConnection;
 import nl.utwente.di.first.util.Security;
 
-import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -17,17 +15,18 @@ public class SubmissionDAO {
     //TODO employer: approve or reject submission -> propose new one
     //TODO student: agree or disagree -> submission goes to staff
 
-    public boolean createSubmission(Student student, Submission submission){
+    public boolean addSubmission(Submission submission){ //TODO: Not final
         try {
             Connection connection = DBConnection.createConnection();
 
-            String query = "INSERT INTO progress(hours, description, date) " +
-                    "VALUES (?, ?, ?)"; //Temporary - no table in db yet
+            String query = "INSERT INTO progress(hours, description, submissionDate, workedDate) " +
+                    "VALUES (?, ?, ?, ?)"; //Temporary - no table in db yet
 
             PreparedStatement insertSubmissionStatement = connection.prepareStatement(query);
             insertSubmissionStatement.setString(1, Integer.toString(submission.getNumberOfHours())); //TODO: String
             insertSubmissionStatement.setString(2, submission.getDescription());
-            insertSubmissionStatement.setString(3, submission.getDateString()); //TODO: String
+            insertSubmissionStatement.setString(3, submission.getSubmissionDateString()); //TODO: String
+            insertSubmissionStatement.setString(4, submission.getWorkedDateString()); //TODO: String
 
             insertSubmissionStatement.execute();
 
@@ -39,5 +38,19 @@ public class SubmissionDAO {
             throw new RuntimeException(e);
         }
         return false;
+    }
+
+
+    //TODO
+    public boolean rejectSubmission(){
+        return true;
+    }
+
+    public boolean suggestDifferentSubmission(){
+        return true;
+    }
+
+    public boolean flagSubmission(){
+        return true;
     }
 }
