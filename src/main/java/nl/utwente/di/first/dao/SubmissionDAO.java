@@ -19,13 +19,14 @@ public class SubmissionDAO {
         try {
             Connection connection = DBConnection.createConnection();
 
-            String query = "INSERT INTO progress(hours, description, date) " +
-                    "VALUES (?, ?, ?)"; //Temporary - no table in db yet
+            String query = "INSERT INTO progress(hours, description, submissionDate, workedDate) " +
+                    "VALUES (?, ?, ?, ?)"; //Temporary - no table in db yet
 
             PreparedStatement insertSubmissionStatement = connection.prepareStatement(query);
             insertSubmissionStatement.setString(1, Integer.toString(submission.getNumberOfHours())); //TODO: String
             insertSubmissionStatement.setString(2, submission.getDescription());
-            insertSubmissionStatement.setString(3, submission.getDateString()); //TODO: String
+            insertSubmissionStatement.setString(3, submission.getSubmissionDateString()); //TODO: String
+            insertSubmissionStatement.setString(4, submission.getWorkedDateString()); //TODO: String
 
             insertSubmissionStatement.execute();
 
