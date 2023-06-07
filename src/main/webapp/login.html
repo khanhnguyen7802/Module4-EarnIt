@@ -13,12 +13,18 @@
     <div class="container-fluid d-flex justify-content-center align-items-center align-content-center">
         <div class="row d-lg-flex justify-content-center align-items-center justify-content-lg-center" style="width: 100%;">
             <div class="col-auto col-lg-12 d-flex flex-column align-items-center justify-content-lg-center" style="width: 40%;"><img class="img-fluid d-flex d-lg-flex justify-content-lg-center" src="assets/img/Earn%20It%20Logo.svg" style="width: 100%;max-width: 224px;">
-                <form class="d-flex d-lg-flex flex-column justify-content-lg-center align-items-lg-center" action="api/login" method="post"><input class="form-control" type="text" placeholder="Username..." style="border-bottom-right-radius: 0;border-bottom-left-radius: 0;border-top-left-radius: 19px;border-top-right-radius: 19px;margin-top: 5px;margin-bottom: 5px;" name="email"><input class="form-control d-lg-flex justify-content-lg-center" type="password" placeholder="Password..." style="border-top-left-radius: 0;border-top-right-radius: 0;border-bottom-right-radius: 19px;border-bottom-left-radius: 19px;margin-top: 5px;margin-bottom: 5px;" name="password"><a class="d-flex d-lg-flex justify-content-start align-items-start align-content-start align-self-start justify-content-lg-start align-items-lg-start" href="#" style="margin-top: 5px;margin-bottom: 5px;">Forgot password?</a><button class="btn btn-primary bg-dark" type="submit" style="margin-right: 3px;margin-left: 3px;border-radius: 12px;--bs-danger: #DB5461;--bs-danger-rgb: 219,84,97;--bs-dark: #12181B;--bs-dark-rgb: 18,24,27;--bs-light: #FAFAFA;--bs-light-rgb: 250,250,250;">Log in</button>
+                <form class="d-flex d-lg-flex flex-column justify-content-lg-center align-items-lg-center">
+                    <input class="form-control" type="text" placeholder="Username..." style="border-bottom-right-radius: 0;border-bottom-left-radius: 0;border-top-left-radius: 19px;border-top-right-radius: 19px;margin-top: 5px;margin-bottom: 5px;" id="email">
+                    <input class="form-control d-lg-flex justify-content-lg-center" type="password" placeholder="Password..." style="border-top-left-radius: 0;border-top-right-radius: 0;border-bottom-right-radius: 19px;border-bottom-left-radius: 19px;margin-top: 5px;margin-bottom: 5px;" id="password">
+                    <a class="d-flex d-lg-flex justify-content-start align-items-start align-content-start align-self-start justify-content-lg-start align-items-lg-start" href="#" style="margin-top: 5px;margin-bottom: 5px;">Forgot password?</a>
+                    <button id="submit-login" class="btn btn-primary bg-dark" type="button" style="width: 100%;margin-right: 3px;margin-left: 3px;border-radius: 12px;--bs-danger: #DB5461;--bs-danger-rgb: 219,84,97;--bs-dark: #12181B;--bs-dark-rgb: 18,24,27;--bs-light: #FAFAFA;--bs-light-rgb: 250,250,250;">Log in</button>
+                    <p style="text-align: left;color: red" id="err-msg"></p>
                     <p style="text-align: center;margin-top: 5px;">Not a member yet?&nbsp;<a href="register.html">Sign up here.</a></p>
                 </form>
             </div>
         </div>
     </div>
+    <script src="assets/js/loginScript.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 </body>
 
