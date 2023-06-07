@@ -65,8 +65,14 @@
     padding: 5px;
     text-align: left;
 }
+.content_wrapper .display_list .dropdown-menu .input-group .search_button {
+    width: 90px;
+    height: 40px;
+    padding: 5px;
+    text-align: center;
+}
 
-
+/* Style for the list of jobs */
 .content_wrapper .display_list .job {
     display: flex;
     align-items: center;
@@ -100,34 +106,36 @@
     cursor: pointer;
     text-decoration: underline;
 }
-.content_wrapper .display_list .icon_bookmark {
-    margin-right: 20px;
+.content_wrapper .display_list .bookmarks {
+    border: #dddddd;
+    background-color: darkgray;
+    margin-right: 15px;
 }
 
 
 
 
 /* Style for the user dropdown */
-.content_wrapper .dropdown .dropbtn {
+.content_wrapper .dropbtn {
     color: black;
     border: none;
     cursor: pointer;
 }
 
-.content_wrapper  .dropdown {
+.content_wrapper .dropdown {
     position: absolute;
     top: 10px;
     right: 10px;
     display: block;
 }
 
-.content_wrapper .dropdown .dropdown-content {
+.content_wrapper .dropdown-content {
     display: none;
     min-width: 160px;
     z-index: 1;
 }
 
-.content_wrapper .dropdown  .dropdown-content .a {
+.content_wrapper .dropdown-content .a {
     color: black;
     padding: 12px 16px;
     text-decoration: none;
@@ -137,6 +145,7 @@
 .content_wrapper .dropdown:hover .dropdown-content {
     display: block;
 }
+
 
 
 /* Style for the footer */

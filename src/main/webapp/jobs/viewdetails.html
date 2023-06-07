@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" width="1000" >
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Dashboard - Brand</title>
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css?h=cb606d99bb2418df19b6bc818b41e412">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="/assets/css/styles.min.css?h=05b0a72b6b057f902b2edee74659e734">
+
+    <link rel="stylesheet" href="viewdetail.css">
+</head>
+<body>
+<div>
+    <nav class="sidebar" id="sidebar">
+        <div class="container_taskbar">
+            <img class="earnit_logo" id="earnit_logo" src="https://earnit.works/landingPage/images/earn_it.png">
+
+            <ul class="navbar_sidebar" id="navbar_sidebar">
+                <li class="job_list" id="job_list">
+                    <a class="job_link" href="jobs.html" >
+                        <i class="far fa-list-alt"></i><span> List of jobs</span>
+                    </a>
+                </li>
+
+                <li class="nav_progress">
+                    <a class="progress_link" href="../progress/progress.html">
+                        <i class="fas fa-table"></i><span> Progress</span>
+                    </a>
+                </li>
+
+                <li class="nav_bookmarks">
+                    <a class="bookmarks_link" href="bookmarks.html">
+                        <i class="far fa-bookmark"></i><span> Bookmarks</span>
+                    </a>
+                </li>
+
+                <li class="nav_notifications">
+                    <a class="notifications_link" href="notifications.html">
+                        <i class="far fa-bell"></i><span> Notifications</span>
+                    </a>
+                </li>
+
+                <li class="nav_settings">
+                    <a class="settings_link" href="settings.html">
+                        <i class="icon ion-android-settings"></i><span> Settings</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="content_wrapper" id="content-wrapper">
+        <div id="content">
+            <nav class="navbar">
+                <div class="container-fluid">
+                    <h1>Jobs description</h1>
+                    <ul class="display_list">
+                        <li class="display_list_1">
+                            <h2 class="title">Job title goes here</h2>
+                            <ul class="details_list" >
+                                <li class="salary" id="salary">Salary: ?? </li>
+                                <li class="hours" id="hours">Hours: ??</li>
+                                <li class="location" id="location">Location: ??</li>
+                            </ul><br>
+                            <button class="apply" id="apply"> Apply</button>
+                            <button class="bookmark" id="bookmark"><a class="icon_bookmark" ><i class="far fa-bookmark"></i></a></button>
+                            <h3 class="detail_description"> About the job</h3>
+                            <p class="description">Description: ...</p>
+                        </li>
+
+                        <div class="dropdown">
+                            <button class="dropbtn"><i class="far fa-user-circle"></i> User name</button>
+                            <div class="dropdown-content" data-bs-popper="none">
+                                <a class="profile" href="profile.html"><i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Profile</a><br>
+                                <a class="logout" href="login.html"><i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a>
+                            </div>
+                        </div>
+
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <footer class="footer">
+            <div class="container_footer">
+                <div class="text-center">
+                    <span>Copyright © Brand 2023</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <a class="d-inline border rounded scroll-to-top" href="jobs.html"><i class="fas fa-angle-up"></i></a>
+</div>
+</body>
+</html>
