@@ -32,6 +32,7 @@ public class LoginResource {
             return role;
         } catch (SQLException e) {
             // TODO handle exception correctly, since the throwing of RuntimeExceptions should be kept to a minimum.
+            System.err.println("SQL exception");
             return "Bullshit";
         }
     }
