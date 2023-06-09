@@ -15,7 +15,7 @@
 <div>
   <nav class="sidebar" id="sidebar">
     <div class="container_taskbar">
-      <img class="earnit_logo" id="earnit_logo" src="https://earnit.works/landingPage/images/earn_it.png">
+      <button href="jobs.html" style="background-color: black " ><img class="earnit_logo" id="earnit_logo" src="https://earnit.works/landingPage/images/earn_it.png" ></button>
 
       <ul class="navbar_sidebar" id="navbar_sidebar">
         <li class="job_list" id="job_list">
@@ -55,84 +55,86 @@
     <div id="content">
       <nav class="navbar">
         <div class="container-fluid">
-          <h1>Jobs</h1>
+          <header class="header" style="background-image: url('header.png')" ><div class="heading"> LIST OF JOBS </div></header>
           <ul class="display_list">
             <li class="display_list_1.1">
               <div class="dropdown-menu" aria-labelledby="searchDropdown">
                 <form class="navbar-search">
+
                   <div class="input-group">
-                    <input type="search" id="search_input" placeholder="Search for ...">
-                    <button class="search_button" id="search_button" type="button">&nbsp;Search&nbsp;<i class="fas fa-search"></i>&nbsp;&nbsp;</button>
+                    <input type="search" id="search_input" placeholder="Search for ..." >
+                    <button class="search_button" id="search_button" type="button" onclick="searchfunction()">&nbsp;Search&nbsp;<i class="fas fa-search"></i>&nbsp;&nbsp;</button>
                     <br><br><br>
                   </div>
 
-                  <div class="job" id="job_1">
-                    <img class="logo" id="logo1" src="https://earnit.works/landingPage/images/earn_it.png"></img>
-                    <div class="detail_display" id="detail_display1">
-                      <div class="company_name" id="company_name1">Company name</div>
-                      <div class="short_detail" id="short_detail1">Description:</div>
-                      <p><a class="view_detail1" href="viewdetails.html">View details</a></p>
-                    </div>
-                    <button class="bookmarks" id="bookmarks1"><a class="icon_bookmark" ><i class="far fa-bookmark"></i></a></button>
-                  </div>
-                  <br><br>
+                  <ul id="list">
+                    <li class="job" id="job_1">
+                      <img class="logo" id="logo1" src="https://earnit.works/landingPage/images/earn_it.png"></img>
+                      <div class="detail_display" id="detail_display1">
+                        <div class="company_name" id="company_name1">EARN IT 1</div>
+                        <div class="short_detail" id="short_detail1">Description:</div>
+                        <p><a class="view_detail1" href="viewdetails.html">View details</a></p>
+                      </div>
+                      <button class="bookmarks" id="bookmarks1"><a class="icon_bookmark" ><i class="far fa-bookmark"></i></a></button>
+                    </li>
+                    <br><br>
 
-                  <div class="job" id="job_2">
-                    <img class="logo" id="logo2" src="https://earnit.works/landingPage/images/earn_it.png"></img>
+                    <li class="job" id="job_2">
+                      <img class="logo" id="logo2" src="https://earnit.works/landingPage/images/earn_it.png"></img>
+                      <div class="detail_display" id="detail_display2">
+                        <div class="company_name" id="company_name2">EARN IT 2</div>
+                        <div class="short_detail" id="short_detail2">Description:</div>
+                        <p><a class="view_detail2" href="#viewdetails2">View details</a></p>
+                      </div>
+                      <button class="bookmarks" id="bookmarks2"><a class="icon_bookmark" ><i class="far fa-bookmark"></i></a></button>
+                    </li>
+                    <br><br>
 
-                    <div class="detail_display" id="detail_display2">
-                      <div class="company_name" id="company_name2">Company name</div>
-                      <div class="short_detail" id="short_detail2">Description:</div>
-                      <p><a class="view_detail2" href="#viewdetails2">View details</a></p>
-                    </div>
-                    <button class="bookmarks" id="bookmarks2"><a class="icon_bookmark" ><i class="far fa-bookmark"></i></a></button>
-                  </div>
-                  <br><br>
+                    <li class="job" id="job_3">
+                      <img class="logo" id="logo3" src="https://earnit.works/landingPage/images/earn_it.png"></img>
+                      <div class="detail_display" id="detail_display3">
+                        <div class="company_name" id="company_name3">Earn it 3</div>
+                        <div class="short_detail" id="short_detail3">Description:</div>
+                        <p><a class="view_detail3" href="#viewdetails3">View details</a></p>
+                      </div>
+                      <button class="bookmarks" id="bookmarks3"><a class="icon_bookmark" ><i class="far fa-bookmark"></i></a></button>
+                    </li>
+                    <br><br>
 
-                  <div class="job" id="job_3">
-                    <img class="logo" id="logo3" src="https://earnit.works/landingPage/images/earn_it.png"></img>
-                    <div class="detail_display" id="detail_display3">
-                      <div class="company_name" id="company_name3">Company name</div>
-                      <div class="short_detail" id="short_detail3">Description:</div>
-                      <p><a class="view_detail3" href="#viewdetails3">View details</a></p>
-                    </div>
-                    <button class="bookmarks" id="bookmarks3"><a class="icon_bookmark" ><i class="far fa-bookmark"></i></a></button>
-                  </div>
-                  <br><br>
+                    <li class="job" id="job_4">
+                      <img class="logo" id="logo4" src="https://earnit.works/landingPage/images/earn_it.png"></img>
+                      <div class="detail_display" id="detail_display4">
+                        <div class="company_name" id="company_name4">earn it 4</div>
+                        <div class="short_detail" id="short_detail4">Description:</div>
+                        <p><a class="view_detail4" href="#viewdetails4">View details</a></p>
+                      </div>
+                      <button class="bookmarks" id="bookmarks4"><a class="icon_bookmark" ><i class="far fa-bookmark"></i></a></button>
+                    </li>
+                    <br><br>
 
-                  <div class="job" id="job_4">
-                    <img class="logo" id="logo4" src="https://earnit.works/landingPage/images/earn_it.png"></img>
-                    <div class="detail_display" id="detail_display4">
-                      <div class="company_name" id="company_name4">Company name</div>
-                      <div class="short_detail" id="short_detail4">Description:</div>
-                      <p><a class="view_detail4" href="#viewdetails4">View details</a></p>
-                    </div>
-                    <button class="bookmarks" id="bookmarks4"><a class="icon_bookmark" ><i class="far fa-bookmark"></i></a></button>
-                  </div>
-                  <br><br>
+                    <li class="job" id="job_5">
+                      <img class="logo" id="logo5" src="https://earnit.works/landingPage/images/earn_it.png"></img>
+                      <div class="detail_display" id="detail_display5">
+                        <div class="company_name" id="company_name5">earn It 5</div>
+                        <div class="short_detail" id="short_detail5">Description:</div>
+                        <p><a class="view_detail5" href="#viewdetails5">View details</a></p>
+                      </div>
+                      <button class="bookmarks" id="bookmarks5"><a class="icon_bookmark" ><i class="far fa-bookmark"></i></a></button>
+                    </li>
+                    <br><br>
 
-                  <div class="job" id="job_5">
-                    <img class="logo" id="logo5" src="https://earnit.works/landingPage/images/earn_it.png"></img>
-                    <div class="detail_display" id="detail_display5">
-                      <div class="company_name" id="company_name5">Company name</div>
-                      <div class="short_detail" id="short_detail5">Description:</div>
-                      <p><a class="view_detail5" href="#viewdetails5">View details</a></p>
-                    </div>
-                    <button class="bookmarks" id="bookmarks5"><a class="icon_bookmark" ><i class="far fa-bookmark"></i></a></button>
-                  </div>
-                  <br><br>
+                    <li class="job" id="job_6">
+                      <img class="logo" id="logo6" src="https://earnit.works/landingPage/images/earn_it.png"></img>
 
-                  <div class="job" id="job_6">
-                    <img class="logo" id="logo6" src="https://earnit.works/landingPage/images/earn_it.png"></img>
-
-                    <div class="detail_display" id="detail_display6">
-                      <div class="company_name" id="company_name6">Company name</div>
-                      <div class="short_detail" id="short_detail6">Description:</div>
-                      <p><a class="view_detail6" href="#viewdetails6">View details</a></p>
-                    </div>
-                    <button class="bookmarks" id="bookmarks6"><a class="icon_bookmark" ><i class="far fa-bookmark"></i></a></button>
-                  </div>
-                  <br><br>
+                      <div class="detail_display" id="detail_display6">
+                        <div class="company_name" id="company_name6">earnit 6</div>
+                        <div class="short_detail" id="short_detail6">Description:</div>
+                        <p><a class="view_detail6" href="#viewdetails6">View details</a></p>
+                      </div>
+                      <button class="bookmarks" id="bookmarks6"><a class="icon_bookmark" ><i class="far fa-bookmark"></i></a></button>
+                    </li>
+                    <br><br>
+                  </ul>
 
                 </form>
               </div>
@@ -141,10 +143,11 @@
             <div class="dropdown">
               <button class="dropbtn"><i class="far fa-user-circle"></i> User name</button>
               <div class="dropdown-content" data-bs-popper="none">
-                <a class="profile" href="profile.html"><i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Profile</a><br>
-                <a class="logout" href="login.html"><i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a>
+                <a class="profile" href="#profile"><i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Profile</a><br>
+                <a class="logout" href="../WEB-INF/login.html"><i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a>
               </div>
             </div>
+
 
           </ul>
         </div>

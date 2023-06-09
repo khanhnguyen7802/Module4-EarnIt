@@ -16,7 +16,6 @@
 
 .sidebar .navbar_sidebar {
     list-style-type: none;
-    padding: 0;
     margin-top: 30px;
 }
 
@@ -32,13 +31,27 @@
 /* Style for the content section */
 .content_wrapper {
     margin-left: 250px;
-    padding: 20px;
+
 }
 
 .content_wrapper .navbar {
-    display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.content_wrapper .header {
+    width: 1000px;
+    height: 200px;
+}
+
+.content_wrapper .header {
+    font-size: 60px;
+    color: white;
+}
+
+.content_wrapper .header .heading{
+    margin-left: 100px;
+    padding-top: 60px;
 }
 
 .content_wrapper .display_list {
@@ -60,9 +73,10 @@
 }
 
 .content_wrapper .display_list .dropdown-menu form input[type="search"] {
-    width: 300px;
+    width: 450px;
     height: 40px;
     padding: 5px;
+    margin-left: 40px;
     text-align: left;
 }
 .content_wrapper .display_list .dropdown-menu .input-group .search_button {
