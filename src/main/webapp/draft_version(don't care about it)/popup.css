@@ -1,0 +1,79 @@
+body {
+	font-family: 'Montserrat', sans-serif;
+	background: #e7e7e7;
+	height: 100vh;
+}
+
+.box {  					/* for button */
+	text-align: center;
+}
+.button {
+	font-size: 1em;
+	padding: 15px 35px;
+	color: #fff;
+	text-decoration: none;
+	cursor: pointer;
+	transition: all 0.3s ease-out;
+	background: #403e3d;
+	border-radius: 50px;
+}
+
+
+.overlay {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: rgba(0, 0, 0, 0.8);
+	transition: opacity 500ms;
+	visibility: hidden;
+	opacity: 0;
+}
+
+.overlay:target {
+	visibility: visible;
+	opacity: 1;
+}
+
+.wrapper {               /* for the popup*/
+	margin: 70px auto;
+	padding: 20px;
+	background: #e7e7e7;
+	border-radius: 7px;
+	width: 40%;
+	position: relative;
+	transition: all 1s ease-in-out;
+}
+
+.wrapper h2 { /* name */
+	color: #333;
+	text-align: center;
+}
+.wrapper .close { /* close button */
+	position: absolute;
+	top: -1px;
+	right: 10px;
+	transition: all 200ms;
+	font-size: 30px;
+	font-weight: bold;
+	text-decoration: none;
+	color: #333;
+}
+.wrapper .close:hover {  /* close button when hover */
+	color: #06D85F;
+}
+
+.content > section:nth-of-type(1) { /* job description*/
+	text-transform: uppercase;
+	font-size: 20px;
+	color:red;
+	padding-bottom: 10px;
+}
+
+.content > section:nth-of-type(2) {
+	height:200px;
+	text-align: left;
+	overflow-y: scroll;
+	color:blue;
+}

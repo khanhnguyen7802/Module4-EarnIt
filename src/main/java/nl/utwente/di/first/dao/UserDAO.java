@@ -9,10 +9,13 @@ import nl.utwente.di.first.util.Security;
 
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
+import java.util.ArrayList;
 
 @XmlRootElement
 public enum UserDAO {
     instance;
+    private ArrayList studentList = new ArrayList();
+    private ArrayList companyList = new ArrayList();
     private UserDAO() {
 
     }
@@ -136,5 +139,68 @@ public enum UserDAO {
             throw new RuntimeException(e);
         }
         return false;
+    }
+
+    public ArrayList getStudentList() {
+        try {
+            Connection connection = DBConnection.createConnection();
+
+            String query = "SELECT * FROM student";
+
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+
+            while(resultSet.next()) {
+                Student student = new Student();
+                student.setBirth(resultSet.getString("birthdate"));
+                student.setName(resultSet.getString("name"));
+                student.setSkills(resultSet.getString("skills"));
+                student.setStudy(resultSet.getString("study"));
+                student.setUniversity(resultSet.getString("university"));
+                student.setBtw_num(resultSet.getString("btw_number"));
+                student.setBirth(resultSet.getString("email"));
+
+                studentList.add(student);
+
+            }
+
+            return studentList;
+
+        } catch (SQLException e) {
+            // FIXME Runtime exceptions should be thrown as little as possible, error messages are much preferred.
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    public ArrayList getCompanyList() {
+        try {
+            Connection connection = DBConnection.createConnection();
+
+            String query = "SELECT * FROM company";
+
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+
+            while(resultSet.next()) {
+                Company company = new Company();
+
+                company.setName(resultSet.getString("name"));
+                company.setLocation(resultSet.getString("location"));
+                company.setField(resultSet.getString("field"));
+                company.setContact(resultSet.getString("contact"));
+                company.setKvk_num(resultSet.getString("kvk_number"));
+
+                companyList.add(company);
+
+            }
+
+            return companyList;
+
+        } catch (SQLException e) {
+            // FIXME Runtime exceptions should be thrown as little as possible, error messages are much preferred.
+            throw new RuntimeException(e);
+        }
+
     }
 }

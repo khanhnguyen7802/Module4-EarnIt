@@ -8,148 +8,156 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
   <link rel="stylesheet" href="/assets/css/styles.min.css?h=05b0a72b6b057f902b2edee74659e734">
-
   <link rel="stylesheet" href="jobs_dashboard.css">
+
 </head>
 <body>
-<div>
-  <nav class="sidebar" id="sidebar">
-    <div class="container_taskbar">
-      <img class="earnit_logo" id="earnit_logo" src="https://earnit.works/landingPage/images/earn_it.png">
+  <div>
+    <nav class="sidebar" id="sidebar">
+      <div class="container_taskbar">
+        <button href="jobs.html" style="background-color: black"><img class="earnit_logo" id="earnit_logo" src="https://earnit.works/landingPage/images/earn_it.png" ></button>
+        <ul class="navbar_sidebar" id="navbar_sidebar">
+          <li class="job_list" id="job_list">
+            <a class="job_link" href="jobs.html" >
+              <i class="far fa-list-alt"></i><span> List of jobs</span>
+            </a>
+          </li>
 
-      <ul class="navbar_sidebar" id="navbar_sidebar">
-        <li class="job_list" id="job_list">
-          <a class="job_link" href="jobs.html" >
-            <i class="far fa-list-alt"></i><span> List of jobs</span>
-          </a>
-        </li>
+          <li class="nav_progress">
+            <a class="progress_link" href="../progress/progress.html">
+              <i class="fas fa-table"></i><span> Progress</span>
+            </a>
+          </li>
 
-        <li class="nav_progress">
-          <a class="progress_link" href="../progress/progress.html">
-            <i class="fas fa-table"></i><span> Progress</span>
-          </a>
-        </li>
+          <li class="nav_bookmarks">
+            <a class="bookmarks_link" href="bookmarks.html">
+              <i class="far fa-bookmark"></i><span> Bookmarks</span>
+            </a>
+          </li>
 
-        <li class="nav_bookmarks">
-          <a class="bookmarks_link" href="bookmarks.html">
-            <i class="far fa-bookmark"></i><span> Bookmarks</span>
-          </a>
-        </li>
+          <li class="nav_settings">
+            <a class="settings_link" href="settings.html">
+              <i class="icon ion-android-settings"></i><span> Settings</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
 
-        <li class="nav_notifications">
-          <a class="notifications_link" href="notifications.html">
-            <i class="far fa-bell"></i><span> Notifications</span>
-          </a>
-        </li>
+    <div class="content_wrapper" id="content-wrapper">
+      <div id="content">
+        <nav class="navbar">
+          <div class="container-fluid">
+            <header class="header" style="background-image: url('header.png')" ><div class="heading">LIST OF JOBS </div></header>
 
-        <li class="nav_settings">
-          <a class="settings_link" href="settings.html">
-            <i class="icon ion-android-settings"></i><span> Settings</span>
-          </a>
-        </li>
-      </ul>
-    </div>
-  </nav>
-
-  <div class="content_wrapper" id="content-wrapper">
-    <div id="content">
-      <nav class="navbar">
-        <div class="container-fluid">
-          <h1>Jobs</h1>
-          <ul class="display_list">
-            <li class="display_list_1.1">
-              <div class="dropdown-menu" aria-labelledby="searchDropdown">
-                <form class="navbar-search">
-                  <div class="input-group">
-                    <input type="search" id="search_input" placeholder="Search for ...">
-                    <button class="search_button" id="search_button" type="button">&nbsp;Search&nbsp;<i class="fas fa-search"></i>&nbsp;&nbsp;</button>
-                    <br><br><br>
-                  </div>
-
-                  <div class="job" id="job_1">
-                    <img class="logo" id="logo1" src="https://earnit.works/landingPage/images/earn_it.png"></img>
-                    <div class="detail_display" id="detail_display1">
-                      <div class="company_name" id="company_name1">Company name</div>
-                      <div class="short_detail" id="short_detail1">Description:</div>
-                      <p><a class="view_detail1" href="viewdetails.html">View details</a></p>
+            <ul class="display_list">
+              <li class="display_list_1">
+                <div class="dropdown-menu" aria-labelledby="searchDropdown">
+                  <form class="navbar-search">
+                    <div class="input-group">
+                      <input type="search" id="search_input" placeholder="Search for ...">
+                      <button class="search_button" id="search_button" type="button">&nbsp;Search&nbsp;<i class="fas fa-search"></i>&nbsp;&nbsp;</button>
+                      <br><br><br>
                     </div>
-                    <button class="bookmarks" id="bookmarks1"><a class="icon_bookmark" ><i class="far fa-bookmark"></i></a></button>
-                  </div>
-                  <br><br>
 
-                  <div class="job" id="job_2">
-                    <img class="logo" id="logo2" src="https://earnit.works/landingPage/images/earn_it.png"></img>
-
-                    <div class="detail_display" id="detail_display2">
-                      <div class="company_name" id="company_name2">Company name</div>
-                      <div class="short_detail" id="short_detail2">Description:</div>
-                      <p><a class="view_detail2" href="#viewdetails2">View details</a></p>
+                    <div class="job" id="job_1">
+                      <img class="logo" id="logo1" src="https://earnit.works/landingPage/images/earn_it.png"></img>
+                      <div class="detail_display" id="detail_display1">
+                        <div class="company_name" id="company_name1">Company name</div>
+                        <div class="short_detail" id="short_detail1">Description:</div>
+                        <p><a class="view_detail1" href="#popup">View details</a></p>
+                      </div>
+                      <button class="bookmarks" id="bookmarks1"><a class="icon_bookmark" ><i class="far fa-bookmark"></i></a>
+                        <!--for the popup-->
+                        <div class="overlay" id="popup">
+                          <div class="wrapper">
+                            <h2>This is for the company's name placeholder</h2><a class="close" href="#">&times;</a>
+                            <div class="content">
+                              <section>Job Description</section>
+                              <section>lLorem ipsum dolor sit amet, consectetur adipiscing elit. Ut varius felis sed ligula tincidunt varius. Nulla aliquam maximus purus, id tempor tortor vehicula ac. Vivamus consequat semper arcu ac ullamcorper. Ut eget aliquet sem. Sed faucibus nisl nisl, in tempus ipsum dapibus non. Vivamus eu ornare erat, id interdum sapien. Interdum et malesuada fames ac ante ipsum primis in faucibus. Cras tincidunt, sapien vitae dignissim accumsan, nisi purus maximus ante, vitae ornare massa turpis sed turpis. Etiam vitae lectus leo. Nullam ullamcorper neque mattis purus cursus, sed malesuada erat tempor.
+                                Etiam pretium sit amet libero ac venenatis. Suspendisse quis nulla leo. Donec elementum ex nec eros imperdiet, a congue sapien accumsan. Phasellus varius arcu tempus, vehicula erat a, luctus eros. Maecenas in justo velit. Proin mollis vitae neque vel consequat. Proin facilisis gravida nisl, id feugiat dui suscipit vel. Maecenas dignissim magna vel odio ornare suscipit. Aenean finibus congue lobortis.
+                                Nam consectetur sem non est semper, a ornare odio congue. Aliquam quis velit non lorem consectetur convallis. In augue est, sagittis vel dictum eu, auctor non est. Nulla maximus aliquet ante eu elementum. Praesent fermentum molestie diam, sit amet efficitur eros rhoncus vel. Maecenas sed euismod erat. In aliquet faucibus ante, vel iaculis nunc cursus nec. Integer tellus leo, accumsan vitae dui quis, eleifend vulputate augue. Proin vitae quam non purus finibus imperdiet at nec ligula. Nullam ipsum ante, rhoncus eget consequat non, aliquet aliquam nulla. Morbi at metus sodales, malesuada eros at, posuere eros.
+                              </section>
+                            </div>
+                          </div>
+                        </div>
+                      </button>
                     </div>
-                    <button class="bookmarks" id="bookmarks2"><a class="icon_bookmark" ><i class="far fa-bookmark"></i></a></button>
-                  </div>
-                  <br><br>
+                    <br><br>
 
-                  <div class="job" id="job_3">
-                    <img class="logo" id="logo3" src="https://earnit.works/landingPage/images/earn_it.png"></img>
-                    <div class="detail_display" id="detail_display3">
-                      <div class="company_name" id="company_name3">Company name</div>
-                      <div class="short_detail" id="short_detail3">Description:</div>
-                      <p><a class="view_detail3" href="#viewdetails3">View details</a></p>
+                    <div class="job" id="job_2">
+                      <img class="logo" id="logo2" src="https://earnit.works/landingPage/images/earn_it.png"></img>
+                      <div class="detail_display" id="detail_display2">
+                        <div class="company_name" id="company_name2">Company name</div>
+                        <div class="short_detail" id="short_detail2">Description:</div>
+                        <p><a class="view_detail2" href="#viewdetails2">View details</a></p>
+                      </div>
+                      <button class="bookmarks" id="bookmarks2"><a class="icon_bookmark" ><i class="far fa-bookmark"></i></a></button>
                     </div>
-                    <button class="bookmarks" id="bookmarks3"><a class="icon_bookmark" ><i class="far fa-bookmark"></i></a></button>
-                  </div>
-                  <br><br>
+                    <br><br>
 
-                  <div class="job" id="job_4">
-                    <img class="logo" id="logo4" src="https://earnit.works/landingPage/images/earn_it.png"></img>
-                    <div class="detail_display" id="detail_display4">
-                      <div class="company_name" id="company_name4">Company name</div>
-                      <div class="short_detail" id="short_detail4">Description:</div>
-                      <p><a class="view_detail4" href="#viewdetails4">View details</a></p>
+                    <div class="job" id="job_3">
+                      <img class="logo" id="logo3" src="https://earnit.works/landingPage/images/earn_it.png"></img>
+                      <div class="detail_display" id="detail_display3">
+                        <div class="company_name" id="company_name3">Company name</div>
+                        <div class="short_detail" id="short_detail3">Description:</div>
+                        <p><a class="view_detail3" href="#viewdetails3">View details</a></p>
+                      </div>
+                      <button class="bookmarks" id="bookmarks3"><a class="icon_bookmark" ><i class="far fa-bookmark"></i></a></button>
                     </div>
-                    <button class="bookmarks" id="bookmarks4"><a class="icon_bookmark" ><i class="far fa-bookmark"></i></a></button>
-                  </div>
-                  <br><br>
+                    <br><br>
 
-                  <div class="job" id="job_5">
-                    <img class="logo" id="logo5" src="https://earnit.works/landingPage/images/earn_it.png"></img>
-                    <div class="detail_display" id="detail_display5">
-                      <div class="company_name" id="company_name5">Company name</div>
-                      <div class="short_detail" id="short_detail5">Description:</div>
-                      <p><a class="view_detail5" href="#viewdetails5">View details</a></p>
+                    <div class="job" id="job_4">
+                      <img class="logo" id="logo4" src="https://earnit.works/landingPage/images/earn_it.png"></img>
+                      <div class="detail_display" id="detail_display4">
+                        <div class="company_name" id="company_name4">Company name</div>
+                        <div class="short_detail" id="short_detail4">Description:</div>
+                        <p><a class="view_detail4" href="#viewdetails4">View details</a></p>
+                      </div>
+                      <button class="bookmarks" id="bookmarks4"><a class="icon_bookmark" ><i class="far fa-bookmark"></i></a></button>
                     </div>
-                    <button class="bookmarks" id="bookmarks5"><a class="icon_bookmark" ><i class="far fa-bookmark"></i></a></button>
-                  </div>
-                  <br><br>
+                    <br><br>
 
-                  <div class="job" id="job_6">
-                    <img class="logo" id="logo6" src="https://earnit.works/landingPage/images/earn_it.png"></img>
-
-                    <div class="detail_display" id="detail_display6">
-                      <div class="company_name" id="company_name6">Company name</div>
-                      <div class="short_detail" id="short_detail6">Description:</div>
-                      <p><a class="view_detail6" href="#viewdetails6">View details</a></p>
+                    <div class="job" id="job_5">
+                      <img class="logo" id="logo5" src="https://earnit.works/landingPage/images/earn_it.png"></img>
+                      <div class="detail_display" id="detail_display5">
+                        <div class="company_name" id="company_name5">Company name</div>
+                        <div class="short_detail" id="short_detail5">Description:</div>
+                        <p><a class="view_detail5" href="#viewdetails5">View details</a></p>
+                      </div>
+                      <button class="bookmarks" id="bookmarks5"><a class="icon_bookmark" ><i class="far fa-bookmark"></i></a></button>
                     </div>
-                    <button class="bookmarks" id="bookmarks6"><a class="icon_bookmark" ><i class="far fa-bookmark"></i></a></button>
-                  </div>
-                  <br><br>
+                    <br><br>
 
-                </form>
+                    <div class="job" id="job_6">
+                      <img class="logo" id="logo6" src="https://earnit.works/landingPage/images/earn_it.png"></img>
+                      <div class="detail_display" id="detail_display6">
+                        <div class="company_name" id="company_name6">Company name</div>
+                        <div class="short_detail" id="short_detail6">Description:</div>
+                        <p><a class="view_detail6" href="#viewdetails6">View details</a></p>
+                      </div>
+                      <button class="bookmarks" id="bookmarks6"><a class="icon_bookmark" ><i class="far fa-bookmark"></i></a></button>
+                    </div>
+                    <br><br>
+
+                  </form>
+                </div>
+              </li>
+
+              <div class="dropdown">
+                <button class="dropbtn"><i class="far fa-user-circle"></i> User name</button>
+                <div class="dropdown-content" data-bs-popper="none">
+                  <a class="profile" href="profile.html"><i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Profile</a><br>
+                  <a class="logout" href="login.html"><i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a>
+                </div>
               </div>
-            </li>
 
-            <div class="dropdown">
-              <button class="dropbtn"><i class="far fa-user-circle"></i> User name</button>
-              <div class="dropdown-content" data-bs-popper="none">
-                <a class="profile" href="profile.html"><i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Profile</a><br>
-                <a class="logout" href="login.html"><i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a>
-              </div>
-            </div>
-
-          </ul>
-        </div>
-      </nav>
+            </ul>
+          </div>
+        </nav>
+      </div>
     </div>
+
     <footer class="bg-white sticky-footer">
       <div class="container my-auto">
         <div class="text-center my-auto copyright">
@@ -157,8 +165,7 @@
         </div>
       </div>
     </footer>
+    <a class="scroll-to-top" href="jobs.html"><i class="fas fa-angle-up"></i>^^</a>
   </div>
-  <a class="d-inline border rounded scroll-to-top" href="jobs.html"><i class="fas fa-angle-up"></i></a>
-</div>
 </body>
 </html>
