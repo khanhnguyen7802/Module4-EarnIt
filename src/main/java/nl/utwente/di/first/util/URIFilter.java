@@ -22,6 +22,7 @@ public class URIFilter implements Filter {
         //Getting the extension of the file that is requested, will return empty string if it does not specify an extension.
         String extension = getExtensionByStringHandling(path).orElse("");
         
+        
         if (path.startsWith("/api")) {
             //If the request is aimed towards the api, we should just let it pass and not alter the URL in any way.
             //After this, the request will be handled by the next servlet matching its URL-pattern
@@ -38,10 +39,12 @@ public class URIFilter implements Filter {
                 //The file does not exist and thus the URL is invalid. Hence, fetch the 404 page.
                 request.getRequestDispatcher("/404.html").forward(request,response);
             }
-        } else {
+        } else if (extension.equals("html")) {
             // If the URI *does* contain a specified file extension, we should redirect the client instead of forwarding the request.
             // This makes sure that the URL displayed in the browser stays clear of extensions, although in reality we are fetching the URL with the extension.
             res.sendRedirect(req.getRequestURI().substring(0, req.getRequestURI().length() - extension.length() - 1));
+        } else {
+            chain.doFilter(request, response);
         }
     }
     
