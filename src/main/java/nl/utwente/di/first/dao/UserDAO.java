@@ -10,12 +10,13 @@ import nl.utwente.di.first.util.Security;
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 @XmlRootElement
 public enum UserDAO {
     instance;
-    private ArrayList studentList = new ArrayList();
-    private ArrayList companyList = new ArrayList();
+    private List<Student> studentList = new ArrayList<>();
+    private List<Company> companyList = new ArrayList<>();
     private UserDAO() {
 
     }
@@ -141,7 +142,7 @@ public enum UserDAO {
         return false;
     }
 
-    public ArrayList getStudentList() {
+    public List<Student> getStudentList() {
         try {
             Connection connection = DBConnection.createConnection();
 
@@ -173,7 +174,7 @@ public enum UserDAO {
 
     }
 
-    public ArrayList getCompanyList() {
+    public List<Company> getCompanyList() {
         try {
             Connection connection = DBConnection.createConnection();
 
