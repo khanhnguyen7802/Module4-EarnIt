@@ -2,9 +2,11 @@ package nl.utwente.di.first.resources;
 
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import nl.utwente.di.first.dao.UserDAO;
+import nl.utwente.di.first.model.Company;
 import nl.utwente.di.first.model.Student;
 
 import java.util.ArrayList;
@@ -18,5 +20,10 @@ public class StudentsResource {
         return UserDAO.instance.getStudentList();
     }
 
-
+    @Path("{email}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Company> getCompanyByEmail (@PathParam("email") String email) {
+        return UserDAO.instance.getCompanyListByEmail(email);
+    }
 }
