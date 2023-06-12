@@ -71,75 +71,6 @@ public enum UserDAO {
         return "INVALID";
     }
 
-    public boolean registerStudent(Student student) {
-        try {
-            Connection connection = DBConnection.createConnection();
-            String finalHashedPassword = "";
-            byte[] salt = Security.getSalt();
-            String stringSalt = Security.toHex(salt); // this one to save into database
-            String passwordToHash = student.getPassword();
-
-            finalHashedPassword = Security.saltSHA256(passwordToHash, salt);
-
-            String query = "INSERT INTO student(email, password, salt, name, birthdate, university, study, skills) " +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-
-            PreparedStatement insertStudentStatement = connection.prepareStatement(query);
-            insertStudentStatement.setString(1, student.getEmail());
-            insertStudentStatement.setString(2, finalHashedPassword);
-            insertStudentStatement.setString(3, stringSalt);
-            insertStudentStatement.setString(4, student.getName());
-            insertStudentStatement.setString(5, student.getBirth());
-            insertStudentStatement.setString(6, student.getUniversity());
-            insertStudentStatement.setString(7, student.getStudy());
-            insertStudentStatement.setString(8, student.getSkills());
-
-            insertStudentStatement.execute();
-
-
-            if (insertStudentStatement.executeUpdate() != 0) {
-                return true;
-            }
-        } catch (SQLException | NoSuchAlgorithmException e) {
-            // FIXME Runtime exceptions should be thrown as little as possible, error messages are much preferred.
-            throw new RuntimeException(e);
-        }
-        return false;
-    }
-
-    public boolean registerCompany(Company company) {
-        try {
-            Connection connection = DBConnection.createConnection();
-            String finalHashedPassword = "";
-            byte[] salt = Security.getSalt();
-            String stringSalt = Security.toHex(salt); // this one to save into database
-            String passwordToHash = company.getPassword();
-
-            finalHashedPassword = Security.saltSHA256(passwordToHash, salt);
-
-            String query = "INSERT INTO company(email, password, salt, name, location, field, contact) " +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?)";
-
-            PreparedStatement insertCompanyStatement = connection.prepareStatement(query);
-            insertCompanyStatement.setString(1, company.getEmail());
-            insertCompanyStatement.setString(2, finalHashedPassword);
-            insertCompanyStatement.setString(3, stringSalt);
-            insertCompanyStatement.setString(4, company.getName());
-            insertCompanyStatement.setString(5, company.getLocation());
-            insertCompanyStatement.setString(6, company.getField());
-            insertCompanyStatement.setString(7, company.getContact());
-            insertCompanyStatement.execute();
-
-            if (insertCompanyStatement.executeUpdate() != 0) {
-                return true;
-            }
-        } catch (SQLException | NoSuchAlgorithmException e) {
-            // FIXME Runtime exceptions should be thrown as little as possible, error messages are much preferred.
-            throw new RuntimeException(e);
-        }
-        return false;
-    }
-
     public List<Student> getStudentList() {
         try {
             Connection connection = DBConnection.createConnection();
@@ -181,17 +112,14 @@ public enum UserDAO {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
 
-            while(resultSet.next()) {
+            while (resultSet.next()) {
                 Company company = new Company();
-
                 company.setName(resultSet.getString("name"));
                 company.setLocation(resultSet.getString("location"));
                 company.setField(resultSet.getString("field"));
                 company.setContact(resultSet.getString("contact"));
                 company.setKvk_num(resultSet.getString("kvk_number"));
-
                 companyList.add(company);
-
             }
 
             return companyList;
@@ -200,6 +128,62 @@ public enum UserDAO {
             // FIXME Runtime exceptions should be thrown as little as possible, error messages are much preferred.
             throw new RuntimeException(e);
         }
+    }
 
+    public List<Company> getCompanyListByEmail(String email) {
+        try {
+            Connection connection = DBConnection.createConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                    "SELECT DISTINCT c.*" +
+                    "FROM Company c, Employment e, Student s" +
+                    "WHERE c.cid = e.cid AND e.sid = s.sid AND u.id = s.sid AND c.email = ?"
+            );
+            preparedStatement.setString(1, email);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<Company> companies = new ArrayList<>();
+
+            while (resultSet.next()) {
+                Company company = new Company();
+                company.setName(resultSet.getString("name"));
+                company.setLocation(resultSet.getString("location"));
+                company.setField(resultSet.getString("field"));
+                company.setContact(resultSet.getString("contact"));
+                company.setKvk_num(resultSet.getString("kvk_number"));
+                companies.add(company);
+            }
+            return companies;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public List<Student> getStudentListByEmail(String email) {
+        try {
+            Connection connection = DBConnection.createConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                    "SELECT DISTINCT s.*" +
+                            "FROM Company c, Employment e, Student s" +
+                            "WHERE c.cid = e.cid AND e.sid = s.sid AND u.id = s.sid AND s.email = ?"
+            );
+            preparedStatement.setString(1, email);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<Student> students = new ArrayList<>();
+
+            while(resultSet.next()) {
+                Student student = new Student();
+                student.setBirth(resultSet.getString("birthdate"));
+                student.setName(resultSet.getString("name"));
+                student.setSkills(resultSet.getString("skills"));
+                student.setStudy(resultSet.getString("study"));
+                student.setUniversity(resultSet.getString("university"));
+                student.setBtw_num(resultSet.getString("btw_number"));
+                student.setBirth(resultSet.getString("email"));
+
+                students.add(student);
+            }
+            return students;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
