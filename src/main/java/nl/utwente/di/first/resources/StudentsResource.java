@@ -1,29 +1,35 @@
 package nl.utwente.di.first.resources;
 
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.PathParam;
-import jakarta.ws.rs.Produces;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
-import nl.utwente.di.first.dao.UserDAO;
-import nl.utwente.di.first.model.Company;
+import nl.utwente.di.first.dao.StudentDAO;
 import nl.utwente.di.first.model.Student;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Path("/students")
 public class StudentsResource {
+    @Context
+    HttpServletRequest req;
+    HttpSession session = req.getSession();
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Student> getAllStudents() {
-        return UserDAO.instance.getStudentList();
+    public List<Student> getStudentList(
+            @QueryParam("company") String cid
+    ) {
+        return StudentDAO.instance.getStudentByCompany(cid);
     }
 
-    @Path("{email}")
+    @Path("{sid}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Company> getCompanyByEmail (@PathParam("email") String email) {
-        return UserDAO.instance.getCompanyListByEmail(email);
+    public Student getStudent(
+            @PathParam("sid") String sid
+    ) {
+        return StudentDAO.instance.getStudent(sid);
     }
 }

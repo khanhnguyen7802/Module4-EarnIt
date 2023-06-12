@@ -1,60 +1,44 @@
 package nl.utwente.di.first.model;
 
+import jakarta.xml.bind.annotation.XmlRootElement;
+
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+@XmlRootElement
 public class Submission {
+    private int hours;
+    private String comment;
+    private String status;
+    private LocalDate date;
 
-    private int numberOfHours;
-    private String description;
-    private boolean flagged;
-    private LocalDateTime submissionDate; //The date in which the submission is created
-    private LocalDate workedDate; //The declared date in which the student worked
+    public Submission() {
 
-    //TODO: status enum for rejections
-
-    public Submission(int numberOfHours, String description, LocalDate workedDate){
-        this.numberOfHours = numberOfHours;
-        this.description = description;
-        this.flagged = false;
-        this.workedDate = workedDate;
-        this.submissionDate = LocalDateTime.now(); //TODO is this suitable?
     }
 
-    public int getNumberOfHours() {
-        return numberOfHours;
+    public int getHours() {
+        return hours;
     }
-
-    public String getDescription() {
-        return description;
+    public void setHours(int hours) {
+        this.hours = hours;
     }
-
-    public boolean isFlagged() {
-        return flagged;
+    public String getComment() {
+        return comment;
     }
-
-    public String getSubmissionDateString() {
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-        String formattedDateTime = submissionDate.format(dateTimeFormatter);
-        return formattedDateTime;
+    public void setComment(String comment) {
+        this.comment = comment;
     }
-
-    public String getWorkedDateString(){
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        String formattedDateTime = workedDate.format(dateTimeFormatter);
-        return formattedDateTime;
+    public String getStatus() {
+        return status;
     }
-
-    public void setNumberOfHours(int numberOfHours) {
-        this.numberOfHours = numberOfHours;
+    public void setStatus(String status) {
+        this.status = status;
     }
-
-    public void setDescription(String description) {
-        this.description = description;
+    public LocalDate getDate(){
+        return date;
     }
-
-    public void flag() {
-        this.flagged = true;
+    public void setDate(String date) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        this.date = LocalDate.parse(date, formatter);
     }
 }

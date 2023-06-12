@@ -1,35 +1,49 @@
 package nl.utwente.di.first.dao;
 
+import nl.utwente.di.first.model.Student;
 import nl.utwente.di.first.model.Submission;
 import nl.utwente.di.first.util.DBConnection;
-import nl.utwente.di.first.util.Security;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.List;
 
-public class SubmissionDAO {
+public enum SubmissionDAO {
+    instance;
+    private SubmissionDAO() {
 
-    //TODO does student need an attribute with the companies they work for?
-
-    //TODO employer: approve or reject submission -> propose new one
-    //TODO student: agree or disagree -> submission goes to staff
-
-    public boolean addSubmission(Submission submission){ //TODO: Not final
+    }
+    public Submission getSubmission(String sid, String cid, LocalDate date) {
         try {
             Connection connection = DBConnection.createConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                    "SELECT DISTINCT *" +
+                            "FROM Submission" +
+                            "WHERE email = ?"
+            );
+//            preparedStatement.setString(1, email);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            Submission submission = new Submission();
 
-            String query = "INSERT INTO progress(hours, description, submissionDate, workedDate) " +
-                    "VALUES (?, ?, ?, ?)"; //Temporary - no table in db yet
-
+            return submission;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public boolean addSubmission(Submission submission) {
+        //Added submission has empty flag on default
+        try {
+            Connection connection = DBConnection.createConnection();
+            String query = "INSERT INTO progress(hours, worked_date, comment, status) VALUES (?, ?, ?, ?)";
             PreparedStatement insertSubmissionStatement = connection.prepareStatement(query);
-            insertSubmissionStatement.setString(1, Integer.toString(submission.getNumberOfHours())); //TODO: String
-            insertSubmissionStatement.setString(2, submission.getDescription());
-            insertSubmissionStatement.setString(3, submission.getSubmissionDateString()); //TODO: String
-            insertSubmissionStatement.setString(4, submission.getWorkedDateString()); //TODO: String
-
+            insertSubmissionStatement.setInt(1, submission.getHours());
+            insertSubmissionStatement.setString(2, submission.getDate().toString());
+            insertSubmissionStatement.setString(3, submission.getComment());
+            insertSubmissionStatement.setString(4, submission.getStatus());
             insertSubmissionStatement.execute();
-
             if (insertSubmissionStatement.executeUpdate() != 0) {
                 return true;
             }
@@ -39,18 +53,15 @@ public class SubmissionDAO {
         }
         return false;
     }
+    public void flagSubmission(String sid, String cid, LocalDate date, String flag) {
+        /*
+            Possible flags:
+            empty (submitted but not confirmed)
+            Confirmed
+            Accepted
+            Rejected
+            Appealed
+         */
 
-
-    //TODO
-    public boolean rejectSubmission(){
-        return true;
-    }
-
-    public boolean suggestDifferentSubmission(){
-        return true;
-    }
-
-    public boolean flagSubmission(){
-        return true;
     }
 }

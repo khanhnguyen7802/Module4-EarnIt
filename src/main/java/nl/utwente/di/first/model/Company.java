@@ -1,5 +1,8 @@
 package nl.utwente.di.first.model;
 
+import jakarta.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class Company extends User {
     String name;
     String location;

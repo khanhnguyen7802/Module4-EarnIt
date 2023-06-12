@@ -13,7 +13,6 @@ import java.time.LocalDate;
 //WEB-INF/progress.html
 public class SubmissionServlet extends HttpServlet {
 
-    SubmissionDAO submissionDAO = new SubmissionDAO();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //TODO: Student: new submission, approve+reject suggestion - different servlets?
         //TODO: Company: approve/reject submission (with comment for reasoning)
@@ -22,9 +21,9 @@ public class SubmissionServlet extends HttpServlet {
         String description = request.getParameter("comment");
         LocalDate date = LocalDate.parse(request.getParameter("date"));
 
-        Submission submission = new Submission(hours, description, date);
+        Submission submission = new Submission();
 
-        boolean status = submissionDAO.addSubmission(submission);
+        boolean status = SubmissionDAO.instance.addSubmission(submission);
         //TODO if status
 
     }

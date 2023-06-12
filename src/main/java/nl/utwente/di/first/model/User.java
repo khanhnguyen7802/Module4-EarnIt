@@ -1,5 +1,8 @@
 package nl.utwente.di.first.model;
 
+import jakarta.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class User {
     private String email;
     private String password;
