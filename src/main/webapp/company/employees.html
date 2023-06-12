@@ -1,10 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
 
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>home</title>
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora">
+    <link rel="stylesheet" href="../assets/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="../assets/css/Pretty-Search-Form-.css">
+    <link rel="stylesheet" href="../assets/css/Pretty-User-List-.css">
+    <link rel="stylesheet" href="../assets/css/Search-Input-responsive.css">
+    <link rel="stylesheet" href="../assets/css/sidebar-1.css">
+    <link rel="stylesheet" href="../assets/css/sidebar.css">
+</head>
+
+<body style="color: var(--bs-gray-100);">
+    <ul class="nav flex-column shadow d-flex sidebar mobile-hid">
+        <li class="nav-item logo-holder">
+            <div class="text-center text-white logo py-4 mx-4"><a class="active text-decoration-none" id="title" href="#" style="color: var(--bs-gray-100);padding-top: 30px;padding-bottom: 36px;"><img src="../assets/img/Earn%20It%20Logo.svg" style="width: 100px;"></a></div>
+        </li>
+        <li class="nav-item"><a class="nav-link active text-start py-1 px-0" href="#"><i class="fas fa-user-graduate mx-3" style="color: var(--bs-gray-100);"></i><span class="text-nowrap mx-2" style="color: var(--bs-white);">Students</span></a></li>
+        <li class="nav-item"><a class="nav-link text-start py-1 px-0" href="#"><i class="far fa-calendar-alt mx-3" style="color: var(--bs-gray-100);"></i><span class="text-nowrap mx-2" style="color: var(--bs-gray-100);">Submissions</span></a></li>
+        <li class="nav-item dropdown show"><a class="dropdown-toggle nav-link text-start py-1 px-0 position-relative" aria-expanded="true" data-bs-toggle="dropdown" href="#"><i class="fas fa-sliders-h mx-3" style="color: var(--bs-white);"></i><span class="text-nowrap mx-2" style="color: var(--bs-white);">Settings</span><i class="fas fa-caret-down float-none float-lg-end fa-sm" style="color: var(--bs-white);margin-right: 20px;margin-top: 5px;"></i></a>
+            <div class="dropdown-menu show border-0 animated fadeIn" data-bs-popper="none"><a class="dropdown-item" href="#" style="color: var(--bs-black);background: rgb(219, 84, 97);font-weight: bold;"><i class="far fa-user" style="text-align: justify;margin-left: -8px;margin-right: 25px;"></i><span>Edit profile</span></a><a class="dropdown-item" href="#" style="color: var(--bs-black);background: rgb(219, 84, 97);font-weight: bold;"><i class="fas fa-sign-out-alt" style="padding-left: 0px;margin-left: -8px;margin-right: 25px;"></i><span>Logout</span></a></div>
+        </li>
+    </ul>
+    <div class="container">
+        <div class="row" style="margin: 0px -15px;">
+            <div class="col" style="margin: 0px 10px 0px 30px;">
+                <h1 style="margin: 2px 0px 15px;padding: 20px 60px 0px 0px;color: var(--bs-black);margin-right: 357px;padding-top: 0px;margin-bottom: 15px;padding-bottom: 0px;margin-top: 20px;">Students</h1>
+                <form class="search-form" style="padding-left: 0px;margin-left: 0px;padding-right: 0px;margin-right: 209px;">
+                    <div class="input-group"><span class="input-group-text"><i class="fa fa-search"></i></span><input class="form-control" type="text" placeholder="Search for student"><button class="btn btn-light" type="button" style="border-style: solid;border-color: var(--bs-btn-border-color);border-top-color: var(--bs-btn-hover-border-color);border-right-color: var(--bs-btn-hover-border-color);border-bottom-color: var(--bs-btn-hover-border-color);border-left-color: var(--bs-btn-hover-border-color);">Search </button></div>
+                </form>
+                <div class="list-group">
+                    <ul>
+                        <li style="padding-bottom: 0px;padding-top: 0px;margin-top: -40px;">Item 1<a class="list-group-item list-group-item-action flex-column align-items-start" href="#" style="margin-left: -32px;">
+                                <div style="display: flex;"><img src="../assets/img/Earn%20It%20Logo.svg" style="width: 80px;">
+                                    <div style="margin-left: 20px;">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1" style="width: 100px;">Student</h5>
+                                        </div><small class="text-muted">Click for details</small>
+                                    </div>
+                                </div>
+                            </a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../assets/js/sidebar.js"></script>
 </body>
+
 </html>
