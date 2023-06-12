@@ -3,6 +3,7 @@ package nl.utwente.di.first.util;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.File;
 import java.io.IOException;
@@ -27,7 +28,17 @@ public class URIFilter implements Filter {
             //If the request is aimed towards the api, we should just let it pass and not alter the URL in any way.
             //After this, the request will be handled by the next servlet matching its URL-pattern
             request.getRequestDispatcher(path).forward(request, response);
-        } else if (extension.equals("")) {
+            return;
+        } else if (path.startsWith("/student")) {
+            HttpSession session = req.getSession();
+            if (session.getAttribute("role") == null || !session.getAttribute("role").equals("STUDENT")) {
+                System.out.println(session.getAttribute("role"));
+                request.getRequestDispatcher("/401.html").forward(request,response);
+            }
+            
+            // TODO implement a similar rule system for company and admin pages. Either by case specific rules or a generalisation.
+            
+        } if (extension.equals("")) {
             // IMPORTANT! Right now, the filter will interpret any URI without a specified extension as a html file
             // This means that any reference to a file of a different extension type should always have this specified in the URI 
             String filePath = request.getServletContext().getRealPath(path + ".html");

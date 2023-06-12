@@ -1,6 +1,5 @@
 package nl.utwente.di.first.dao;
 
-import jakarta.xml.bind.annotation.XmlRootElement;
 import nl.utwente.di.first.model.Company;
 import nl.utwente.di.first.model.Student;
 import nl.utwente.di.first.model.User;
@@ -12,7 +11,6 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@XmlRootElement
 public enum UserDAO {
     instance;
     private List<Student> studentList = new ArrayList<>();
