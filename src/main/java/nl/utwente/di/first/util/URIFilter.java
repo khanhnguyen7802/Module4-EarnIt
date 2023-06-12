@@ -38,7 +38,9 @@ public class URIFilter implements Filter {
             
             // TODO implement a similar rule system for company and admin pages. Either by case specific rules or a generalisation.
             
-        } if (extension.equals("")) {
+        }
+
+        if (extension.equals("")) {
             // IMPORTANT! Right now, the filter will interpret any URI without a specified extension as a html file
             // This means that any reference to a file of a different extension type should always have this specified in the URI 
             String filePath = request.getServletContext().getRealPath(path + ".html");
