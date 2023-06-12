@@ -13,7 +13,7 @@ import nl.utwente.di.first.model.Student;
 
 import java.util.List;
 
-@Path("/company")
+@Path("/companies")
 public class CompaniesResource {
     @Context
     HttpServletRequest req;
