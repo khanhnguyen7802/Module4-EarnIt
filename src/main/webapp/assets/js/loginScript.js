@@ -25,7 +25,7 @@ submit_button.addEventListener("click", function () {
                 // No redirect here
                 err_msg.innerHTML = "The given credentials were invalid. Check spelling or create an account.";
             } else if (data === "STUDENT") {
-                window.location.href = "./jobs/jobs.html";
+                window.location.href = "../../student/jobs.html";
                 // Redirect to the student homepage
                 err_msg.innerHTML = "Successfully logged in as a student";
             } else if (data === "COMPANY") {
