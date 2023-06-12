@@ -45,8 +45,8 @@ public enum CompanyDAO {
         try {
             Connection connection = DBConnection.createConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "SELECT DISTINCT c.*" +
-                            "FROM Company c, Employment e, Student s" +
+                    "SELECT DISTINCT c.* " +
+                            "FROM company c, employment e, student s " +
                             "WHERE c.cid = e.cid AND e.sid = s.sid AND u.id = s.sid AND c.email = ?"
             );
             preparedStatement.setString(1, email);
@@ -70,8 +70,8 @@ public enum CompanyDAO {
         try {
             Connection connection = DBConnection.createConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "SELECT DISTINCT *" +
-                            "FROM Company" +
+                    "SELECT DISTINCT * " +
+                            "FROM company " +
                             "WHERE email = ?"
             );
             preparedStatement.setString(1, email);

@@ -21,7 +21,7 @@ public enum SubmissionDAO {
             Connection connection = DBConnection.createConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(
                     "SELECT DISTINCT *" +
-                            "FROM Submission" +
+                            "FROM submission" +
                             "WHERE email = ?"
             );
 //            preparedStatement.setString(1, email);
@@ -37,7 +37,7 @@ public enum SubmissionDAO {
         //Added submission has empty flag on default
         try {
             Connection connection = DBConnection.createConnection();
-            String query = "INSERT INTO progress(hours, worked_date, comment, status) VALUES (?, ?, ?, ?)";
+            String query = "INSERT INTO submission(hours, worked_date, comment, status) VALUES (?, ?, ?, ?)";
             PreparedStatement insertSubmissionStatement = connection.prepareStatement(query);
             insertSubmissionStatement.setInt(1, submission.getHours());
             insertSubmissionStatement.setString(2, submission.getDate().toString());
