@@ -29,6 +29,7 @@ submit_button.addEventListener("click", function () {
                 // Redirect to the student homepage
                 err_msg.innerHTML = "Successfully logged in as a student";
             } else if (data === "COMPANY") {
+                window.location.href = "./company/employees.html";
                 // Redirect to the company homepage
                 err_msg.innerHTML = "Successfully logged in as a company";
             } else {

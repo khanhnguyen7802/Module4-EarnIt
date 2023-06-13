@@ -1,14 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang ='en'>
 <head>
-    <title>Home Page</title>
-</head>
-<body>
-<h2>Home Page</h2>
-<br>
-<b><a href="https://localhost:8080/earnit/login">Login</a></b>
-<br>
-<b><a href="https://localhost:8080/earnit/register">Register</a></b>
-</body>
-</html>
 
+    <title>Starting page</title>
+    <link rel="stylesheet" href="assets/css/start-page.css">
+
+    <link href = 'https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap'>
+    <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
+
+
+<body>
+<div class="container">
+    <div class="box" id="left">
+        <div>
+            <h1>STUDENTS</h1>
+        </div>
+        <div>
+            <h2>Discover Exciting Jobs</h2>
+        </div>
+
+        <button class='button' onclick="location.href='homepage/about-students.html'" type="button">Students</button>
+    </div>
+
+    <div class="box" id="right">
+        <div>
+            <h1>COMPANIES</h1>
+        </div>
+        <div>
+            <h2>Hire & Find Employees</h2>
+        </div>
+
+        <button class='button' onclick="location.href='homepage/about-companies.html'" type="button">Companies</button>
+    </div>
+
+
+</div>
+</body>
+
+</html>
