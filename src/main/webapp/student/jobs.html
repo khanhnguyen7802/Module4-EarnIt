@@ -20,19 +20,32 @@
                 .then(response => response.json())
                 .then(json => {
                     console.log(json);
-                    let list = "<ul>";
+                    let list = "<ul style=\"margin-left: -32px;position: relative;\">";
                     for (const item of json) {
                         let entry =
-                            "<li style=\"padding-bottom: 0px;padding-top: 0px;margin-top: -40px;margin-bottom: 20px;\">Item<a class=\"list-group-item list-group-item-action flex-column align-items-start\" href=\"#popup\" style=\"margin-left: -32px;\">\n" +
-                            "                                <div style=\"display: flex;\"><img src=\"../assets/img/Earn%20It%20Logo.svg\" style=\"width: 80px;\">\n" +
-                            "                                    <div style=\"margin-left: 20px;\">\n" +
-                            "                                        <div class=\"d-flex w-100 justify-content-between\">\n" +
-                            "                                            <h5 class=\"mb-1\" style=\"width: 100px;\">" + item.name + "</h5><span class=\"badge rounded-pill bg-primary align-self-center\">unfinished</span>\n" +
+                            "<li style=\"position: relative;padding-bottom: 0px;margin-bottom: 18px;\">\n" +
+                            "                        <div class=\"list-group\" style=\"padding-right: 208px;position: relative;\"><a\n" +
+                            "                                class=\"list-group-item list-group-item-action flex-column align-items-start\" href=\"#popup\"\n" +
+                            "                                style=\"position: relative;\">\n" +
+                            "                            <div style=\"display: flex;position: relative;\"><img src=\"../assets/img/Earn%20It%20Logo.svg\"\n" +
+                            "                                                                                style=\"width: 80px;margin-right: 15px;position: relative;\">\n" +
+                            "                                <div style=\"position: static;\">\n" +
+                            "                                    <div class=\"d-flex w-100 justify-content-between\"\n" +
+                            "                                         style=\"margin-bottom: -8px;position: relative;margin-right: 429px;\">\n" +
+                            "                                        <div class=\"d-flex w-100 justify-content-between\" style=\"position: static;\">\n" +
+                            "                                            <h5 class=\"mb-1\" style=\"position: static;\">" + item.name + "</h5>\n" +
+                            "                                            <button class=\"btn btn-primary\" type=\"button\" onclick=\"http://localhost:8080/earnit/student/submission\"\n" +
+                            "                                                    style=\"border-top-left-radius: 20px;border-bottom-left-radius: 20px;border-top-right-radius: 20px;border-bottom-right-radius: 20px;background: rgb(219, 84, 97);border-color: var(--bs-list-group-border-color);\">\n" +
+                            "                                                Submit\n" +
+                            "                                            </button>\n" +
                             "                                        </div>\n" +
-                            "                                        <p class=\"mb-1\">" + item.title + "</p><small class=\"text-muted\">Click for details</small>\n" +
                             "                                    </div>\n" +
+                            "                                    <p class=\"mb-1\" style=\"padding-top: 6px;position: static;margin-top: -13px;\">" + item.title +
+                            "                                        </p><small class=\"text-muted\">Click to view details</small>\n" +
                             "                                </div>\n" +
-                            "                            </a></li>";
+                            "                            </div>\n" +
+                            "                        </a></div>\n" +
+                            "                    </li>";
                         list += entry;
                     }
                     list += "</ul>";
@@ -43,54 +56,109 @@
 </head>
 
 <body style="color: var(--bs-gray-100);" onload="loadList()">
-    <ul class="nav flex-column shadow d-flex sidebar mobile-hid">
-        <li class="nav-item logo-holder">
-            <div class="text-center text-white logo py-4 mx-4"><a class="active text-decoration-none" id="title" href="#" style="color: var(--bs-gray-100);padding-top: 30px;padding-bottom: 36px;"><img src="../assets/img/Earn%20It%20Logo.svg" style="width: 100px;"></a></div>
-        </li>
-        <li class="nav-item"><a class="nav-link active text-start py-1 px-0" href="#"><i class="fas fa-suitcase mx-3" style="color: var(--bs-gray-100);"></i><span class="text-nowrap mx-2" style="color: var(--bs-white);">Jobs</span></a></li>
-        <li class="nav-item"><a class="nav-link text-start py-1 px-0" href="#"><i class="far fa-calendar-alt mx-3" style="color: var(--bs-gray-100);"></i><span class="text-nowrap mx-2" style="color: var(--bs-gray-100);">Submissions</span></a></li>
-        <li class="nav-item dropdown show"><a class="dropdown-toggle nav-link text-start py-1 px-0 position-relative" aria-expanded="true" data-bs-toggle="dropdown" href="#"><i class="fas fa-sliders-h mx-3" style="color: var(--bs-white);"></i><span class="text-nowrap mx-2" style="color: var(--bs-white);">Settings</span><i class="fas fa-caret-down float-none float-lg-end fa-sm" style="color: var(--bs-white);margin-right: 20px;margin-top: 5px;"></i></a>
-            <div class="dropdown-menu show border-0 animated fadeIn" data-bs-popper="none"><a class="dropdown-item" href="#" style="color: var(--bs-black);background: rgb(219, 84, 97);font-weight: bold;"><i class="far fa-user" style="text-align: justify;margin-left: -8px;margin-right: 25px;"></i><span>Edit profile</span></a><a class="dropdown-item" href="#" style="color: var(--bs-black);background: rgb(219, 84, 97);font-weight: bold;"><i class="fas fa-sign-out-alt" style="padding-left: 0px;margin-left: -8px;margin-right: 25px;"></i><span>Logout</span></a></div>
-        </li>
-    </ul>
-    <div class="container">
-        <div class="row" style="margin: 0px -15px;">
-            <div class="col" style="margin: 0px 10px 0px 30px;">
-                <h1 style="margin: 2px 0px 15px;padding: 20px 60px 0px 0px;color: var(--bs-black);margin-right: 357px;padding-top: 0px;margin-bottom: 15px;padding-bottom: 0px;margin-top: 20px;">Jobs</h1>
-                <form class="search-form" style="padding-left: 0px;margin-left: 0px;padding-right: 0px;margin-right: 209px;">
-                    <div class="input-group"><span class="input-group-text"><i class="fa fa-search"></i></span><input class="form-control" type="text" placeholder="Search for company"><button class="btn btn-light" type="button" style="border-style: solid;border-color: var(--bs-btn-border-color);border-top-color: var(--bs-btn-hover-border-color);border-right-color: var(--bs-btn-hover-border-color);border-bottom-color: var(--bs-btn-hover-border-color);border-left-color: var(--bs-btn-hover-border-color);">Search </button></div>
-                </form>
-                <div class="list-group" id="list">
-                    <ul>
-                        <li style="padding-bottom: 0px;padding-top: 0px;margin-top: -40px;">Item 1<a class="list-group-item list-group-item-action flex-column align-items-start" href="#popup" style="margin-left: -32px;">
-                                <div style="display: flex;"><img src="../assets/img/Earn%20It%20Logo.svg" style="width: 80px;">
-                                    <div style="margin-left: 20px;">
-                                        <div class="d-flex w-100 justify-content-between">
-                                            <h5 class="mb-1" style="width: 100px;">Company</h5><span class="badge rounded-pill bg-primary align-self-center">status</span>
-                                        </div>
-                                        <p class="mb-1">Description</p><small class="text-muted">Click for details</small>
-                                    </div>
-                                </div>
-                            </a></li>
-                    </ul>
+<ul class="nav flex-column shadow d-flex sidebar mobile-hid">
+    <li class="nav-item logo-holder">
+        <div class="text-center text-white logo py-4 mx-4"><a class="active text-decoration-none" id="title" href="#"
+                                                              style="color: var(--bs-gray-100);padding-top: 30px;padding-bottom: 36px;"><img
+                src="../assets/img/Earn%20It%20Logo.svg" style="width: 100px;"></a></div>
+    </li>
+    <li class="nav-item"><a class="nav-link active text-start py-1 px-0" href="#"><i class="fas fa-building mx-3"
+                                                                                     style="color: var(--bs-gray-100);"></i><span
+            class="text-nowrap mx-2" style="color: var(--bs-white);">Jobs</span></a></li>
+    <li class="nav-item"><a class="nav-link text-start py-1 px-0" href="#"><i class="far fa-calendar-alt mx-3"
+                                                                              style="color: var(--bs-gray-100);"></i><span
+            class="text-nowrap mx-2" style="color: var(--bs-gray-100);">Submissions</span></a></li>
+    <li class="nav-item dropdown show"><a class="nav-link text-start dropdown-toggle py-1 px-0 position-relative"
+                                          aria-expanded="true" data-bs-toggle="dropdown" href="#"><i
+            class="fas fa-sliders-h mx-3" style="color: var(--bs-white);"></i><span class="text-nowrap mx-2"
+                                                                                    style="color: var(--bs-white);">Settings</span><i
+            class="fas fa-caret-down float-none float-lg-end fa-sm"
+            style="color: var(--bs-white);margin-right: 20px;margin-top: 5px;"></i></a>
+        <div class="border-0 bounce animated dropdown-menu show fadeIn" data-bs-popper="none"><a class="dropdown-item"
+                                                                                                 href="#"
+                                                                                                 style="color: var(--bs-black);background: rgb(219, 84, 97);font-weight: bold;"><i
+                class="far fa-user" style="text-align: justify;margin-left: -8px;margin-right: 25px;"></i><span>Edit profile</span></a><a
+                class="dropdown-item" href="http://localhost:8080/earnit/api/logout"
+                style="color: var(--bs-black);background: rgb(219, 84, 97);font-weight: bold;"><i
+                class="fas fa-sign-out-alt" style="padding-left: 0px;margin-left: -8px;margin-right: 25px;"></i><span>Logout</span></a>
+        </div>
+    </li>
+</ul>
+<div class="container">
+    <div class="row" style="margin: 0px -15px;">
+        <div class="col" style="margin: 0px 10px 0px 30px;">
+            <h1 style="margin: 2px 0px 15px;padding: 20px 60px 0px 0px;color: var(--bs-black);margin-right: 357px;padding-top: 0px;margin-bottom: 15px;padding-bottom: 0px;margin-top: 20px;">
+                Jobs</h1>
+            <form class="search-form"
+                  style="padding-left: 0px;margin-left: 0px;padding-right: 0px;margin-right: 209px;position: relative;">
+                <div class="input-group"><span class="input-group-text input-group-text"><i
+                        class="fas fa-search"></i></span><input class="form-control form-control" type="text"
+                                                                placeholder="Search for company">
+                    <button class="btn btn-light" type="button"
+                            style="border-style: solid;border-color: var(--bs-btn-border-color);border-top-color: var(--bs-btn-hover-border-color);border-right-color: var(--bs-btn-hover-border-color);border-bottom-color: var(--bs-btn-hover-border-color);border-left-color: var(--bs-btn-hover-border-color);">
+                        Search
+                    </button>
                 </div>
+            </form>
+            <div class="list-group" style="position: relative;">
+                <ul style="margin-left: -32px;position: relative;">
+                    <li style="position: relative;padding-bottom: 0px;margin-bottom: 18px;">Item 1
+                        <div class="list-group" style="padding-right: 208px;position: relative;"><a
+                                class="list-group-item list-group-item-action flex-column align-items-start" href="#"
+                                style="position: relative;">
+                            <div style="display: flex;position: relative;"><img src="../assets/img/Earn%20It%20Logo.svg"
+                                                                                style="width: 80px;margin-right: 15px;position: relative;">
+                                <div style="position: static;">
+                                    <div class="d-flex w-100 justify-content-between"
+                                         style="margin-bottom: -8px;position: relative;margin-right: 429px;">
+                                        <div class="d-flex w-100 justify-content-between" style="position: static;">
+                                            <h5 class="mb-1" style="position: static;">Company</h5>
+                                            <button class="btn btn-primary" type="button"
+                                                    style="border-top-left-radius: 20px;border-bottom-left-radius: 20px;border-top-right-radius: 20px;border-bottom-right-radius: 20px;background: rgb(219, 84, 97);border-color: var(--bs-list-group-border-color);">
+                                                Submit
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <p class="mb-1" style="padding-top: 6px;position: static;margin-top: -13px;">Job
+                                        title</p><small class="text-muted">Click to view details</small>
+                                </div>
+                            </div>
+                        </a></div>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
-    <div class="overlay" id="popup">
-        <div class="wrapper">
-            <h2>This is for the company's name placeholder</h2><a class="close" href="#">&times;</a>
-            <div class="content">
-                <section>Job Description</section>
-                <section>lLorem ipsum dolor sit amet, consectetur adipiscing elit. Ut varius felis sed ligula tincidunt varius. Nulla aliquam maximus purus, id tempor tortor vehicula ac. Vivamus consequat semper arcu ac ullamcorper. Ut eget aliquet sem. Sed faucibus nisl nisl, in tempus ipsum dapibus non. Vivamus eu ornare erat, id interdum sapien. Interdum et malesuada fames ac ante ipsum primis in faucibus. Cras tincidunt, sapien vitae dignissim accumsan, nisi purus maximus ante, vitae ornare massa turpis sed turpis. Etiam vitae lectus leo. Nullam ullamcorper neque mattis purus cursus, sed malesuada erat tempor.
-                    Etiam pretium sit amet libero ac venenatis. Suspendisse quis nulla leo. Donec elementum ex nec eros imperdiet, a congue sapien accumsan. Phasellus varius arcu tempus, vehicula erat a, luctus eros. Maecenas in justo velit. Proin mollis vitae neque vel consequat. Proin facilisis gravida nisl, id feugiat dui suscipit vel. Maecenas dignissim magna vel odio ornare suscipit. Aenean finibus congue lobortis.
-                    Nam consectetur sem non est semper, a ornare odio congue. Aliquam quis velit non lorem consectetur convallis. In augue est, sagittis vel dictum eu, auctor non est. Nulla maximus aliquet ante eu elementum. Praesent fermentum molestie diam, sit amet efficitur eros rhoncus vel. Maecenas sed euismod erat. In aliquet faucibus ante, vel iaculis nunc cursus nec. Integer tellus leo, accumsan vitae dui quis, eleifend vulputate augue. Proin vitae quam non purus finibus imperdiet at nec ligula. Nullam ipsum ante, rhoncus eget consequat non, aliquet aliquam nulla. Morbi at metus sodales, malesuada eros at, posuere eros.
-                </section>
-            </div>
+</div>
+<div class="overlay" id="popup">
+    <div class="wrapper">
+        <h2>This is for the company's name placeholder</h2><a class="close" href="#">&times;</a>
+        <div class="content">
+            <section>Job Description</section>
+            <section>lLorem ipsum dolor sit amet, consectetur adipiscing elit. Ut varius felis sed ligula tincidunt
+                varius. Nulla aliquam maximus purus, id tempor tortor vehicula ac. Vivamus consequat semper arcu ac
+                ullamcorper. Ut eget aliquet sem. Sed faucibus nisl nisl, in tempus ipsum dapibus non. Vivamus eu ornare
+                erat, id interdum sapien. Interdum et malesuada fames ac ante ipsum primis in faucibus. Cras tincidunt,
+                sapien vitae dignissim accumsan, nisi purus maximus ante, vitae ornare massa turpis sed turpis. Etiam
+                vitae lectus leo. Nullam ullamcorper neque mattis purus cursus, sed malesuada erat tempor.
+                Etiam pretium sit amet libero ac venenatis. Suspendisse quis nulla leo. Donec elementum ex nec eros
+                imperdiet, a congue sapien accumsan. Phasellus varius arcu tempus, vehicula erat a, luctus eros.
+                Maecenas in justo velit. Proin mollis vitae neque vel consequat. Proin facilisis gravida nisl, id
+                feugiat dui suscipit vel. Maecenas dignissim magna vel odio ornare suscipit. Aenean finibus congue
+                lobortis.
+                Nam consectetur sem non est semper, a ornare odio congue. Aliquam quis velit non lorem consectetur
+                convallis. In augue est, sagittis vel dictum eu, auctor non est. Nulla maximus aliquet ante eu
+                elementum. Praesent fermentum molestie diam, sit amet efficitur eros rhoncus vel. Maecenas sed euismod
+                erat. In aliquet faucibus ante, vel iaculis nunc cursus nec. Integer tellus leo, accumsan vitae dui
+                quis, eleifend vulputate augue. Proin vitae quam non purus finibus imperdiet at nec ligula. Nullam ipsum
+                ante, rhoncus eget consequat non, aliquet aliquam nulla. Morbi at metus sodales, malesuada eros at,
+                posuere eros.
+            </section>
         </div>
     </div>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="assets/js/sidebar.js"></script>
+</div>
+<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="assets/js/sidebar.js"></script>
 </body>
 
 </html>
