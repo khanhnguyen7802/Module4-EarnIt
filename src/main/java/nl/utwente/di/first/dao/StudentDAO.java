@@ -80,13 +80,15 @@ public enum StudentDAO {
             preparedStatement.setString(1, email);
             ResultSet resultSet = preparedStatement.executeQuery();
             Student student = new Student();
-            student.setBirth(resultSet.getString("birthdate"));
-            student.setName(resultSet.getString("name"));
-            student.setSkills(resultSet.getString("skills"));
-            student.setStudy(resultSet.getString("study"));
-            student.setUniversity(resultSet.getString("university"));
-            student.setBtw_num(resultSet.getString("btw_number"));
-            student.setEmail(resultSet.getString("email"));
+            while (resultSet.next()) {
+                student.setBirth(resultSet.getString("birthdate"));
+                student.setName(resultSet.getString("name"));
+                student.setSkills(resultSet.getString("skills"));
+                student.setStudy(resultSet.getString("study"));
+                student.setUniversity(resultSet.getString("university"));
+                student.setBtw_num(resultSet.getString("btw_number"));
+                student.setEmail(resultSet.getString("email"));
+            }
             return student;
         } catch (SQLException e) {
             throw new RuntimeException(e);
