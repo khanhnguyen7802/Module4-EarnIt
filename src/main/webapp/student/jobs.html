@@ -16,14 +16,14 @@
     <link rel="stylesheet" href="../assets/css/jobs_dashboard.css">
     <script>
         function loadList() {
-            fetch("./api/companies")
+            fetch("http://localhost:8080/earnit/api/companies")
                 .then(response => response.json())
                 .then(json => {
                     console.log(json);
                     let list = "<ul>";
                     for (const item of json) {
                         let entry =
-                            "<li style=\"padding-bottom: 0px;padding-top: 0px;margin-top: -40px;\">Item<a class=\"list-group-item list-group-item-action flex-column align-items-start\" href=\"#popup\" style=\"margin-left: -32px;\">\n" +
+                            "<li style=\"padding-bottom: 0px;padding-top: 0px;margin-top: -40px;margin-bottom: 20px;\">Item<a class=\"list-group-item list-group-item-action flex-column align-items-start\" href=\"#popup\" style=\"margin-left: -32px;\">\n" +
                             "                                <div style=\"display: flex;\"><img src=\"../assets/img/Earn%20It%20Logo.svg\" style=\"width: 80px;\">\n" +
                             "                                    <div style=\"margin-left: 20px;\">\n" +
                             "                                        <div class=\"d-flex w-100 justify-content-between\">\n" +
@@ -36,7 +36,7 @@
                         list += entry;
                     }
                     list += "</ul>";
-                    document.getElementById("list-group").innerHTML = list;
+                    document.getElementById("list").innerHTML = list;
                 })
         }
     </script>
@@ -60,7 +60,7 @@
                 <form class="search-form" style="padding-left: 0px;margin-left: 0px;padding-right: 0px;margin-right: 209px;">
                     <div class="input-group"><span class="input-group-text"><i class="fa fa-search"></i></span><input class="form-control" type="text" placeholder="Search for company"><button class="btn btn-light" type="button" style="border-style: solid;border-color: var(--bs-btn-border-color);border-top-color: var(--bs-btn-hover-border-color);border-right-color: var(--bs-btn-hover-border-color);border-bottom-color: var(--bs-btn-hover-border-color);border-left-color: var(--bs-btn-hover-border-color);">Search </button></div>
                 </form>
-                <div class="list-group">
+                <div class="list-group" id="list">
                     <ul>
                         <li style="padding-bottom: 0px;padding-top: 0px;margin-top: -40px;">Item 1<a class="list-group-item list-group-item-action flex-column align-items-start" href="#popup" style="margin-left: -32px;">
                                 <div style="display: flex;"><img src="../assets/img/Earn%20It%20Logo.svg" style="width: 80px;">
