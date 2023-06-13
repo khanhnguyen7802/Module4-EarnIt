@@ -25,24 +25,19 @@
                         let entry =
                             "<li style=\"position: relative;padding-bottom: 0px;margin-bottom: 18px;\">\n" +
                             "                        <div class=\"list-group\" style=\"padding-right: 208px;position: relative;\"><a\n" +
-                            "                                class=\"list-group-item list-group-item-action flex-column align-items-start\" href=\"#popup\"\n" +
-                            "                                style=\"position: relative;\">\n" +
+                            "                                class=\"list-group-item list-group-item-action flex-column align-items-start\"\n" +
+                            "                                href=\"#popup\" style=\"position: relative;\">\n" +
                             "                            <div style=\"display: flex;position: relative;\"><img src=\"../assets/img/Earn%20It%20Logo.svg\"\n" +
-                            "                                                                                style=\"width: 80px;margin-right: 15px;position: relative;\">\n" +
-                            "                                <div style=\"position: static;\">\n" +
-                            "                                    <div class=\"d-flex w-100 justify-content-between\"\n" +
-                            "                                         style=\"margin-bottom: -8px;position: relative;margin-right: 429px;\">\n" +
-                            "                                        <div class=\"d-flex w-100 justify-content-between\" style=\"position: static;\">\n" +
-                            "                                            <h5 class=\"mb-1\" style=\"position: static;\">" + item.name + "</h5>\n" +
-                            "                                            <button class=\"btn btn-primary\" type=\"button\" onclick=\"http://localhost:8080/earnit/student/submission\"\n" +
-                            "                                                    style=\"border-top-left-radius: 20px;border-bottom-left-radius: 20px;border-top-right-radius: 20px;border-bottom-right-radius: 20px;background: rgb(219, 84, 97);border-color: var(--bs-list-group-border-color);\">\n" +
-                            "                                                Submit\n" +
-                            "                                            </button>\n" +
-                            "                                        </div>\n" +
-                            "                                    </div>\n" +
-                            "                                    <p class=\"mb-1\" style=\"padding-top: 6px;position: static;margin-top: -13px;\">" + item.title +
+                            "                                                                                style=\"width: 80px;margin-right: 15px;position: relative;\"/>\n" +
+                            "                                <div style=\"position: relative;width: 1000px;\">\n" +
+                            "                                    <h5 class=\"mb-1\" style=\"position: static;\">" + item.name + "</h5>\n" +
+                            "                                    <p class=\"mb-1\" style=\"position: static;margin-top: -13px;padding-top: 13px;\">" + item.title +
                             "                                        </p><small class=\"text-muted\">Click to view details</small>\n" +
                             "                                </div>\n" +
+                            "                                <button class=\"btn btn-primary z-index\" type=\"button\"\n" +
+                            "                                        style=\"border-top-left-radius: 20px;border-bottom-left-radius: 20px;border-top-right-radius: 20px;border-bottom-right-radius: 20px;background: rgb(219, 84, 97);border-color: var(--bs-list-group-border-color);height: 40px;position: relative;\">\n" +
+                            "                                    Submit\n" +
+                            "                                </button>\n" +
                             "                            </div>\n" +
                             "                        </a></div>\n" +
                             "                    </li>";
@@ -102,26 +97,21 @@
             </form>
             <div class="list-group" style="position: relative;" id="list">
                 <ul style="margin-left: -32px;position: relative;">
-                    <li style="position: relative;padding-bottom: 0px;margin-bottom: 18px;">Item 1
+                    <li style="position: relative;padding-bottom: 0px;margin-bottom: 18px;">
                         <div class="list-group" style="padding-right: 208px;position: relative;"><a
-                                class="list-group-item list-group-item-action flex-column align-items-start" href="#"
-                                style="position: relative;">
+                                class="list-group-item list-group-item-action flex-column align-items-start"
+                                href="#popup" style="position: relative;">
                             <div style="display: flex;position: relative;"><img src="../assets/img/Earn%20It%20Logo.svg"
-                                                                                style="width: 80px;margin-right: 15px;position: relative;">
-                                <div style="position: static;">
-                                    <div class="d-flex w-100 justify-content-between"
-                                         style="margin-bottom: -8px;position: relative;margin-right: 429px;">
-                                        <div class="d-flex w-100 justify-content-between" style="position: static;">
-                                            <h5 class="mb-1" style="position: static;">Company</h5>
-                                            <button class="btn btn-primary" type="button"
-                                                    style="border-top-left-radius: 20px;border-bottom-left-radius: 20px;border-top-right-radius: 20px;border-bottom-right-radius: 20px;background: rgb(219, 84, 97);border-color: var(--bs-list-group-border-color);">
-                                                Submit
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <p class="mb-1" style="padding-top: 6px;position: static;margin-top: -13px;">Job
+                                                                                style="width: 80px;margin-right: 15px;position: relative;"/>
+                                <div style="position: relative;width: 1000px;">
+                                    <h5 class="mb-1" style="position: static;">Company</h5>
+                                    <p class="mb-1" style="position: static;margin-top: -13px;padding-top: 13px;">Job
                                         title</p><small class="text-muted">Click to view details</small>
                                 </div>
+                                <button class="btn btn-primary z-index" type="button"
+                                        style="border-top-left-radius: 20px;border-bottom-left-radius: 20px;border-top-right-radius: 20px;border-bottom-right-radius: 20px;background: rgb(219, 84, 97);border-color: var(--bs-list-group-border-color);height: 40px;position: relative;">
+                                    Submit
+                                </button>
                             </div>
                         </a></div>
                     </li>
