@@ -17,10 +17,10 @@ public class StudentsResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Student> getStudentList(
-            @QueryParam("company") String cid
-    ) {
-        return StudentDAO.instance.getStudentByCompany(cid);
+    public List<Student> getStudentList() {
+        HttpSession session = req.getSession();
+        String email = session.getAttribute("email").toString();
+        return StudentDAO.instance.getStudentByCompany(email);
     }
 
     @Path("{sid}")
@@ -30,14 +30,5 @@ public class StudentsResource {
             @PathParam("sid") String sid
     ) {
         return StudentDAO.instance.getStudent(sid);
-    }
-
-    @Path("/list")
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<Student> getListAsCurrentUser() {
-        HttpSession session = req.getSession();
-        String email = session.getAttribute("email").toString();
-        return StudentDAO.instance.getStudentByCompany(email);
     }
 }

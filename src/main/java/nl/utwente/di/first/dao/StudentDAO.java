@@ -30,7 +30,7 @@ public enum StudentDAO {
                 student.setStudy(resultSet.getString("study"));
                 student.setUniversity(resultSet.getString("university"));
                 student.setBtw_num(resultSet.getString("btw_number"));
-                student.setBirth(resultSet.getString("email"));
+                student.setEmail(resultSet.getString("email"));
                 students.add(student);
             }
             return students;
@@ -61,7 +61,7 @@ public enum StudentDAO {
                 student.setStudy(resultSet.getString("study"));
                 student.setUniversity(resultSet.getString("university"));
                 student.setBtw_num(resultSet.getString("btw_number"));
-                student.setBirth(resultSet.getString("email"));
+                student.setEmail(resultSet.getString("email"));
                 sFilter.add(student);
             }
             return sFilter;
@@ -86,7 +86,7 @@ public enum StudentDAO {
             student.setStudy(resultSet.getString("study"));
             student.setUniversity(resultSet.getString("university"));
             student.setBtw_num(resultSet.getString("btw_number"));
-            student.setBirth(resultSet.getString("email"));
+            student.setEmail(resultSet.getString("email"));
             return student;
         } catch (SQLException e) {
             throw new RuntimeException(e);

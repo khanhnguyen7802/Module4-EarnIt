@@ -20,27 +20,18 @@ public class CompaniesResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Company> getCompanyList(
-            @QueryParam("student") String sid
-    ) {
-        return CompanyDAO.instance.getCompanyByStudent(sid);
+    public List<Company> getCompanyList() {
+        HttpSession session = req.getSession();
+        String email = session.getAttribute("email").toString();
+        return CompanyDAO.instance.getCompanyByStudent(email);
     }
 
     @Path("{cid}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Company getStudent(
+    public Company getCompany(
             @PathParam("cid") String cid
     ) {
         return CompanyDAO.instance.getCompany(cid);
-    }
-
-    @Path("/list")
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<Company> getListAsCurrentUser() {
-        HttpSession session = req.getSession();
-        String email = session.getAttribute("email").toString();
-        return CompanyDAO.instance.getCompanyByStudent(email);
     }
 }

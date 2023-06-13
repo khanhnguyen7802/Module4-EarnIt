@@ -30,11 +30,10 @@ public enum CompanyDAO {
                 company.setField(resultSet.getString("field"));
                 company.setContact(resultSet.getString("contact"));
                 company.setKvk_num(resultSet.getString("kvk_number"));
+                company.setEmail(resultSet.getString("email"));
                 companies.add(company);
             }
-
             return companies;
-
         } catch (SQLException e) {
             // FIXME Runtime exceptions should be thrown as little as possible, error messages are much preferred.
             throw new RuntimeException(e);
@@ -51,7 +50,7 @@ public enum CompanyDAO {
             );
             preparedStatement.setString(1, email);
             ResultSet resultSet = preparedStatement.executeQuery();
-            List<Company> cFilter = new ArrayList<>();
+            List<Company> selectedCompanies = new ArrayList<>();
             while (resultSet.next()) {
                 Company company = new Company();
                 company.setName(resultSet.getString("name"));
@@ -59,9 +58,10 @@ public enum CompanyDAO {
                 company.setField(resultSet.getString("field"));
                 company.setContact(resultSet.getString("contact"));
                 company.setKvk_num(resultSet.getString("kvk_number"));
-                cFilter.add(company);
+                company.setEmail(resultSet.getString("email"));
+                selectedCompanies.add(company);
             }
-            return cFilter;
+            return selectedCompanies;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -77,12 +77,14 @@ public enum CompanyDAO {
             preparedStatement.setString(1, email);
             ResultSet resultSet = preparedStatement.executeQuery();
             Company company = new Company();
-            company.setName(resultSet.getString("name"));
-            company.setLocation(resultSet.getString("location"));
-            company.setField(resultSet.getString("field"));
-            company.setContact(resultSet.getString("contact"));
-            company.setKvk_num(resultSet.getString("kvk_number"));
-            companies.add(company);
+            while (resultSet.next()) {
+                company.setName(resultSet.getString("name"));
+                company.setLocation(resultSet.getString("location"));
+                company.setField(resultSet.getString("field"));
+                company.setContact(resultSet.getString("contact"));
+                company.setKvk_num(resultSet.getString("kvk_number"));
+                company.setEmail(resultSet.getString("email"));
+            }
             return company;
         } catch (SQLException e) {
             throw new RuntimeException(e);
