@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="../assets/css/Search-Input-responsive.css">
     <link rel="stylesheet" href="../assets/css/sidebar-1.css">
     <link rel="stylesheet" href="../assets/css/sidebar.css">
+    <link rel="stylesheet" href="../assets/css/jobs_dashboard.css">
     <script>
         function loadList() {
             fetch("./api/companies")
@@ -22,7 +23,7 @@
                     let list = "<ul>";
                     for (const item of json) {
                         let entry =
-                            "<li style=\"padding-bottom: 0px;padding-top: 0px;margin-top: -40px;\">Item<a class=\"list-group-item list-group-item-action flex-column align-items-start\" href=\"#\" style=\"margin-left: -32px;\">\n" +
+                            "<li style=\"padding-bottom: 0px;padding-top: 0px;margin-top: -40px;\">Item<a class=\"list-group-item list-group-item-action flex-column align-items-start\" href=\"#popup\" style=\"margin-left: -32px;\">\n" +
                             "                                <div style=\"display: flex;\"><img src=\"../assets/img/Earn%20It%20Logo.svg\" style=\"width: 80px;\">\n" +
                             "                                    <div style=\"margin-left: 20px;\">\n" +
                             "                                        <div class=\"d-flex w-100 justify-content-between\">\n" +
@@ -61,7 +62,7 @@
                 </form>
                 <div class="list-group">
                     <ul>
-                        <li style="padding-bottom: 0px;padding-top: 0px;margin-top: -40px;">Item 1<a class="list-group-item list-group-item-action flex-column align-items-start" href="#" style="margin-left: -32px;">
+                        <li style="padding-bottom: 0px;padding-top: 0px;margin-top: -40px;">Item 1<a class="list-group-item list-group-item-action flex-column align-items-start" href="#popup" style="margin-left: -32px;">
                                 <div style="display: flex;"><img src="../assets/img/Earn%20It%20Logo.svg" style="width: 80px;">
                                     <div style="margin-left: 20px;">
                                         <div class="d-flex w-100 justify-content-between">
@@ -73,6 +74,18 @@
                             </a></li>
                     </ul>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="overlay" id="popup">
+        <div class="wrapper">
+            <h2>This is for the company's name placeholder</h2><a class="close" href="#">&times;</a>
+            <div class="content">
+                <section>Job Description</section>
+                <section>lLorem ipsum dolor sit amet, consectetur adipiscing elit. Ut varius felis sed ligula tincidunt varius. Nulla aliquam maximus purus, id tempor tortor vehicula ac. Vivamus consequat semper arcu ac ullamcorper. Ut eget aliquet sem. Sed faucibus nisl nisl, in tempus ipsum dapibus non. Vivamus eu ornare erat, id interdum sapien. Interdum et malesuada fames ac ante ipsum primis in faucibus. Cras tincidunt, sapien vitae dignissim accumsan, nisi purus maximus ante, vitae ornare massa turpis sed turpis. Etiam vitae lectus leo. Nullam ullamcorper neque mattis purus cursus, sed malesuada erat tempor.
+                    Etiam pretium sit amet libero ac venenatis. Suspendisse quis nulla leo. Donec elementum ex nec eros imperdiet, a congue sapien accumsan. Phasellus varius arcu tempus, vehicula erat a, luctus eros. Maecenas in justo velit. Proin mollis vitae neque vel consequat. Proin facilisis gravida nisl, id feugiat dui suscipit vel. Maecenas dignissim magna vel odio ornare suscipit. Aenean finibus congue lobortis.
+                    Nam consectetur sem non est semper, a ornare odio congue. Aliquam quis velit non lorem consectetur convallis. In augue est, sagittis vel dictum eu, auctor non est. Nulla maximus aliquet ante eu elementum. Praesent fermentum molestie diam, sit amet efficitur eros rhoncus vel. Maecenas sed euismod erat. In aliquet faucibus ante, vel iaculis nunc cursus nec. Integer tellus leo, accumsan vitae dui quis, eleifend vulputate augue. Proin vitae quam non purus finibus imperdiet at nec ligula. Nullam ipsum ante, rhoncus eget consequat non, aliquet aliquam nulla. Morbi at metus sodales, malesuada eros at, posuere eros.
+                </section>
             </div>
         </div>
     </div>
