@@ -15,9 +15,10 @@
     <link rel="stylesheet" href="../assets/css/sidebar.css">
     <script>
         function loadList() {
-            fetch("./api/company")
+            fetch("./api/companies")
                 .then(response => response.json())
                 .then(json => {
+                    console.log(json);
                     let list = "<ul>";
                     for (const item of json) {
                         let entry =
