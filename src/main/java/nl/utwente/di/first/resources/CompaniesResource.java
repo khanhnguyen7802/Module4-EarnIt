@@ -18,6 +18,10 @@ public class CompaniesResource {
     @Context
     HttpServletRequest req;
 
+    /**
+     * Session as a student and given the student's email
+     * @return list of companies that the student is working for
+     */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Company> getCompanyList() {
@@ -26,6 +30,11 @@ public class CompaniesResource {
         return CompanyDAO.instance.getCompanyByStudent(email);
     }
 
+    /**
+     * Given a company's email
+     * @param cid
+     * @return the information of that specific company
+     */
     @Path("{cid}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)

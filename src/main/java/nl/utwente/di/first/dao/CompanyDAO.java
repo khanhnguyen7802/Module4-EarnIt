@@ -14,6 +14,12 @@ public enum CompanyDAO {
     private CompanyDAO() {
 
     }
+
+    /**
+     * Get a list of all companies
+     *
+     * @return a list of all companies
+     */
     public List<Company> getAllCompany() {
         try {
             Connection connection = DBConnection.createConnection();
@@ -40,13 +46,19 @@ public enum CompanyDAO {
         }
     }
 
+    /**
+     * Given a student's email, return all companies that student work for
+     *
+     * @param email of a student
+     * @return a list of all companies that student is currently working for
+     */
     public List<Company> getCompanyByStudent(String email) {
         try {
             Connection connection = DBConnection.createConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(
                     "SELECT DISTINCT c.* " +
-                            "FROM Company c, Employment e, Student s, User u " +
-                            "WHERE c.cid = e.cid AND e.sid = s.sid AND u.id = s.sid AND u.email = ?"
+                            "FROM company c, employment e, student s " +
+                            "WHERE c.id = e.cid AND e.sid = s.id AND s.email = ?"
             );
             preparedStatement.setString(1, email);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -66,16 +78,24 @@ public enum CompanyDAO {
             throw new RuntimeException(e);
         }
     }
+
+    /**
+     * Given a company's email, return the information of that company
+     *
+     * @param email of a company
+     * @return information of that company
+     */
     public Company getCompany(String email) {
         try {
             Connection connection = DBConnection.createConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "SELECT DISTINCT c.* " +
-                            "FROM Company c, User u " +
-                            "WHERE u.email = ?"
+                    "SELECT * " +
+                            "FROM company " +
+                            "WHERE email = ?"
             );
             preparedStatement.setString(1, email);
             ResultSet resultSet = preparedStatement.executeQuery();
+
             Company company = new Company();
             while (resultSet.next()) {
                 company.setName(resultSet.getString("name"));

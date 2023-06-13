@@ -15,14 +15,24 @@ public class StudentsResource {
     @Context
     HttpServletRequest req;
 
+    /**
+     * Session as a company and given a company's email
+     * @return list of students employed by that company
+     */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Student> getStudentList() {
         HttpSession session = req.getSession();
         String email = session.getAttribute("email").toString();
+
         return StudentDAO.instance.getStudentByCompany(email);
     }
 
+    /**
+     * Given a student's email
+     * @param sid
+     * @return the personal information of that specific student
+     */
     @Path("{sid}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
