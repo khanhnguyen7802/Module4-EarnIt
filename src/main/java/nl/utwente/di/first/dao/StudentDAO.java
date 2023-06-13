@@ -17,7 +17,7 @@ public enum StudentDAO {
         try {
             Connection connection = DBConnection.createConnection();
 
-            String query = "SELECT * FROM student";
+            String query = "SELECT * FROM Student";
 
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
@@ -46,12 +46,12 @@ public enum StudentDAO {
             Connection connection = DBConnection.createConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(
                     "SELECT DISTINCT s.* " +
-                            "FROM company c, employment e, student s " +
-                            "WHERE c.cid = e.cid AND e.sid = s.sid AND u.id = s.sid AND s.email = ?"
+                            "FROM Company c, Employment e, Student s, User u " +
+                            "WHERE c.cid = e.cid AND e.sid = s.sid AND u.id = s.sid AND u.email = ?"
             );
             preparedStatement.setString(1, email);
             ResultSet resultSet = preparedStatement.executeQuery();
-            List<Student> sFilter = new ArrayList<>();
+            List<Student> selectedStudents = new ArrayList<>();
 
             while(resultSet.next()) {
                 Student student = new Student();
@@ -62,9 +62,9 @@ public enum StudentDAO {
                 student.setUniversity(resultSet.getString("university"));
                 student.setBtw_num(resultSet.getString("btw_number"));
                 student.setEmail(resultSet.getString("email"));
-                sFilter.add(student);
+                selectedStudents.add(student);
             }
-            return sFilter;
+            return selectedStudents;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -73,9 +73,9 @@ public enum StudentDAO {
         try {
             Connection connection = DBConnection.createConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "SELECT DISTINCT * " +
-                            "FROM student " +
-                            "WHERE email = ?"
+                    "SELECT DISTINCT s.* " +
+                            "FROM Student s, User u " +
+                            "WHERE u.email = ?"
             );
             preparedStatement.setString(1, email);
             ResultSet resultSet = preparedStatement.executeQuery();
