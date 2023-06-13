@@ -12,6 +12,10 @@ public class Student extends User {
     String skills;
     String btw_num;
 
+    public Student() {
+
+    }
+
     public void setName(String name) {
         this.name = name;
     }

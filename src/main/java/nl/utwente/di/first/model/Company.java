@@ -10,6 +10,9 @@ public class Company extends User {
     String contact;
     String kvk_num;
 
+    public Company() {
+
+    }
     public void setName(String name) {
         this.name = name;
     }
