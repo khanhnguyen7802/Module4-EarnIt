@@ -9,7 +9,8 @@ public class Company extends User {
     String field;
     String contact;
     String kvk_num;
-
+    String title;
+    String description;
     public Company() {
 
     }
@@ -42,5 +43,21 @@ public class Company extends User {
     }
     public String getKvk_num() {
         return kvk_num;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
