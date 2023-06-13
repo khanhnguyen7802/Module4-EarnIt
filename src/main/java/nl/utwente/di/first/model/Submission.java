@@ -13,7 +13,7 @@ public class Submission {
     private LocalDate date;
 
     public Submission() {
-
+        status = "";
     }
 
     public int getHours() {
