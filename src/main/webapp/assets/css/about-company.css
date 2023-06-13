@@ -1,0 +1,132 @@
+/* CSS styles */
+/* Style for the taskbar */
+.taskbar {
+    display: flex;
+    position: fixed;
+    border: 1px solid black;
+    border-radius: 30px;
+    background-color: black;
+    width: 1250px;
+    height: 70px;
+}
+
+.taskbar .earnit_logo {
+    width: 60px;
+    padding-top: 5px;
+    padding-left: 20px;
+}
+
+.taskbar .container {
+    display: flex;
+    padding-left: 30px;
+    padding-top: 15px;
+}
+
+.taskbar .container .but  {
+    color: white;
+    width: 80px;
+    height: 20px;
+    border: 2px solid rosybrown;
+    border-radius: 30px;
+    padding: 10px;
+    text-align: center;
+}
+
+.taskbar .container .butt  {
+    color: white;
+    width: 80px;
+    height: 20px;
+    border: 2px solid rosybrown;
+    border-radius: 30px;
+    padding: 10px;
+    text-align: center;
+    margin-right: 550px;
+}
+
+.taskbar .container .button {
+    color: white;
+    width: 80px;
+    height: 20px;
+    border: 2px solid rosybrown;
+    border-radius: 30px;
+    padding: 10px;
+    text-align: center;
+
+}
+
+/* Style for thr content_wrapper */
+.content_wrapper {
+    padding-top: 100px;
+
+}
+
+.content_wrapper .description {
+    margin-bottom: 150px;
+}
+
+.content_wrapper .description .image_4 {
+    width: 500px;
+    padding-left: 50px;
+    padding-right: 50px;
+
+
+}
+
+.content_wrapper .description .image_5 {
+    width: 500px;
+    padding-left: 50px;
+    padding-right: 50px;
+
+}
+
+.content_wrapper .description .image_6 {
+    width: 500px;
+    padding-left: 50px;
+    padding-right: 50px;
+
+}
+.content_wrapper .description .title {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    overflow: visible;
+    color: #DB5461;
+}
+
+.content_wrapper .description .text {
+    font-size: 20px;
+    text-align: center;
+    margin: 1rem;
+}
+
+/* Style for the footer */
+footer {
+    height: 100px;
+    background-color: black;
+    color: white;
+    font-family: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 10px;
+}
+
+#contact_us {
+    font-size: 2rem;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+    font-weight: bolder;
+    text-align: center;
+}
+
+.phone_email {
+    font-size: 15px;
+    margin: 2px;
+}
+.social_media {
+    width: 30px;
+    height: 30px;
+}
+

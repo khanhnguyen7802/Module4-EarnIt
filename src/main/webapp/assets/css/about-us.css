@@ -1,0 +1,105 @@
+/* CSS styles */
+/* Style for the taskbar */
+.taskbar {
+    display: flex;
+    position: fixed;
+    border: 1px solid black;
+    border-radius: 30px;
+    background-color: black;
+    width: 1250px;
+    height: 70px;
+}
+
+.taskbar .earnit_logo {
+    width: 60px;
+    padding-top: 5px;
+    padding-left: 20px;
+}
+
+.taskbar .container {
+    display: flex;
+    padding-left: 30px;
+    padding-top: 15px;
+}
+
+.taskbar .container .but  {
+    color: white;
+    width: 80px;
+    height: 20px;
+    border: 2px solid rosybrown;
+    border-radius: 30px;
+    padding: 10px;
+    text-align: center;
+}
+
+.taskbar .container .butt  {
+    color: white;
+    width: 80px;
+    height: 20px;
+    border: 2px solid rosybrown;
+    border-radius: 30px;
+    padding: 10px;
+    text-align: center;
+    margin-right: 550px;
+}
+
+.taskbar .container .button {
+    color: white;
+    width: 80px;
+    height: 20px;
+    border: 2px solid rosybrown;
+    border-radius: 30px;
+    padding: 10px;
+    text-align: center;
+
+}
+
+/* Style for the content_wrapper*/
+.content_wrapper {
+    padding-top: 100px;
+    padding-bottom: 200px;
+    padding-left: 80px;
+    padding-right: 80px;
+}
+h1 {
+    font-size: 4rem;
+    text-align: center;
+    margin: 1rem;
+    color: #DB5461;
+}
+.content_wrapper .title {
+    font-size: 20px;
+    text-align: center;
+    margin: 1rem;
+}
+
+
+/* Style for the footer */
+footer {
+    height: 100px;
+    background-color: black;
+    color: white;
+    font-family: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 10px;
+}
+
+#contact_us {
+    font-size: 2rem;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+    font-weight: bolder;
+    text-align: center;
+}
+
+.phone_email {
+    font-size: 15px;
+    margin: 2px;
+}
+.social_media {
+    width: 30px;
+    height: 30px;
+}
