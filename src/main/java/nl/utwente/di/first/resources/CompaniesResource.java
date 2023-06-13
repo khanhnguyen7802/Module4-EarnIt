@@ -17,7 +17,6 @@ import java.util.List;
 public class CompaniesResource {
     @Context
     HttpServletRequest req;
-    HttpSession session = req.getSession();
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -34,5 +33,14 @@ public class CompaniesResource {
             @PathParam("cid") String cid
     ) {
         return CompanyDAO.instance.getCompany(cid);
+    }
+
+    @Path("/list")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Company> getListAsCurrentUser() {
+        HttpSession session = req.getSession();
+        String email = session.getAttribute("email").toString();
+        return CompanyDAO.instance.getCompanyByStudent(email);
     }
 }

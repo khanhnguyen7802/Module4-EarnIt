@@ -14,7 +14,6 @@ import java.util.List;
 public class StudentsResource {
     @Context
     HttpServletRequest req;
-    HttpSession session = req.getSession();
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -31,5 +30,14 @@ public class StudentsResource {
             @PathParam("sid") String sid
     ) {
         return StudentDAO.instance.getStudent(sid);
+    }
+
+    @Path("/list")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Student> getListAsCurrentUser() {
+        HttpSession session = req.getSession();
+        String email = session.getAttribute("email").toString();
+        return StudentDAO.instance.getStudentByCompany(email);
     }
 }
