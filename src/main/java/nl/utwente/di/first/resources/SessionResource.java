@@ -13,15 +13,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+//This class is used only for testing purposes
 @Path("/session")
 public class SessionResource {
     @Context
     HttpServletRequest req;
-    HttpSession session = req.getSession();
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<String> getUserSession() {
+        HttpSession session = req.getSession();
         List<String> sessionData = new ArrayList<>();
         String email = session.getAttribute("email").toString();
         String role = session.getAttribute("role").toString();
