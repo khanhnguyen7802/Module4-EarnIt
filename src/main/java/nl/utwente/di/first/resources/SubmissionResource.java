@@ -28,6 +28,21 @@ public class SubmissionResource {
         }
         return new ArrayList<>();
     }
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    public List<Submission> getWeekOfSubmissions(){
+        String role = request.getAttribute("role").toString();
+        if(role.equals("STUDENT")){
+            //TODO
+            return null;
+        }
+        else if (role.equals("COMPANY")){
+            //TODO
+            return null;
+        }
+        return null;
+    }
 
     @POST
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
