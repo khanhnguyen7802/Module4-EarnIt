@@ -1,24 +1,4 @@
-body {
-	font-family: 'Montserrat', sans-serif;
-	background: #e7e7e7;
-	height: 100vh;
-}
-
-.box {  					/* for button */
-	text-align: center;
-}
-.button {
-	font-size: 1em;
-	padding: 15px 35px;
-	color: #fff;
-	text-decoration: none;
-	cursor: pointer;
-	transition: all 0.3s ease-out;
-	background: #403e3d;
-	border-radius: 50px;
-}
-
-
+/* For the popup */
 .overlay {
 	position: fixed;
 	top: 0;
@@ -38,10 +18,10 @@ body {
 
 .wrapper {               /* for the popup*/
 	margin: 70px auto;
-	padding: 20px;
+	padding: 30px 50px;
 	background: #e7e7e7;
 	border-radius: 7px;
-	width: 40%;
+	width: 50%;
 	position: relative;
 	transition: all 1s ease-in-out;
 }
@@ -52,10 +32,10 @@ body {
 }
 .wrapper .close { /* close button */
 	position: absolute;
-	top: -1px;
-	right: 10px;
+	top: 11px;
+	right: 20px;
 	transition: all 200ms;
-	font-size: 30px;
+	font-size: 40px;
 	font-weight: bold;
 	text-decoration: none;
 	color: #333;
@@ -70,6 +50,7 @@ body {
 	color:red;
 	padding-bottom: 10px;
 }
+
 
 .content > section:nth-of-type(2) {
 	height:200px;
