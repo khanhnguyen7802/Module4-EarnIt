@@ -20,34 +20,8 @@
     <link rel="stylesheet" href="../assets/css/fonts/fontawesome-all.min.css">
     <link rel="stylesheet" href="../assets/css/css/Pretty-Search-Form-.css">
     <link rel="stylesheet" href="../assets/css/bootstrap/css/bootstrap.min-1.css">
-    <script>
-        function loadList() {
-            fetch("http://localhost:8080/earnit/api/companies")
-                .then(response => response.json())
-                .then(json => {
-                    console.log(json);
-                    let list = "<ul style=\"margin-left: -32px;position: relative;\">";
-                    for (const item of json) {
-                        let entry =
-                            "<li style=\"position: relative;padding-bottom: 0px;margin-bottom: 18px;\"><div class=\"list-group\" style=\"padding-right: 208px;position: relative;\"><a class=\"list-group-item list-group-item-action flex-column align-items-start\" href=\"#\" style=\"position: relative;\">\n" +
-                            "                            <div style=\"display: flex;position: relative;\"><img src=\"../assets/img/Earn%20It%20Logo.svg\" style=\"width: 80px;margin-right: 15px;position: relative;\" />\n" +
-                            "                                <div style=\"position: static;\">\n" +
-                            "                                    <div class=\"d-flex w-100 justify-content-between\" style=\"margin-bottom: -8px;position: relative;margin-right: 429px;\">\n" +
-                            "                                        <div class=\"d-flex w-100 justify-content-between\" style=\"position: static;\">\n" +
-                            "                                            <h5 class=\"mb-1\" style=\"position: static;padding-bottom: 7px;padding-top: 6px;\"> + item.name + </h5>\n" +
-                            "                                        </div>\n" +
-                            "                                    </div><small class=\"text-muted\">Click to view submissions</small>\n" +
-                            "                                </div>\n" +
-                            "                            </div>\n" +
-                            "                        </a></div>\n" +
-                            "                        </li>";
-                        list += entry;
-                    }
-                    list += "</ul>";
-                    document.getElementById("list").innerHTML = list;
-                })
-        }
-    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script></script>
 </head>
 
 <body style="color: var(--bs-gray-100);">
@@ -58,7 +32,7 @@
         <li class="nav-item"><a class="nav-link active text-start py-1 px-0" href="#"><i class="fas fa-user-graduate mx-3" style="color: var(--bs-gray-100);"></i><span class="text-nowrap mx-2" style="color: var(--bs-white);">Students</span></a></li>
         <li class="nav-item"><a class="nav-link text-start py-1 px-0" href="#"><i class="far fa-calendar-alt mx-3" style="color: var(--bs-gray-100);"></i><span class="text-nowrap mx-2" style="color: var(--bs-gray-100);">Submissions</span></a></li>
         <li class="nav-item dropdown show"><a class="dropdown-toggle nav-link text-start py-1 px-0 position-relative" aria-expanded="true" data-bs-toggle="dropdown" href="#"><i class="fas fa-sliders-h mx-3" style="color: var(--bs-white);"></i><span class="text-nowrap mx-2" style="color: var(--bs-white);">Settings</span><i class="fas fa-caret-down float-none float-lg-end fa-sm" style="color: var(--bs-white);margin-right: 20px;margin-top: 5px;"></i></a>
-            <div class="dropdown-menu show border-0 animated fadeIn" data-bs-popper="none"><a class="dropdown-item" href="#" style="color: var(--bs-black);background: rgb(219, 84, 97);font-weight: bold;"><i class="far fa-user" style="text-align: justify;margin-left: -8px;margin-right: 25px;"></i><span>Edit profile</span></a><a class="dropdown-item" href="#" style="color: var(--bs-black);background: rgb(219, 84, 97);font-weight: bold;"><i class="fas fa-sign-out-alt" style="padding-left: 0px;margin-left: -8px;margin-right: 25px;"></i><span>Logout</span></a></div>
+            <div class="dropdown-menu show border-0 animated fadeIn" data-bs-popper="none"><a class="dropdown-item" onclick="logout()" style="color: var(--bs-black);background: rgb(219, 84, 97);font-weight: bold;"><i class="far fa-user" style="text-align: justify;margin-left: -8px;margin-right: 25px;"></i><span>Edit profile</span></a><a class="dropdown-item" href="#" style="color: var(--bs-black);background: rgb(219, 84, 97);font-weight: bold;"><i class="fas fa-sign-out-alt" style="padding-left: 0px;margin-left: -8px;margin-right: 25px;"></i><span>Logout</span></a></div>
         </li>
     </ul>
     <div class="container">
@@ -68,27 +42,47 @@
                 <form class="search-form" style="padding-left: 0px;margin-left: 0px;padding-right: 0px;margin-right: 209px;">
                     <div class="input-group"><span class="input-group-text"><i class="fa fa-search"></i></span><input class="form-control" type="text" placeholder="Search for student"><button class="btn btn-light" type="button" style="border-style: solid;border-color: var(--bs-btn-border-color);border-top-color: var(--bs-btn-hover-border-color);border-right-color: var(--bs-btn-hover-border-color);border-bottom-color: var(--bs-btn-hover-border-color);border-left-color: var(--bs-btn-hover-border-color);">Search </button></div>
                 </form>
-                <div class="list-group" style="position: relative;" id="list">
-                    <ul style="margin-left: -32px;position: relative;">
-                        <li style="position: relative;padding-bottom: 0px;margin-bottom: 18px;"><div class="list-group" style="padding-right: 208px;position: relative;"><a class="list-group-item list-group-item-action flex-column align-items-start" href="#" style="position: relative;">
-                            <div style="display: flex;position: relative;"><img src="../assets/img/Earn%20It%20Logo.svg" style="width: 80px;margin-right: 15px;position: relative;" />
-                                <div style="position: static;">
-                                    <div class="d-flex w-100 justify-content-between" style="margin-bottom: -8px;position: relative;margin-right: 429px;">
-                                        <div class="d-flex w-100 justify-content-between" style="position: static;">
-                                            <h5 class="mb-1" style="position: static;padding-bottom: 7px;padding-top: 6px;">Student</h5>
-                                        </div>
-                                    </div><small class="text-muted">Click to view submissions</small>
-                                </div>
-                            </div>
-                        </a></div>
-                        </li>
+                <div class="list-group" style="position: relative;">
+                    <ul style="margin-left: -32px;position: relative;" id="list">
+                        
                     </ul>
                 </div>
             </div>
         </div>
     </div>
+    <template id="student-item">
+        <li style="position: relative;padding-bottom: 0px;margin-bottom: 18px;"><div class="list-group" style="padding-right: 208px;position: relative;"><a class="list-group-item list-group-item-action flex-column align-items-start" href="#" style="position: relative;">
+            <div style="display: flex;position: relative;"><img src="../assets/img/Earn%20It%20Logo.svg" style="width: 80px;margin-right: 15px;position: relative;" />
+                <div style="position: static;">
+                    <div class="d-flex w-100 justify-content-between" style="margin-bottom: -8px;position: relative;margin-right: 429px;">
+                        <div class="d-flex w-100 justify-content-between" style="position: static;">
+                            <h5 class="mb-1 student_name" style="position: static;padding-bottom: 7px;padding-top: 6px;">Student</h5>
+                        </div>
+                    </div><small class="text-muted">Click to view submissions</small>
+                </div>
+            </div>
+        </a></div>
+        </li>
+    </template>
     <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="../assets/js/sidebar.js"></script>
+    <script>
+        function logout() {
+            fetch(window.location.origin + "/earnit/api/logout", {
+                method: "POST"
+            }).then(response => {
+                if (response.ok) {
+                    window.location.href = window.location.origin + "/earnit/login"
+                } else {
+                    console.log('Failed to logout');
+                }
+            })
+                .catch(error => {
+                    // An error occurred during the fetch request
+                    console.log('Request error:', error);
+                });
+        }
+    </script>
 </body>
 
 </html>
