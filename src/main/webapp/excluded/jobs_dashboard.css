@@ -11,7 +11,8 @@
 .sidebar .earnit_logo {
     margin-left: 60px;
     margin-top: 10px;
-    width: 80px
+    width: 80px;
+    /*background-color: white;*/
 }
 
 .sidebar .navbar_sidebar {

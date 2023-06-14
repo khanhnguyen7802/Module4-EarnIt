@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +42,20 @@ public enum SubmissionDAO {
             throw new RuntimeException(e);
         }
     }
+
+    public List<Submission> getWeekOfSubmissions(String email, String weekNumber){ //TODO not tested
+        List<Submission> weekOfSubmissions = new ArrayList<>();
+        List<Submission> allSubmissions = getSubmissions(email);
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("ww");
+
+        for(Submission s: allSubmissions){
+            if(dateFormat.format(s.getDate()).equals(dateFormat.format(weekNumber)))
+                weekOfSubmissions.add(s);
+        }
+        return weekOfSubmissions;
+    }
+
     public boolean addSubmission(Submission submission) {
         //Added submission has empty flag on default
         try {
