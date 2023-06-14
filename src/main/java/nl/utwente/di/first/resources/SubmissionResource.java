@@ -31,17 +31,18 @@ public class SubmissionResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public List<Submission> getWeekOfSubmissions(){
+    public List<Submission> getWeekOfSubmissions(@FormParam("?") String weekNumber){
+
+        String email = request.getAttribute("email").toString();
         String role = request.getAttribute("role").toString();
-        if(role.equals("STUDENT")){
-            //TODO
+
+        if(role.equals("STUDENT")){ //TODO is this necessary?
             return null;
         }
         else if (role.equals("COMPANY")){
-            //TODO
             return null;
         }
-        return null;
+        return SubmissionDAO.instance.getWeekOfSubmissions(email, weekNumber);
     }
 
     @POST
