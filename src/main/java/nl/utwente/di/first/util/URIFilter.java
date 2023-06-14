@@ -29,14 +29,11 @@ public class URIFilter implements Filter {
             //After this, the request will be handled by the next servlet matching its URL-pattern
             request.getRequestDispatcher(path).forward(request, response);
             return;
-        } else if (path.startsWith("/student")) {
+        } else if (path.startsWith("/student") || path.startsWith("/company")) {
             HttpSession session = req.getSession();
-            if (session.getAttribute("role") == null || !session.getAttribute("role").equals("STUDENT")) {
-                System.out.println(session.getAttribute("role"));
+            if (session.getAttribute("role") == null || !session.getAttribute("role").equals(path.substring(1,8).toUpperCase())) {
                 request.getRequestDispatcher("/401.html").forward(request,response);
             }
-            
-            // TODO implement a similar rule system for company and admin pages. Either by case specific rules or a generalisation.
             
         }
 
