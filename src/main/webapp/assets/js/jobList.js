@@ -27,7 +27,7 @@ $(window).on("load", function () {
 });
 
 function logout() {
-    fetch("./api/logout", {
+    fetch(window.location.origin + "/earnit/api/logout", {
         method: "POST"
     }).then(response => {
         if (response.ok) {

@@ -28,7 +28,7 @@ public class SubmissionResource {
         }
         return new ArrayList<>();
     }
-    @GET
+    @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     public List<Submission> getWeekOfSubmissions(@FormParam("?") String weekNumber){

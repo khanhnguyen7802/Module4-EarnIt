@@ -17,15 +17,15 @@ import java.util.Map;
 @Path("/session")
 public class SessionResource {
     @Context
-    HttpServletRequest req;
+    HttpServletRequest request;
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<String> getUserSession() {
-        HttpSession session = req.getSession();
+        HttpSession session = request.getSession();
         List<String> sessionData = new ArrayList<>();
-        String email = session.getAttribute("email").toString();
-        String role = session.getAttribute("role").toString();
+        String email = (session.getAttribute("email") != null) ? session.getAttribute("email").toString() : "";
+        String role = (session.getAttribute("role") != null) ? session.getAttribute("role").toString() : "";
         sessionData.add(email);
         sessionData.add(role);
         return sessionData;

@@ -25,16 +25,30 @@ submit_button.addEventListener("click", function () {
                 // No redirect here
                 err_msg.innerHTML = "The given credentials were invalid. Check spelling or create an account.";
             } else if (data === "STUDENT") {
-                window.location.href = "./student/jobs.html";
+                window.location.href = "./student/jobs";
                 // Redirect to the student homepage
-                err_msg.innerHTML = "Successfully logged in as a student";
+                err_msg.innerHTML = "";
             } else if (data === "COMPANY") {
-                window.location.href = "./company/employees.html";
+                window.location.href = "./company/employees";
                 // Redirect to the company homepage
-                err_msg.innerHTML = "Successfully logged in as a company";
+                err_msg.innerHTML = "";
             } else {
                 err_msg.innerHTML = "Idk wtf you did but you messed some shit up.";
             }
         })
+    }
+});
+
+email_field.addEventListener("keypress", function (event) {
+    if (event.key === "Enter") {
+        event.preventDefault();
+        submit_button.click();
+    }
+});
+
+password_field.addEventListener("keypress", function (event) {
+    if (event.key === "Enter") {
+        event.preventDefault();
+        submit_button.click();
     }
 });

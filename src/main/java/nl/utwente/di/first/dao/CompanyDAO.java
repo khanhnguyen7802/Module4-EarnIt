@@ -10,7 +10,6 @@ import java.util.List;
 
 public enum CompanyDAO {
     instance;
-    private List<Company> companies = new ArrayList<>();
     private CompanyDAO() {
 
     }
@@ -22,6 +21,7 @@ public enum CompanyDAO {
      */
     public List<Company> getAllCompany() {
         try {
+            List<Company> companies = new ArrayList<>();
             Connection connection = DBConnection.createConnection();
 
             String query = "SELECT * FROM company";

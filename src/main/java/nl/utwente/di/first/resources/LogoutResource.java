@@ -9,6 +9,8 @@ import jakarta.ws.rs.core.Context;
 public class LogoutResource {
     @POST
     public void logOut(@Context HttpServletRequest request) {
+        System.out.println("user tried to logout");
         request.getSession().invalidate();
+        System.out.println(request.getSession().getAttribute("role"));
     }
 }
