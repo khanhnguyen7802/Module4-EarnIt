@@ -18,13 +18,19 @@ public enum SubmissionDAO {
     private SubmissionDAO() {
 
     }
-    public List<Submission> getSubmissions(String email) {
+
+    /**
+     * Given an email, return a list of submissions of that student
+     * @param email of a specific student
+     * @return a full list of all submissions that was made by that student
+     */
+    public List<Submission> getStudentSubmissions(String email) {
         try {
             Connection connection = DBConnection.createConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "SELECT DISTINCT *" +
-                            "FROM Submission s, User u " +
-                            "WHERE u.email = ? AND (u.id = s.sid OR u.id = s.cid)"
+                    "SELECT DISTINCT * " +
+                            "FROM submission su, student st " +
+                            "WHERE st.email = ? AND st.id = su.sid"
             );
             preparedStatement.setString(1, email);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -45,9 +51,9 @@ public enum SubmissionDAO {
 
     public List<Submission> getWeekOfSubmissions(String email, String weekNumber){ //TODO not tested
         List<Submission> weekOfSubmissions = new ArrayList<>();
-        List<Submission> allSubmissions = getSubmissions(email);
+        List<Submission> allSubmissions = getStudentSubmissions(email);
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("ww");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("w"); // result week in year
 
         for(Submission s: allSubmissions){
             if(dateFormat.format(s.getDate()).equals(dateFormat.format(weekNumber)))
