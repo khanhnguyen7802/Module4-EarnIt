@@ -37,8 +37,8 @@ public enum CompanyDAO {
                 company.setContact(resultSet.getString("contact"));
                 company.setKvk_num(resultSet.getString("kvk_number"));
                 company.setEmail(resultSet.getString("email"));
-                company.setTitle(resultSet.getString("job_title"));
-                company.setDescription(resultSet.getString("job_description"));
+                company.setJob_title(resultSet.getString("job_title"));
+                company.setJob_description(resultSet.getString("job_description"));
 
                 companies.add(company);
             }
@@ -74,8 +74,8 @@ public enum CompanyDAO {
                 company.setContact(resultSet.getString("contact"));
                 company.setKvk_num(resultSet.getString("kvk_number"));
                 company.setEmail(resultSet.getString("email"));
-                company.setTitle(resultSet.getString("job_title"));
-                company.setDescription(resultSet.getString("job_description"));
+                company.setJob_title(resultSet.getString("job_title"));
+                company.setJob_description(resultSet.getString("job_description"));
                 selectedCompanies.add(company);
             }
             return selectedCompanies;
@@ -109,8 +109,8 @@ public enum CompanyDAO {
                 company.setContact(resultSet.getString("contact"));
                 company.setKvk_num(resultSet.getString("kvk_number"));
                 company.setEmail(resultSet.getString("email"));
-                company.setTitle(resultSet.getString("job_title"));
-                company.setDescription(resultSet.getString("job_description"));
+                company.setJob_title(resultSet.getString("job_title"));
+                company.setJob_description(resultSet.getString("job_description"));
             }
             return company;
         } catch (SQLException e) {

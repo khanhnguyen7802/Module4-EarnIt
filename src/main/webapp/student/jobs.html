@@ -66,65 +66,58 @@
                 <ul style="margin-left: -32px;position: relative;" id="list">
 
                 </ul>
+
             </div>
         </div>
     </div>
 </div>
-<div class="overlay" id="popup">
-    <div class="wrapper">
-        <h2>This is for the company's name placeholder</h2><a class="close" href="#">&times;</a>
-        <div class="content">
-            <section>Job Description</section>
-            <section>lLorem ipsum dolor sit amet, consectetur adipiscing elit. Ut varius felis sed ligula tincidunt
-                varius. Nulla aliquam maximus purus, id tempor tortor vehicula ac. Vivamus consequat semper arcu ac
-                ullamcorper. Ut eget aliquet sem. Sed faucibus nisl nisl, in tempus ipsum dapibus non. Vivamus eu ornare
-                erat, id interdum sapien. Interdum et malesuada fames ac ante ipsum primis in faucibus. Cras tincidunt,
-                sapien vitae dignissim accumsan, nisi purus maximus ante, vitae ornare massa turpis sed turpis. Etiam
-                vitae lectus leo. Nullam ullamcorper neque mattis purus cursus, sed malesuada erat tempor.
-                Etiam pretium sit amet libero ac venenatis. Suspendisse quis nulla leo. Donec elementum ex nec eros
-                imperdiet, a congue sapien accumsan. Phasellus varius arcu tempus, vehicula erat a, luctus eros.
-                Maecenas in justo velit. Proin mollis vitae neque vel consequat. Proin facilisis gravida nisl, id
-                feugiat dui suscipit vel. Maecenas dignissim magna vel odio ornare suscipit. Aenean finibus congue
-                lobortis.
-                Nam consectetur sem non est semper, a ornare odio congue. Aliquam quis velit non lorem consectetur
-                convallis. In augue est, sagittis vel dictum eu, auctor non est. Nulla maximus aliquet ante eu
-                elementum. Praesent fermentum molestie diam, sit amet efficitur eros rhoncus vel. Maecenas sed euismod
-                erat. In aliquet faucibus ante, vel iaculis nunc cursus nec. Integer tellus leo, accumsan vitae dui
-                quis, eleifend vulputate augue. Proin vitae quam non purus finibus imperdiet at nec ligula. Nullam ipsum
-                ante, rhoncus eget consequat non, aliquet aliquam nulla. Morbi at metus sodales, malesuada eros at,
-                posuere eros.
-            </section>
 
-            <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.4.1.min.220afd743d.js" type="text/javascript"></script>
-            <script>
+<template id="job-item">
+    <li style="position: relative;padding-bottom: 0px;margin-bottom: 18px;">
+        <div class="list-group" style="padding-right: 208px;position: relative;">
+            <div
+                class="list-group-item list-group-item-action flex-column align-items-start"
+                style="position: relative;">
+                <div style="display: flex;position: relative;"><img src="../assets/img/Earn%20It%20Logo.svg"
+                                                                    style="width: 80px;margin-right: 15px;position: relative;"/>
+                    <div style="position: relative;width: 1000px;">
+                        <h5 class="mb-1 company_name" style="position: static;">Company</h5>
+                        <p class="mb-1 job_title" style="position: static;margin-top: -13px;padding-top: 13px;">Job
+                            title</p><a class="text-muted" id="view_details" href="#popup">Click to view details</a>
+                    </div>
+
+
+                    <button onclick="submit()" class="btn btn-primary z-index" type="button"
+                            style="border-top-left-radius: 20px;border-bottom-left-radius: 20px;border-top-right-radius: 20px;border-bottom-right-radius: 20px;background: rgb(219, 84, 97);border-color: var(--bs-list-group-border-color);height: 40px;position: relative;">
+                        Submit                </button>
+                </div>
+            </div>
+        </div>
+
+    </li>
+
+</template>
+
+<template id="job-popup">
+    <div class="overlay">
+        <div class="wrapper">
+            <h2 class="company_name">name</h2><a class="close" href="#">&times;</a>
+            <div class="content">
+                <section>Job Description</section>
+                <section id="job_description"></section>
+
+                <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.4.1.min.220afd743d.js" type="text/javascript"></script>
+                <script>
                     $('.close').click(function() {
                         setTimeout(function() {
                             history.replaceState(null, null, ' ');
                         }, 0);
                     });
-            </script>
+                </script>
+            </div>
         </div>
     </div>
-</div>
-<template id="job-item">
-    <li style="position: relative;padding-bottom: 0px;margin-bottom: 18px;">
-        <div class="list-group" style="padding-right: 208px;position: relative;"><div
-                class="list-group-item list-group-item-action flex-column align-items-start"
-                style="position: relative;">
-            <div style="display: flex;position: relative;"><img src="../assets/img/Earn%20It%20Logo.svg"
-                                                                style="width: 80px;margin-right: 15px;position: relative;"/>
-                <div style="position: relative;width: 1000px;">
-                    <h5 class="mb-1 company_name" style="position: static;">Company</h5>
-                    <p class="mb-1 job_title" style="position: static;margin-top: -13px;padding-top: 13px;">Job
-                        title</p><a class="text-muted" href="#popup">Click to view details</a>
-                </div>
-                <button onclick="submit()" class="btn btn-primary z-index" type="button"
-                        style="border-top-left-radius: 20px;border-bottom-left-radius: 20px;border-top-right-radius: 20px;border-bottom-right-radius: 20px;background: rgb(219, 84, 97);border-color: var(--bs-list-group-border-color);height: 40px;position: relative;">
-                    Submit
-                </button>
-            </div>
-        </div></div>
-    </li>
+
 </template>
 <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
 <script src="../assets/js/sidebar.js"></script>
