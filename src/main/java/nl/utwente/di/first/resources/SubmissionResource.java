@@ -53,7 +53,7 @@ public class SubmissionResource {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public List<Submission> getWeekOfSubmissions(@FormParam("?") String weekNumber){
+    public List<Submission> getWeekOfSubmissions(@FormParam("?"/*TODO*/) String weekNumber){
         HttpSession session = req.getSession();
         String email = session.getAttribute("email").toString();
         String role = session.getAttribute("role").toString();

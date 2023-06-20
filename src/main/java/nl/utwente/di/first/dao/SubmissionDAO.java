@@ -49,6 +49,12 @@ public enum SubmissionDAO {
         }
     }
 
+    /**
+     * Filters a students submissions by an input given week number from that year
+     * @param email
+     * @param weekNumber
+     * @return a list with a student's submissions from a certain week (by given week number)
+     */
     public List<Submission> getWeekOfSubmissions(String email, String weekNumber){ //TODO not tested
         List<Submission> weekOfSubmissions = new ArrayList<>();
         List<Submission> allSubmissions = getStudentSubmissions(email);
@@ -82,6 +88,30 @@ public enum SubmissionDAO {
         }
         return false;
     }
+
+    //TODO not finished
+    public boolean confirmWeekSubmissions(String email, List<Submission> weekOfSubmissions){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyy-MM-dd");
+        try{
+            Connection connection = DBConnection.createConnection();
+            for(Submission s: weekOfSubmissions) {
+                PreparedStatement confirmSubmissionStatement = connection.prepareStatement(
+                        "UPDATE submission " +
+                                "SET status = 'Confirmed' WHERE student.email = ? AND submission.worked_date = ? AND student.id = submission.sid"
+                );
+                confirmSubmissionStatement.setString(1, email);
+                confirmSubmissionStatement.setString(2, dateFormat.format(s.getDate()));//TODO check if it matches
+                confirmSubmissionStatement.execute();
+                if (confirmSubmissionStatement.executeUpdate() != 0) {
+                    return true;
+                }
+            }
+        }catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+        return false;
+    }
+
     public void flagSubmission(String sid, String cid, LocalDate date, String flag) {
         /*
             Possible flags:
