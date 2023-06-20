@@ -11,7 +11,7 @@ public class Company extends User {
     String kvk_num;
     String job_description;
     String job_title;
-    String title;
+
     public Company() {
 
     }
