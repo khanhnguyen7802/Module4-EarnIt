@@ -8,6 +8,15 @@ public class Employment {
     String companyName;
     String job_description;
     String job_title;
+    double salaryPerHour;
+
+    public double getSalaryPerHour() {
+        return salaryPerHour;
+    }
+
+    public void setSalaryPerHour(double salaryPerHour) {
+        this.salaryPerHour = salaryPerHour;
+    }
 
     public String getJob_title() {
         return job_title;
