@@ -1,5 +1,6 @@
 package nl.utwente.di.first.dao;
 
+import jakarta.ws.rs.Path;
 import nl.utwente.di.first.model.Employment;
 import nl.utwente.di.first.util.DBConnection;
 
@@ -20,7 +21,7 @@ public enum EmploymentDAO {
         try {
             Connection connection = DBConnection.createConnection();
 
-            String query = "SELECT s.name AS student_name, c.name AS company_name, job_title, job_description, salaryPerHour " +
+            String query = "SELECT e.eid, e.sid, e.cid, s.name AS student_name, c.name AS company_name, job_title, job_description, salary_per_hour " +
                             "FROM student s, company c, employment e " +
                             "WHERE s.id = e.sid AND c.id = e.cid";
 
@@ -29,6 +30,9 @@ public enum EmploymentDAO {
 
             while (resultSet.next()) {
                 Employment employment = new Employment();
+                employment.setEid(resultSet.getInt("eid"));
+                employment.setCid(resultSet.getInt("cid"));
+                employment.setSid(resultSet.getInt("sid"));
                 employment.setStudentName(resultSet.getString("student_name"));
                 employment.setCompanyName(resultSet.getString("company_name"));
                 employment.setJob_title(resultSet.getString("job_title"));
@@ -40,6 +44,55 @@ public enum EmploymentDAO {
 
             return employments;
 
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    
+    public List<Employment> getAllVacancies() {
+        List<Employment> result = new ArrayList<>();
+        try {
+            Connection connection = DBConnection.createConnection();
+            String query = "SELECT e.eid, e.sid, e.cid, c.name AS company_name, job_title, job_description, salary_per_hour " +
+                           "FROM company c, employment e " +
+                           "WHERE e.sid IS NULL AND c.id = e.cid";
+    
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            
+            while (resultSet.next()) {
+                Employment employment = new Employment();
+                employment.setEid(resultSet.getInt("eid"));
+                employment.setCid(resultSet.getInt("cid"));
+                employment.setSid(resultSet.getInt("sid"));
+                employment.setStudentName(null);
+                employment.setCompanyName(resultSet.getString("company_name"));
+                employment.setJob_title(resultSet.getString("job_title"));
+                employment.setJob_description(resultSet.getString("job_description"));
+                employment.setSalaryPerHour(resultSet.getDouble("salary_per_hour"));
+                
+                result.add(employment);
+                
+            }
+            
+            return result;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    
+    @Path("link")
+    public boolean linkStudent(Employment employment) {
+        try {
+            Connection connection = DBConnection.createConnection();
+            String query = "UPDATE employment " +
+                           "SET sid = ? " +
+                           "WHERE eid = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, employment.getSid());
+            preparedStatement.setInt(2, employment.getEid());
+            return preparedStatement.executeUpdate() == 1;
+            
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
