@@ -43,10 +43,13 @@ public enum LoginDAO {
                     ResultSet returnResultSet = studentStatement.executeQuery(); // cannot use executeUpdate
                     if (returnResultSet.next()) {
                         String role = returnResultSet.getString("role");
+                        System.out.println(role);
                         if (role.equals("student")) {
                             return "STUDENT";
                         } else if (role.equals("company")) {
                             return "COMPANY";
+                        } else if (role.equals("admin")) {
+                            return "ADMIN";
                         }
                     }
                 }
