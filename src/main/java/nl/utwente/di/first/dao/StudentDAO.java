@@ -13,7 +13,7 @@ public enum StudentDAO {
     private StudentDAO() {
 
     }
-    public List<Student> getAllStudent() {
+    public List<Student> getAllStudents() {
         try {
             Connection connection = DBConnection.createConnection();
 
@@ -24,6 +24,7 @@ public enum StudentDAO {
 
             while(resultSet.next()) {
                 Student student = new Student();
+                student.setId(resultSet.getInt("id"));
                 student.setBirth(resultSet.getString("birthdate"));
                 student.setName(resultSet.getString("name"));
                 student.setSkills(resultSet.getString("skills"));

@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Optional;
 
 public class URIFilter implements Filter {
@@ -29,15 +30,17 @@ public class URIFilter implements Filter {
             //After this, the request will be handled by the next servlet matching its URL-pattern
             request.getRequestDispatcher(path).forward(request, response);
             return;
-        } else if (path.startsWith("/student") || path.startsWith("/company")) {
+        } else if (path.startsWith("/student") || path.startsWith("/company") || path.startsWith("/admin")) {
+            String[] splitpath = path.split("/");
             HttpSession session = req.getSession();
-            if (session.getAttribute("role") == null || !session.getAttribute("role").equals(path.substring(1,8).toUpperCase())) {
+            if (session.getAttribute("role") == null || !session.getAttribute("role").equals(splitpath[1].toUpperCase())) {
                 request.getRequestDispatcher("/401.html").forward(request,response);
             }
             
         }
-
-        if (extension.equals("")) {
+        if (path.equals("/")) {
+            request.getRequestDispatcher("/index.html").forward(request,response);
+        } else if (extension.equals("")) {
             // IMPORTANT! Right now, the filter will interpret any URI without a specified extension as a html file
             // This means that any reference to a file of a different extension type should always have this specified in the URI 
             String filePath = request.getServletContext().getRealPath(path + ".html");

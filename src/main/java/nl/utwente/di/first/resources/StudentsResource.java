@@ -41,4 +41,11 @@ public class StudentsResource {
     ) {
         return StudentDAO.instance.getStudent(sid);
     }
+    
+    @Path("all")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Student> getAllStudents() {
+        return StudentDAO.instance.getAllStudents();
+    }
 }
