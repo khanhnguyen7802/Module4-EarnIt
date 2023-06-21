@@ -1,6 +1,5 @@
 package nl.utwente.di.first.dao;
 
-import nl.utwente.di.first.model.Student;
 import nl.utwente.di.first.model.Submission;
 import nl.utwente.di.first.util.DBConnection;
 
@@ -13,7 +12,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public enum SubmissionDAO { //Might be a good idea to keep the week number of each submission in the database for simplicity. Otherwise, we need the query statements in a loop?
+public enum SubmissionDAO {
     instance;
     private SubmissionDAO() {
 
@@ -28,15 +27,16 @@ public enum SubmissionDAO { //Might be a good idea to keep the week number of ea
         try {
             Connection connection = DBConnection.createConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "SELECT DISTINCT * " +
-                            "FROM submission su, student st " +
-                            "WHERE st.email = ? AND st.id = su.sid"
+                    "SELECT DISTINCT s.* " +
+                            "FROM Submission s, Student st, Company c " +
+                            "WHERE st.email = ? AND st.id = s.sid AND c.id = s.cid"
             );
             preparedStatement.setString(1, email);
             ResultSet resultSet = preparedStatement.executeQuery();
             List<Submission> submissions = new ArrayList<>();
             while (resultSet.next()) {
                 Submission submission = new Submission();
+                submission.setEmploymentId(resultSet.getString("eid"));
                 submission.setComment(resultSet.getString("comment"));
                 submission.setDate(resultSet.getString("worked_date"));
                 submission.setStatus(resultSet.getString("status"));
@@ -49,37 +49,45 @@ public enum SubmissionDAO { //Might be a good idea to keep the week number of ea
         }
     }
 
-    /**
-     * Filters a students submissions by an input given week number from that year
-     * @param email
-     * @param weekNumber - given by the user
-     * @return a list with a student's submissions from a certain week (by given week number)
-     */
-    public List<Submission> getWeekOfSubmissions(String email, String weekNumber){ //TODO not tested
-        List<Submission> weekOfSubmissions = new ArrayList<>();
-        List<Submission> allSubmissions = getStudentSubmissions(email);
-
-        SimpleDateFormat dateFormat = new SimpleDateFormat("w"); // result week in year
-
-        for(Submission s: allSubmissions){
-            if(dateFormat.format(s.getDate()).equals(dateFormat.format(weekNumber)))
-                weekOfSubmissions.add(s);
+    public List<Submission> getCompanySubmissions(String email) {
+        try {
+            Connection connection = DBConnection.createConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                    "SELECT DISTINCT s.* " +
+                            "FROM Submission s, Student st, Company c " +
+                            "WHERE c.email = ? AND st.id = s.sid AND c.id = s.cid"
+            );
+            preparedStatement.setString(1, email);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<Submission> submissions = new ArrayList<>();
+            while (resultSet.next()) {
+                Submission submission = new Submission();
+                submission.setEmploymentId(resultSet.getString("eid"));
+                submission.setComment(resultSet.getString("comment"));
+                submission.setDate(resultSet.getString("worked_date"));
+                submission.setStatus(resultSet.getString("status"));
+                submission.setHours(resultSet.getInt("hours"));
+                submissions.add(submission);
+            }
+            return submissions;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
-        return weekOfSubmissions;
     }
 
     public boolean addSubmission(Submission submission) {
         //Added submission has empty flag on default
         try {
             Connection connection = DBConnection.createConnection();
-            String query = "INSERT INTO submission(hours, worked_date, comment, status) VALUES (?, ?, ?, ?)";
-            PreparedStatement insertSubmissionStatement = connection.prepareStatement(query);
-            insertSubmissionStatement.setInt(1, submission.getHours());
-            insertSubmissionStatement.setString(2, submission.getDate().toString());
-            insertSubmissionStatement.setString(3, submission.getComment());
-            insertSubmissionStatement.setString(4, submission.getStatus());
-            insertSubmissionStatement.execute();
-            if (insertSubmissionStatement.executeUpdate() != 0) {
+            String query = "INSERT INTO submission(eid, hours, worked_date, comment, status) VALUES (?, ?, ?, ?, ?)";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, submission.getEmploymentId());
+            statement.setInt(2, submission.getHours());
+            statement.setString(3, submission.getDate().toString());
+            statement.setString(4, submission.getComment());
+            statement.setString(5, submission.getStatus());
+            statement.execute();
+            if (statement.executeUpdate() != 0) {
                 return true;
             }
         } catch (SQLException e) {
@@ -89,64 +97,7 @@ public enum SubmissionDAO { //Might be a good idea to keep the week number of ea
         return false;
     }
 
-    /**
-     * Changes the status of the given week of submissions to "Confirmed".
-     * @param weekOfSubmissions - list of submissions that should be produced using the getWeekOfSubmissions() method
-     */
-    //TODO not finished - check query and whether the loop is fine or not -- otherwise forget the list and match dates with week number in sql
-    public boolean confirmWeekSubmissions(String sid, String cid, List<Submission> weekOfSubmissions){
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyy-MM-dd");
-        boolean statementsExecution = true;
-        try{
-            Connection connection = DBConnection.createConnection();
-            PreparedStatement confirmSubmissionStatement = connection.prepareStatement(
-                    "UPDATE submission " +
-                            "SET status = 'Confirmed' WHERE submission.sid = ? AND submission.cid = ? AND submission.worked_date = ?");
-            for(Submission s: weekOfSubmissions) {
-                confirmSubmissionStatement.setString(1, sid);
-                confirmSubmissionStatement.setString(2, cid);
-                confirmSubmissionStatement.setString(3, dateFormat.format(s.getDate()));
-                confirmSubmissionStatement.execute();
-                if (confirmSubmissionStatement.executeUpdate() == 0) {
-                    statementsExecution = false;
-                }
-            }
-        }catch (SQLException e){
-            throw new RuntimeException(e);
-        }
-        return statementsExecution;
-    }
-
-    /**
-     * Sets the status of the submissions from a given week to "Rejected", and changes their number of hours to what the company suggested.
-     * @param weekOfSubmissions - list of submissions that should be produced using the getWeekOfSubmissions() method
-     * @param suggestedHours - given by the user
-     */ //TODO not finished - check query and whether the loop is fine or not -- otherwise forget the list and match dates with week number in sql
-    public boolean rejectWeekSubmission(String sid, String cid, List<Submission> weekOfSubmissions, int suggestedHours){
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyy-MM-dd");
-        boolean statementsExecution = true;
-        try{
-            Connection connection = DBConnection.createConnection();
-            PreparedStatement rejectSubmissionStatement = connection.prepareStatement(
-                    "UPDATE submission " +
-                            "SET status = 'Rejected', hours = ? WHERE submission.sid = ? AND submission.cid = ? AND submission.worked_date = ?");
-            for(Submission s: weekOfSubmissions) {
-                rejectSubmissionStatement.setString(1, String.valueOf(suggestedHours));
-                rejectSubmissionStatement.setString(2, sid);
-                rejectSubmissionStatement.setString(3, cid);
-                rejectSubmissionStatement.setString(4, dateFormat.format(s.getDate()));
-                rejectSubmissionStatement.execute();
-                if (rejectSubmissionStatement.executeUpdate() == 0) {
-                    statementsExecution = false;
-                }
-            }
-        }catch (SQLException e){
-            throw new RuntimeException(e);
-        }
-        return statementsExecution;
-    }
-
-    public void flagSubmission(String sid, String cid, LocalDate date, String flag) {
+    public void flagSubmission(String subId, String flag) {
         /*
             Possible flags:
             empty (submitted but not confirmed)
@@ -155,6 +106,15 @@ public enum SubmissionDAO { //Might be a good idea to keep the week number of ea
             Rejected
             Appealed
          */
-
+        try {
+            Connection connection = DBConnection.createConnection();
+            String query = "UPDATE submission SET status = ? WHERE submission_id = ?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, flag);
+            statement.setString(2, subId);
+        } catch (SQLException e) {
+            // FIXME Runtime exceptions should be thrown as little as possible, error messages are much preferred.
+            throw new RuntimeException(e);
+        }
     }
 }
