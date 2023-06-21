@@ -18,6 +18,8 @@ public class SubmissionResource {
     @Context
     HttpServletRequest req;
 
+    //TODO: Several check might need to be added to prevent unauthorized requests
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Submission> getSubmission() {
@@ -48,6 +50,13 @@ public class SubmissionResource {
         SubmissionDAO.instance.addSubmission(submission);
     }
 
-    //TODO: POST request for flagging
-
+    @Path("/flag")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void flagSubmission(
+        @QueryParam("subId") String subId,
+        @QueryParam("flag") String flag
+    ) {
+        SubmissionDAO.instance.flagSubmission(subId, flag);
+    }
 }

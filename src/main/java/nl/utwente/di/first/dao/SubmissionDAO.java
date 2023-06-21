@@ -81,7 +81,6 @@ public enum SubmissionDAO {
             Connection connection = DBConnection.createConnection();
             String query = "INSERT INTO submission(eid, hours, worked_date, comment, status) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement statement = connection.prepareStatement(query);
-            statement = connection.prepareStatement(query);
             statement.setString(1, submission.getEmploymentId());
             statement.setInt(2, submission.getHours());
             statement.setString(3, submission.getDate().toString());
@@ -98,7 +97,7 @@ public enum SubmissionDAO {
         return false;
     }
 
-    public void flagSubmission(String sid, String cid, LocalDate date, String flag) {
+    public void flagSubmission(String subId, String flag) {
         /*
             Possible flags:
             empty (submitted but not confirmed)
@@ -107,6 +106,15 @@ public enum SubmissionDAO {
             Rejected
             Appealed
          */
-
+        try {
+            Connection connection = DBConnection.createConnection();
+            String query = "UPDATE submission SET status = ? WHERE submission_id = ?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, flag);
+            statement.setString(2, subId);
+        } catch (SQLException e) {
+            // FIXME Runtime exceptions should be thrown as little as possible, error messages are much preferred.
+            throw new RuntimeException(e);
+        }
     }
 }
