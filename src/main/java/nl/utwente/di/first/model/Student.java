@@ -5,6 +5,7 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class Student extends User {
+    int id;
     String name;
     String birth;
     String university;
@@ -15,7 +16,15 @@ public class Student extends User {
     public Student() {
 
     }
-
+    
+    public int getId() {
+        return id;
+    }
+    
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public void setName(String name) {
         this.name = name;
     }

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Student Linking</title>
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora">
+    <link rel="stylesheet" href="../assets/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="../assets/css/Pretty-Search-Form-.css">
+    <link rel="stylesheet" href="../assets/css/Pretty-User-List-.css">
+    <link rel="stylesheet" href="../assets/css/Search-Input-responsive.css">
+    <link rel="stylesheet" href="../assets/css/sidebar-1.css">
+    <link rel="stylesheet" href="../assets/css/sidebar.css">
+    <link rel="stylesheet" href="../assets/css/popup.css">
+    <link rel="stylesheet" href="../assets/css/dropdown.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+</head>
+<body style="color: var(--bs-gray-100);">
+<ul class="nav flex-column shadow d-flex sidebar mobile-hid">
+    <li class="nav-item logo-holder">
+        <div class="text-center text-white logo py-4 mx-4"><a class="active text-decoration-none" id="title" href="#"
+                                                              style="color: var(--bs-gray-100);padding-top: 30px;padding-bottom: 36px;"><img
+                src="../assets/img/Earn%20It%20Logo.svg" style="width: 100px;" alt="Earn It Logo"></a></div>
+    </li>
+    <li class="nav-item"><a class="nav-link active text-start py-1 px-0" href="#"><i class="fas fa-building mx-3"
+                                                                                     style="color: var(--bs-gray-100);"></i><span
+            class="text-nowrap mx-2" style="color: var(--bs-white);">Jobs</span></a></li>
+    <li class="nav-item"><a class="nav-link text-start py-1 px-0" href="#"><i class="far fa-calendar-alt mx-3"
+                                                                              style="color: var(--bs-gray-100);"></i><span
+            class="text-nowrap mx-2" style="color: var(--bs-gray-100);">Submissions</span></a></li>
+    <li class="nav-item dropdown show"><a class="nav-link text-start dropdown-toggle py-1 px-0 position-relative"
+                                          aria-expanded="true" data-bs-toggle="dropdown" href="#"><i
+            class="fas fa-sliders-h mx-3" style="color: var(--bs-white);"></i><span class="text-nowrap mx-2"
+                                                                                    style="color: var(--bs-white);">Settings</span><i
+            class="fas fa-caret-down float-none float-lg-end fa-sm"
+            style="color: var(--bs-white);margin-right: 20px;margin-top: 5px;"></i></a>
+        <div class="border-0 bounce animated dropdown-menu show fadeIn" data-bs-popper="none"><a class="dropdown-item"
+                                                                                                 href="./profile"
+                                                                                                 style="color: var(--bs-black);background: rgb(219, 84, 97);font-weight: bold;"><i
+                class="far fa-user" style="text-align: justify;margin-left: -8px;margin-right: 25px;"></i><span>Edit profile</span></a><a
+                class="dropdown-item" id="logoutButton" onclick="logout()"
+                style="cursor: pointer;color: var(--bs-black);background: rgb(219, 84, 97);font-weight: bold;"><i
+                class="fas fa-sign-out-alt" style="padding-left: 0;margin-left: -8px;margin-right: 25px;"></i><span>Logout</span></a>
+        </div>
+    </li>
+</ul>
+<div class="container" id="main-screen">
+    <div class="row" style="margin: 0 -15px;">
+        <div class="col" style="margin: 0 10px 0 30px;vertical-align: top">
+            <h1 style="color: var(--bs-black);padding: 0 60px 0 0;margin: 20px 357px 15px 0;">
+                Link jobs to Students</h1>
+            <nav style="display: inline-block;vertical-align: top">
+                <input type="checkbox" id="touch1">
+                <label for="touch1"><span>Select a Job</span><i class="arrow">▼</i></label>
+    
+                <ul id="vacancy-list" style="overflow: auto" class="list-group">
+                </ul>
+            </nav>
+            <nav style="display: inline-block;vertical-align: top">
+                <input type="checkbox" id="touch2" disabled>
+                <label for="touch2"><span>Select a Student</span><i class="arrow">▼</i></label>
+
+                <ul id="student-list" style="overflow: auto" class="list-group">
+                </ul>
+            </nav>
+            <button style="display: block" id="link-button">Link!</button>
+        </div>
+    </div>
+</div>
+<template id="vacancy-template">
+    <li>
+        <button class="list-group-item list-group-item-action vacancy-button" style="cursor: pointer">
+            <div style="display: flex;position: relative;"><img src="../assets/img/Earn%20It%20Logo.svg"
+                                                                style="width: 80px;margin-right: 15px;position: relative;"
+                                                                alt="Earn It Logo"/>
+                <div style="position: relative;width: 1000px;">
+                    <h5 class="mb-1 job_title" style="position: static;">Company</h5>
+                    <p class="mb-1 company_name" style="position: static;margin-top: -13px;padding-top: 13px;">Job title</p>
+                </div>
+            </div>
+        </button>
+    </li>
+</template>
+<template id="student-template">
+    <li>
+        <button class="list-group-item list-group-item-action student-button" style="cursor: pointer">
+            <h5 class="mb-1 student-name" style="position: static">Student name</h5>
+        </button>
+    </li>
+</template>
+<script src="../assets/js/studentLinking.js"></script>
+</body>
+</html>

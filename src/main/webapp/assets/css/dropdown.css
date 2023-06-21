@@ -1,0 +1,58 @@
+
+nav {
+    width : 300px;
+    background: #d9d9d9;
+    margin : 40px;
+}
+
+li a {text-decoration : none; color : #2d2f31;}
+
+label {
+    padding : 30px;
+    background : #2d2f31;
+    color : white;
+    font-size : 1.2em;
+    font-variant : small-caps;
+    cursor : pointer;
+    display: block;
+}
+
+ul {
+    margin-block-start: 0;
+    margin-block-end: 0;
+}
+
+#vacancy-list, #student-list {
+    clear:both;
+    width:100%;
+    height:0;
+    overflow: hidden;
+    text-align: center;
+    transition: height .4s ease;
+}
+
+.arrow {
+    transform:rotate(0deg);
+    float:right;
+}
+
+#touch2:disabled + label {
+    background: #dddddd;
+}
+
+#vacancy-list li, #student-list li {display: block;}
+
+#touch1, #touch2 {position: absolute; opacity: 0; height: 0px;}
+
+#touch1:checked ~ #vacancy-list, #touch2:checked ~ #student-list {height: 250px;}
+
+
+#touch1:not(:checked) + label .arrow, #touch2:not(:checked) + label .arrow {
+    transform: rotate(0deg);
+    transition: transform 400ms cubic-bezier(.23,.53,.52,.99);
+}
+
+#touch1:checked + label .arrow, #touch2:checked + label .arrow {
+    transform: rotate(180deg);
+    transition: transform 400ms cubic-bezier(.23,.53,.52,.99);
+}
