@@ -55,7 +55,7 @@ public class SubmissionResource {
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     public List<Submission> getWeekOfSubmissions(@FormParam("?"/*TODO*/) String weekNumber){
         HttpSession session = req.getSession();
-        String email = session.getAttribute("email").toString();
+        String email = session.getAttribute("email").toString(); //TODO use student id?
         String role = session.getAttribute("role").toString();
 
         if(role.equals("STUDENT")){ //TODO is this necessary?
