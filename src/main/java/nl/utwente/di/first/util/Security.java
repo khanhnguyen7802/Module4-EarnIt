@@ -18,8 +18,8 @@ public class Security {
         String passwordToHash = "company10";
         byte[] byteSalt = getSalt();
         String stringSalt = toHex(byteSalt);
-        String salt = "e717c31996975d6369cd063452cc9427"; //
-        String testHashedPassword = "eebf325d66b84653940b17a1f6825679e862a4ab857d82bb85501359cdfdce01";
+//        String salt = "e717c31996975d6369cd063452cc9427"; 
+//        String testHashedPassword = "eebf325d66b84653940b17a1f6825679e862a4ab857d82bb85501359cdfdce01";
 
         System.out.println("Convert from byte to Hex(String): " + stringSalt);
 //        byte[] backToByte = toByteArray(salt);
@@ -33,13 +33,12 @@ public class Security {
 
     public static String saltSHA256(String passwordToHash, byte[] salt) {
         String finalPassword = "";
-        byte[] saltByteArray = salt;
-
+    
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-256");
 
             // Passing the salt to the digest for the computation
-            md.update(saltByteArray);
+            md.update(salt);
 
             // Add password bytes to digest
             byte[] bytes = md.digest(passwordToHash.getBytes());
@@ -66,9 +65,8 @@ public class Security {
 
     public static String toHex(byte[] bytes) {
         HexFormat hexFormat = HexFormat.of();
-        String result = hexFormat.formatHex(bytes);
-
-        return result;
+    
+        return hexFormat.formatHex(bytes);
     }
 //    public static String toHex2(byte[] bytes) {
 //        StringBuilder result = new StringBuilder();
@@ -80,8 +78,7 @@ public class Security {
         public static byte[] toByteArray(String str) {
 
         HexFormat hexFormat = HexFormat.of();
-        byte[] result = hexFormat.parseHex(str);
-
-        return result;
+    
+        return hexFormat.parseHex(str);
     }
 }
