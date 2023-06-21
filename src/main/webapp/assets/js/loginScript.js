@@ -34,7 +34,7 @@ submit_button.addEventListener("click", function () {
                 // Redirect to the company homepage
                 err_msg.innerHTML = "";
             } else if (data === "ADMIN") {
-                window.location.href = "./admin/linking"
+                window.location.href = "./admin/overview"
                 
                 err_msg.innerHTML = "";
             } else {

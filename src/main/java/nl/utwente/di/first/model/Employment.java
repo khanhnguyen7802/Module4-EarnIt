@@ -7,11 +7,11 @@ public class Employment {
     int eid;    
     int sid;
     int cid;
-    String studentName;
-    String companyName;
+    String student_name;
+    String company_name;
     String job_description;
     String job_title;
-    double salaryPerHour;
+    double salary_per_hour;
     
     
     public int getSid() {
@@ -30,12 +30,12 @@ public class Employment {
         this.cid = cid;
     }
     
-    public double getSalaryPerHour() {
-        return salaryPerHour;
+    public double getSalary_per_hour() {
+        return salary_per_hour;
     }
 
-    public void setSalaryPerHour(double salaryPerHour) {
-        this.salaryPerHour = salaryPerHour;
+    public void setSalary_per_hour(double salary_per_hour) {
+        this.salary_per_hour = salary_per_hour;
     }
     
     public int getEid() {
@@ -54,20 +54,20 @@ public class Employment {
         this.job_title = job_title;
     }
     
-    public String getStudentName() {
-        return studentName;
+    public String getStudent_name() {
+        return student_name;
     }
 
-    public void setStudentName(String studentName) {
-        this.studentName = studentName;
+    public void setStudent_name(String student_name) {
+        this.student_name = student_name;
     }
 
-    public String getCompanyName() {
-        return companyName;
+    public String getCompany_name() {
+        return company_name;
     }
 
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
+    public void setCompany_name(String company_name) {
+        this.company_name = company_name;
     }
 
     public String getJob_description() {

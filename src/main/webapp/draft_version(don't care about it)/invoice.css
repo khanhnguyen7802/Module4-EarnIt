@@ -1,0 +1,53 @@
+img {
+    width: 15%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 50px;
+}
+
+
+body { margin: 0 }
+.sheet-outer {
+    margin: 0;
+}
+
+.sheet {
+    margin: 0;
+    overflow: hidden;
+    position: relative;
+    box-sizing: border-box;
+    page-break-after: always;
+}
+
+/* To get look and feel like a printable page*/
+@media screen {
+    body {
+        background: #e0e0e0
+    }
+
+    .sheet {
+        background: white;
+        box-shadow: 0 .5mm 2mm rgba(0,0,0,.3);
+        margin: 5mm auto;
+    }
+}
+
+/* Add the page size for A4 in mm */
+.sheet-outer.A4 .sheet {
+    width: 210mm;
+    height: 296mm
+}
+.sheet.padding-5mm { padding: 5mm }
+
+
+/* set page size to A4 in CSS and media print option to set the size of your A4 layout */
+@page {
+    size: A4;
+    margin: 0
+}
+@media print {
+    .sheet-outer.A4, .sheet-outer.A5.landscape {
+        width: 210mm
+    }
+}

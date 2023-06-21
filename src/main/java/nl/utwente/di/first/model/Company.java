@@ -9,8 +9,6 @@ public class Company extends User {
     String field;
     String contact;
     String kvk_num;
-    String job_description;
-    String job_title;
 
     public Company() {
 
@@ -45,22 +43,4 @@ public class Company extends User {
     public String getKvk_num() {
         return kvk_num;
     }
-    
-    public String getJob_description() {
-        return job_description;
-    }
-    
-    public void setJob_description(String job_description) {
-        this.job_description = job_description;
-    }
-    
-    public String getJob_title() {
-        return job_title;
-    }
-    
-    public void setJob_title(String job_title) {
-        this.job_title = job_title;
-    }
-
-
 }
