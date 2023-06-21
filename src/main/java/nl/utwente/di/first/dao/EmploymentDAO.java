@@ -33,11 +33,11 @@ public enum EmploymentDAO {
                 employment.setEid(resultSet.getInt("eid"));
                 employment.setCid(resultSet.getInt("cid"));
                 employment.setSid(resultSet.getInt("sid"));
-                employment.setStudentName(resultSet.getString("student_name"));
-                employment.setCompanyName(resultSet.getString("company_name"));
+                employment.setStudent_name(resultSet.getString("student_name"));
+                employment.setCompany_name(resultSet.getString("company_name"));
                 employment.setJob_title(resultSet.getString("job_title"));
                 employment.setJob_description(resultSet.getString("job_description"));
-                employment.setSalaryPerHour(resultSet.getDouble("salaryPerHour"));
+                employment.setSalary_per_hour(resultSet.getDouble("salary_per_hour"));
 
                 employments.add(employment);
             }
@@ -65,11 +65,11 @@ public enum EmploymentDAO {
                 employment.setEid(resultSet.getInt("eid"));
                 employment.setCid(resultSet.getInt("cid"));
                 employment.setSid(resultSet.getInt("sid"));
-                employment.setStudentName(null);
-                employment.setCompanyName(resultSet.getString("company_name"));
+                employment.setStudent_name(null);
+                employment.setCompany_name(resultSet.getString("company_name"));
                 employment.setJob_title(resultSet.getString("job_title"));
                 employment.setJob_description(resultSet.getString("job_description"));
-                employment.setSalaryPerHour(resultSet.getDouble("salary_per_hour"));
+                employment.setSalary_per_hour(resultSet.getDouble("salary_per_hour"));
                 
                 result.add(employment);
                 
