@@ -13,7 +13,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public enum SubmissionDAO { //Might be a good idea to keep the week number of each submission in the database for simplicity. Otherwise we need the query statements in a loop?
+public enum SubmissionDAO { //Might be a good idea to keep the week number of each submission in the database for simplicity. Otherwise, we need the query statements in a loop?
     instance;
     private SubmissionDAO() {
 
@@ -93,20 +93,19 @@ public enum SubmissionDAO { //Might be a good idea to keep the week number of ea
      * Changes the status of the given week of submissions to "Confirmed".
      * @param weekOfSubmissions - list of submissions that should be produced using the getWeekOfSubmissions() method
      */
-    //TODO not finished - check query and whether the loop is fine or not -- match dates with week number in sql otherwise
+    //TODO not finished - check query and whether the loop is fine or not -- otherwise forget the list and match dates with week number in sql
     public boolean confirmWeekSubmissions(String sid, String cid, List<Submission> weekOfSubmissions){
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyy-MM-dd");
         boolean statementsExecution = true;
         try{
             Connection connection = DBConnection.createConnection();
+            PreparedStatement confirmSubmissionStatement = connection.prepareStatement(
+                    "UPDATE submission " +
+                            "SET status = 'Confirmed' WHERE submission.sid = ? AND submission.cid = ? AND submission.worked_date = ?");
             for(Submission s: weekOfSubmissions) {
-                PreparedStatement confirmSubmissionStatement = connection.prepareStatement(
-                        "UPDATE submission " +
-                                "SET status = 'Confirmed' WHERE submission.sid = ? AND submission.cid = ? AND submission.worked_date = ?"
-                );
                 confirmSubmissionStatement.setString(1, sid);
                 confirmSubmissionStatement.setString(2, cid);
-                confirmSubmissionStatement.setString(3, dateFormat.format(s.getDate()));//TODO check if format matches
+                confirmSubmissionStatement.setString(3, dateFormat.format(s.getDate()));
                 confirmSubmissionStatement.execute();
                 if (confirmSubmissionStatement.executeUpdate() == 0) {
                     statementsExecution = false;
@@ -122,21 +121,20 @@ public enum SubmissionDAO { //Might be a good idea to keep the week number of ea
      * Sets the status of the submissions from a given week to "Rejected", and changes their number of hours to what the company suggested.
      * @param weekOfSubmissions - list of submissions that should be produced using the getWeekOfSubmissions() method
      * @param suggestedHours - given by the user
-     */ //TODO not finished - check query and whether the loop is fine or not
+     */ //TODO not finished - check query and whether the loop is fine or not -- otherwise forget the list and match dates with week number in sql
     public boolean rejectWeekSubmission(String sid, String cid, List<Submission> weekOfSubmissions, int suggestedHours){
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyy-MM-dd");
         boolean statementsExecution = true;
         try{
             Connection connection = DBConnection.createConnection();
+            PreparedStatement rejectSubmissionStatement = connection.prepareStatement(
+                    "UPDATE submission " +
+                            "SET status = 'Rejected', hours = ? WHERE submission.sid = ? AND submission.cid = ? AND submission.worked_date = ?");
             for(Submission s: weekOfSubmissions) {
-                PreparedStatement rejectSubmissionStatement = connection.prepareStatement(
-                        "UPDATE submission " +
-                                "SET status = 'Rejected', hours = ? WHERE submission.sid = ? AND submission.cid = ? AND submission.worked_date = ?"
-                );
                 rejectSubmissionStatement.setString(1, String.valueOf(suggestedHours));
                 rejectSubmissionStatement.setString(2, sid);
                 rejectSubmissionStatement.setString(3, cid);
-                rejectSubmissionStatement.setString(4, dateFormat.format(s.getDate()));//TODO check if format matches
+                rejectSubmissionStatement.setString(4, dateFormat.format(s.getDate()));
                 rejectSubmissionStatement.execute();
                 if (rejectSubmissionStatement.executeUpdate() == 0) {
                     statementsExecution = false;
