@@ -28,8 +28,8 @@ public enum SubmissionDAO {
             Connection connection = DBConnection.createConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(
                     "SELECT DISTINCT s.* " +
-                            "FROM Submission s, Student st, Company c, Employment e " +
-                            "WHERE st.id = e.sid AND c.id = e.cid AND e.eid = s.eid " +
+                            "FROM Submission s, Student st, Employment e " +
+                            "WHERE st.id = e.sid AND e.eid = s.eid " +
                             "AND st.email = ? AND s.worked_date LIKE ? AND s.status LIKE ?"
             );
             preparedStatement.setString(1, email);
@@ -48,8 +48,8 @@ public enum SubmissionDAO {
             Connection connection = DBConnection.createConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(
                     "SELECT DISTINCT s.* " +
-                            "FROM Submission s, Student st, Company c, Employment e " +
-                            "WHERE st.id = e.sid AND c.id = e.cid AND e.eid = s.eid " +
+                            "FROM Submission s, Company c, Employment e " +
+                            "WHERE c.id = e.cid AND e.eid = s.eid " +
                             "AND c.email = ? AND s.worked_date LIKE ? AND s.status LIKE ?"
             );
             preparedStatement.setString(1, email);
@@ -63,7 +63,49 @@ public enum SubmissionDAO {
         }
     }
 
-    //TODO: Method for getting a week's data
+    public List<Submission> getStudentWeekSubmissions(String email, String date, String flag) {
+        try {
+            Connection connection = DBConnection.createConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                    "SELECT DISTINCT s.* " +
+                            "FROM Submission s, Student st, Employment e " +
+                            "WHERE st.id = e.sid AND e.eid = s.eid " +
+                            "AND st.email = ? AND s.status LIKE ? " +
+                            "AND date_column >= DATEADD(wk, DATEDIFF(wk, 0, ?), 0) AND date_column < DATEADD(wk, DATEDIFF(wk, 0, ?) + 1, 0)"
+            );
+            preparedStatement.setString(1, email);
+            preparedStatement.setString(2, flag);
+            preparedStatement.setString(3, date);
+            preparedStatement.setString(4, date);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            return getQuery(resultSet);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public List<Submission> getCompanyWeekSubmissions(String email, String date, String flag) {
+        try {
+            Connection connection = DBConnection.createConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                    "SELECT DISTINCT s.* " +
+                            "FROM Submission s, Company c, Employment e " +
+                            "WHERE c.id = e.cid AND e.eid = s.eid " +
+                            "AND c.email = ? AND s.status LIKE ? " +
+                            "AND date_column >= DATEADD(wk, DATEDIFF(wk, 0, ?), 0) AND date_column < DATEADD(wk, DATEDIFF(wk, 0, ?) + 1, 0)"
+            );
+            preparedStatement.setString(1, email);
+            preparedStatement.setString(2, flag);
+            preparedStatement.setString(3, date);
+            preparedStatement.setString(4, date);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            return getQuery(resultSet);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     private List<Submission> getQuery(ResultSet resultSet) throws SQLException {
         List<Submission> submissions = new ArrayList<>();
