@@ -68,7 +68,7 @@ public enum SubmissionDAO {
                             "FROM Submission s, Student st, Employment e " +
                             "WHERE st.id = e.sid AND e.eid = s.eid " +
                             "AND st.email = ? AND s.status LIKE ? " +
-                            "AND worked_date >= DATEADD(wk, DATEDIFF(wk, 0, ?), 0) AND date_column < DATEADD(wk, DATEDIFF(wk, 0, ?) + 1, 0)"
+                            "AND worked_date >= DATEADD(wk, DATEDIFF(wk, 0, ?), 0) AND worked_date < DATEADD(wk, DATEDIFF(wk, 0, ?) + 1, 0)"
             );
             preparedStatement.setString(1, email);
             preparedStatement.setString(2, flag);
@@ -90,7 +90,7 @@ public enum SubmissionDAO {
                             "FROM Submission s, Company c, Employment e " +
                             "WHERE c.id = e.cid AND e.eid = s.eid " +
                             "AND c.email = ? AND s.status LIKE ? " +
-                            "AND worked_date >= DATEADD(wk, DATEDIFF(wk, 0, ?), 0) AND date_column < DATEADD(wk, DATEDIFF(wk, 0, ?) + 1, 0)"
+                            "AND worked_date >= DATEADD(wk, DATEDIFF(wk, 0, ?), 0) AND worked_date < DATEADD(wk, DATEDIFF(wk, 0, ?) + 1, 0)"
             );
             preparedStatement.setString(1, email);
             preparedStatement.setString(2, flag);
