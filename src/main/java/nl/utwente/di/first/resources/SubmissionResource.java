@@ -21,19 +21,20 @@ public class SubmissionResource {
 
     //TODO: Several check might need to be added to prevent unauthorized requests
 
+    @Path("/day")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Submission> getSubmission(
-            @DefaultValue("%%") @QueryParam("date") String date,
+    public List<Submission> getDateSubmission(
+            @QueryParam("date") String date,
             @DefaultValue("%%") @QueryParam("flag") String flag
     ) {
         HttpSession session = req.getSession();
         String role = session.getAttribute("role").toString();
         String email = session.getAttribute("email").toString();
         if (role.equals("STUDENT")) {
-            return SubmissionDAO.instance.getStudentSubmissions(email, date, flag);
+            return SubmissionDAO.instance.getStudentDateSubmissions(email, date, flag);
         } else if (role.equals("COMPANY")) {
-            return SubmissionDAO.instance.getCompanySubmissions(email, date, flag);
+            return SubmissionDAO.instance.getCompanyDateSubmissions(email, date, flag);
         }
         return new ArrayList<>();
     }
@@ -42,7 +43,7 @@ public class SubmissionResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Submission> getWeekSubmission(
-            @DefaultValue("%%") @QueryParam("date") String date,
+            @QueryParam("date") String date,
             @DefaultValue("%%") @QueryParam("flag") String flag
     ) {
         HttpSession session = req.getSession();

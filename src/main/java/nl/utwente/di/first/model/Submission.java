@@ -2,7 +2,9 @@ package nl.utwente.di.first.model;
 
 import jakarta.xml.bind.annotation.XmlRootElement;
 
-import java.time.LocalDate;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 
 @XmlRootElement
@@ -11,7 +13,7 @@ public class Submission {
     private int hours;
     private String comment;
     private String status;
-    private LocalDate date;
+    private Date date;
 
     public Submission() {
         status = "";
@@ -40,11 +42,12 @@ public class Submission {
     public void setStatus(String status) {
         this.status = status;
     }
-    public LocalDate getDate(){
+    public Date getDate(){
         return date;
     }
-    public void setDate(String date) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        this.date = LocalDate.parse(date, formatter);
+    public void setDate(String date) throws ParseException {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        java.util.Date parsed = formatter.parse(date);
+        this.date = new java.sql.Date(parsed.getTime());
     }
 }

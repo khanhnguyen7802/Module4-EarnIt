@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -23,42 +24,42 @@ public enum SubmissionDAO {
      * @param email of a specific student
      * @return a full list of all submissions that was made by that student
      */
-    public List<Submission> getStudentSubmissions(String email, String date, String flag) {
+    public List<Submission> getStudentDateSubmissions(String email, String date, String flag) {
         try {
             Connection connection = DBConnection.createConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(
                     "SELECT DISTINCT s.* " +
                             "FROM Submission s, Student st, Employment e " +
                             "WHERE st.id = e.sid AND e.eid = s.eid " +
-                            "AND st.email = ? AND s.worked_date LIKE ? AND s.status LIKE ?"
+                            "AND st.email = ? AND s.worked_date = ? AND s.status LIKE ?"
             );
             preparedStatement.setString(1, email);
-            preparedStatement.setString(2, date);
+            preparedStatement.setDate(2, java.sql.Date.valueOf(date));
             preparedStatement.setString(3, flag);
             ResultSet resultSet = preparedStatement.executeQuery();
 
             return getQuery(resultSet);
-        } catch (SQLException e) {
+        } catch (SQLException | ParseException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public List<Submission> getCompanySubmissions(String email, String date, String flag) {
+    public List<Submission> getCompanyDateSubmissions(String email, String date, String flag) {
         try {
             Connection connection = DBConnection.createConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(
                     "SELECT DISTINCT s.* " +
                             "FROM Submission s, Company c, Employment e " +
                             "WHERE c.id = e.cid AND e.eid = s.eid " +
-                            "AND c.email = ? AND s.worked_date LIKE ? AND s.status LIKE ?"
+                            "AND c.email = ? AND s.worked_date = ? AND s.status LIKE ?"
             );
             preparedStatement.setString(1, email);
-            preparedStatement.setString(2, date);
+            preparedStatement.setDate(2, java.sql.Date.valueOf(date));
             preparedStatement.setString(3, flag);
             ResultSet resultSet = preparedStatement.executeQuery();
 
             return getQuery(resultSet);
-        } catch (SQLException e) {
+        } catch (SQLException | ParseException e) {
             throw new RuntimeException(e);
         }
     }
@@ -71,16 +72,16 @@ public enum SubmissionDAO {
                             "FROM Submission s, Student st, Employment e " +
                             "WHERE st.id = e.sid AND e.eid = s.eid " +
                             "AND st.email = ? AND s.status LIKE ? " +
-                            "AND date_column >= DATEADD(wk, DATEDIFF(wk, 0, ?), 0) AND date_column < DATEADD(wk, DATEDIFF(wk, 0, ?) + 1, 0)"
+                            "AND worked_date >= DATEADD(wk, DATEDIFF(wk, 0, ?), 0) AND date_column < DATEADD(wk, DATEDIFF(wk, 0, ?) + 1, 0)"
             );
             preparedStatement.setString(1, email);
             preparedStatement.setString(2, flag);
-            preparedStatement.setString(3, date);
-            preparedStatement.setString(4, date);
+            preparedStatement.setDate(3, java.sql.Date.valueOf(date));
+            preparedStatement.setDate(4, java.sql.Date.valueOf(date));
             ResultSet resultSet = preparedStatement.executeQuery();
 
             return getQuery(resultSet);
-        } catch (SQLException e) {
+        } catch (SQLException | ParseException e) {
             throw new RuntimeException(e);
         }
     }
@@ -93,21 +94,21 @@ public enum SubmissionDAO {
                             "FROM Submission s, Company c, Employment e " +
                             "WHERE c.id = e.cid AND e.eid = s.eid " +
                             "AND c.email = ? AND s.status LIKE ? " +
-                            "AND date_column >= DATEADD(wk, DATEDIFF(wk, 0, ?), 0) AND date_column < DATEADD(wk, DATEDIFF(wk, 0, ?) + 1, 0)"
+                            "AND worked_date >= DATEADD(wk, DATEDIFF(wk, 0, ?), 0) AND date_column < DATEADD(wk, DATEDIFF(wk, 0, ?) + 1, 0)"
             );
             preparedStatement.setString(1, email);
             preparedStatement.setString(2, flag);
-            preparedStatement.setString(3, date);
-            preparedStatement.setString(4, date);
+            preparedStatement.setDate(3, java.sql.Date.valueOf(date));
+            preparedStatement.setDate(4, java.sql.Date.valueOf(date));
             ResultSet resultSet = preparedStatement.executeQuery();
 
             return getQuery(resultSet);
-        } catch (SQLException e) {
+        } catch (SQLException | ParseException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private List<Submission> getQuery(ResultSet resultSet) throws SQLException {
+    private List<Submission> getQuery(ResultSet resultSet) throws SQLException, ParseException {
         List<Submission> submissions = new ArrayList<>();
         while (resultSet.next()) {
             Submission submission = new Submission();
@@ -129,7 +130,7 @@ public enum SubmissionDAO {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, submission.getEmploymentId());
             statement.setInt(2, submission.getHours());
-            statement.setString(3, submission.getDate().toString());
+            statement.setDate(3, submission.getDate());
             statement.setString(4, submission.getComment());
             statement.setString(5, submission.getStatus());
             statement.execute();
