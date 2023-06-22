@@ -28,8 +28,9 @@ public enum SubmissionDAO {
             Connection connection = DBConnection.createConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(
                     "SELECT DISTINCT s.* " +
-                            "FROM Submission s, Student st, Company c " +
-                            "WHERE st.id = s.sid AND c.id = s.cid AND st.email = ? AND s.worked_date LIKE ? AND s.status LIKE ?"
+                            "FROM Submission s, Student st, Company c, Employment e " +
+                            "WHERE st.id = e.sid AND c.id = e.cid AND e.eid = s.eid " +
+                            "AND st.email = ? AND s.worked_date LIKE ? AND s.status LIKE ?"
             );
             preparedStatement.setString(1, email);
             preparedStatement.setString(2, date);
@@ -47,8 +48,9 @@ public enum SubmissionDAO {
             Connection connection = DBConnection.createConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(
                     "SELECT DISTINCT s.* " +
-                            "FROM Submission s, Student st, Company c " +
-                            "WHERE c.email = ? AND st.id = s.sid AND c.id = s.cid"
+                            "FROM Submission s, Student st, Company c, Employment e " +
+                            "WHERE st.id = e.sid AND c.id = e.cid AND e.eid = s.eid " +
+                            "AND c.email = ? AND s.worked_date LIKE ? AND s.status LIKE ?"
             );
             preparedStatement.setString(1, email);
             preparedStatement.setString(2, date);
@@ -60,6 +62,8 @@ public enum SubmissionDAO {
             throw new RuntimeException(e);
         }
     }
+
+    //TODO: Method for getting a week's data
 
     private List<Submission> getQuery(ResultSet resultSet) throws SQLException {
         List<Submission> submissions = new ArrayList<>();
