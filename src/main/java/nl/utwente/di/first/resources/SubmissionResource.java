@@ -10,6 +10,7 @@ import nl.utwente.di.first.dao.SubmissionDAO;
 import nl.utwente.di.first.model.Student;
 import nl.utwente.di.first.model.Submission;
 
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -64,7 +65,7 @@ public class SubmissionResource {
             @FormParam("hours") int hours,
             @FormParam("comment") String comment,
             @FormParam("date") String date
-    ){
+    ) throws ParseException {
         Submission submission = new Submission();
         submission.setEmploymentId(eid);
         submission.setHours(hours);
