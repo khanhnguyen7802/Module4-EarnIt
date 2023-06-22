@@ -23,33 +23,21 @@ public enum SubmissionDAO {
      * @param email of a specific student
      * @return a full list of all submissions that was made by that student
      */
-    public List<Submission> getStudentSubmissions(String email) {
+    public List<Submission> getStudentSubmissions(String email, String date, String flag) {
         try {
             Connection connection = DBConnection.createConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(
                     "SELECT DISTINCT s.* " +
                             "FROM Submission s, Student st, Company c " +
-                            "WHERE st.email = ? AND st.id = s.sid AND c.id = s.cid"
+                            "WHERE st.id = s.sid AND c.id = s.cid AND st.email = ? AND s.worked_date LIKE ? AND s.status LIKE ?"
             );
-            preparedStatement.setString(1, email);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            List<Submission> submissions = new ArrayList<>();
-            while (resultSet.next()) {
-                Submission submission = new Submission();
-                submission.setEmploymentId(resultSet.getString("eid"));
-                submission.setComment(resultSet.getString("comment"));
-                submission.setDate(resultSet.getString("worked_date"));
-                submission.setStatus(resultSet.getString("status"));
-                submission.setHours(resultSet.getInt("hours"));
-                submissions.add(submission);
-            }
-            return submissions;
+            return getQuery(email, date, flag, preparedStatement);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public List<Submission> getCompanySubmissions(String email) {
+    public List<Submission> getCompanySubmissions(String email, String date, String flag) {
         try {
             Connection connection = DBConnection.createConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(
@@ -57,22 +45,28 @@ public enum SubmissionDAO {
                             "FROM Submission s, Student st, Company c " +
                             "WHERE c.email = ? AND st.id = s.sid AND c.id = s.cid"
             );
-            preparedStatement.setString(1, email);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            List<Submission> submissions = new ArrayList<>();
-            while (resultSet.next()) {
-                Submission submission = new Submission();
-                submission.setEmploymentId(resultSet.getString("eid"));
-                submission.setComment(resultSet.getString("comment"));
-                submission.setDate(resultSet.getString("worked_date"));
-                submission.setStatus(resultSet.getString("status"));
-                submission.setHours(resultSet.getInt("hours"));
-                submissions.add(submission);
-            }
-            return submissions;
+            return getQuery(email, date, flag, preparedStatement);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private List<Submission> getQuery(String email, String date, String flag, PreparedStatement preparedStatement) throws SQLException {
+        preparedStatement.setString(1, email);
+        preparedStatement.setString(2, date);
+        preparedStatement.setString(3, flag);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        List<Submission> submissions = new ArrayList<>();
+        while (resultSet.next()) {
+            Submission submission = new Submission();
+            submission.setEmploymentId(resultSet.getString("eid"));
+            submission.setComment(resultSet.getString("comment"));
+            submission.setDate(resultSet.getString("worked_date"));
+            submission.setStatus(resultSet.getString("status"));
+            submission.setHours(resultSet.getInt("hours"));
+            submissions.add(submission);
+        }
+        return submissions;
     }
 
     public boolean addSubmission(Submission submission) {
@@ -98,14 +92,7 @@ public enum SubmissionDAO {
     }
 
     public void flagSubmission(String subId, String flag) {
-        /*
-            Possible flags:
-            empty (submitted but not confirmed)
-            Confirmed
-            Accepted
-            Rejected
-            Appealed
-         */
+        //Possible flags: <empty>, Confirmed, Accepted, Rejected, Appealed
         try {
             Connection connection = DBConnection.createConnection();
             String query = "UPDATE submission SET status = ? WHERE submission_id = ?";

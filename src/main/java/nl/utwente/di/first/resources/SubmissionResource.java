@@ -10,6 +10,7 @@ import nl.utwente.di.first.dao.SubmissionDAO;
 import nl.utwente.di.first.model.Student;
 import nl.utwente.di.first.model.Submission;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,14 +23,17 @@ public class SubmissionResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Submission> getSubmission() {
+    public List<Submission> getSubmission(
+            @DefaultValue("%%") @QueryParam("date") String date,
+            @DefaultValue("%%") @QueryParam("flag") String flag
+    ) {
         HttpSession session = req.getSession();
         String role = session.getAttribute("role").toString();
         String email = session.getAttribute("email").toString();
         if (role.equals("STUDENT")) {
-            return SubmissionDAO.instance.getStudentSubmissions(email);
+            return SubmissionDAO.instance.getStudentSubmissions(email, date, flag);
         } else if (role.equals("COMPANY")) {
-            return SubmissionDAO.instance.getCompanySubmissions(email);
+            return SubmissionDAO.instance.getCompanySubmissions(email, date, flag);
         }
         return new ArrayList<>();
     }
