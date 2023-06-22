@@ -21,26 +21,12 @@ public enum CompanyDAO {
      */
     public List<Company> getAllCompany() {
         try {
-            List<Company> companies = new ArrayList<>();
             Connection connection = DBConnection.createConnection();
-
             String query = "SELECT * FROM company";
-
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
 
-            while (resultSet.next()) {
-                Company company = new Company();
-                company.setName(resultSet.getString("name"));
-                company.setLocation(resultSet.getString("location"));
-                company.setField(resultSet.getString("field"));
-                company.setContact(resultSet.getString("contact"));
-                company.setKvk_num(resultSet.getString("kvk_number"));
-                company.setEmail(resultSet.getString("email"));
-
-                companies.add(company);
-            }
-            return companies;
+            return getQuery(resultSet);
         } catch (SQLException e) {
             // FIXME Runtime exceptions should be thrown as little as possible, error messages are much preferred.
             throw new RuntimeException(e);
@@ -65,21 +51,26 @@ public enum CompanyDAO {
             );
             preparedStatement.setString(1, email);
             ResultSet resultSet = preparedStatement.executeQuery();
-            List<Company> selectedCompanies = new ArrayList<>();
-            while (resultSet.next()) {
-                Company company = new Company();
-                company.setName(resultSet.getString("name"));
-                company.setLocation(resultSet.getString("location"));
-                company.setField(resultSet.getString("field"));
-                company.setContact(resultSet.getString("contact"));
-                company.setKvk_num(resultSet.getString("kvk_number"));
-                company.setEmail(resultSet.getString("email"));
-                selectedCompanies.add(company);
-            }
-            return selectedCompanies;
+
+            return getQuery(resultSet);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private List<Company> getQuery(ResultSet resultSet) throws SQLException {
+        List<Company> companies = new ArrayList<>();
+        while (resultSet.next()) {
+            Company company = new Company();
+            company.setName(resultSet.getString("name"));
+            company.setLocation(resultSet.getString("location"));
+            company.setField(resultSet.getString("field"));
+            company.setContact(resultSet.getString("contact"));
+            company.setKvk_num(resultSet.getString("kvk_number"));
+            company.setEmail(resultSet.getString("email"));
+            companies.add(company);
+        }
+        return companies;
     }
 
     /**
@@ -99,16 +90,8 @@ public enum CompanyDAO {
             preparedStatement.setString(1, email);
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            Company company = new Company();
-            while (resultSet.next()) {
-                company.setName(resultSet.getString("name"));
-                company.setLocation(resultSet.getString("location"));
-                company.setField(resultSet.getString("field"));
-                company.setContact(resultSet.getString("contact"));
-                company.setKvk_num(resultSet.getString("kvk_number"));
-                company.setEmail(resultSet.getString("email"));
-            }
-            return company;
+            List<Company> results = getQuery(resultSet);
+            return (results.isEmpty()) ? null : results.get(0);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

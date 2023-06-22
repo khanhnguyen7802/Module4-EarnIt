@@ -31,7 +31,12 @@ public enum SubmissionDAO {
                             "FROM Submission s, Student st, Company c " +
                             "WHERE st.id = s.sid AND c.id = s.cid AND st.email = ? AND s.worked_date LIKE ? AND s.status LIKE ?"
             );
-            return getQuery(email, date, flag, preparedStatement);
+            preparedStatement.setString(1, email);
+            preparedStatement.setString(2, date);
+            preparedStatement.setString(3, flag);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            return getQuery(resultSet);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -45,17 +50,18 @@ public enum SubmissionDAO {
                             "FROM Submission s, Student st, Company c " +
                             "WHERE c.email = ? AND st.id = s.sid AND c.id = s.cid"
             );
-            return getQuery(email, date, flag, preparedStatement);
+            preparedStatement.setString(1, email);
+            preparedStatement.setString(2, date);
+            preparedStatement.setString(3, flag);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            return getQuery(resultSet);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private List<Submission> getQuery(String email, String date, String flag, PreparedStatement preparedStatement) throws SQLException {
-        preparedStatement.setString(1, email);
-        preparedStatement.setString(2, date);
-        preparedStatement.setString(3, flag);
-        ResultSet resultSet = preparedStatement.executeQuery();
+    private List<Submission> getQuery(ResultSet resultSet) throws SQLException {
         List<Submission> submissions = new ArrayList<>();
         while (resultSet.next()) {
             Submission submission = new Submission();
