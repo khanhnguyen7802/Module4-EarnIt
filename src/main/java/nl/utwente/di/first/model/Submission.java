@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
 
 @XmlRootElement
 public class Submission {
-    private String eid;
+    private int eid;
     private int hours;
     private String comment;
     private String status;
@@ -18,10 +18,10 @@ public class Submission {
     public Submission() {
         status = "";
     }
-    public String getEmploymentId() {
+    public int getEmploymentId() {
         return eid;
     }
-    public void setEmploymentId(String eid) {
+    public void setEmploymentId(int eid) {
         this.eid = eid;
     }
     public int getHours() {

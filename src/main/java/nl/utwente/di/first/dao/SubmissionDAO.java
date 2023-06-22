@@ -108,7 +108,7 @@ public enum SubmissionDAO {
         List<Submission> submissions = new ArrayList<>();
         while (resultSet.next()) {
             Submission submission = new Submission();
-            submission.setEmploymentId(resultSet.getString("eid"));
+            submission.setEmploymentId(resultSet.getInt("eid"));
             submission.setComment(resultSet.getString("comment"));
             submission.setDate(resultSet.getDate("worked_date").toString());
             submission.setStatus(resultSet.getString("status"));
@@ -124,7 +124,7 @@ public enum SubmissionDAO {
             Connection connection = DBConnection.createConnection();
             String query = "INSERT INTO submission(eid, hours, worked_date, comment, status) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement statement = connection.prepareStatement(query);
-            statement.setString(1, submission.getEmploymentId());
+            statement.setInt(1, submission.getEmploymentId());
             statement.setInt(2, submission.getHours());
             statement.setDate(3, convertToSqlDate(submission.getDate()));
             statement.setString(4, submission.getComment());
