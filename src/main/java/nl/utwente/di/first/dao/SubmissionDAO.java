@@ -3,13 +3,9 @@ package nl.utwente.di.first.dao;
 import nl.utwente.di.first.model.Submission;
 import nl.utwente.di.first.util.DBConnection;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,7 +30,7 @@ public enum SubmissionDAO {
                             "AND st.email = ? AND s.worked_date = ? AND s.status LIKE ?"
             );
             preparedStatement.setString(1, email);
-            preparedStatement.setDate(2, java.sql.Date.valueOf(date));
+            preparedStatement.setDate(2, convertToSqlDate(date));
             preparedStatement.setString(3, flag);
             ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -54,7 +50,7 @@ public enum SubmissionDAO {
                             "AND c.email = ? AND s.worked_date = ? AND s.status LIKE ?"
             );
             preparedStatement.setString(1, email);
-            preparedStatement.setDate(2, java.sql.Date.valueOf(date));
+            preparedStatement.setDate(2, convertToSqlDate(date));
             preparedStatement.setString(3, flag);
             ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -76,8 +72,8 @@ public enum SubmissionDAO {
             );
             preparedStatement.setString(1, email);
             preparedStatement.setString(2, flag);
-            preparedStatement.setDate(3, java.sql.Date.valueOf(date));
-            preparedStatement.setDate(4, java.sql.Date.valueOf(date));
+            preparedStatement.setDate(3, convertToSqlDate(date));
+            preparedStatement.setDate(4, convertToSqlDate(date));
             ResultSet resultSet = preparedStatement.executeQuery();
 
             return getQuery(resultSet);
@@ -98,8 +94,8 @@ public enum SubmissionDAO {
             );
             preparedStatement.setString(1, email);
             preparedStatement.setString(2, flag);
-            preparedStatement.setDate(3, java.sql.Date.valueOf(date));
-            preparedStatement.setDate(4, java.sql.Date.valueOf(date));
+            preparedStatement.setDate(3, convertToSqlDate(date));
+            preparedStatement.setDate(4, convertToSqlDate(date));
             ResultSet resultSet = preparedStatement.executeQuery();
 
             return getQuery(resultSet);
@@ -114,7 +110,7 @@ public enum SubmissionDAO {
             Submission submission = new Submission();
             submission.setEmploymentId(resultSet.getString("eid"));
             submission.setComment(resultSet.getString("comment"));
-            submission.setDate(resultSet.getString("worked_date"));
+            submission.setDate(resultSet.getDate("worked_date").toString());
             submission.setStatus(resultSet.getString("status"));
             submission.setHours(resultSet.getInt("hours"));
             submissions.add(submission);
@@ -130,7 +126,7 @@ public enum SubmissionDAO {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, submission.getEmploymentId());
             statement.setInt(2, submission.getHours());
-            statement.setDate(3, submission.getDate());
+            statement.setDate(3, convertToSqlDate(submission.getDate()));
             statement.setString(4, submission.getComment());
             statement.setString(5, submission.getStatus());
             statement.execute();
@@ -138,7 +134,8 @@ public enum SubmissionDAO {
                 return true;
             }
         } catch (SQLException e) {
-            // FIXME Runtime exceptions should be thrown as little as possible, error messages are much preferred.
+            throw new RuntimeException(e);
+        } catch (ParseException e) {
             throw new RuntimeException(e);
         }
         return false;
@@ -156,5 +153,11 @@ public enum SubmissionDAO {
             // FIXME Runtime exceptions should be thrown as little as possible, error messages are much preferred.
             throw new RuntimeException(e);
         }
+    }
+
+    public Date convertToSqlDate(String date) throws ParseException {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        java.util.Date parsed = format.parse(date);
+        return new java.sql.Date(parsed.getTime());
     }
 }

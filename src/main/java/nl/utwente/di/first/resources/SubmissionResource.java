@@ -65,7 +65,7 @@ public class SubmissionResource {
             @FormParam("hours") int hours,
             @FormParam("comment") String comment,
             @FormParam("date") String date
-    ) throws ParseException {
+    ) {
         Submission submission = new Submission();
         submission.setEmploymentId(eid);
         submission.setHours(hours);

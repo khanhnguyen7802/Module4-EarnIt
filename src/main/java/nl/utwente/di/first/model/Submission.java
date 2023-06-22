@@ -13,7 +13,7 @@ public class Submission {
     private int hours;
     private String comment;
     private String status;
-    private Date date;
+    private String date;
 
     public Submission() {
         status = "";
@@ -42,12 +42,10 @@ public class Submission {
     public void setStatus(String status) {
         this.status = status;
     }
-    public Date getDate(){
+    public String getDate(){
         return date;
     }
-    public void setDate(String date) throws ParseException {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        java.util.Date parsed = formatter.parse(date);
-        this.date = new java.sql.Date(parsed.getTime());
+    public void setDate(String date) {
+        this.date = date;
     }
 }
