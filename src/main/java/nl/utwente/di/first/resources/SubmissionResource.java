@@ -38,6 +38,7 @@ public class SubmissionResource {
         return new ArrayList<>();
     }
 
+    @Path("/week")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Submission> getWeekSubmission(
