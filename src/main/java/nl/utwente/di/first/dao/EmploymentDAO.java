@@ -11,7 +11,7 @@ import java.util.List;
 public enum EmploymentDAO {
     instance;
 
-    private EmploymentDAO() {
+    EmploymentDAO() {
 
     }
 
@@ -21,7 +21,7 @@ public enum EmploymentDAO {
         try {
             Connection connection = DBConnection.createConnection();
 
-            String query = "SELECT e.eid, e.sid, e.cid, s.name AS student_name, c.name AS company_name, job_title, job_description, salary_per_hour " +
+            String query = "SELECT e.eid, e.sid, e.cid, s.name AS student_name, c.name AS company_name, job_title, job_description, salary_per_hour, c.logo AS logo " +
                             "FROM student s, company c, employment e " +
                             "WHERE s.id = e.sid AND c.id = e.cid";
 
@@ -38,6 +38,7 @@ public enum EmploymentDAO {
                 employment.setJob_title(resultSet.getString("job_title"));
                 employment.setJob_description(resultSet.getString("job_description"));
                 employment.setSalary_per_hour(resultSet.getDouble("salary_per_hour"));
+                employment.setLogo(resultSet.getBytes("logo"));
 
                 employments.add(employment);
             }
@@ -53,7 +54,7 @@ public enum EmploymentDAO {
         List<Employment> result = new ArrayList<>();
         try {
             Connection connection = DBConnection.createConnection();
-            String query = "SELECT e.eid, e.sid, e.cid, c.name AS company_name, job_title, job_description, salary_per_hour " +
+            String query = "SELECT e.eid, e.sid, e.cid, c.name AS company_name, job_title, job_description, salary_per_hour, c.logo AS logo " +
                            "FROM company c, employment e " +
                            "WHERE e.sid IS NULL AND c.id = e.cid";
     
@@ -70,6 +71,7 @@ public enum EmploymentDAO {
                 employment.setJob_title(resultSet.getString("job_title"));
                 employment.setJob_description(resultSet.getString("job_description"));
                 employment.setSalary_per_hour(resultSet.getDouble("salary_per_hour"));
+                employment.setLogo(resultSet.getBytes("logo"));
                 
                 result.add(employment);
                 

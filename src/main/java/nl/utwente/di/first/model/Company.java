@@ -9,7 +9,8 @@ public class Company extends User {
     String field;
     String contact;
     String kvk_num;
-
+    byte[] logo;
+    
     public Company() {
 
     }
@@ -42,5 +43,12 @@ public class Company extends User {
     }
     public String getKvk_num() {
         return kvk_num;
+    }
+    public byte[] getLogo() {
+        return logo;
+    }
+    
+    public void setLogo(byte[] logo) {
+        this.logo = logo;
     }
 }

@@ -24,9 +24,11 @@ $(window).on("load", function () {
                     const new_item = itemTemplate.content.cloneNode(true);
 
                     let company_name = new_item.querySelector(".company_name");
+                    let company_logo = new_item.querySelector(".company_logo");
                     let job_name = new_item.querySelector(".job_title");
                     let viewDetails = new_item.querySelector(".view_details");
-                    let submit_button = new_item.querySelector(".submit-button")
+                    let submit_button = new_item.querySelector(".submit-button");
+                    company_logo.src = (item["logo"] == null) ? company_logo.src : "data:image/svg+xml;base64," + item["logo"];
                     company_name.innerHTML = item["company_name"];
                     job_name.innerHTML = item["job_title"];
                     
@@ -34,9 +36,9 @@ $(window).on("load", function () {
                         let job_info = document.getElementById("job-info")
                         let salary = document.getElementById("salary")
                         let job_description = document.getElementById("job_description")
-                        job_info.innerHTML = `${item["job_title"]} (${item["company_name"]})`
+                        job_info.innerHTML = `${item["job_title"] == null ? "Not specified" : item["job_title"]} (${item["company_name"]})`
                         salary.innerHTML = `€${item['salary_per_hour']} per hour`
-                        job_description.innerHTML = item["job_description"]
+                        job_description.innerHTML = item["job_description"] == null ? "Not specified" : item["job_description"]
                         job_popup.style.display = "flex";
                     });
                     submit_button.addEventListener("click", function() {

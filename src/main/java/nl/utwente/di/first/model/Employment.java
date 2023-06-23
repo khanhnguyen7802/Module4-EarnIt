@@ -12,6 +12,7 @@ public class Employment {
     String job_description;
     String job_title;
     double salary_per_hour;
+    byte[] logo;
     
     
     public int getSid() {
@@ -76,5 +77,13 @@ public class Employment {
 
     public void setJob_description(String job_description) {
         this.job_description = job_description;
+    }
+    
+    public byte[] getLogo() {
+        return logo;
+    }
+    
+    public void setLogo(byte[] logo) {
+        this.logo = logo;
     }
 }
