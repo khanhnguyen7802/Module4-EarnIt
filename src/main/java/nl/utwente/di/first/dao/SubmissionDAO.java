@@ -17,8 +17,10 @@ public enum SubmissionDAO {
 
     /**
      * Given an email, return a list of submissions of that student
-     * @param email of a specific student
-     * @return a full list of all submissions that was made by that student
+     * @param email - the email of a specific student
+     * @param date - the date of submission
+     * @param flag - status of the submission
+     * @return a full list of all submissions that was made by that student on a specific date
      */
     public List<Submission> getStudentDateSubmissions(String email, String date, String flag) {
         try {
@@ -40,26 +42,33 @@ public enum SubmissionDAO {
         }
     }
 
-    public List<Submission> getCompanyDateSubmissions(String email, String date, String flag) {
-        try {
-            Connection connection = DBConnection.createConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(
-                    "SELECT DISTINCT s.* " +
-                            "FROM Submission s, Company c, Employment e " +
-                            "WHERE c.id = e.cid AND e.eid = s.eid " +
-                            "AND c.email = ? AND s.worked_date = ? AND s.status LIKE ?"
-            );
-            preparedStatement.setString(1, email);
-            preparedStatement.setDate(2, convertToSqlDate(date));
-            preparedStatement.setString(3, flag);
-            ResultSet resultSet = preparedStatement.executeQuery();
+//    public List<Submission> getCompanyDateSubmissions(String email, String date, String flag) {
+//        try {
+//            Connection connection = DBConnection.createConnection();
+//            PreparedStatement preparedStatement = connection.prepareStatement(
+//                    "SELECT DISTINCT s.* " +
+//                            "FROM Submission s, Company c, Employment e " +
+//                            "WHERE c.id = e.cid AND e.eid = s.eid " +
+//                            "AND c.email = ? AND s.worked_date = ? AND s.status LIKE ?"
+//            );
+//            preparedStatement.setString(1, email);
+//            preparedStatement.setDate(2, convertToSqlDate(date));
+//            preparedStatement.setString(3, flag);
+//            ResultSet resultSet = preparedStatement.executeQuery();
+//
+//            return getQuery(resultSet);
+//        } catch (SQLException | ParseException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
 
-            return getQuery(resultSet);
-        } catch (SQLException | ParseException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
+    /**
+     * Given an email, return a list of submissions of that student
+     * @param email - the email of a specific student
+     * @param date - the date of submission
+     * @param flag - status of the submission
+     * @return a full list of all submissions that was made by that student on a specific date
+     */
     public List<Submission> getStudentWeekSubmissions(String email, String date, String flag) {
         try {
             Connection connection = DBConnection.createConnection();
@@ -118,6 +127,13 @@ public enum SubmissionDAO {
         return submissions;
     }
 
+    /**
+     * In the frontend, when the submission button is clicked,
+     * then a new submission is added into database
+     *
+     * @param submission
+     * @return true if successfully added; otherwise false
+     */
     public boolean addSubmission(Submission submission) {
         //Added submission has empty flag on default
         try {
@@ -128,7 +144,7 @@ public enum SubmissionDAO {
             statement.setInt(2, submission.getHours());
             statement.setDate(3, convertToSqlDate(submission.getDate()));
             statement.setString(4, submission.getComment());
-            statement.setString(5, submission.getStatus());
+            statement.setString(5, ""); // empty flag
             statement.execute();
             if (statement.executeUpdate() != 0) {
                 return true;
