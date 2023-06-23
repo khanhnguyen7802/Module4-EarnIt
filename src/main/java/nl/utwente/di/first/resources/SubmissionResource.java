@@ -54,20 +54,17 @@ public class SubmissionResource {
 //        return new ArrayList<>();
 //    }
 
-    @Path("/week")
+    @Path("week/{weekNumber}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Submission> getWeekSubmission(
-            @QueryParam("date") String date,
-            @DefaultValue("%%") @QueryParam("flag") String flag
-    ) {
+    public List<Submission> getWeekSubmission(@PathParam("weekNumber") int week) {
         HttpSession session = req.getSession();
         String role = session.getAttribute("role").toString();
         String email = session.getAttribute("email").toString();
         if (role.equals("STUDENT")) {
-            return SubmissionDAO.instance.getStudentWeekSubmissions(email, date, flag);
+            return SubmissionDAO.instance.getStudentWeekSubmissions(email, week, "");
         } else if (role.equals("COMPANY")) {
-            return SubmissionDAO.instance.getCompanyWeekSubmissions(email, date, flag);
+            return SubmissionDAO.instance.getCompanyWeekSubmissions(email, date, "");
         }
         return new ArrayList<>();
     }
