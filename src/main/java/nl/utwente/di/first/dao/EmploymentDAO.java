@@ -11,7 +11,7 @@ import java.util.List;
 public enum EmploymentDAO {
     instance;
 
-    private EmploymentDAO() {
+    EmploymentDAO() {
 
     }
 

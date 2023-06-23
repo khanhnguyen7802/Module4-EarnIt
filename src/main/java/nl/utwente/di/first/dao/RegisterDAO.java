@@ -14,7 +14,7 @@ import java.sql.SQLException;
 public enum RegisterDAO {
     instance;
     
-    private RegisterDAO() {
+    RegisterDAO() {
         
     }
     

@@ -11,7 +11,7 @@ import java.util.List;
 
 public enum SubmissionDAO {
     instance;
-    private SubmissionDAO() {
+    SubmissionDAO() {
 
     }
 
@@ -149,9 +149,7 @@ public enum SubmissionDAO {
             if (statement.executeUpdate() != 0) {
                 return true;
             }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (ParseException e) {
+        } catch (SQLException | ParseException e) {
             throw new RuntimeException(e);
         }
         return false;

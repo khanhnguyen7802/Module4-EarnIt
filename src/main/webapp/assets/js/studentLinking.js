@@ -26,13 +26,13 @@ $(window).on("load", function () {
                     let company_name = new_vacancy.querySelector(".company_name");
                     let vacancy_button = new_vacancy.querySelector(".vacancy-button")
                     
-                    job_title.innerHTML = item.job_title;
-                    company_name.innerHTML = item.companyName;
+                    job_title.innerHTML = item["job_title"];
+                    company_name.innerHTML = item["companyName"];
                     vacancy_button.addEventListener("click", function() {
                         selectedJob = item;
                         students_checkbox.disabled = false
                         vacancies_checkbox.checked = false
-                        vacancy_label.innerHTML = item.job_title
+                        vacancy_label.innerHTML = item["job_title"]
                     })
                     
                     vacancy_list.append(new_vacancy);

@@ -30,7 +30,7 @@ public class StudentsResource {
 
     /**
      * Given a student's email
-     * @param sid
+     * @param sid id of the student whose information is being requested.
      * @return the personal information of that specific student
      */
     @Path("{sid}")

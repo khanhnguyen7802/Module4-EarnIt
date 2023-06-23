@@ -34,9 +34,9 @@ $(window).on("load", function () {
                         let job_info = document.getElementById("job-info")
                         let salary = document.getElementById("salary")
                         let job_description = document.getElementById("job_description")
-                        job_info.innerHTML = `${item["job_title"]} (${item["company_name"]})`
+                        job_info.innerHTML = `${item["job_title"] == null ? "Not specified" : item["job_title"]} (${item["company_name"]})`
                         salary.innerHTML = `€${item['salary_per_hour']} per hour`
-                        job_description.innerHTML = item["job_description"]
+                        job_description.innerHTML = item["job_description"] == null ? "Not specified" : item["job_description"]
                         job_popup.style.display = "flex";
                     });
                     submit_button.addEventListener("click", function() {

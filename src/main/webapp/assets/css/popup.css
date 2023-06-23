@@ -86,8 +86,7 @@
 }
 
 .popup-content {
-	position: fixed;
-	margin:auto;
+	margin:50px;
 	background-color: #fefefe;
 	width: 100%;
 	animation-name: zoomIn;

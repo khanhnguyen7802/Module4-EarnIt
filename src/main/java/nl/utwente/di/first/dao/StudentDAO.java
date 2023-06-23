@@ -1,6 +1,5 @@
 package nl.utwente.di.first.dao;
 
-import nl.utwente.di.first.model.Company;
 import nl.utwente.di.first.model.Student;
 import nl.utwente.di.first.util.DBConnection;
 
@@ -10,8 +9,7 @@ import java.util.List;
 
 public enum StudentDAO {
     instance;
-    private List<Student> students = new ArrayList<>();
-    private StudentDAO() {
+    StudentDAO() {
 
     }
     public List<Student> getAllStudents() {

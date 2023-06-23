@@ -1,10 +1,8 @@
 package nl.utwente.di.first.util;
 
-import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
-import java.util.Arrays;
 import java.util.HexFormat;
 
 
@@ -18,15 +16,13 @@ public class Security {
         String passwordToHash = "company10";
         byte[] byteSalt = getSalt();
         String stringSalt = toHex(byteSalt);
-//        String salt = "e717c31996975d6369cd063452cc9427"; 
-//        String testHashedPassword = "eebf325d66b84653940b17a1f6825679e862a4ab857d82bb85501359cdfdce01";
+        String testHashedPassword = "eebf325d66b84653940b17a1f6825679e862a4ab857d82bb85501359cdfdce01";
 
         System.out.println("Convert from byte to Hex(String): " + stringSalt);
-//        byte[] backToByte = toByteArray(salt);
 
         String securePassword = saltSHA256(passwordToHash, byteSalt);
         System.out.println(securePassword);
-//        System.out.println("Compare equal: " + securePassword.equals(testHashedPassword));
+        System.out.println("Compare equal: " + securePassword.equals(testHashedPassword));
 
     }
 
@@ -68,15 +64,8 @@ public class Security {
     
         return hexFormat.formatHex(bytes);
     }
-//    public static String toHex2(byte[] bytes) {
-//        StringBuilder result = new StringBuilder();
-//        for (byte aByte : bytes) {
-//            result.append(String.format("%02x", aByte));
-//        }
-//        return result.toString();
-//    }
-        public static byte[] toByteArray(String str) {
-
+    
+    public static byte[] toByteArray(String str) {
         HexFormat hexFormat = HexFormat.of();
     
         return hexFormat.parseHex(str);
