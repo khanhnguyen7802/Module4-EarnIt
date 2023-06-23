@@ -21,9 +21,9 @@ $(window).on("load", async function () {
                     let companyName = new_employment.querySelector("#company-name");
                     let jobTitle = new_employment.querySelector("#job-title");
 
-                    studentName.textContent = item.student_name;
-                    companyName.textContent = item.company_name;
-                    jobTitle.textContent = item.job_title;
+                    studentName.textContent = item["student_name"];
+                    companyName.textContent = item["company_name"];
+                    jobTitle.textContent = item["job_title"];
 
                     tbody.append(new_employment);
 

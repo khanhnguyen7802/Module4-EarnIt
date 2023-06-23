@@ -2,11 +2,6 @@ package nl.utwente.di.first.model;
 
 import jakarta.xml.bind.annotation.XmlRootElement;
 
-import java.sql.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
-
 @XmlRootElement
 public class Submission {
     private int eid;

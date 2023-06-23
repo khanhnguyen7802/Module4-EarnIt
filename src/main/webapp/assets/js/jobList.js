@@ -1,9 +1,13 @@
 const itemTemplate = document.getElementById("job-item");
 const popupTemplate = document.getElementById("job-popup");
 const ul = document.getElementById("list");
+const job_popup = document.getElementById("job-popup")
+const submit_popup = document.getElementById("submit-popup")
+const job_close_button = document.getElementById("job-popup-close")
+const submit_close_button = document.getElementById("submit-popup-close")
 
-$(window).on("load", async function () {
-    fetch(window.location.origin + "/earnit/api/companies")
+$(window).on("load", function () {
+    fetch(window.location.origin + "/earnit/api/employments")
         .then(response => {
             if (response.ok) {
                 return response.json();
@@ -18,52 +22,87 @@ $(window).on("load", async function () {
                 for (let item of json) {
                     console.log(item);
                     const new_item = itemTemplate.content.cloneNode(true);
-                    const new_popup = popupTemplate.content.cloneNode(true);
 
                     let company_name = new_item.querySelector(".company_name");
+                    let company_logo = new_item.querySelector(".company_logo");
                     let job_name = new_item.querySelector(".job_title");
-                    let viewDetails = new_item.querySelector("#view_details");
-                    company_name.innerHTML = item.name;
-                    job_name.innerHTML = item.job_title;
-                    viewDetails.setAttribute("href", "#popup"+idx);
+                    let viewDetails = new_item.querySelector(".view_details");
+                    let submit_button = new_item.querySelector(".submit-button");
+                    company_logo.src = (item["logo"] == null) ? company_logo.src : "data:image/svg+xml;base64," + item["logo"];
+                    company_name.innerHTML = item["company_name"];
+                    job_name.innerHTML = item["job_title"];
+                    
+                    viewDetails.addEventListener("click", function() {
+                        let job_info = document.getElementById("job-info")
+                        let salary = document.getElementById("salary")
+                        let job_description = document.getElementById("job_description")
+                        job_info.innerHTML = `${item["job_title"] == null ? "Not specified" : item["job_title"]} (${item["company_name"]})`
+                        salary.innerHTML = `€${item['salary_per_hour']} per hour`
+                        job_description.innerHTML = item["job_description"] == null ? "Not specified" : item["job_description"]
+                        job_popup.style.display = "flex";
+                    });
+                    submit_button.addEventListener("click", function() {
+                        let job_info = document.getElementById("submit-info")
+                        let final_submit = document.getElementById("send-submission")
+                        job_info.innerHTML = `${item["job_title"]} (${item["company_name"]})`
+                        final_submit.addEventListener("click", function () {
+                            let submission = {}
+                            submission["eid"] = item["eid"]
 
-
-                    let popUp = new_popup.querySelector(".overlay");
-                    popUp.setAttribute("id", "popup"+idx);
-                    let company_name_popup = new_popup.querySelector(".company_name");
-                    let job_description = new_popup.querySelector("#job_description")
-                    company_name_popup.textContent = item.name;
-                    job_description.textContent = item.job_description;
+                            let hours = document.getElementById("hours")
+                            let date = document.getElementById("date")
+                            let comment = document.getElementById("comment")
+                            submission["hours_worked"] = hours.value
+                            submission["worked_date"] = date.value;
+                            submission["comment"] = comment.value;
+                            alert(`About to send the following info to the API:\n${JSON.stringify(submission)}`)
+                            fetch(window.location.origin + "/earnit/api/submissions/day", {
+                                method: "POST",
+                                headers: {
+                                    "Content-type": "application/json"
+                                },
+                                body: JSON.stringify(submission)
+                            }).then(response => {
+                                if (!response.ok) throw new Error("HTTP Error! Status: " + response.status);
+                                return response.text()
+                            }).then(data => {
+                                //TODO replace this with redirect
+                                if (data === "SUCCESS") alert("Success!")
+                                if (data === "FAILURE") alert("Oof, failure...")
+                            })
+                        })
+                        submit_popup.style.display = "flex"
+                    });
                     
                     ul.append(new_item);
-                    document.getElementById("main-screen").append(new_popup);
-                    // document.getElementById("job_description").innerHTML = job_description;
-                    console.log(job_description);
-                    console.log(document.getElementById("job_description"));
-
-                    idx++;
-
                 }
             }
         })
 });
 
-function logout() {
-    fetch(window.location.origin + "/earnit/api/logout", {
-        method: "POST"
-    }).then(response => {
-        if (response.ok) {
-            window.location.href = window.location.origin + "/earnit/login"
-        } else {
-            console.log('Failed to logout');
-        }
-    })
-        .catch(error => {
-            // An error occurred during the fetch request
-            console.log('Request error:', error);
-        });
+job_close_button.addEventListener("click", closeJobPopup)
+
+function closeJobPopup() {
+    job_popup.classList.add('animate-out');
+
+    job_popup.addEventListener('animationend', function() {
+        job_popup.style.display = "none";
+        job_popup.classList.remove('animate-out');
+    }, { once: true });
 }
 
-function submit() {
-    window.location.href = window.location.origin + "/earnit/student/submission"
+document.addEventListener("click", function(event) {
+    if (event.target.matches("#job-popup")) closeJobPopup();
+    else if (event.target.matches("#submit-popup")) closeSubmitPopup();
+})
+
+submit_close_button.addEventListener("click", closeSubmitPopup)
+
+function closeSubmitPopup() {
+    submit_popup.classList.add('animate-out');
+
+    submit_popup.addEventListener('animationend', function() {
+        submit_popup.style.display = "none";
+        submit_popup.classList.remove('animate-out');
+    }, { once: true });
 }

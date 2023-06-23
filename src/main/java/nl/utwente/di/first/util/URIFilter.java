@@ -7,7 +7,6 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Optional;
 
 public class URIFilter implements Filter {
@@ -31,9 +30,9 @@ public class URIFilter implements Filter {
             request.getRequestDispatcher(path).forward(request, response);
             return;
         } else if (path.startsWith("/student") || path.startsWith("/company") || path.startsWith("/admin")) {
-            String[] splitpath = path.split("/");
+            String[] split_path = path.split("/");
             HttpSession session = req.getSession();
-            if (session.getAttribute("role") == null || !session.getAttribute("role").equals(splitpath[1].toUpperCase())) {
+            if (session.getAttribute("role") == null || !session.getAttribute("role").equals(split_path[1].toUpperCase())) {
                 request.getRequestDispatcher("/401.html").forward(request,response);
             }
             

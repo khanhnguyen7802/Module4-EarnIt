@@ -29,9 +29,11 @@
   <li class="nav-item"><a class="nav-link active text-start py-1 px-0" href="overview.html"><i class="fas fa-building mx-3"
                                                                                                style="color: var(--bs-gray-100);"></i><span
           class="text-nowrap mx-2" style="color: var(--bs-white);">Overview</span></a></li>
-  <li class="nav-item"><a class="nav-link text-start py-1 px-0" href="linking.html"><i class="far fa-calendar-alt mx-3"
+  <li class="nav-item"><a class="nav-link text-start py-1 px-0" href="linking.html"><i class="fas fa-building mx-3"
                                                                                        style="color: var(--bs-gray-100);"></i><span
-          class="text-nowrap mx-2" style="color: var(--bs-gray-100);">Link jobs</span></a></li>
+          class="text-nowrap mx-2" style="color: var(--bs-gray-100);">Linking Jobs</span></a></li>
+  <li class="nav-item"><a class="nav-link text-start py-1 px-0" href="../admin/createjobs.html">
+    <i class="far fa-calendar-alt mx-3" style="color: var(--bs-gray-100);"></i><span class="text-nowrap mx-2" style="color: var(--bs-gray-100);">Create Jobs</span></a></li>
   <li class="nav-item dropdown show"><a class="nav-link text-start dropdown-toggle py-1 px-0 position-relative"
                                         aria-expanded="true" data-bs-toggle="dropdown" href="#"><i
           class="fas fa-sliders-h mx-3" style="color: var(--bs-white);"></i><span class="text-nowrap mx-2"
@@ -51,24 +53,24 @@
 
 <div class="center">
   <!--for table header-->
-<div class="tbl-header">
-  <table>
-    <thead>
-    <tr>
-      <th>Student name</th>
-      <th>Company name</th>
-      <th>Job title</th>
-    </tr>
-    </thead>
-  </table>
-</div>
+  <div class="tbl-header">
+    <table>
+      <thead>
+      <tr>
+        <th>Student name</th>
+        <th>Company name</th>
+        <th>Job title</th>
+      </tr>
+      </thead>
+    </table>
+  </div>
 
-<!--for table content (fetch data)-->
-<div class="tbl-content">
-  <table>
-    <tbody id="table-body">  </tbody>
-  </table>
-</div>
+  <!--for table content (fetch data)-->
+  <div class="tbl-content">
+    <table>
+      <tbody id="table-body"></tbody>
+    </table>
+  </div>
 </div>
 
 <template id="employment-item">
@@ -80,7 +82,7 @@
 </template>
 
 <script src="../assets/js/overviewList.js"></script>
-
+<script src="../assets/js/logoutScript.js"></script>
 </body>
 
 </html>

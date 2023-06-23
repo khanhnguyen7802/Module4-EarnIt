@@ -21,7 +21,7 @@
     
     win.resize(function() {
         
-        if (w==win.width()) {
+        if (w===win.width()) {
             return;
         }
         

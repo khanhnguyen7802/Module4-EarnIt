@@ -60,7 +60,6 @@ submit_button.addEventListener("click", function () {
     if (company_tab.ariaSelected === "true") {
         if (!mandatory_company_fields.every(element => element.value !== null && element.value !== "")) {
             alert("Not all mandatory Company fields are filled in!")
-            return
         } else {
             user.name = company_name.value;
             user.location = location_field.value;

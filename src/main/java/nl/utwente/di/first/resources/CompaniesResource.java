@@ -2,14 +2,14 @@ package nl.utwente.di.first.resources;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-import jakarta.ws.rs.*;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import nl.utwente.di.first.dao.CompanyDAO;
-import nl.utwente.di.first.dao.LoginDAO;
-import nl.utwente.di.first.dao.StudentDAO;
 import nl.utwente.di.first.model.Company;
-import nl.utwente.di.first.model.Student;
 
 import java.util.List;
 
@@ -32,7 +32,7 @@ public class CompaniesResource {
 
     /**
      * Given a company's email
-     * @param cid
+     * @param cid the id of the company which is requested.
      * @return the information of that specific company
      */
     @Path("{cid}")

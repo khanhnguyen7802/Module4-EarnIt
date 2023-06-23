@@ -1,18 +1,14 @@
 package nl.utwente.di.first.dao;
 
-import nl.utwente.di.first.model.Company;
-import nl.utwente.di.first.model.Student;
 import nl.utwente.di.first.model.User;
 import nl.utwente.di.first.util.DBConnection;
 import nl.utwente.di.first.util.Security;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public enum LoginDAO {
     instance;
-    private LoginDAO() {
+    LoginDAO() {
 
     }
     public String loginUser(User user) throws SQLException {
@@ -44,12 +40,13 @@ public enum LoginDAO {
                     if (returnResultSet.next()) {
                         String role = returnResultSet.getString("role");
                         System.out.println(role);
-                        if (role.equals("student")) {
-                            return "STUDENT";
-                        } else if (role.equals("company")) {
-                            return "COMPANY";
-                        } else if (role.equals("admin")) {
-                            return "ADMIN";
+                        switch (role) {
+                            case "student":
+                                return "STUDENT";
+                            case "company":
+                                return "COMPANY";
+                            case "admin":
+                                return "ADMIN";
                         }
                     }
                 }
