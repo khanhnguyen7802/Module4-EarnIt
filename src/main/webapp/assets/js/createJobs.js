@@ -1,8 +1,7 @@
-const companyTemplate = document.getElementById("company");
-const option = document.getElementById("company_name");
+const companySelect = document.getElementById("company");
 
 $(window).on("load", async function() {
-    fetch(window.location.origin + "earnit/api/companies")
+    fetch(window.location.origin + "earnit/api/employments")
         .then(response => {
             if (response.ok) {
                 return response.json();
@@ -12,20 +11,16 @@ $(window).on("load", async function() {
         })
         .then(json => {
             console.log(json);
-            // Clear existing options
-            option.innerHTML = "";
+            if ('content' in document.getElementById('company')) {
+                for (let item of json) {
+                    const option = document.getElementById('company_name');
 
-            const defaultOption = document.createElement("option");
-            defaultOption.value = "";
-            defaultOption.textContent = "--- Company Name ---";
-            option.appendChild(defaultOption);
+                    option.value = item.id; // Replace with the actual property containing the company ID
+                    option.textContent = item.company_name; // Replace with the actual property containing the company name
 
-            // Iterate over the companies and append options
-            json.forEach(company => {
-                const newOption = companyTemplate.cloneNode(true);
-                newOption.textContent = company.name;
-                option.appendChild(newOption);
-            });
+                    companySelect.appendChild(option);
+                }
+            }
         })
         .catch(error => {
             console.error(error);
