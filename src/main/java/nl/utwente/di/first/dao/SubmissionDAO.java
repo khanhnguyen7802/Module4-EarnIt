@@ -63,13 +63,13 @@ public enum SubmissionDAO {
 //    }
 
     /**
-     * Given an email, return a list of submissions of that student
+     * Given an email, return a 1-week range list of submissions of that student
      * @param email - the email of a specific student
-     * @param date - the date of submission
+     * @param week - the specific week
      * @param flag - status of the submission
      * @return a full list of all submissions that was made by that student on a specific date
      */
-    public List<Submission> getStudentWeekSubmissions(String email, String date, String flag) {
+    public List<Submission> getStudentWeekSubmissions(String email, int week, String flag) {
         try {
             Connection connection = DBConnection.createConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(
@@ -77,12 +77,11 @@ public enum SubmissionDAO {
                             "FROM Submission s, Student st, Employment e " +
                             "WHERE st.id = e.sid AND e.eid = s.eid " +
                             "AND st.email = ? AND s.status LIKE ? " +
-                            "AND worked_date >= DATEADD(wk, DATEDIFF(wk, 0, ?), 0) AND worked_date < DATEADD(wk, DATEDIFF(wk, 0, ?) + 1, 0)"
+                            "AND DATE_PART('week', worked_date) = ?"
             );
             preparedStatement.setString(1, email);
             preparedStatement.setString(2, flag);
-            preparedStatement.setDate(3, convertToSqlDate(date));
-            preparedStatement.setDate(4, convertToSqlDate(date));
+            preparedStatement.setInt(3, week);
             ResultSet resultSet = preparedStatement.executeQuery();
 
             return getQuery(resultSet);
