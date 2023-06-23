@@ -24,9 +24,9 @@ public enum SubmissionDAO {
         try {
             Connection connection = DBConnection.createConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "SELECT DISTINCT s.* " +
-                            "FROM Submission s, Student st, Employment e " +
-                            "WHERE st.id = e.sid AND e.eid = s.eid " +
+                    "SELECT DISTINCT st.name AS student_name, c.name AS company_name, s.* " +
+                            "FROM Submission s, Student st, Company c, Employment e " +
+                            "WHERE st.id = e.sid AND c.id = e.cid AND e.eid = s.eid " +
                             "AND st.email = ? AND s.worked_date = ? AND s.status LIKE ?"
             );
             preparedStatement.setString(1, email);
@@ -44,9 +44,9 @@ public enum SubmissionDAO {
         try {
             Connection connection = DBConnection.createConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "SELECT DISTINCT s.* " +
-                            "FROM Submission s, Company c, Employment e " +
-                            "WHERE c.id = e.cid AND e.eid = s.eid " +
+                    "SELECT DISTINCT st.name AS student_name, c.name AS company_name, s.* " +
+                            "FROM Submission s, Student st, Company c, Employment e " +
+                            "WHERE st.id = e.sid AND c.id = e.cid AND e.eid = s.eid " +
                             "AND c.email = ? AND s.worked_date = ? AND s.status LIKE ?"
             );
             preparedStatement.setString(1, email);
@@ -64,9 +64,9 @@ public enum SubmissionDAO {
         try {
             Connection connection = DBConnection.createConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "SELECT DISTINCT s.* " +
-                            "FROM Submission s, Student st, Employment e " +
-                            "WHERE st.id = e.sid AND e.eid = s.eid " +
+                    "SELECT DISTINCT st.name AS student_name, c.name AS company_name, s.* " +
+                            "FROM Submission s, Student st, Company c, Employment e " +
+                            "WHERE st.id = e.sid AND c.id = e.cid AND e.eid = s.eid " +
                             "AND st.email = ? AND s.status LIKE ? " +
                             "AND worked_date >= DATEADD(wk, DATEDIFF(wk, 0, ?), 0) AND worked_date < DATEADD(wk, DATEDIFF(wk, 0, ?) + 1, 0)"
             );
@@ -86,9 +86,9 @@ public enum SubmissionDAO {
         try {
             Connection connection = DBConnection.createConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "SELECT DISTINCT s.* " +
-                            "FROM Submission s, Company c, Employment e " +
-                            "WHERE c.id = e.cid AND e.eid = s.eid " +
+                    "SELECT DISTINCT st.name AS student_name, c.name AS company_name, s.* " +
+                            "FROM Submission s, Student st, Company c, Employment e " +
+                            "WHERE st.id = e.sid AND c.id = e.cid AND e.eid = s.eid " +
                             "AND c.email = ? AND s.status LIKE ? " +
                             "AND worked_date >= DATEADD(wk, DATEDIFF(wk, 0, ?), 0) AND worked_date < DATEADD(wk, DATEDIFF(wk, 0, ?) + 1, 0)"
             );
@@ -113,6 +113,8 @@ public enum SubmissionDAO {
             submission.setDate(resultSet.getDate("worked_date").toString());
             submission.setStatus(resultSet.getString("status"));
             submission.setHours(resultSet.getInt("hours"));
+            submission.setStudentName("student_name");
+            submission.setCompanyName("company_name");
             submissions.add(submission);
         }
         return submissions;

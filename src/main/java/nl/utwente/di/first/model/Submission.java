@@ -14,6 +14,9 @@ public class Submission {
     private String comment;
     private String status;
     private String date;
+    private String companyName;
+    private String jobTitle;
+    private String studentName;
 
     public Submission() {
         status = "";
@@ -47,5 +50,23 @@ public class Submission {
     }
     public void setDate(String date) {
         this.date = date;
+    }
+    public String getCompanyName() {
+        return companyName;
+    }
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+    public String getJobTitle() {
+        return jobTitle;
+    }
+    public void setJobTitle(String jobTitle) {
+        this.jobTitle = jobTitle;
+    }
+    public String getStudentName() {
+        return studentName;
+    }
+    public void setStudentName(String studentName) {
+        this.studentName = studentName;
     }
 }

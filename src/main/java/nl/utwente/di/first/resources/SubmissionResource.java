@@ -61,7 +61,7 @@ public class SubmissionResource {
     @POST
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     public void addSubmission(
-            @FormParam("eid") String eid,
+            @FormParam("eid") int eid,
             @FormParam("hours") int hours,
             @FormParam("comment") String comment,
             @FormParam("date") String date
