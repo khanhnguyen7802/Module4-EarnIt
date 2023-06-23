@@ -68,6 +68,7 @@ public enum CompanyDAO {
             company.setContact(resultSet.getString("contact"));
             company.setKvk_num(resultSet.getString("kvk_number"));
             company.setEmail(resultSet.getString("email"));
+            company.setLogo(resultSet.getBytes("logo"));
             companies.add(company);
         }
         return companies;
