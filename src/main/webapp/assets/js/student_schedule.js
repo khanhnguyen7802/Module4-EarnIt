@@ -21,7 +21,7 @@ $(window).on("load", async function () {
 
 function getDate(dayIndex) {
     let today = new Date();
-    let currentDay = today.getDay(); // Get the current day index (0-6)
+    let currentDay = today.getDay(); // Get the current day index (0-6) with 0 for Sunday
     let distance = dayIndex - currentDay; // Calculate the difference between the desired day and the current day
     let targetDate = new Date(today.setDate(today.getDate() + distance)); // Set the target date by adding the difference to the current date
     return targetDate.toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' }); // Return the formatted date

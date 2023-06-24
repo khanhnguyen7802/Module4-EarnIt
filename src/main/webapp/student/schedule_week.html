@@ -4,27 +4,16 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>home</title>
+    <title>student schedule</title>
     <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora">
-    <link rel="stylesheet" href="../assets/css/Font%20Awesome%205%20Brands.css">
-    <link rel="stylesheet" href="../assets/css/Font%20Awesome%205%20Free.css">
     <link rel="stylesheet" href="../assets/fonts/fontawesome-all.min.css">
-    <link rel="stylesheet" href="../assets/css/animate.min.css">
     <link rel="stylesheet" href="../assets/css/Pretty-Search-Form-.css">
     <link rel="stylesheet" href="../assets/css/Pretty-User-List-.css">
     <link rel="stylesheet" href="../assets/css/Search-Input-responsive.css">
     <link rel="stylesheet" href="../assets/css/sidebar-1.css">
     <link rel="stylesheet" href="../assets/css/sidebar.css">
-    <link rel="stylesheet" href="../assets/css/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../assets/css/fonts/fontawesome-all.min.css">
-    <link rel="stylesheet" href="../assets/css/css/Pretty-Search-Form-.css">
-    <link rel="stylesheet" href="../assets/css/bootstrap/css/bootstrap.min-1.css">
-    <link rel="stylesheet" href="../assets/css/bootstrap/css/bootstrap.min-2.css">
-    <link rel="stylesheet" href="../assets/css/css/styles.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../assets/css/Bootstrap-4-Calendar-No-Custom-Code.css">
-    <link rel="stylesheet" href="../assets/css/Bootstrap-Calendar.css">
+
 </head>
 
 <body style="color: var(--bs-gray-100);">
@@ -34,9 +23,22 @@
         </li>
         <li class="nav-item"><a class="nav-link text-start py-1 px-0" href="#"><i class="fas fa-building mx-3" style="color: var(--bs-gray-100);"></i><span class="text-nowrap mx-2" style="color: var(--bs-white);">Company</span></a></li>
         <li class="nav-item"><a class="nav-link active text-start py-1 px-0" href="#"><i class="far fa-calendar-alt mx-3" style="color: var(--bs-gray-100);"></i><span class="text-nowrap mx-2" style="color: var(--bs-gray-100);">Schedule</span></a></li>
-        <li class="nav-item dropdown show"><a class="nav-link text-start dropdown-toggle py-1 px-0 position-relative" aria-expanded="true" data-bs-toggle="dropdown" href="#"><i class="fas fa-sliders-h mx-3" style="color: var(--bs-white);"></i><span class="text-nowrap mx-2" style="color: var(--bs-white);">Settings</span><i class="fas fa-caret-down float-none float-lg-end fa-sm" style="color: var(--bs-white);margin-right: 20px;margin-top: 5px;"></i></a>
-            <div class="border-0 bounce animated dropdown-menu show fadeIn" data-bs-popper="none"><a class="dropdown-item" href="#" style="color: var(--bs-black);background: rgb(219, 84, 97);font-weight: bold;"><i class="far fa-user" style="text-align: justify;margin-left: -8px;margin-right: 25px;"></i><span>Edit profile</span></a><a class="dropdown-item" href="#" style="color: var(--bs-black);background: rgb(219, 84, 97);font-weight: bold;"><i class="fas fa-sign-out-alt" style="padding-left: 0px;margin-left: -8px;margin-right: 25px;"></i><span>Logout</span></a></div>
+        <li class="nav-item dropdown show"><a class="nav-link text-start dropdown-toggle py-1 px-0 position-relative"
+                                              aria-expanded="true" data-bs-toggle="dropdown" href="#"><i
+                class="fas fa-sliders-h mx-3" style="color: var(--bs-white);"></i><span class="text-nowrap mx-2"
+                                                                                        style="color: var(--bs-white);">Settings</span><i
+                class="fas fa-caret-down float-none float-lg-end fa-sm"
+                style="color: var(--bs-white);margin-right: 20px;margin-top: 5px;"></i></a>
+            <div class="border-0 bounce animated dropdown-menu show fadeIn" data-bs-popper="none"><a class="dropdown-item"
+                                                                                                     href="./profile"
+                                                                                                     style="color: var(--bs-black);background: rgb(219, 84, 97);font-weight: bold;"><i
+                    class="far fa-user" style="text-align: justify;margin-left: -8px;margin-right: 25px;"></i><span>Edit profile</span></a><a
+                    class="dropdown-item" id="logoutButton" onclick="logout()"
+                    style="cursor: pointer;color: var(--bs-black);background: rgb(219, 84, 97);font-weight: bold;"><i
+                    class="fas fa-sign-out-alt" style="padding-left: 0px;margin-left: -8px;margin-right: 25px;"></i><span>Logout</span></a>
+            </div>
         </li>
+
     </ul>
     <div class="container">
         <div class="row" style="margin: 0px -15px;">
@@ -44,41 +46,46 @@
                 <h1 style="margin: 2px 0px 15px;padding: 20px 60px 0px 0px;color: var(--bs-black);margin-right: 357px;padding-top: 0px;margin-bottom: 15px;padding-bottom: 0px;margin-top: 20px;">Schedule</h1>
                 <div class="timetable" style="color: var(--bs-black);">
                     <div>
-                        <ul class="nav nav-tabs" role="tablist" style="padding-bottom: 0px;margin-bottom: 15px;">
-                            <li class="nav-item" role="presentation" id="nav-1"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-item">Monday</a></li>
-                            <li class="nav-item" role="presentation" id="nav-2"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-item">Tuesday</a></li>
-                            <li class="nav-item" role="presentation" id="nav-3"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-item">Wednesday</a></li>
-                            <li class="nav-item" role="presentation" id="nav-4"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-item">Thursday</a></li>
-                            <li class="nav-item" role="presentation" id="nav-5"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-item">Friday</a></li>
-                            <li class="nav-item" role="presentation" id="nav-6"><a class="nav-link active" role="tab" data-bs-toggle="tab" href="#tab-6">Overview</a></li>
+                        <!--For the tabs-->
+                        <ul class="nav nav-tabs" style="padding-bottom: 0px;margin-bottom: 15px;">
+                            <li class="nav-item" id="nav-1"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-1">Monday</a></li>
+                            <li class="nav-item" id="nav-2"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-2">Tuesday</a></li>
+                            <li class="nav-item" id="nav-3"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-3">Wednesday</a></li>
+                            <li class="nav-item" id="nav-4"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-4">Thursday</a></li>
+                            <li class="nav-item" id="nav-5"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-5">Friday</a></li>
+                            <li class="nav-item" id="nav-6"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-6">Saturday</a></li>
+                            <li class="nav-item" id="nav-7"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-7">Sunday</a></li>
+                            <li class="nav-item" id="nav-8"><a class="nav-link active" role="tab" data-bs-toggle="tab" href="#tab-8">Overview</a></li>
                         </ul>
-                        <div class="tab-content">
-                            <div class="tab-pane" role="tabpanel" id="tab-1">
-                                <ul id="list-1" class="list-unstyled" style="margin-left: -32px;position: relative;padding-left: 32px;">
 
+                        <div class="tab-content">
+                            <div class="tab-pane" id="tab-1">
+                                <ul id="list-1" class="list-unstyled" style="margin-left: -32px;position: relative;padding-left: 32px;">
                                 </ul>
                             </div>
-                            <div class="tab-pane" role="tabpanel" id="tab-2">
+                            <div class="tab-pane" id="tab-2">
                                 <ul id="list-2" class="list-unstyled" style="margin-left: -32px;position: relative;padding-left: 32px;">
 
                                 </ul>
                             </div>
-                            <div class="tab-pane" role="tabpanel" id="tab-3">
+                            <div class="tab-pane" id="tab-3">
                                 <ul id="list-3" class="list-unstyled" style="margin-left: -32px;position: relative;padding-left: 32px;">
 
                                 </ul>
                             </div>
-                            <div class="tab-pane" role="tabpanel" id="tab-4">
+                            <div class="tab-pane" id="tab-4">
                                 <ul id="list-4" class="list-unstyled" style="margin-left: -32px;position: relative;padding-left: 32px;">
 
                                 </ul>
                             </div>
-                            <div class="tab-pane" role="tabpanel" id="tab-5">
+                            <div class="tab-pane" id="tab-5">
                                 <ul id="list-5" class="list-unstyled" style="margin-left: -32px;position: relative;padding-left: 32px;">
 
                                 </ul>
                             </div>
-                            <div class="tab-pane active" role="tabpanel" id="tab-6">
+
+                            <!--A job item tab with total hours (for overview tab)-->
+                            <div class="tab-pane active" id="tab-8">
                                 <ul id="list-6" class="list-unstyled" style="margin-left: -32px;position: relative;padding-left: 32px;">
                                     <li style="position: relative;padding-bottom: 0px;margin-bottom: 18px;">
                                         <div class="list-group"><a class="list-group-item list-group-item-action flex-column align-items-start" href="#">
@@ -90,7 +97,9 @@
                                     </li>
                                 </ul>
                             </div>
-                            <div class="tab-pane active" role="tabpanel" id="tab-item">
+
+                            <!--A job item tab with job title (for normal tab)-->
+                            <div class="tab-pane active" id="tab-item">
                                 <ul id="list-item" class="list-unstyled" style="margin-left: -32px;position: relative;padding-left: 32px;">
                                     <li style="position: relative;padding-bottom: 0px;margin-bottom: 18px;">
                                         <div class="list-group"><a class="list-group-item list-group-item-action flex-column align-items-start" href="#">
@@ -102,12 +111,15 @@
                                     </li>
                                 </ul>
                             </div>
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <!--Template for a job item tab-->
     <template id="job-item">
         <li style="position: relative;padding-bottom: 0px;margin-bottom: 18px;">
             <div class="list-group"><a class="list-group-item list-group-item-action flex-column align-items-start" href="#">
@@ -118,6 +130,8 @@
             </a></div>
         </li>
     </template>
+
+    <!--Template for the overview tab-->
     <template id="overview-item">
         <li style="position: relative;padding-bottom: 0px;margin-bottom: 18px;">
             <div class="list-group"><a class="list-group-item list-group-item-action flex-column align-items-start" href="#">
@@ -129,11 +143,7 @@
         </li>
     </template>
     <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="../assets/js/bs-init.js"></script>
     <script src="../assets/js/sidebar.js"></script>
-    <script src="../assets/js/bootstrap/js/bootstrap.min.js"></script>
-    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../assets/js/student_schedule.js"></script>
 </body>
 
