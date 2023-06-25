@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="../assets/css/sidebar.css">
     <link rel="stylesheet" href="../assets/css/popup.css">
     <link rel="stylesheet" href="../assets/css/dropdown.css">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="../assets/js/sidebar.js"></script>
@@ -39,12 +40,9 @@
     <li class="nav-item dropdown show"><a class="nav-link text-start dropdown-toggle py-1 px-0 position-relative" aria-expanded="true" data-bs-toggle="dropdown" href="#">
         <i class="fas fa-sliders-h mx-3" style="color: var(--bs-white);"></i><span class="text-nowrap mx-2" style="color: var(--bs-white);">Settings</span>
         <i class="fas fa-caret-down float-none float-lg-end fa-sm" style="color: var(--bs-white);margin-right: 20px;margin-top: 5px;"></i></a>
-        <div class="border-0 bounce animated dropdown-menu show fadeIn" data-bs-popper="none"><a class="dropdown-item"                                                  href="./profile"
-                                                                                                 style="color: var(--bs-black);background: rgb(219, 84, 97);font-weight: bold;"><i
-                class="far fa-user" style="text-align: justify;margin-left: -8px;margin-right: 25px;"></i><span>Edit profile</span></a><a
-                class="dropdown-item" id="logoutButton" onclick="logout()"
-                style="cursor: pointer;color: var(--bs-black);background: rgb(219, 84, 97);font-weight: bold;"><i
-                class="fas fa-sign-out-alt" style="padding-left: 0;margin-left: -8px;margin-right: 25px;"></i><span>Logout</span></a>
+        <div class="border-0 bounce animated dropdown-menu show fadeIn" data-bs-popper="none">
+            <a class="dropdown-item" href="./adminProfile.html" style="color: var(--bs-black);background: rgb(219, 84, 97);font-weight: bold;"><i class="far fa-user" style="text-align: justify;margin-left: -8px;margin-right: 25px;"></i><span>Edit profile</span></a>
+            <a class="dropdown-item" id="logoutButton" onclick="logout()" style="cursor: pointer;color: var(--bs-black);background: rgb(219, 84, 97);font-weight: bold;"><i class="fas fa-sign-out-alt" style="padding-left: 0;margin-left: -8px;margin-right: 25px;"></i><span>Logout</span></a>
         </div>
     </li>
 </ul>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>student schedule</title>
+    <title>Student schedule</title>
     <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora">
     <link rel="stylesheet" href="../assets/fonts/fontawesome-all.min.css">
@@ -21,25 +21,19 @@
         <li class="nav-item logo-holder">
             <div class="text-center text-white logo py-4 mx-4"><a class="active text-decoration-none" id="title" href="#" style="color: var(--bs-gray-100);padding-top: 30px;padding-bottom: 36px;"><img src="../assets/img/Earn%20It%20Logo.svg" style="width: 100px;"></a></div>
         </li>
-        <li class="nav-item"><a class="nav-link text-start py-1 px-0" href="#"><i class="fas fa-building mx-3" style="color: var(--bs-gray-100);"></i><span class="text-nowrap mx-2" style="color: var(--bs-white);">Company</span></a></li>
-        <li class="nav-item"><a class="nav-link active text-start py-1 px-0" href="#"><i class="far fa-calendar-alt mx-3" style="color: var(--bs-gray-100);"></i><span class="text-nowrap mx-2" style="color: var(--bs-gray-100);">Schedule</span></a></li>
-        <li class="nav-item dropdown show"><a class="nav-link text-start dropdown-toggle py-1 px-0 position-relative"
-                                              aria-expanded="true" data-bs-toggle="dropdown" href="#"><i
-                class="fas fa-sliders-h mx-3" style="color: var(--bs-white);"></i><span class="text-nowrap mx-2"
-                                                                                        style="color: var(--bs-white);">Settings</span><i
-                class="fas fa-caret-down float-none float-lg-end fa-sm"
-                style="color: var(--bs-white);margin-right: 20px;margin-top: 5px;"></i></a>
-            <div class="border-0 bounce animated dropdown-menu show fadeIn" data-bs-popper="none"><a class="dropdown-item"
-                                                                                                     href="./profile"
-                                                                                                     style="color: var(--bs-black);background: rgb(219, 84, 97);font-weight: bold;"><i
-                    class="far fa-user" style="text-align: justify;margin-left: -8px;margin-right: 25px;"></i><span>Edit profile</span></a><a
-                    class="dropdown-item" id="logoutButton" onclick="logout()"
-                    style="cursor: pointer;color: var(--bs-black);background: rgb(219, 84, 97);font-weight: bold;"><i
-                    class="fas fa-sign-out-alt" style="padding-left: 0px;margin-left: -8px;margin-right: 25px;"></i><span>Logout</span></a>
+        <li class="nav-item">
+            <a class="nav-link text-start py-1 px-0" href="../student/jobs.html"><i class="fas fa-building mx-3" style="color: var(--bs-gray-100);"></i><span class="text-nowrap mx-2" style="color: var(--bs-white);">Companies</span></a>
+        </li>
+        <li class="nav-item"><a class="nav-link active text-start py-1 px-0" href="../student/schedule_week.html"><i class="far fa-calendar-alt mx-3" style="color: var(--bs-gray-100);"></i><span class="text-nowrap mx-2" style="color: var(--bs-gray-100);">Schedule</span></a></li>
+        <li class="nav-item dropdown show"><a class="nav-link text-start dropdown-toggle py-1 px-0 position-relative" aria-expanded="true" data-bs-toggle="dropdown" href="#">
+            <i class="fas fa-sliders-h mx-3" style="color: var(--bs-white);"></i><span class="text-nowrap mx-2" style="color: var(--bs-white);">Settings</span><i class="fas fa-caret-down float-none float-lg-end fa-sm" style="color: var(--bs-white);margin-right: 20px;margin-top: 5px;"></i></a>
+            <div class="border-0 bounce animated dropdown-menu show fadeIn" data-bs-popper="none">
+                <a class="dropdown-item" href="./studentProfile.html" style="color: var(--bs-black);background: rgb(219, 84, 97);font-weight: bold;"><i class="far fa-user" style="text-align: justify;margin-left: -8px;margin-right: 25px;"></i><span>Edit profile</span></a>
+                <a class="dropdown-item" id="logoutButton" onclick="logout()" style="cursor: pointer;color: var(--bs-black);background: rgb(219, 84, 97);font-weight: bold;"><i class="fas fa-sign-out-alt" style="padding-left: 0px;margin-left: -8px;margin-right: 25px;"></i><span>Logout</span></a>
             </div>
         </li>
-
     </ul>
+
     <div class="container">
         <div class="row" style="margin: 0px -15px;">
             <div class="col" style="margin: 0px 10px 0px 30px;">

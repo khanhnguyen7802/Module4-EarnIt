@@ -22,10 +22,16 @@
     <li class="nav-item logo-holder">
         <div class="text-center text-white logo py-4 mx-4"><a class="active text-decoration-none" id="title" href="#" style="color: var(--bs-gray-100);padding-top: 30px;padding-bottom: 36px;"><img src="../assets/img/Earn%20It%20Logo.svg" style="width: 100px;"></a></div>
     </li>
-    <li class="nav-item"><a class="nav-link text-start py-1 px-0" href="#"><i class="fas fa-building mx-3" style="color: var(--bs-gray-100);"></i><span class="text-nowrap mx-2" style="color: var(--bs-white);">Jobs</span></a></li>
-    <li class="nav-item"><a class="nav-link text-start py-1 px-0" href="#"><i class="far fa-calendar-alt mx-3" style="color: var(--bs-gray-100);"></i><span class="text-nowrap mx-2" style="color: var(--bs-gray-100);">Submissions</span></a></li>
-    <li class="nav-item dropdown show"><a class="nav-link text-start dropdown-toggle py-1 px-0 position-relative" aria-expanded="true" data-bs-toggle="dropdown" href="#"><i class="fas fa-sliders-h mx-3" style="color: var(--bs-white);"></i><span class="text-nowrap mx-2" style="color: var(--bs-white);">Settings</span><i class="fas fa-caret-down float-none float-lg-end fa-sm" style="color: var(--bs-white);margin-right: 20px;margin-top: 5px;"></i></a>
-        <div class="border-0 bounce animated dropdown-menu show fadeIn" data-bs-popper="none"><a class="dropdown-item" href="#" style="color: var(--bs-black);background: rgb(219, 84, 97);font-weight: bold;"><i class="far fa-user" style="text-align: justify;margin-left: -8px;margin-right: 25px;"></i><span>Edit profile</span></a><a class="dropdown-item" onclick="logout()" style="cursor: pointer;color: var(--bs-black);background: rgb(219, 84, 97);font-weight: bold;"><i class="fas fa-sign-out-alt" style="padding-left: 0px;margin-left: -8px;margin-right: 25px;"></i><span>Logout</span></a></div>
+    <li class="nav-item">
+        <a class="nav-link text-start py-1 px-0" href="../student/jobs.html"><i class="fas fa-building mx-3" style="color: var(--bs-gray-100);"></i><span class="text-nowrap mx-2" style="color: var(--bs-white);">Company</span></a>
+    </li>
+    <li class="nav-item"><a class="nav-link active text-start py-1 px-0" href="../student/schedule_week.html"><i class="far fa-calendar-alt mx-3" style="color: var(--bs-gray-100);"></i><span class="text-nowrap mx-2" style="color: var(--bs-gray-100);">Schedule</span></a></li>
+    <li class="nav-item dropdown show"><a class="nav-link text-start dropdown-toggle py-1 px-0 position-relative" aria-expanded="true" data-bs-toggle="dropdown" href="#">
+        <i class="fas fa-sliders-h mx-3" style="color: var(--bs-white);"></i><span class="text-nowrap mx-2" style="color: var(--bs-white);">Settings</span><i class="fas fa-caret-down float-none float-lg-end fa-sm" style="color: var(--bs-white);margin-right: 20px;margin-top: 5px;"></i></a>
+        <div class="border-0 bounce animated dropdown-menu show fadeIn" data-bs-popper="none">
+            <a class="dropdown-item" href="./studentProfile.html" style="color: var(--bs-black);background: rgb(219, 84, 97);font-weight: bold;"><i class="far fa-user" style="text-align: justify;margin-left: -8px;margin-right: 25px;"></i><span>Edit profile</span></a>
+            <a class="dropdown-item" id="logoutButton" onclick="logout()" style="cursor: pointer;color: var(--bs-black);background: rgb(219, 84, 97);font-weight: bold;"><i class="fas fa-sign-out-alt" style="padding-left: 0px;margin-left: -8px;margin-right: 25px;"></i><span>Logout</span></a>
+        </div>
     </li>
 </ul>
 <div class="container">
@@ -35,12 +41,22 @@
             <div class="list-group" style="position: relative;">
                 <div class="content">
                     <form>
-                        <div class="row_1"><label class="form-label" for="name">Name:</label><input class="form-control" type="text" id="name" placeholder="Your name"></div>
-                        <div class="row_2"><label class="form-label" for="dateofbirth">Date of birth:</label><input class="form-control" type="date" id="dateofbirth"></div>
-                        <div class="row_3"><label class="form-label" for="email">Email:</label><input class="form-control" type="text" id="email" placeholder="Email"></div><br>
-                        <div class="row_4"><label class="form-label" for="university">University:</label><input class="form-control" type="text" id="university" placeholder="University"></div>
+                        <table class="row_1">
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <div class="col" for="email">Email:</div>
+                                    <input class="form-control" type="text" id="email" placeholder="Email" style="width: 450px; margin-right: 30px">
+                                </td>
+                                <td>
+                                    <div class="col" for="university">University:</div>
+                                    <input class="form-control" type="text" id="university" placeholder="University" style="width: 500px">
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
 
-                        <table class="row_5">
+                        <table class="row_2">
                             <tbody>
                                 <tr>
                                     <td>
@@ -55,21 +71,22 @@
                             </tbody>
                         </table>
 
-                        <table class="row_5">
+                        <table class="row_4">
                             <tbody>
                             <tr>
                                 <td>
-                                    <div class="col" for="btwnumber">BTW Number:</div>
-                                    <input class="form-control" type="text" placeholder="BTW Number..." style="width: 450px; margin-right: 30px">
+                                    <div class="col" for="newpassword">New password:</div>
+                                    <input class="form-control" id="newpassword" type="password" placeholder="New password..." style="width: 450px; margin-right: 30px">
                                 </td>
                                 <td>
-                                    <label class="upload_cv" for="uploadcv">Upload CV</label><br>
-                                    <input class="form control" type="file" id="uploadcv" style="color: black; width: 500px; height: 40px; border: 1px solid black; border-radius: 5px;padding: 5px">
+                                    <div class="col" for="comfirmpassword">Confirm password:</div>
+                                    <input class="form-control" id="comfirmpassword" type="password" placeholder="Confirm password..." style="width: 500px">
                                 </td>
+
                             </tr>
                             </tbody>
                         </table>
-                        <button class="btn btn-primary" type="save chages" style="margin-top: 28px; background-color: black">Save changes</button>
+                        <button class="btn btn-primary" type="save chages" onclick="" style="margin-top: 28px; background-color: black">Save changes</button>
                     </form>
                 </div>
             </div>

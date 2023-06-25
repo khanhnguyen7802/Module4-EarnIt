@@ -19,6 +19,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="../assets/js/sidebar.js"></script>
+    <script src="../assets/js/logoutScript.js"></script>
     <script src="../assets/js/createJobs.js"></script>
 </head>
 
@@ -42,12 +43,9 @@
     <li class="nav-item dropdown show"><a class="nav-link text-start dropdown-toggle py-1 px-0 position-relative" aria-expanded="true" data-bs-toggle="dropdown" href="#">
         <i class="fas fa-sliders-h mx-3" style="color: var(--bs-white);"></i><span class="text-nowrap mx-2" style="color: var(--bs-white);">Settings</span>
         <i class="fas fa-caret-down float-none float-lg-end fa-sm" style="color: var(--bs-white);margin-right: 20px;margin-top: 5px;"></i></a>
-        <div class="border-0 bounce animated dropdown-menu show fadeIn" data-bs-popper="none"><a class="dropdown-item"                                                  href="./profile"
-                                                                                                 style="color: var(--bs-black);background: rgb(219, 84, 97);font-weight: bold;"><i
-                class="far fa-user" style="text-align: justify;margin-left: -8px;margin-right: 25px;"></i><span>Edit profile</span></a><a
-                class="dropdown-item" id="logoutButton" onclick="logout()"
-                style="cursor: pointer;color: var(--bs-black);background: rgb(219, 84, 97);font-weight: bold;"><i
-                class="fas fa-sign-out-alt" style="padding-left: 0;margin-left: -8px;margin-right: 25px;"></i><span>Logout</span></a>
+        <div class="border-0 bounce animated dropdown-menu show fadeIn" data-bs-popper="none">
+            <a class="dropdown-item" href="adminProfile.html" style="color: var(--bs-black);background: rgb(219, 84, 97);font-weight: bold;"><i class="far fa-user" style="text-align: justify;margin-left: -8px;margin-right: 25px;"></i><span>Edit profile</span></a>
+            <a class="dropdown-item" id="logoutButton" onclick="logout()" style="cursor: pointer;color: var(--bs-black);background: rgb(219, 84, 97);font-weight: bold;"><i class="fas fa-sign-out-alt" style="padding-left: 0;margin-left: -8px;margin-right: 25px;"></i><span>Logout</span></a>
         </div>
     </li>
 </ul>
@@ -60,13 +58,15 @@
             <div class="display" id="display">
                 <select class="company" id="company">
                     <option value="" id="">--- Company Name ---</option>
-                    <option value="company_name" id="company_name">Earn It</option>
-                </select><br><br>
+                    <option value="company_name" id="company_name"> Earn It </option>
+                </select>
+                <br><br>
 
                 <div class="form-group"><label class="form-label" for="job_title" style="color: black">Job title: </label><input class="form-control" type="text" id="job_title" placeholder="Enter job title ... "></div>
                 <div class="form-group"><label class="form-label" for="salary" style="color: black">Salary per hour: </label><input class="form-control" type="number" id="salary" placeholder="Enter salary per hour ... "></div>
                 <div class="form-group"><label class="form-label" for="job_description" style="color: black">Job description: </label><input class="form-control" type="text" id="job_description" placeholder="Enter job description  ... "></div>
             </div>
+
             <button class="btn btn-primary" onclick="submit()" type="submit" style="margin-top: 28px; background-color: black">Submit</button>
         </div>
     </div>
