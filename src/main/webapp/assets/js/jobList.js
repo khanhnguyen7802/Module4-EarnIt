@@ -56,7 +56,7 @@ $(window).on("load", function () {
                             submission["worked_date"] = date.value;
                             submission["comment"] = comment.value;
                             alert(`About to send the following info to the API:\n${JSON.stringify(submission)}`)
-                            fetch(window.location.origin + "/earnit/api/submissions/day", {
+                            fetch(window.location.origin + "/earnit/api/submissions", {
                                 method: "POST",
                                 headers: {
                                     "Content-type": "application/json"
@@ -70,6 +70,8 @@ $(window).on("load", function () {
                                 if (data === "SUCCESS") alert("Success!")
                                 if (data === "FAILURE") alert("Oof, failure...")
                             })
+
+                            //TODO: also POST flag to /flags
                         })
                         submit_popup.style.display = "flex"
                     });
