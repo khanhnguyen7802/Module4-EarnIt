@@ -47,6 +47,7 @@ $(window).on("load", function () {
                         job_info.innerHTML = `${item["job_title"]} (${item["company_name"]})`
                         final_submit.addEventListener("click", function () {
                             let submission = {}
+
                             submission["eid"] = item["eid"]
 
                             let hours = document.getElementById("hours")
@@ -56,23 +57,32 @@ $(window).on("load", function () {
                             submission["date"] = date.value;
                             submission["comment"] = comment.value;
                             alert(`About to send the following info to the API:\n${JSON.stringify(submission)}`)
-                            fetch(window.location.origin + "/earnit/api/submissions", {
-                                method: "POST",
-                                headers: {
-                                    "Content-type": "application/json"
-                                },
-                                body: JSON.stringify(submission)
-                            }).then(response => {
-                                if (!response.ok) throw new Error("HTTP Error! Status: " + response.status);
-                                return response.text()
-                            }).then(data => {
-                                //TODO replace this with redirect
-                                if (data === "SUCCESS") alert("Success!")
-                                if (data === "FAILURE") alert("Oof, failure...")
+                            fetchSubmission(submission).then(data => {
+                                if (data === "SUCCESS") alert("Adding daily submission: Success!")
+                                if (data === "FAILURE") alert("Oof, adding daily submission: Failure...")
                             })
 
+
                             //TODO: also POST flag to /flags
+                            let flag ={}
+                            flag["eid"] = item["eid"]
+
+                            let myDate = new Date(date.value);
+                            let year = myDate.getFullYear(); // number type
+                            let week = myDate.getWeek();
+                            
+                            flag["year"] = year
+                            flag["week"] = week;
+                            flag["status"] = "";
+
+                            fetchFlag(flag);
+                            //     .then(data => {
+                            //     if (data === "SUCCESS") alert("Adding weekly submission: Success!")
+                            //     if (data === "FAILURE") alert("Oof, adding weekly submission: Failure...")
+                            // })
+
                         })
+
                         submit_popup.style.display = "flex"
                     });
                     
@@ -107,4 +117,51 @@ function closeSubmitPopup() {
         submit_popup.style.display = "none";
         submit_popup.classList.remove('animate-out');
     }, { once: true });
+}
+
+async function fetchSubmission(submission) {
+    const response = await fetch(window.location.origin + "/earnit/api/submissions", {
+        method: "POST",
+        headers: {
+            "Content-type": "application/json"
+        },
+        body: JSON.stringify(submission)
+    });
+
+    if (!response.ok) {
+        throw new Error("HTTP Error! Status: " + response.status);
+    }
+
+    return response.text()
+
+}
+
+async function fetchFlag(flag) {
+    const response = await fetch(window.location.origin + "/earnit/api/flags", {
+        method: "POST",
+        headers: {
+            "Content-type": "application/json"
+        },
+        body: JSON.stringify(flag)
+    });
+
+    if (!response.ok) {
+        throw new Error("HTTP Error! Status: " + response.status);
+    }
+
+    return response.text()
+
+}
+
+
+Date.prototype.getWeek = function() {
+    let date = new Date(this.getTime());
+    date.setHours(0, 0, 0, 0);
+    // Thursday in current week decides the year.
+    date.setDate(date.getDate() + 3 - (date.getDay() + 6) % 7);
+    // January 4 is always in week 1.
+    let week1 = new Date(date.getFullYear(), 0, 4);
+    // Adjust to Thursday in week 1 and count number of weeks from date to week1.
+    return 1 + Math.round(((date.getTime() - week1.getTime()) / 86400000
+        - 3 + (week1.getDay() + 6) % 7) / 7);
 }

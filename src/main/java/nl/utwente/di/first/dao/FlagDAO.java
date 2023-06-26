@@ -24,19 +24,19 @@ public enum FlagDAO {
             PreparedStatement statement = connection.prepareStatement("SELECT EXISTS( " +
                     "SELECT 1 FROM flag WHERE week = ? AND year = ? AND eid = ? " + ")"
             );
+
             statement.setInt(1, flag.getWeek());
             statement.setInt(2, flag.getYear());
-            statement.setInt(3, flag.getEmploymentId());
+            statement.setInt(3, flag.getEid());
             ResultSet resultSet = statement.executeQuery();
             while(resultSet.next()) {
-                if(resultSet.getString("exists").equals("FALSE")) {
+                if(resultSet.getString("exists").equals("f")) {
                     String query = "INSERT INTO flag(eid, week, year, status) VALUES (?, ?, ?, ?)";
                     PreparedStatement preparedStatement = connection.prepareStatement(query);
-                    preparedStatement.setInt(1, flag.getEmploymentId());
+                    preparedStatement.setInt(1, flag.getEid());
                     preparedStatement.setInt(2, flag.getWeek());
                     preparedStatement.setInt(3, flag.getYear());
                     preparedStatement.setString(4, flag.getStatus());
-                    preparedStatement.execute();
 
                     if (preparedStatement.executeUpdate() != 0) {
                         return true;
@@ -72,7 +72,7 @@ public enum FlagDAO {
         List<Flag> flags = new ArrayList<>();
         while (resultSet.next()) {
             Flag flag = new Flag();
-            flag.setEmploymentId(resultSet.getInt("eid"));
+            flag.setEid(resultSet.getInt("eid"));
             flag.setWeek(resultSet.getInt("week"));
             flag.setYear(resultSet.getInt("year"));
             flag.setStatus(resultSet.getString("status"));

@@ -20,85 +20,85 @@ public enum SubmissionDAO {
      * @param email of a specific student
      * @return a full list of all submissions that was made by that student
      */
-    public List<Submission> getStudentDateSubmissions(String email, String date) {
-        try {
-            Connection connection = DBConnection.createConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(
-                    "SELECT DISTINCT st.name AS student_name, c.name AS company_name, s.* " +
-                            "FROM Submission s, Student st, Company c, Employment e " +
-                            "WHERE st.id = e.sid AND c.id = e.cid AND e.eid = s.eid " +
-                            "AND st.email = ? AND s.worked_date = ? "
-            );
-            preparedStatement.setString(1, email);
-            preparedStatement.setDate(2, convertToSqlDate(date));
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            return getQuery(resultSet);
-        } catch (SQLException | ParseException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public List<Submission> getCompanyDateSubmissions(String email, String date) {
-        try {
-            Connection connection = DBConnection.createConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(
-                    "SELECT DISTINCT st.name AS student_name, c.name AS company_name, s.* " +
-                            "FROM Submission s, Student st, Company c, Employment e " +
-                            "WHERE st.id = e.sid AND c.id = e.cid AND e.eid = s.eid " +
-                            "AND c.email = ? AND s.worked_date = ? "
-            );
-            preparedStatement.setString(1, email);
-            preparedStatement.setDate(2, convertToSqlDate(date));
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            return getQuery(resultSet);
-        } catch (SQLException | ParseException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public List<Submission> getStudentWeekSubmissions(String email, String date) {
-        try {
-            Connection connection = DBConnection.createConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(
-                    "SELECT DISTINCT st.name AS student_name, c.name AS company_name, s.* " +
-                            "FROM Submission s, Student st, Company c, Employment e " +
-                            "WHERE st.id = e.sid AND c.id = e.cid AND e.eid = s.eid " +
-                            "AND st.email = ? " +
-                            "AND worked_date >= DATEADD(wk, DATEDIFF(wk, 0, ?), 0) AND worked_date < DATEADD(wk, DATEDIFF(wk, 0, ?) + 1, 0)"
-            );
-            preparedStatement.setString(1, email);
-            preparedStatement.setDate(2, convertToSqlDate(date));
-            preparedStatement.setDate(3, convertToSqlDate(date));
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            return getQuery(resultSet);
-        } catch (SQLException | ParseException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public List<Submission> getCompanyWeekSubmissions(String email, String date, String flag) {
-        try {
-            Connection connection = DBConnection.createConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(
-                    "SELECT DISTINCT st.name AS student_name, c.name AS company_name, s.* " +
-                            "FROM Submission s, Student st, Company c, Employment e " +
-                            "WHERE st.id = e.sid AND c.id = e.cid AND e.eid = s.eid " +
-                            "AND c.email = ? " +
-                            "AND worked_date >= DATEADD(wk, DATEDIFF(wk, 0, ?), 0) AND worked_date < DATEADD(wk, DATEDIFF(wk, 0, ?) + 1, 0)"
-            );
-            preparedStatement.setString(1, email);
-            preparedStatement.setDate(2, convertToSqlDate(date));
-            preparedStatement.setDate(3, convertToSqlDate(date));
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            return getQuery(resultSet);
-        } catch (SQLException | ParseException e) {
-            throw new RuntimeException(e);
-        }
-    }
+//    public List<Submission> getStudentDateSubmissions(String email, String date) {
+//        try {
+//            Connection connection = DBConnection.createConnection();
+//            PreparedStatement preparedStatement = connection.prepareStatement(
+//                    "SELECT DISTINCT st.name AS student_name, c.name AS company_name, s.* " +
+//                            "FROM Submission s, Student st, Company c, Employment e " +
+//                            "WHERE st.id = e.sid AND c.id = e.cid AND e.eid = s.eid " +
+//                            "AND st.email = ? AND s.worked_date = ? "
+//            );
+//            preparedStatement.setString(1, email);
+//            preparedStatement.setDate(2, convertToSqlDate(date));
+//            ResultSet resultSet = preparedStatement.executeQuery();
+//
+//            return getQuery(resultSet);
+//        } catch (SQLException | ParseException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
+//
+//    public List<Submission> getCompanyDateSubmissions(String email, String date) {
+//        try {
+//            Connection connection = DBConnection.createConnection();
+//            PreparedStatement preparedStatement = connection.prepareStatement(
+//                    "SELECT DISTINCT st.name AS student_name, c.name AS company_name, s.* " +
+//                            "FROM Submission s, Student st, Company c, Employment e " +
+//                            "WHERE st.id = e.sid AND c.id = e.cid AND e.eid = s.eid " +
+//                            "AND c.email = ? AND s.worked_date = ? "
+//            );
+//            preparedStatement.setString(1, email);
+//            preparedStatement.setDate(2, convertToSqlDate(date));
+//            ResultSet resultSet = preparedStatement.executeQuery();
+//
+//            return getQuery(resultSet);
+//        } catch (SQLException | ParseException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
+//
+//    public List<Submission> getStudentWeekSubmissions(String email, String date) {
+//        try {
+//            Connection connection = DBConnection.createConnection();
+//            PreparedStatement preparedStatement = connection.prepareStatement(
+//                    "SELECT DISTINCT st.name AS student_name, c.name AS company_name, s.* " +
+//                            "FROM Submission s, Student st, Company c, Employment e " +
+//                            "WHERE st.id = e.sid AND c.id = e.cid AND e.eid = s.eid " +
+//                            "AND st.email = ? " +
+//                            "AND worked_date >= DATEADD(wk, DATEDIFF(wk, 0, ?), 0) AND worked_date < DATEADD(wk, DATEDIFF(wk, 0, ?) + 1, 0)"
+//            );
+//            preparedStatement.setString(1, email);
+//            preparedStatement.setDate(2, convertToSqlDate(date));
+//            preparedStatement.setDate(3, convertToSqlDate(date));
+//            ResultSet resultSet = preparedStatement.executeQuery();
+//
+//            return getQuery(resultSet);
+//        } catch (SQLException | ParseException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
+//
+//    public List<Submission> getCompanyWeekSubmissions(String email, String date, String flag) {
+//        try {
+//            Connection connection = DBConnection.createConnection();
+//            PreparedStatement preparedStatement = connection.prepareStatement(
+//                    "SELECT DISTINCT st.name AS student_name, c.name AS company_name, s.* " +
+//                            "FROM Submission s, Student st, Company c, Employment e " +
+//                            "WHERE st.id = e.sid AND c.id = e.cid AND e.eid = s.eid " +
+//                            "AND c.email = ? " +
+//                            "AND worked_date >= DATEADD(wk, DATEDIFF(wk, 0, ?), 0) AND worked_date < DATEADD(wk, DATEDIFF(wk, 0, ?) + 1, 0)"
+//            );
+//            preparedStatement.setString(1, email);
+//            preparedStatement.setDate(2, convertToSqlDate(date));
+//            preparedStatement.setDate(3, convertToSqlDate(date));
+//            ResultSet resultSet = preparedStatement.executeQuery();
+//
+//            return getQuery(resultSet);
+//        } catch (SQLException | ParseException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
 
     private List<Submission> getQuery(ResultSet resultSet) throws SQLException, ParseException {
         List<Submission> submissions = new ArrayList<>();
@@ -117,13 +117,12 @@ public enum SubmissionDAO {
     public boolean addSubmission(Submission submission) {
         try {
             Connection connection = DBConnection.createConnection();
-            String query = "INSERT INTO submission(eid, hours, worked_date, status, comment) VALUES (?, ?, ?, ?, ?)";
+            String query = "INSERT INTO submission(eid, hours, worked_date, comment) VALUES (?, ?, ?, ?)";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(1, submission.getEid());
             statement.setInt(2, submission.getHours());
             statement.setDate(3, convertToSqlDate(submission.getDate()));
-            statement.setString(4, "pending");
-            statement.setString(5, submission.getComment());
+            statement.setString(4, submission.getComment());
             
             if (statement.executeUpdate() != 0) {
                 return true;
