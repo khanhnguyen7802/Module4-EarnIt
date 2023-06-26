@@ -1,7 +1,7 @@
-const companySelect = document.getElementById("company");
+const companySelect = document.getElementById("companies");
 
 $(window).on("load", async function() {
-    fetch(window.location.origin + "earnit/api/employments")
+    fetch(window.location.origin + "/earnit/api/companies/all")
         .then(response => {
             if (response.ok) {
                 return response.json();
@@ -11,16 +11,15 @@ $(window).on("load", async function() {
         })
         .then(json => {
             console.log(json);
-            if ('content' in document.getElementById('company')) {
-                for (let item of json) {
-                    const option = document.getElementById('company_name');
 
-                    option.value = item.id; // Replace with the actual property containing the company ID
-                    option.textContent = item.company_name; // Replace with the actual property containing the company name
+            for (let item of json) {
+                let option = item.name;
+                let newOption = document.createElement("option");
+                newOption.textContent = option;
 
-                    companySelect.appendChild(option);
-                }
+                companySelect.appendChild(newOption);
             }
+
         })
         .catch(error => {
             console.error(error);

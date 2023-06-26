@@ -43,4 +43,11 @@ public class CompaniesResource {
     ) {
         return CompanyDAO.instance.getCompany(cid);
     }
+
+    @Path("all")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Company> getAllCompanies() {
+        return CompanyDAO.instance.getAllCompany();
+    }
 }

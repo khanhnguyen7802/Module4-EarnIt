@@ -82,8 +82,7 @@ public enum EmploymentDAO {
             throw new RuntimeException(e);
         }
     }
-    
-    @Path("link")
+
     public boolean linkStudent(Employment employment) {
         try {
             Connection connection = DBConnection.createConnection();
