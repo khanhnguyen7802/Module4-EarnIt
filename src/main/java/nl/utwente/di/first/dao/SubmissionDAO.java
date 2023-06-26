@@ -104,7 +104,7 @@ public enum SubmissionDAO {
         List<Submission> submissions = new ArrayList<>();
         while (resultSet.next()) {
             Submission submission = new Submission();
-            submission.setEmploymentId(resultSet.getInt("eid"));
+            submission.setEid((resultSet.getInt("eid")));
             submission.setComment(resultSet.getString("comment"));
             submission.setDate(resultSet.getDate("worked_date").toString());
             submission.setHours(resultSet.getInt("hours"));
@@ -117,14 +117,14 @@ public enum SubmissionDAO {
     public boolean addSubmission(Submission submission) {
         try {
             Connection connection = DBConnection.createConnection();
-            String query = "INSERT INTO submission(eid, hours, worked_date, comment) VALUES (?, ?, ?, ?)";
+            String query = "INSERT INTO submission(eid, hours, worked_date, status, comment) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement statement = connection.prepareStatement(query);
-            statement.setInt(1, submission.getEmploymentId());
+            statement.setInt(1, submission.getEid());
             statement.setInt(2, submission.getHours());
             statement.setDate(3, convertToSqlDate(submission.getDate()));
-            statement.setString(4, submission.getComment());
-            statement.execute();
-
+            statement.setString(4, "pending");
+            statement.setString(5, submission.getComment());
+            
             if (statement.executeUpdate() != 0) {
                 return true;
             }
@@ -149,7 +149,7 @@ public enum SubmissionDAO {
                     "SELECT SUM(hours) AS total_hours " +
                             "FROM submission s, employment e, student st " +
                             "WHERE st.id = e.sid AND e.eid = s.eid " +
-                            "AND s.email = ? " +
+                            "AND st.email = ? " +
                             "AND DATE_PART('week', worked_date) = ? AND DATE_PART('year', worked_date) = ?"
             );
             preparedStatement.setString(1, email);

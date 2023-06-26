@@ -12,10 +12,10 @@ public class Submission {
     public Submission() {
 
     }
-    public int getEmploymentId() {
+    public int getEid() {
         return eid;
     }
-    public void setEmploymentId(int eid) {
+    public void setEid(int eid) {
         this.eid = eid;
     }
     public int getHours() {

@@ -52,8 +52,8 @@ $(window).on("load", function () {
                             let hours = document.getElementById("hours")
                             let date = document.getElementById("date")
                             let comment = document.getElementById("comment")
-                            submission["hours_worked"] = hours.value
-                            submission["worked_date"] = date.value;
+                            submission["hours"] = hours.value
+                            submission["date"] = date.value;
                             submission["comment"] = comment.value;
                             alert(`About to send the following info to the API:\n${JSON.stringify(submission)}`)
                             fetch(window.location.origin + "/earnit/api/submissions", {
