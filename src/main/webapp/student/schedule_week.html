@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="../assets/css/Search-Input-responsive.css">
     <link rel="stylesheet" href="../assets/css/sidebar-1.css">
     <link rel="stylesheet" href="../assets/css/sidebar.css">
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 </head>
 
 <body style="color: var(--bs-gray-100);">
@@ -39,143 +39,129 @@
             <div class="col" style="margin: 0px 10px 0px 30px;">
                 <h1 style="margin: 2px 0px 15px;padding: 20px 60px 0px 0px;color: var(--bs-black);margin-right: 357px;padding-top: 0px;margin-bottom: 15px;padding-bottom: 0px;margin-top: 20px;">Schedule</h1>
                 <div class="timetable" style="color: var(--bs-black);">
-                    <div>
-                        <div class="select date" id="select">
-                            <select id="week-tab" style="width:100px; border-radius: 10px; text-align: center">
-                                <option id="week">---Week---</option>
-                                <option id="week1" href="#week1">Week 1</option>
-                                <option id="week2" href="#week2">Week 2</option>
-                                <option id="week3" href="#week3">Week 3</option>
-                                <option id="week4" href="#week4">Week 4</option>
-                                <option id="week5" href="#week5">Week 5</option>
-                                <option id="week6" href="#week5">Week 6</option>
-                                <option id="week7" href="#week5">Week 7</option>
-                                <option id="week8" href="#week5">Week 8</option>
-                                <option id="week9" href="#week5">Week 9</option>
-                                <option id="week10" href="#week5">Week 10</option>
-                                <option id="week11" href="#week5">Week 11</option>
-                                <option id="week12" href="#week5">Week 12</option>
-                                <option id="week13" href="#week5">Week 13</option>
-                                <option id="week14" href="#week5">Week 14</option>
-                                <option id="week15" href="#week5">Week 15</option>
-                                <option id="week16" href="#week5">Week 16</option>
-                                <option id="week17" href="#week5">Week 17</option>
-                                <option id="week18" href="#week5">Week 18</option>
-                                <option id="week19" href="#week5">Week 19</option>
-                                <option id="week20" href="#week5">Week 20</option>
-                                <option id="week21" href="#week5">Week 21</option>
-                                <option id="week22" href="#week5">Week 22</option>
-                                <option id="week23" href="#week5">Week 23</option>
-                                <option id="week24" href="#week5">Week 24</option>
-                                <option id="week25" href="#week5">Week 25</option>
-                                <option id="week26" href="#week5">Week 26</option>
-                                <option id="week27" href="#week5">Week 27</option>
-                                <option id="week28" href="#week5">Week 28</option>
-                                <option id="week29" href="#week5">Week 29</option>
-                                <option id="week30" href="#week5">Week 30</option>
-                                <option id="week31" href="#week5">Week 31</option>
-                                <option id="week32" href="#week5">Week 32</option>
-                                <option id="week33" href="#week5">Week 33</option>
-                                <option id="week34" href="#week5">Week 34</option>
-                                <option id="week35" href="#week5">Week 35</option>
-                                <option id="week36" href="#week5">Week 36</option>
-                                <option id="week37" href="#week5">Week 37</option>
-                                <option id="week38" href="#week5">Week 38</option>
-                                <option id="week39" href="#week5">Week 39</option>
-                                <option id="week40" href="#week5">Week 40</option>
-                                <option id="week41" href="#week5">Week 41</option>
-                                <option id="week42" href="#week5">Week 42</option>
-                                <option id="week43" href="#week5">Week 43</option>
-                                <option id="week44" href="#week5">Week 44</option>
-                                <option id="week45" href="#week5">Week 45</option>
-                                <option id="week46" href="#week5">Week 46</option>
-                                <option id="week47" href="#week5">Week 47</option>
-                                <option id="week48" href="#week5">Week 48</option>
-                                <option id="week49" href="#week5">Week 49</option>
-                                <option id="week50" href="#week5">Week 50</option>
-                                <option id="week51" href="#week5">Week 51</option>
-                                <option id="week52" href="#week5">Week 52</option>
+                    <div class="select date" id="select">
+                        
+                        <select id="year-dd" style="width: 100px; border-radius: 10px; text-align: center">
+                            <option id="year">---Year---</option>
+                            <option id="2023" value="2023">2023</option>
+                            <option id="2024" value="2024">2024</option>
+                            <option id="2025" value="2025">2025</option>
+                            <option id="2026" value="2026">2026</option>
+                        </select>
+                        <select id="week-dd" style="width:100px; border-radius: 10px; text-align: center">
+                            <option id="week">---Week---</option>
+                            <option id="week1" value="1">Week 1</option>
+                            <option id="week2" value="2">Week 2</option>
+                            <option id="week3" value="3">Week 3</option>
+                            <option id="week4" value="4">Week 4</option>
+                            <option id="week5" value="5">Week 5</option>
+                            <option id="week6" value="6">Week 6</option>
+                            <option id="week7" value="7">Week 7</option>
+                            <option id="week8" value="8">Week 8</option>
+                            <option id="week9" value="9">Week 9</option>
+                            <option id="week10" value="10">Week 10</option>
+                            <option id="week11" value="11">Week 11</option>
+                            <option id="week12" value="12">Week 12</option>
+                            <option id="week13" value="13">Week 13</option>
+                            <option id="week14" value="14">Week 14</option>
+                            <option id="week15" value="15">Week 15</option>
+                            <option id="week16" value="16">Week 16</option>
+                            <option id="week17" value="17">Week 17</option>
+                            <option id="week18" value="18">Week 18</option>
+                            <option id="week19" value="19">Week 19</option>
+                            <option id="week20" value="20">Week 20</option>
+                            <option id="week21" value="21">Week 21</option>
+                            <option id="week22" value="22">Week 22</option>
+                            <option id="week23" value="23">Week 23</option>
+                            <option id="week24" value="24">Week 24</option>
+                            <option id="week25" value="25">Week 25</option>
+                            <option id="week26" value="26">Week 26</option>
+                            <option id="week27" value="27">Week 27</option>
+                            <option id="week28" value="28">Week 28</option>
+                            <option id="week29" value="29">Week 29</option>
+                            <option id="week30" value="30">Week 30</option>
+                            <option id="week31" value="31">Week 31</option>
+                            <option id="week32" value="32">Week 32</option>
+                            <option id="week33" value="33">Week 33</option>
+                            <option id="week34" value="34">Week 34</option>
+                            <option id="week35" value="35">Week 35</option>
+                            <option id="week36" value="36">Week 36</option>
+                            <option id="week37" value="37">Week 37</option>
+                            <option id="week38" value="38">Week 38</option>
+                            <option id="week39" value="39">Week 39</option>
+                            <option id="week40" value="40">Week 40</option>
+                            <option id="week41" value="41">Week 41</option>
+                            <option id="week42" value="42">Week 42</option>
+                            <option id="week43" value="43">Week 43</option>
+                            <option id="week44" value="44">Week 44</option>
+                            <option id="week45" value="45">Week 45</option>
+                            <option id="week46" value="46">Week 46</option>
+                            <option id="week47" value="47">Week 47</option>
+                            <option id="week48" value="48">Week 48</option>
+                            <option id="week49" value="49">Week 49</option>
+                            <option id="week50" value="50">Week 50</option>
+                            <option id="week51" value="51">Week 51</option>
+                            <option id="week52" value="52">Week 52</option>
 
-                            </select>
+                        </select>
+                    </div>
 
-                            <select id="year-tab" style="width: 100px; border-radius: 10px; text-align: center">
-                                <option id="year">---Year---</option>
-                                <option id="2020" value="2020" href="#">2020</option>
-                                <option id="2021" value="2021" href="#">2021</option>
-                                <option id="2022" value="2022" href="#">2022</option>
-                                <option id="2023" value="2023" href="#">2023</option>
-                                <option id="2024" value="2024" href="#">2024</option>
-                                <option id="2025" value="2025" href="#">2025</option>
-                            </select>
+                    <!--For the tabs-->
+                    <ul class="nav nav-tabs" style="padding-bottom: 0px;margin: 15px 0;">
+                        <li class="nav-item" id="nav-1"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-1">Monday</a></li>
+                        <li class="nav-item" id="nav-2"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-2">Tuesday</a></li>
+                        <li class="nav-item" id="nav-3"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-3">Wednesday</a></li>
+                        <li class="nav-item" id="nav-4"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-4">Thursday</a></li>
+                        <li class="nav-item" id="nav-5"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-5">Friday</a></li>
+                        <li class="nav-item" id="nav-6"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-6">Saturday</a></li>
+                        <li class="nav-item" id="nav-7"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-7">Sunday</a></li>
+                        <li class="nav-item" id="nav-8"><a class="nav-link active" role="tab" data-bs-toggle="tab" href="#tab-8">Overview</a></li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div class="tab-pane" id="tab-1">
+                            <ul id="list-0" class="list-unstyled" style="margin-left: -32px;position: relative;padding-left: 32px;">
+                            </ul>
                         </div>
+                        <div class="tab-pane" id="tab-2">
+                            <ul id="list-1" class="list-unstyled" style="margin-left: -32px;position: relative;padding-left: 32px;">
 
-                        <!--For the tabs-->
-                        <ul class="nav nav-tabs" style="padding-bottom: 0px;margin-bottom: 15px;">
-                            <li class="nav-item" id="nav-1"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-1">Monday</a></li>
-                            <li class="nav-item" id="nav-2"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-2">Tuesday</a></li>
-                            <li class="nav-item" id="nav-3"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-3">Wednesday</a></li>
-                            <li class="nav-item" id="nav-4"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-4">Thursday</a></li>
-                            <li class="nav-item" id="nav-5"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-5">Friday</a></li>
-                            <li class="nav-item" id="nav-6"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-6">Saturday</a></li>
-                            <li class="nav-item" id="nav-7"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-7">Sunday</a></li>
-                            <li class="nav-item" id="nav-8"><a class="nav-link active" role="tab" data-bs-toggle="tab" href="#tab-8">Overview</a></li>
-                        </ul>
-
-                        <div class="tab-content">
-                            <div class="tab-pane" id="tab-1">
-                                <ul id="list-1" class="list-unstyled" style="margin-left: -32px;position: relative;padding-left: 32px;">
-                                </ul>
-                            </div>
-                            <div class="tab-pane" id="tab-2">
-                                <ul id="list-2" class="list-unstyled" style="margin-left: -32px;position: relative;padding-left: 32px;">
-
-                                </ul>
-                            </div>
-                            <div class="tab-pane" id="tab-3">
-                                <ul id="list-3" class="list-unstyled" style="margin-left: -32px;position: relative;padding-left: 32px;">
-
-                                </ul>
-                            </div>
-                            <div class="tab-pane" id="tab-4">
-                                <ul id="list-4" class="list-unstyled" style="margin-left: -32px;position: relative;padding-left: 32px;">
-
-                                </ul>
-                            </div>
-                            <div class="tab-pane" id="tab-5">
-                                <ul id="list-5" class="list-unstyled" style="margin-left: -32px;position: relative;padding-left: 32px;">
-
-                                </ul>
-                            </div>
-
-                            <!--A job item tab with total hours (for overview tab)-->
-                            <div class="tab-pane active" id="tab-8">
-                                <ul id="list-6" class="list-unstyled" style="margin-left: -32px;position: relative;padding-left: 32px;">
-                                    <li style="position: relative;padding-bottom: 0px;margin-bottom: 18px;">
-                                        <div class="list-group"><a class="list-group-item list-group-item-action flex-column align-items-start" href="#">
-                                            <div class="d-flex w-100 justify-content-between">
-                                                <h5 class="mb-1 company_name">Company</h5>
-                                            </div>
-                                            <p class="mb-1 job_title">Job title</p><small class="text-muted total_hours">Total hours: ? hours</small>
-                                        </a></div>
-                                    </li>
-                                </ul>
-                            </div>
-
-                            <!--A job item tab with job title (for normal tab)-->
-                            <div class="tab-pane active" id="tab-item">
-                                <ul id="list-item" class="list-unstyled" style="margin-left: -32px;position: relative;padding-left: 32px;">
-                                    <li style="position: relative;padding-bottom: 0px;margin-bottom: 18px;">
-                                        <div class="list-group"><a class="list-group-item list-group-item-action flex-column align-items-start" href="#">
-                                            <div class="d-flex w-100 justify-content-between">
-                                                <h5 class="mb-1 company_name">Company</h5><span class="badge rounded-pill bg-primary align-self-center hours">2 hours</span>
-                                            </div>
-                                            <p class="mb-1 job_title">Job title</p><small class="text-muted">Click to view notes</small>
-                                        </a></div>
-                                    </li>
-                                </ul>
-                            </div>
-
+                            </ul>
                         </div>
+                        <div class="tab-pane" id="tab-3">
+                            <ul id="list-2" class="list-unstyled" style="margin-left: -32px;position: relative;padding-left: 32px;">
+
+                            </ul>
+                        </div>
+                        <div class="tab-pane" id="tab-4">
+                            <ul id="list-3" class="list-unstyled" style="margin-left: -32px;position: relative;padding-left: 32px;">
+
+                            </ul>
+                        </div>
+                        <div class="tab-pane" id="tab-5">
+                            <ul id="list-4" class="list-unstyled" style="margin-left: -32px;position: relative;padding-left: 32px;">
+
+                            </ul>
+                        </div>
+                        <div class="tab-pane" id="tab-6">
+                            <ul id="list-5" class="list-unstyled" style="margin-left: -32px;position: relative;padding-left: 32px;">
+
+                            </ul>
+                        </div>
+                        <div class="tab-pane" id="tab-7">
+                            <ul id="list-6" class="list-unstyled" style="margin-left: -32px;position: relative;padding-left: 32px;">
+
+                            </ul>
+                        </div>
+                        
+
+                        <!--A job item tab with total hours (for overview tab)-->
+                        <div class="tab-pane active" id="tab-8">
+                            <ul id="list-7" class="list-unstyled" style="margin-left: -32px;position: relative;padding-left: 32px;">
+                                
+                            </ul>
+                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -183,7 +169,7 @@
     </div>
 
     <!--Template for a job item tab-->
-    <template id="job-item">
+    <template id="submission-item">
         <li style="position: relative;padding-bottom: 0px;margin-bottom: 18px;">
             <div class="list-group"><a class="list-group-item list-group-item-action flex-column align-items-start" href="#">
                 <div class="d-flex w-100 justify-content-between">
@@ -193,21 +179,10 @@
             </a></div>
         </li>
     </template>
-
-    <!--Template for the overview tab-->
-    <template id="overview-item">
-        <li style="position: relative;padding-bottom: 0px;margin-bottom: 18px;">
-            <div class="list-group"><a class="list-group-item list-group-item-action flex-column align-items-start" href="#">
-                <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1 company_name">Company</h5>
-                </div>
-                <p class="mb-1 job_title">Job title</p><small class="text-muted total_hours">Total hours: ? hours</small>
-            </a></div>
-        </li>
-    </template>
     <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="../assets/js/sidebar.js"></script>
     <script src="../assets/js/student_schedule.js"></script>
+    <script src="../assets/js/logoutScript.js"></script>
 </body>
 
 </html>

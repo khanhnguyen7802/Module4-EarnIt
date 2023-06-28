@@ -26,12 +26,13 @@ public class SubmissionResource {
      * @return all submissions within that specific week
      */
     @GET
-    @Produces(MediaType.TEXT_PLAIN)
+    @Path("week")
+    @Produces(MediaType.APPLICATION_JSON)
     public List<Submission> getAllSubmissionsByWeek(@QueryParam("week") int week,
-                             @QueryParam("year") int year,
-                             @QueryParam("eid") int eid) {
-
-        return SubmissionDAO.instance.getWeeklySubmission(eid, week, year);
+                             @QueryParam("year") int year) {
+        HttpSession session = req.getSession();
+        String email = session.getAttribute("email").toString();
+        return SubmissionDAO.instance.getWeeklySubmission(email, week, year);
     }
 
     /**

@@ -80,37 +80,38 @@ public enum SubmissionDAO {
 
     /**
      * Given eid, week and year, return all submissions of that week
-     * @param eid - employment id
      * @param week - the week being investigated
      * @param year - the year being investigated
      * @return a list of submissions have been made in that week
      */
-    public List<Submission> getWeeklySubmission(int eid, int week, int year) {
+    public List<Submission> getWeeklySubmission(String email, int week, int year) {
+        List<Submission> submissions = new ArrayList<>();
         try {
             Connection connection = DBConnection.createConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "SELECT s.comment, hours, worked_date " +
-                            "FROM submission s, employment e " +
-                            "WHERE s.eid = e.eid AND e.eid = ? " +
+                    "SELECT e.eid, comment, hours, worked_date " +
+                            "FROM submission s, employment e, student st " +
+                            "WHERE s.eid = e.eid " +
                             "AND DATE_PART('week', worked_date) = ? " +
-                            "AND DATE_PART('year', worked_date) = ?"
+                            "AND DATE_PART('year', worked_date) = ? " +
+                            "AND e.sid = st.id " +
+                            "AND st.email = ?"
             );
-
-            preparedStatement.setInt(1, eid);
-            preparedStatement.setInt(2, week);
-            preparedStatement.setInt(3, year);
+            
+            preparedStatement.setInt(1, week);
+            preparedStatement.setInt(2, year);
+            preparedStatement.setString(3, email);
             ResultSet resultSet = preparedStatement.executeQuery();
-
-            List<Submission> submissions = new ArrayList<>();
             while(resultSet.next()) {
                 Submission submission = new Submission();
+                submission.setEid(resultSet.getInt("eid"));
                 submission.setHours(resultSet.getInt("hours"));
                 submission.setComment(resultSet.getString("comment"));
                 submission.setDate(resultSet.getDate("worked_date"));
 
                 submissions.add(submission);
             }
-
+    
             return submissions;
 
             } catch (SQLException e) {
