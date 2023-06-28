@@ -3,7 +3,12 @@ const overviewTemplate = document.getElementById("overview-item");
 const tabs = document.querySelectorAll(".nav-tabs");
 const ul = document.getElementById("list-item");
 
-let currentDate = new Date().toJSON().slice(0, 10);
+const weekNumberSelect = document.getElementById("week-ddl"); //TODO: add a week dropdown list
+const yearNumberSelect = document.getElementById("year-ddl"); //TODO: add a year dropdown list
+let weekNumber = weekNumberSelect.value;
+let yearNumber = yearNumberSelect.value;
+
+
 
 $(window).on("load", async function () {
     fetch(window.location.origin + "/earnit/api/submissions/week?date=" + currentDate)

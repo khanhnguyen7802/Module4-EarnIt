@@ -31,7 +31,7 @@ $(window).on("load", function () {
                     company_logo.src = (item["logo"] == null) ? company_logo.src : "data:image/svg+xml;base64," + item["logo"];
                     company_name.innerHTML = item["company_name"];
                     job_name.innerHTML = item["job_title"];
-                    
+
                     viewDetails.addEventListener("click", function() {
                         let job_info = document.getElementById("job-info")
                         let salary = document.getElementById("salary")
@@ -48,7 +48,7 @@ $(window).on("load", function () {
 
                         submit_popup.style.display = "flex"
                     });
-                    
+
                     ul.append(new_item);
                 }
             }
@@ -74,7 +74,7 @@ document.addEventListener("click", function(event) {
 submit_close_button.addEventListener("click", closeSubmitPopup)
 
 function closeSubmitPopup() {
-    
+
     submit_popup.classList.add('animate-out');
 
     submit_popup.addEventListener('animationend', function() {
@@ -83,22 +83,6 @@ function closeSubmitPopup() {
     }, { once: true });
 }
 
-async function fetchSubmission(submission) {
-    const response = await fetch(window.location.origin + "/earnit/api/submissions", {
-        method: "POST",
-        headers: {
-            "Content-type": "application/json"
-        },
-        body: JSON.stringify(submission)
-    });
-
-    if (!response.ok) {
-        throw new Error("HTTP Error! Status: " + response.status);
-    }
-
-    return response.text()
-
-}
 
 function fetchFlag(flag) {
     const response = fetch(window.location.origin + "/earnit/api/flags", {
@@ -117,17 +101,6 @@ function fetchFlag(flag) {
 
 }
 
-
-Date.prototype.getWeek = function() {
-    // find the year of the current date
-    let oneJan = new Date(this.getFullYear(), 0, 1);
-
-    // calculating number of days in given year before the given date
-    let numberOfDays = Math.floor((this - oneJan) / (24 * 60 * 60 * 1000));
-
-    // adding 1 since to current date and returns value starting from 0
-    return Math.ceil((this.getDay() + 1 + numberOfDays) / 7);
-}
 
 function submit(item) {
     let submission = {}
@@ -167,13 +140,37 @@ function submit(item) {
     console.log(myDate);
     let year = myDate.getFullYear(); // number type
     let week = myDate.getWeek();
-    flag["year"] = year
+    console.log(week);
+    console.log(typeof(week));
+    flag["year"] = year;
     flag["week"] = week;
     flag["status"] = "";
 
-    fetchFlag(flag);
+    fetch(window.location.origin + "/earnit/api/flags", {
+        method: "POST",
+        headers: {
+            "Content-type": "application/json"
+        },
+        body: JSON.stringify(flag)
+    }).then(response => {
+        if (!response.ok) throw new Error("HTTP Error! Status: " + response.status)
+        return response.text()
+    })
 
 }
+
+Date.prototype.getWeek = function () {
+    let target  = this;
+    let dayNr   = (this.getDay() + 6) % 7;
+    target.setDate(target.getDate() - dayNr + 3);
+    let firstThursday = target.valueOf();
+    target.setMonth(0, 1);
+    if (target.getDay() != 4) {
+        target.setMonth(0, 1 + ((4 - target.getDay()) + 7) % 7);
+    }
+    return 1 + Math.ceil((firstThursday - target) / 604800000);
+}
+
 
 // Date.prototype.getWeek = function() {
 //     let dowOffset = 0;

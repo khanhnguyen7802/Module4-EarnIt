@@ -44,6 +44,7 @@ public enum FlagDAO {
 
                     return false;
                 }
+                System.out.println("already existed");
 
             }
         } catch (SQLException e) {
