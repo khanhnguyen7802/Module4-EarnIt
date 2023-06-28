@@ -4,6 +4,7 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class Company extends User {
+    int cid;
     String name;
     String location;
     String field;
@@ -14,6 +15,15 @@ public class Company extends User {
     public Company() {
 
     }
+    
+    public int getCid() {
+        return cid;
+    }
+    
+    public void setCid(int cid) {
+        this.cid = cid;
+    }
+    
     public void setName(String name) {
         this.name = name;
     }
