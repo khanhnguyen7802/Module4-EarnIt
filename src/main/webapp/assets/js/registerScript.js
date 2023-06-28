@@ -10,6 +10,7 @@ const location_field = document.getElementById("location-field")
 const field_field = document.getElementById("field-field")
 const contact_name = document.getElementById("contact-name")
 const kvk_number = document.getElementById("kvk-number")
+const logo_field = document.getElementById("logo")
 const email_field = document.getElementById("email-field")
 const password_field = document.getElementById("password-field")
 const confirm_password = document.getElementById("confirm-password")
@@ -18,6 +19,8 @@ const company_tab = document.getElementById("company-tab")
 const mandatory_student_fields = [full_name, student_birthdate, student_study]
 const mandatory_company_fields = [company_name, location_field, contact_name]
 const mandatory_general_fields = [email_field, password_field, confirm_password]
+let logo_data = null;
+
 submit_button.addEventListener("click", function () {
     let user = {}
     if (!mandatory_general_fields.every(element => element.value !== null && element.value !== "")) {
@@ -66,6 +69,7 @@ submit_button.addEventListener("click", function () {
             user.field = field_field.value === "" ? null : field_field.value
             user.contact = contact_name.value;
             user.kvk_num = kvk_number.value === "" ? null : kvk_number.value;
+            user.logo = logo_data;
             fetch(window.location.origin + "/earnit/api/register/company", {
                 method: "POST",
                 headers: {
@@ -84,3 +88,27 @@ submit_button.addEventListener("click", function () {
     }
     
 })
+
+function loadLogo(element) {
+    const file = element.files[0];
+    console.log(`file: ${file}`)
+    const reader = new FileReader();
+    reader.onloadend = function() {
+        console.log(`reader.result onloadend: ${reader.result}`)
+        logo_data = reader.result.replace("data:image/svg+xml;base64,", '');
+    }
+    if (file !== undefined) reader.readAsDataURL(file);
+    else logo_data = null;
+}
+
+const closest = (to, selector) => {
+    let currentElement = to
+    let returnElement
+
+    while (currentElement.parentNode && !returnElement) {
+        currentElement = currentElement.parentNode
+        returnElement = currentElement.querySelector(selector)
+    }
+
+    return returnElement
+}

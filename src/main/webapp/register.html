@@ -83,6 +83,15 @@
                                         <input id="kvk-number" class="form-control d-md-flex" type="text" style="margin: 10px;" placeholder="KVK Number...">
                                     </div>
                                 </div>
+                                <div class="row" style="margin: 0;">
+                                    <sub class="err-msg">Logo</sub>
+                                    <div class="col d-flex flex-row">
+                                        <div class="input-group custom-file-button" style="margin: 10px;">
+                                            <label class="input-group-text" for="logo">Upload a company Logo</label>
+                                            <input type="file" class="form-control" id="logo" accept="image/svg+xml" onchange="loadLogo(this)">
+                                        </div>  
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
