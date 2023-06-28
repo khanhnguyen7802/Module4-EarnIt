@@ -84,23 +84,6 @@ function closeSubmitPopup() {
 }
 
 
-function fetchFlag(flag) {
-    const response = fetch(window.location.origin + "/earnit/api/flags", {
-        method: "POST",
-        headers: {
-            "Content-type": "application/json"
-        },
-        body: JSON.stringify(flag)
-    });
-
-    if (!response.ok) {
-        throw new Error("HTTP Error! Status: " + response.status);
-    }
-
-    return response.text()
-
-}
-
 
 function submit(item) {
     let submission = {}
@@ -114,7 +97,7 @@ function submit(item) {
     submission["date"] = date.value;
     submission["comment"] = comment.value;
 
-    fetch(window.location.origin + "/earnit/api/submissions", {
+    fetch(window.location.origin + "/earnit/api/submissions/add", {
         method: "POST",
         headers: {
             "Content-type": "application/json"

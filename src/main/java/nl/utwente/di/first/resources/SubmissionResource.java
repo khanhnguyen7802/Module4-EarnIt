@@ -23,6 +23,7 @@ public class SubmissionResource {
      * @param submission
      * @return string indicating success or failure
      */
+    @Path("add")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.TEXT_PLAIN)
