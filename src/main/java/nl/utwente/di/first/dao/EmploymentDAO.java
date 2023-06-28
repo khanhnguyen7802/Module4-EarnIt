@@ -98,4 +98,22 @@ public enum EmploymentDAO {
             throw new RuntimeException(e);
         }
     }
+    
+    public boolean createJob(Employment newJob) {
+        try {
+            Connection connection = DBConnection.createConnection();
+            String query = "INSERT INTO employment (sid, cid, job_title, job_description, salary_per_hour) " +
+                           "VALUES (NULL, ?, ?, ?, ?)";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, newJob.getCid());
+            preparedStatement.setString(2, newJob.getJob_title());
+            preparedStatement.setString(3, newJob.getJob_description());
+            preparedStatement.setDouble(4, newJob.getSalary_per_hour());
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            // TODO replace with proper handling.
+            throw new RuntimeException(e);
+        }
+    }
 }

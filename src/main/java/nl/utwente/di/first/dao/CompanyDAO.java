@@ -62,6 +62,7 @@ public enum CompanyDAO {
         List<Company> companies = new ArrayList<>();
         while (resultSet.next()) {
             Company company = new Company();
+            company.setCid(resultSet.getInt("id"));
             company.setName(resultSet.getString("name"));
             company.setLocation(resultSet.getString("location"));
             company.setField(resultSet.getString("field"));

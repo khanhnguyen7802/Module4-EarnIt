@@ -34,4 +34,12 @@ public class EmploymentsResource {
     public String linkStudent(Employment newLink) {
         return (EmploymentDAO.instance.linkStudent(newLink)) ? "SUCCESS" : "FAILURE";
     }
+    
+    @POST
+    @Path("new")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
+    public String createJob(Employment newJob) {
+        return (EmploymentDAO.instance.createJob(newJob)) ? "SUCCESS" : "FAILURE";
+    }
 }   
