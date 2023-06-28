@@ -6,10 +6,10 @@ import java.sql.Date;
 
 @XmlRootElement
 public class Submission {
-    private int eid;
-    private int hours;
-    private String comment;
-    private Date date;
+    int eid;
+    int hours;
+    String comment;
+    Date date;
 
     public Submission() {
 
