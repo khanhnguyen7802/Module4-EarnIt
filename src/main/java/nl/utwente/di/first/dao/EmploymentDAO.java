@@ -15,7 +15,7 @@ public enum EmploymentDAO {
 
     }
 
-    public List<Employment> getAllEmployments() {
+    public List<Employment> getAllEmployments(String email) {
         List<Employment> employments = new ArrayList<>();
 
         try {
@@ -23,10 +23,12 @@ public enum EmploymentDAO {
 
             String query = "SELECT e.eid, e.sid, e.cid, s.name AS student_name, c.name AS company_name, job_title, job_description, salary_per_hour, c.logo AS logo " +
                             "FROM student s, company c, employment e " +
-                            "WHERE s.id = e.sid AND c.id = e.cid";
+                            "WHERE s.id = e.sid AND c.id = e.cid " +
+                            "AND s.email = ?";
 
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(query);
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, email);
+            ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
                 Employment employment = new Employment();
