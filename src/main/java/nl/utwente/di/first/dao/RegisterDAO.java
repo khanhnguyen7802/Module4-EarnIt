@@ -5,6 +5,7 @@ import nl.utwente.di.first.model.Student;
 import nl.utwente.di.first.util.DBConnection;
 import nl.utwente.di.first.util.Security;
 
+import java.io.ByteArrayInputStream;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.Date;
@@ -51,8 +52,8 @@ public enum RegisterDAO {
     public boolean registerCompany(Company company) {
         try {
             Connection connection = DBConnection.createConnection();
-            String query = "INSERT INTO company (email, password, salt, name, location, field, contact, kvk_number) " +
-                           "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            String query = "INSERT INTO company (email, password, salt, name, location, field, contact, kvk_number, logo) " +
+                           "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         
             PreparedStatement preparedStatement = connection.prepareStatement(query);
         
@@ -68,6 +69,7 @@ public enum RegisterDAO {
             preparedStatement.setString(6, company.getField());
             preparedStatement.setString(7, company.getContact());
             preparedStatement.setString(8, company.getKvk_num());
+            preparedStatement.setBinaryStream(9, new ByteArrayInputStream(company.getLogo()), company.getLogo().length);
         
             preparedStatement.executeUpdate();
             return true;
