@@ -2,12 +2,14 @@ package nl.utwente.di.first.model;
 
 import jakarta.xml.bind.annotation.XmlRootElement;
 
+import java.sql.Date;
+
 @XmlRootElement
 public class Submission {
     private int eid;
     private int hours;
     private String comment;
-    private String date;
+    private Date date;
 
     public Submission() {
 
@@ -30,10 +32,10 @@ public class Submission {
     public void setComment(String comment) {
         this.comment = comment;
     }
-    public String getDate(){
+    public Date getDate(){
         return date;
     }
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
