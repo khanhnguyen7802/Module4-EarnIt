@@ -31,20 +31,20 @@ public class SubmissionResource {
     }
 
     /**
-     * Given a specific week and year in a student's session, return the total worked hours
+     * Given a specific week and year with an eid, return the total worked hours
      * @param week - the week being queried
      * @param year - the year being queried
      *
      * @return the total worked hours of that student
      */
+    @Path("hours")
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     public int getTotalHours(@QueryParam("week") int week,
-                                @QueryParam("year") int year) {
-        HttpSession session = req.getSession();
-        String email = session.getAttribute("email").toString();
+                                @QueryParam("year") int year,
+                                @QueryParam("eid") int eid) {
 
-        return SubmissionDAO.instance.getTotalHoursOfWeek(email, week, year);
+        return SubmissionDAO.instance.getTotalHoursOfWeek(eid, week, year);
     }
 
 //    @Path("/day")

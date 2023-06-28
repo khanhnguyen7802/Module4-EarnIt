@@ -136,22 +136,22 @@ public enum SubmissionDAO {
     }
 
     /**
-     * Given a student's email in a specific week, return the total hours worked
-     * @param email - the student's email
+     * Given an eid in a specific week, return the total hours worked
+     * @param eid - the eid to know about the employment
      * @param week - the week being investigated
      * @return total hours worked in that week
      */
-    public int getTotalHoursOfWeek(String email, int week, int year) {
+    public int getTotalHoursOfWeek(int eid, int week, int year) {
         try {
             Connection connection = DBConnection.createConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(
                     "SELECT SUM(hours) AS total_hours " +
-                            "FROM submission s, employment e, student st " +
-                            "WHERE st.id = e.sid AND e.eid = s.eid " +
-                            "AND st.email = ? " +
+                            "FROM submission s, employment e " +
+                            "WHERE e.eid = s.eid " +
+                            "AND s.eid = ? " +
                             "AND DATE_PART('week', worked_date) = ? AND DATE_PART('year', worked_date) = ?"
             );
-            preparedStatement.setString(1, email);
+            preparedStatement.setInt(1, eid);
             preparedStatement.setInt(2, week);
             preparedStatement.setInt(3, year);
             ResultSet resultSet = preparedStatement.executeQuery();

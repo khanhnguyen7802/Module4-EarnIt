@@ -57,6 +57,7 @@ $(window).on("load", function () {
                             submission["date"] = date.value;
                             submission["comment"] = comment.value;
                             alert(`About to send the following info to the API:\n${JSON.stringify(submission)}`)
+
                             fetchSubmission(submission).then(data => {
                                 if (data === "SUCCESS") alert("Adding daily submission: Success!")
                                 if (data === "FAILURE") alert("Oof, adding daily submission: Failure...")
@@ -66,20 +67,16 @@ $(window).on("load", function () {
                             //TODO: also POST flag to /flags
                             let flag ={}
                             flag["eid"] = item["eid"]
-
+                            
                             let myDate = new Date(date.value);
+                            console.log(myDate);
                             let year = myDate.getFullYear(); // number type
                             let week = myDate.getWeek();
-                            
                             flag["year"] = year
                             flag["week"] = week;
                             flag["status"] = "";
 
                             fetchFlag(flag);
-                            //     .then(data => {
-                            //     if (data === "SUCCESS") alert("Adding weekly submission: Success!")
-                            //     if (data === "FAILURE") alert("Oof, adding weekly submission: Failure...")
-                            // })
 
                         })
 
@@ -136,8 +133,8 @@ async function fetchSubmission(submission) {
 
 }
 
-async function fetchFlag(flag) {
-    const response = await fetch(window.location.origin + "/earnit/api/flags", {
+function fetchFlag(flag) {
+    const response = fetch(window.location.origin + "/earnit/api/flags", {
         method: "POST",
         headers: {
             "Content-type": "application/json"
@@ -155,13 +152,41 @@ async function fetchFlag(flag) {
 
 
 Date.prototype.getWeek = function() {
-    let date = new Date(this.getTime());
-    date.setHours(0, 0, 0, 0);
-    // Thursday in current week decides the year.
-    date.setDate(date.getDate() + 3 - (date.getDay() + 6) % 7);
-    // January 4 is always in week 1.
-    let week1 = new Date(date.getFullYear(), 0, 4);
-    // Adjust to Thursday in week 1 and count number of weeks from date to week1.
-    return 1 + Math.round(((date.getTime() - week1.getTime()) / 86400000
-        - 3 + (week1.getDay() + 6) % 7) / 7);
+    // find the year of the current date
+    let oneJan = new Date(this.getFullYear(),0,1);
+
+    // calculating number of days in given year before the given date
+    let numberOfDays =  Math.floor((this - oneJan) / (24 * 60 * 60 * 1000));
+
+    // adding 1 since to current date and returns value starting from 0
+    let result = Math.ceil(( this.getDay() + 1 + numberOfDays) / 7);
+
+    return result;
 }
+
+// Date.prototype.getWeek = function() {
+//     let dowOffset = 0;
+//     let date = new Date(this.getTime())
+//
+//     const newYear = new Date(date.getFullYear(), 0, 1);
+//     let day = newYear.getDay() - dowOffset; //the day of week the year begins on
+//     day = (day >= 0 ? day : day + 7);
+//     const daynum = Math.floor((date.getTime() - newYear.getTime() -
+//         (date.getTimezoneOffset() - newYear.getTimezoneOffset()) * 60000) / 86400000) + 1;
+//     //if the year starts before the middle of a week
+//     if (day < 4) {
+//         const weeknum = Math.floor((daynum + day - 1) / 7) + 1;
+//         if (weeknum > 52) {
+//             const nYear = new Date(date.getFullYear() + 1, 0, 1);
+//             let nday = nYear.getDay() - dowOffset;
+//             nday = nday >= 0 ? nday : nday + 7;
+//             /*if the next year starts before the middle of
+//               the week, it is week #1 of that year*/
+//             return nday < 4 ? 1 : 53;
+//         }
+//         return weeknum;
+//     }
+//     else {
+//         return Math.floor((daynum + day - 1) / 7);
+//     }
+// }
