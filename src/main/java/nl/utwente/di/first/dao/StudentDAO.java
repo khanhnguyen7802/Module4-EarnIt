@@ -78,6 +78,7 @@ public enum StudentDAO {
         List<Student> students = new ArrayList<>();
         while (resultSet.next()) {
             Student student = new Student();
+            student.setId(resultSet.getInt("id"));
             student.setBirth(resultSet.getString("birthdate"));
             student.setName(resultSet.getString("name"));
             student.setSkills(resultSet.getString("skills"));
@@ -85,6 +86,7 @@ public enum StudentDAO {
             student.setUniversity(resultSet.getString("university"));
             student.setBtw_num(resultSet.getString("btw_number"));
             student.setEmail(resultSet.getString("email"));
+            students.add(student);
         }
         return students;
     }

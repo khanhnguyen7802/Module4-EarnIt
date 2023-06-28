@@ -25,9 +25,11 @@ $(window).on("load", function () {
                     let job_title = new_vacancy.querySelector(".job_title");
                     let company_name = new_vacancy.querySelector(".company_name");
                     let vacancy_button = new_vacancy.querySelector(".vacancy-button")
+                    let job_logo = new_vacancy.querySelector(".job_logo")
                     
                     job_title.innerHTML = item["job_title"];
                     company_name.innerHTML = item["companyName"];
+                    job_logo = (item["logo"] == null) ? job_logo.src : "data:image/svg+xml;base64," + item["logo"];
                     vacancy_button.addEventListener("click", function() {
                         selectedJob = item;
                         students_checkbox.disabled = false
@@ -62,20 +64,21 @@ $(window).on("load", function () {
                 }
             }
         });
-    document.getElementById("link-button").addEventListener("click", function () {
-        selectedJob.sid = selectedStudent.id
-        fetch(window.location.origin + "/earnit/api/employments/link", {
-            method: "POST",
-            headers: {
-                "Content-type": "application/json"
-            },
-            body: JSON.stringify(selectedJob)
-        }).then(response => {
-            if (!response.ok) throw new Error("HTTP Error! Status: " + response.status);
-            return response.text()
-        }).then(data => {
-            if (data === "SUCCESS") alert("Update was successful!")
-            if (data === "FAILURE") alert("Something went wrong")
-        })
+})
+
+document.getElementById("link-button").addEventListener("click", function () {
+    selectedJob.sid = selectedStudent.id
+    fetch(window.location.origin + "/earnit/api/employments/link", {
+        method: "POST",
+        headers: {
+            "Content-type": "application/json"
+        },
+        body: JSON.stringify(selectedJob)
+    }).then(response => {
+        if (!response.ok) throw new Error("HTTP Error! Status: " + response.status);
+        return response.text()
+    }).then(data => {
+        if (data === "SUCCESS") alert("Update was successful!")
+        if (data === "FAILURE") alert("Something went wrong")
     })
 })
