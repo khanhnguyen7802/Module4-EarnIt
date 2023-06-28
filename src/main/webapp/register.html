@@ -7,6 +7,7 @@
     <title>Earn it</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/register.css">
 </head>
 
 <body class="d-flex justify-content-center align-items-md-center align-items-lg-center" style="height: 100%;">
@@ -26,65 +27,76 @@
                         <div class="tab-content">
                             <div class="tab-pane active" role="tabpanel" id="tab-1">
                                 <div class="row" style="margin-right: 0;margin-left: 0;">
+                                    <sub class="err-msg"></sub>
                                     <div class="col-md-12 d-flex flex-row">
-                                        <input id="student-name" class="form-control" type="text" style="margin: 10px;" placeholder="Full name...">
+                                        <input id="student-name" class="form-control" type="text" style="margin: 10px;" placeholder="Full name..." required>
                                     </div>
                                 </div>
                                 <div class="row" style="margin-right: 0;margin-left: 0;">
+                                    <sub class="err-msg"></sub>
                                     <div class="col d-flex flex-row">
                                         <label class="form-label text-center d-md-flex align-items-md-center" style="margin: 10px;">Birthdate</label>
-                                        <input id="student-birthdate" class="form-control" type="date" style="margin: 10px;" name="Birthdate">
+                                        <input id="student-birthdate" class="form-control" type="date" style="margin: 10px;" name="Birthdate" required>
                                     </div>
                                 </div>
                                 <div class="row" style="margin-right: 0;margin-left: 0;">
+                                    <sub class="err-msg"></sub>
                                     <div class="col d-flex flex-row">
                                         <input id="student-university" class="form-control d-md-flex" type="text" style="margin: 10px;" placeholder="University...">
                                     </div>
                                 </div>
                                 <div class="row" style="margin-right: 0;margin-left: 0;">
+                                    <sub class="err-msg"></sub>
                                     <div class="col d-flex flex-row">
-                                        <input id="student-study" class="form-control d-md-flex" type="text" style="margin: 10px;" placeholder="Study...">
+                                        <input id="student-study" class="form-control d-md-flex" type="text" style="margin: 10px;" placeholder="Study..." required>
                                     </div>
                                 </div>
                                 <div class="row" style="margin-right: 0;margin-left: 0;">
+                                    <sub class="err-msg"></sub>
                                     <div class="col d-flex flex-row">
                                         <input id="student-skills" class="form-control d-md-flex" type="text" style="margin: 10px;" placeholder="Skills...">
                                     </div>
                                 </div>
                                 <div class="row" style="margin: 0;">
+                                    <sub class="err-msg"></sub>
                                     <div class="col d-flex flex-row">
-                                        <input id="btw-number" class="form-control d-md-flex" type="text" style="margin: 10px;" placeholder="BTW Number...">
+                                        <input id="btw-number" class="form-control d-md-flex" type="text" style="margin: 10px;" placeholder="BTW Number..." pattern="NL\d{9}B\d{2}">
                                     </div>
                                 </div>
                             </div>
                             <div class="tab-pane" role="tabpanel" id="tab-2" style="width: auto;height: auto;">
                                 <div class="row" style="margin-right: 0;margin-left: 0;width: auto;">
+                                    <sub class="err-msg"></sub>
                                     <div class="col-md-12 d-flex flex-row">
-                                        <input id="company-name" class="form-control d-md-flex" type="text" style="margin: 10px;" placeholder="Company name...">
+                                        <input id="company-name" class="form-control d-md-flex" type="text" style="margin: 10px;" placeholder="Company name..." required>
                                     </div>
                                 </div>
                                 <div class="row" style="margin-right: 0;margin-left: 0;">
+                                    <sub class="err-msg"></sub>
                                     <div class="col d-flex flex-row">
-                                        <input id="location-field" class="form-control d-md-flex" type="text" style="margin: 10px;" placeholder="Location..." inputmode="numeric">
+                                        <input id="location-field" class="form-control d-md-flex" type="text" style="margin: 10px;" placeholder="Location..." inputmode="numeric" required>
                                     </div>
                                 </div>
                                 <div class="row" style="margin-right: 0;margin-left: 0;">
+                                    <sub class="err-msg"></sub>
                                     <div class="col d-flex flex-row">
-                                        <input id="field-field" class="form-control d-md-flex" type="text" style="margin: 10px;" placeholder="Field...">
+                                        <input id="field-field" class="form-control d-md-flex" type="text" style="margin: 10px;" placeholder="Field..." required>
                                     </div>
                                 </div>
                                 <div class="row" style="margin-right: 0;margin-left: 0;">
+                                    <sub class="err-msg"></sub>
                                     <div class="col d-flex flex-row">
                                         <input id="contact-name" class="form-control d-md-flex" type="text" style="margin: 10px;" placeholder="Contact Person Name...">
                                     </div>
                                 </div>
                                 <div class="row" style="margin: 0;">
+                                    <sub class="err-msg"></sub>
                                     <div class="col d-flex flex-row">
-                                        <input id="kvk-number" class="form-control d-md-flex" type="text" style="margin: 10px;" placeholder="KVK Number...">
+                                        <input id="kvk-number" class="form-control d-md-flex" type="text" style="margin: 10px;" placeholder="KVK Number..." pattern="\d{8}">
                                     </div>
                                 </div>
                                 <div class="row" style="margin: 0;">
-                                    <sub class="err-msg">Logo</sub>
+                                    <sub class="err-msg"></sub>
                                     <div class="col d-flex flex-row">
                                         <div class="input-group custom-file-button" style="margin: 10px;">
                                             <label class="input-group-text" for="logo">Upload a company Logo</label>
@@ -100,17 +112,20 @@
                 <div class="col d-flex d-lg-flex flex-column justify-content-lg-center align-items-xl-center col-lg" style="padding-right: 0px;padding-left: 0px;width: auto;">
                     <img class="img-fluid d-lg-flex justify-content-xl-center" src="assets/img/Earn%20It%20Logo.svg" style="width: 100%;max-width: 250px;margin:auto;">
                     <div class="row d-flex d-xl-flex justify-content-xl-center" style="margin: 0;width: 100%;">
+                        <sub class="err-msg"></sub>
                         <div class="col d-md-flex justify-content-md-center" style="padding: 0;">
-                            <input id="email-field" class="form-control d-flex d-md-flex justify-content-md-center" type="text" style="margin: 10px;" placeholder="E-mail...">
+                            <input id="email-field" class="form-control d-flex d-md-flex justify-content-md-center" type="email" style="margin: 10px;" placeholder="E-mail..." required>
                         </div>
                     </div>
                     <div class="row d-xl-flex justify-content-xl-center" style="margin: 0;width: 100%;">
+                        <sub class="err-msg"></sub>
                         <div class="col d-md-flex justify-content-md-center" style="padding: 0;">
-                            <input id="password-field" class="form-control d-flex d-md-flex justify-content-md-center" type="password" style="margin: 10px;" placeholder="Password...">
-                            <input id="confirm-password" class="form-control d-flex d-md-flex justify-content-md-center" type="password" style="margin: 10px;" placeholder="Confirm Password...">
+                            <input id="password-field" class="form-control d-flex d-md-flex justify-content-md-center" type="password" style="margin: 10px;" placeholder="Password (min. 10 characters)..." minlength="10" required>
+                            <input id="confirm-password" class="form-control d-flex d-md-flex justify-content-md-center" type="password" style="margin: 10px;" placeholder="Confirm Password..." minlength="10" required>
                         </div>
                     </div>
                     <div class="row" style="width: 100%;margin: 0;">
+                        <sub class="err-msg"></sub>
                         <div class="col d-md-flex justify-content-md-center" style="width: 100%;padding: 0;"> 
                             <button id="submit-button" class="btn btn-primary bg-dark" type="button" style="width: 100%;margin: 10px;">Submit</button>
                         </div>
