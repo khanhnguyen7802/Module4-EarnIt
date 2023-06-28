@@ -5,6 +5,7 @@ const job_popup = document.getElementById("job-popup")
 const submit_popup = document.getElementById("submit-popup")
 const job_close_button = document.getElementById("job-popup-close")
 const submit_close_button = document.getElementById("submit-popup-close")
+const final_submit = document.getElementById("send-submission")
 
 $(window).on("load", function () {
     fetch(window.location.origin + "/earnit/api/employments")
@@ -16,7 +17,6 @@ $(window).on("load", function () {
             }
         })
         .then(json => {
-            let idx = 0;
             console.log(json);
             if ("content" in document.createElement("template")) {
                 for (let item of json) {
@@ -43,42 +43,8 @@ $(window).on("load", function () {
                     });
                     submit_button.addEventListener("click", function() {
                         let job_info = document.getElementById("submit-info")
-                        let final_submit = document.getElementById("send-submission")
                         job_info.innerHTML = `${item["job_title"]} (${item["company_name"]})`
-                        final_submit.addEventListener("click", function () {
-                            let submission = {}
-
-                            submission["eid"] = item["eid"]
-
-                            let hours = document.getElementById("hours")
-                            let date = document.getElementById("date")
-                            let comment = document.getElementById("comment")
-                            submission["hours"] = hours.value
-                            submission["date"] = date.value;
-                            submission["comment"] = comment.value;
-                            alert(`About to send the following info to the API:\n${JSON.stringify(submission)}`)
-
-                            fetchSubmission(submission).then(data => {
-                                if (data === "SUCCESS") alert("Adding daily submission: Success!")
-                                if (data === "FAILURE") alert("Oof, adding daily submission: Failure...")
-                            })
-
-
-                            //TODO: also POST flag to /flags
-                            let flag ={}
-                            flag["eid"] = item["eid"]
-                            
-                            let myDate = new Date(date.value);
-                            console.log(myDate);
-                            let year = myDate.getFullYear(); // number type
-                            let week = myDate.getWeek();
-                            flag["year"] = year
-                            flag["week"] = week;
-                            flag["status"] = "";
-
-                            fetchFlag(flag);
-
-                        })
+                        final_submit.onclick = function () {submit(item)}
 
                         submit_popup.style.display = "flex"
                     });
@@ -108,6 +74,7 @@ document.addEventListener("click", function(event) {
 submit_close_button.addEventListener("click", closeSubmitPopup)
 
 function closeSubmitPopup() {
+    
     submit_popup.classList.add('animate-out');
 
     submit_popup.addEventListener('animationend', function() {
@@ -153,15 +120,59 @@ function fetchFlag(flag) {
 
 Date.prototype.getWeek = function() {
     // find the year of the current date
-    let oneJan = new Date(this.getFullYear(),0,1);
+    let oneJan = new Date(this.getFullYear(), 0, 1);
 
     // calculating number of days in given year before the given date
-    let numberOfDays =  Math.floor((this - oneJan) / (24 * 60 * 60 * 1000));
+    let numberOfDays = Math.floor((this - oneJan) / (24 * 60 * 60 * 1000));
 
     // adding 1 since to current date and returns value starting from 0
-    let result = Math.ceil(( this.getDay() + 1 + numberOfDays) / 7);
+    return Math.ceil((this.getDay() + 1 + numberOfDays) / 7);
+}
 
-    return result;
+function submit(item) {
+    let submission = {}
+
+    submission["eid"] = item["eid"]
+
+    let hours = document.getElementById("hours")
+    let date = document.getElementById("date")
+    let comment = document.getElementById("comment")
+    submission["hours"] = hours.value
+    submission["date"] = date.value;
+    submission["comment"] = comment.value;
+
+    fetch(window.location.origin + "/earnit/api/submissions", {
+        method: "POST",
+        headers: {
+            "Content-type": "application/json"
+        },
+        body: JSON.stringify(submission)
+    }).then(response => {
+        if (!response.ok) throw new Error("HTTP Error! Status: " + response.status)
+        return response.text()
+    }).then(data => {
+        if (data === "SUCCESS") {
+            alert("Adding daily submission: Success!")
+            closeSubmitPopup()
+        }
+        if (data === "FAILURE") alert("Oof, adding daily submission: Failure...")
+    })
+
+
+    //TODO: also POST flag to /flags
+    let flag ={}
+    flag["eid"] = item["eid"]
+
+    let myDate = new Date(date.value);
+    console.log(myDate);
+    let year = myDate.getFullYear(); // number type
+    let week = myDate.getWeek();
+    flag["year"] = year
+    flag["week"] = week;
+    flag["status"] = "";
+
+    fetchFlag(flag);
+
 }
 
 // Date.prototype.getWeek = function() {
