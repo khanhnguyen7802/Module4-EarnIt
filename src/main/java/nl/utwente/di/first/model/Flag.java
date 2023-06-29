@@ -7,7 +7,11 @@ public class Flag {
     int eid;
     int week;
     int year;
-    String status;
+    String status; // "": pending; accept: accepted; reject: company rejected; appeal: company rejected and student rejected
+    int total_hours;
+    String company_name;
+    String job_title;
+    byte[] logo;
 
     public int getEid() {
         return eid;
@@ -39,5 +43,37 @@ public class Flag {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public int getTotal_hours() {
+        return total_hours;
+    }
+
+    public void setTotal_hours(int total_hours) {
+        this.total_hours = total_hours;
+    }
+
+    public String getCompany_name() {
+        return company_name;
+    }
+
+    public void setCompany_name(String company_name) {
+        this.company_name = company_name;
+    }
+
+    public String getJob_title() {
+        return job_title;
+    }
+
+    public void setJob_title(String job_title) {
+        this.job_title = job_title;
+    }
+
+    public byte[] getLogo() {
+        return logo;
+    }
+
+    public void setLogo(byte[] logo) {
+        this.logo = logo;
     }
 }
