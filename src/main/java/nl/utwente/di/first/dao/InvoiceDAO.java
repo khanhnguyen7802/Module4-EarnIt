@@ -63,18 +63,18 @@ public enum InvoiceDAO {
     }
 
     /**
-     * Given student, company and week, return the corresponding invoice
+     * Given student and week, returns the corresponding invoices within that week, from all companies the student works for.
      * @param studentEmail
      * @param week
-     * @return the corresponding invoice
+     * @return the corresponding invoices
      */
     public List<Invoice> getWeeklyInvoices(String studentEmail, int week, int year) {
         try (Connection connection = DBConnection.createConnection();) {
             
             // this query will return all invoices for a student within the time range
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "SELECT DISTINCT i.iid AS invoice_number, i.week AS week_ number, " +
-                            "c.name AS company_name, s.name AS student_name, c.logo AS logo " +
+                    "SELECT DISTINCT i.iid AS invoice_number, i.week AS week_number, " +
+                            "c.name AS company_name, s.name AS student_name, c.logo AS logo, " +
                             "e.job_title, total_salary, date_of_issue, c.kvk_number, s.btw_number " +
                             "FROM invoice i, company c, employment e, student s " +
                             "WHERE i.eid = e.eid AND e.cid = c.id AND s.id = e.sid " +
@@ -85,8 +85,38 @@ public enum InvoiceDAO {
             preparedStatement.setInt(3, year);
 
             ResultSet resultSet = preparedStatement.executeQuery();
-
             return getQuery(resultSet);
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Having the employment id, the week number and the year, returns the invoice from that week.
+     * @param eid
+     * @param week
+     * @param year
+     * @return the corresponding invoice
+     */
+    public Invoice getInvoice(int eid, int week, int year){
+        try (Connection connection = DBConnection.createConnection();) {
+
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                    "SELECT DISTINCT i.iid AS invoice_number, i.week AS week_number, " +
+                            "c.name AS company_name, s.name AS student_name, c.logo AS logo, " +
+                            "e.job_title, total_salary, date_of_issue, c.kvk_number, s.btw_number " +
+                            "FROM invoice i, company c, employment e, student s " +
+                            "WHERE i.eid = e.eid AND e.cid = c.id AND s.id = e.sid " +
+                            "AND e.eid = ? AND week = ? AND year = ? "
+            );
+            preparedStatement.setInt(1, eid);
+            preparedStatement.setInt(2, week);
+            preparedStatement.setInt(3, year);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            return getQuery(resultSet).get(0); //TODO (temporary solution)
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
