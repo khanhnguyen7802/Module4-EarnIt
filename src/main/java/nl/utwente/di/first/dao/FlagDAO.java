@@ -63,20 +63,37 @@ public enum FlagDAO {
         try (Connection connection = DBConnection.createConnection()) {
             
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "SELECT e.eid, total_hours, c.name AS company_name, job_title, c.logo AS logo " +
+                    "SELECT e.eid, SUM(hours) AS total_hours, c.name AS company_name, job_title, c.logo AS logo, f.status " +
                             "FROM submission s, employment e, student st, company c, flag f " +
                             "WHERE s.eid = e.eid AND e.sid = st.id AND c.id = e.cid AND f.eid = e.eid " +
-                            "AND DATE_PART('week', worked_date) = ? " +
+                            "AND f.week = ?" +
+                            "AND DATE_PART('week', worked_date) = f.week " +
                             "AND DATE_PART('year', worked_date) = ? " +
-                            "AND st.email = ?"
+                            "AND st.email = ? " +
+                            "GROUP BY e.eid, c.name, job_title, c.logo, f.status, f.week"
             );
 
             preparedStatement.setInt(1, week);
             preparedStatement.setInt(2, year);
             preparedStatement.setString(3, email);
             ResultSet resultSet = preparedStatement.executeQuery();
-
-            return getQuery(resultSet);
+    
+            List<Flag> flags = new ArrayList<>();
+            while (resultSet.next()) {
+                Flag flag = new Flag();
+                flag.setEid(resultSet.getInt("eid"));
+                flag.setWeek(week);
+                flag.setYear(year);
+                flag.setStatus(resultSet.getString("status"));
+                flag.setTotal_hours(resultSet.getInt("total_hours"));
+                flag.setCompany_name(resultSet.getString("company_name"));
+                flag.setJob_title(resultSet.getString("job_title"));
+                flag.setLogo(resultSet.getBytes("logo"));
+        
+                flags.add(flag);
+                
+            }
+            return flags;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

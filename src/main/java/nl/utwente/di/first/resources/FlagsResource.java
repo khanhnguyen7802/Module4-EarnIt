@@ -22,6 +22,7 @@ public class FlagsResource {
     public String addWeekInstance(Flag flag) {
         return (FlagDAO.instance.addFlag(flag)) ? "SUCCESS" : "FAILURE";
     }
+    
     @Path("all")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
