@@ -14,8 +14,7 @@ public enum LoginDAO {
     public String loginUser(User user) throws SQLException {
         String email = user.getEmail(); // user input
         String originalPassword = user.getPassword(); // user input
-        try {
-            Connection connection = DBConnection.createConnection();
+        try (Connection connection = DBConnection.createConnection();) {
             PreparedStatement preparedStatement = connection.prepareStatement(
                     "SELECT * " +
                     "FROM \"user\" " +

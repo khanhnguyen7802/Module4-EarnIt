@@ -13,8 +13,8 @@ public enum StudentDAO {
 
     }
     public List<Student> getAllStudents() {
-        try {
-            Connection connection = DBConnection.createConnection();
+        try (Connection connection = DBConnection.createConnection();) {
+            
             String query = "SELECT * FROM student";
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
@@ -34,8 +34,8 @@ public enum StudentDAO {
      * @return list of students employed by that company
      */
     public List<Student> getStudentByCompany(String email) {
-        try {
-            Connection connection = DBConnection.createConnection();
+        try (Connection connection = DBConnection.createConnection()) {
+            
             PreparedStatement preparedStatement = connection.prepareStatement(
                     "SELECT DISTINCT s.* " +
                             "FROM company c, employment e, student s " +
@@ -57,8 +57,8 @@ public enum StudentDAO {
      * @return information of that student
      */
     public Student getStudent(String email) {
-        try {
-            Connection connection = DBConnection.createConnection();
+        try (Connection connection = DBConnection.createConnection()) {
+            
             PreparedStatement preparedStatement = connection.prepareStatement(
                     "SELECT * " +
                             "FROM student " +

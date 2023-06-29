@@ -20,8 +20,8 @@ public enum RegisterDAO {
     }
     
     public boolean registerStudent(Student student) {
-        try {
-            Connection connection = DBConnection.createConnection();
+        try (Connection connection = DBConnection.createConnection();) {
+            
             String query = "INSERT INTO student (email, password, salt, name, birthdate, university, study, skills, btw_number) " +
                            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
             
@@ -50,8 +50,7 @@ public enum RegisterDAO {
     }
     
     public boolean registerCompany(Company company) {
-        try {
-            Connection connection = DBConnection.createConnection();
+        try (Connection connection = DBConnection.createConnection();) {
             String query = "INSERT INTO company (email, password, salt, name, location, field, contact, kvk_number, logo) " +
                            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         

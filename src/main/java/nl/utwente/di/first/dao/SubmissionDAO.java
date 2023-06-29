@@ -53,8 +53,8 @@ public enum SubmissionDAO {
      * @return total hours worked in that week
      */
     public int getTotalHoursOfWeek(int eid, int week, int year) {
-        try {
-            Connection connection = DBConnection.createConnection();
+        try (Connection connection = DBConnection.createConnection()) {
+            
             PreparedStatement preparedStatement = connection.prepareStatement(
                     "SELECT SUM(hours) AS total_hours " +
                             "FROM submission s, employment e " +
@@ -86,8 +86,8 @@ public enum SubmissionDAO {
      */
     public List<Submission> getWeeklySubmission(String email, int week, int year) {
         List<Submission> submissions = new ArrayList<>();
-        try {
-            Connection connection = DBConnection.createConnection();
+        try (Connection connection = DBConnection.createConnection()) {
+            
 
             // this query will return all employment's of that student in the given (week, year)
             PreparedStatement preparedStatement = connection.prepareStatement(

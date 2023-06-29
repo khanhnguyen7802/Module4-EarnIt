@@ -19,8 +19,8 @@ public enum CompanyDAO {
      * @return a list of all companies
      */
     public List<Company> getAllCompany() {
-        try {
-            Connection connection = DBConnection.createConnection();
+        try (Connection connection = DBConnection.createConnection();) {
+            
             String query = "SELECT * " +
                            "FROM company";
             Statement statement = connection.createStatement();
@@ -42,8 +42,7 @@ public enum CompanyDAO {
     public List<Company> getCompanyByStudent(String email) {
         
         //TODO replace the calls to this function to a function that gets all employments instead of all companies.
-        try {
-            Connection connection = DBConnection.createConnection();
+        try (Connection connection = DBConnection.createConnection();) {
             PreparedStatement preparedStatement = connection.prepareStatement(
                     "SELECT DISTINCT c.* " +
                             "FROM company c, employment e, student s " +
@@ -82,8 +81,8 @@ public enum CompanyDAO {
      * @return information of that company
      */
     public Company getCompany(String email) {
-        try {
-            Connection connection = DBConnection.createConnection();
+        try (Connection connection = DBConnection.createConnection();) {
+            
             PreparedStatement preparedStatement = connection.prepareStatement(
                     "SELECT * " +
                             "FROM company " +

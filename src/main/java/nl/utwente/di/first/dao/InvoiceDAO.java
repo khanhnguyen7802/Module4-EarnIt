@@ -43,8 +43,8 @@ public enum InvoiceDAO {
     }
 
     public boolean addInvoice(Invoice invoice) {
-        try {
-            Connection connection = DBConnection.createConnection();
+        try (Connection connection = DBConnection.createConnection();) {
+            
             String query = "INSERT INTO invoice(eid, week, total_salary, date_of_issue) VALUES (?, ?, ?, ?)";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(1, invoice.getEid());
@@ -69,8 +69,8 @@ public enum InvoiceDAO {
      * @return the corresponding invoice
      */
     public List<Invoice> getWeeklyInvoices(String studentEmail, int week, int year) {
-        try {
-            Connection connection = DBConnection.createConnection();
+        try (Connection connection = DBConnection.createConnection();) {
+            
             // this query will return all invoices for a student within the time range
             PreparedStatement preparedStatement = connection.prepareStatement(
                     "SELECT DISTINCT i.iid AS invoice_number, i.week AS week_ number, " +

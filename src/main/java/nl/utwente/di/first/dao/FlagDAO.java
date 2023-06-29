@@ -16,8 +16,8 @@ public enum FlagDAO {
 
     public boolean addFlag(Flag flag) {
         //Possible flags: <empty>, Confirmed, Accepted, Rejected, Appealed
-        try {
-            Connection connection = DBConnection.createConnection();
+        try (Connection connection = DBConnection.createConnection()) {
+            
 
             // check if a row (eid, week, year) has already existed or not
             // if not, then add in
@@ -60,8 +60,8 @@ public enum FlagDAO {
      * @return a list of Flag (i.e. weekly submission) of a student
      */
     public List<Flag> getAllWeeklyFlags(String email, int week, int year) {
-        try {
-            Connection connection = DBConnection.createConnection();
+        try (Connection connection = DBConnection.createConnection()) {
+            
             PreparedStatement preparedStatement = connection.prepareStatement(
                     "SELECT e.eid, total_hours, c.name AS company_name, job_title, c.logo AS logo " +
                             "FROM submission s, employment e, student st, company c, flag f " +
@@ -101,8 +101,8 @@ public enum FlagDAO {
     }
 
     public boolean updateStatus(Flag flag) {
-        try {
-            Connection connection = DBConnection.createConnection();
+        try (Connection connection = DBConnection.createConnection();) {
+            
             String query = "UPDATE flag " +
                     "SET status = ? " +
                     "WHERE eid = ?";

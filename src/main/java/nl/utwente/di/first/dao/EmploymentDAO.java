@@ -18,8 +18,8 @@ public enum EmploymentDAO {
     public List<Employment> getAllEmployments(String email) {
         List<Employment> employments = new ArrayList<>();
 
-        try {
-            Connection connection = DBConnection.createConnection();
+        try (Connection connection = DBConnection.createConnection();) {
+            
 
             String query = "SELECT e.eid, e.sid, e.cid, s.name AS student_name, c.name AS company_name, job_title, job_description, salary_per_hour, c.logo AS logo " +
                             "FROM student s, company c, employment e " +
@@ -54,8 +54,8 @@ public enum EmploymentDAO {
     
     public List<Employment> getAllVacancies() {
         List<Employment> result = new ArrayList<>();
-        try {
-            Connection connection = DBConnection.createConnection();
+        try (Connection connection = DBConnection.createConnection();) {
+            
             String query = "SELECT e.eid, e.sid, e.cid, c.name AS company_name, job_title, job_description, salary_per_hour, c.logo AS logo " +
                            "FROM company c, employment e " +
                            "WHERE e.sid IS NULL AND c.id = e.cid";
@@ -86,8 +86,8 @@ public enum EmploymentDAO {
     }
 
     public boolean linkStudent(Employment employment) {
-        try {
-            Connection connection = DBConnection.createConnection();
+        try (Connection connection = DBConnection.createConnection();) {
+            
             String query = "UPDATE employment " +
                            "SET sid = ? " +
                            "WHERE eid = ?";
@@ -102,8 +102,8 @@ public enum EmploymentDAO {
     }
     
     public boolean createJob(Employment newJob) {
-        try {
-            Connection connection = DBConnection.createConnection();
+        try (Connection connection = DBConnection.createConnection();) {
+            
             String query = "INSERT INTO employment (sid, cid, job_title, job_description, salary_per_hour) " +
                            "VALUES (NULL, ?, ?, ?, ?)";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
