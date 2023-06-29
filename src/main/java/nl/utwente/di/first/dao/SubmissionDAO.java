@@ -9,6 +9,7 @@ import java.util.List;
 
 public enum SubmissionDAO {
     instance;
+
     private SubmissionDAO() {
 
     }
@@ -36,7 +37,7 @@ public enum SubmissionDAO {
             statement.setInt(2, submission.getHours());
             statement.setDate(3, submission.getDate());
             statement.setString(4, submission.getComment());
-            
+
             if (statement.executeUpdate() != 0) {
                 return true;
             }
@@ -48,13 +49,14 @@ public enum SubmissionDAO {
 
     /**
      * Given an eid in a specific week, return the total hours worked
-     * @param eid - the eid to know about the employment
+     *
+     * @param eid  - the eid to know about the employment
      * @param week - the week being investigated
      * @return total hours worked in that week
      */
     public int getTotalHoursOfWeek(int eid, int week, int year) {
         try (Connection connection = DBConnection.createConnection()) {
-            
+
             PreparedStatement preparedStatement = connection.prepareStatement(
                     "SELECT SUM(hours) AS total_hours " +
                             "FROM submission s, employment e " +
@@ -68,7 +70,7 @@ public enum SubmissionDAO {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             int result = 0;
-            while(resultSet.next()) {
+            while (resultSet.next()) {
                 result = resultSet.getInt("total_hours");
             }
 
@@ -80,6 +82,7 @@ public enum SubmissionDAO {
 
     /**
      * Given eid, week and year, return all submissions of that week
+     *
      * @param week - the week being investigated
      * @param year - the year being investigated
      * @return a list of submissions have been made in that week
@@ -87,7 +90,7 @@ public enum SubmissionDAO {
     public List<Submission> getWeeklySubmission(String email, int week, int year) {
         List<Submission> submissions = new ArrayList<>();
         try (Connection connection = DBConnection.createConnection()) {
-            
+
 
             // this query will return all employment's of that student in the given (week, year)
             PreparedStatement preparedStatement = connection.prepareStatement(
@@ -98,12 +101,12 @@ public enum SubmissionDAO {
                             "AND DATE_PART('year', worked_date) = ? " +
                             "AND st.email = ?"
             );
-            
+
             preparedStatement.setInt(1, week);
             preparedStatement.setInt(2, year);
             preparedStatement.setString(3, email);
             ResultSet resultSet = preparedStatement.executeQuery();
-            while(resultSet.next()) {
+            while (resultSet.next()) {
                 Submission submission = new Submission();
                 submission.setEid(resultSet.getInt("eid"));
                 submission.setHours(resultSet.getInt("hours"));
@@ -115,28 +118,51 @@ public enum SubmissionDAO {
 
                 submissions.add(submission);
             }
-    
+
             return submissions;
 
-            } catch (SQLException e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
 
-            //TODO: Day-submission is not flagged
-//    public void flagSubmission(String subId, String flag) {
-//        //Possible flags: <empty>, Confirmed, Accepted, Rejected, Appealed
-//        try {
-//            Connection connection = DBConnection.createConnection();
-//            String query = "UPDATE submission SET status = ? WHERE submission_id = ?";
-//            PreparedStatement statement = connection.prepareStatement(query);
-//            statement.setString(1, flag);
-//            statement.setString(2, subId);
-//        } catch (SQLException e) {
-//            // FIXME Runtime exceptions should be thrown as little as possible, error messages are much preferred.
-//            throw new RuntimeException(e);
-//        }
-//    }
+    public List<Submission> getWeeklySubmissionForCompany(String email, int week, int year) {
+        List<Submission> submissions = new ArrayList<>();
+        try (Connection connection = DBConnection.createConnection()) {
 
+            // this query will return all students together with employment for a company in the given (week, year)
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                    "SELECT e.eid, comment, hours, worked_date, s.name AS student_name, job_title " +
+                            "FROM submission s, employment e, student st, company c " +
+                            "WHERE s.eid = e.eid AND e.sid = st.id AND c.id = e.cid " +
+                            "AND DATE_PART('week', worked_date) = ? " +
+                            "AND DATE_PART('year', worked_date) = ? " +
+                            "AND c.email = ?"
+            );
+
+            preparedStatement.setInt(1, week);
+            preparedStatement.setInt(2, year);
+            preparedStatement.setString(3, email);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Submission submission = new Submission();
+
+                submission.setEid(resultSet.getInt("eid"));
+                submission.setHours(resultSet.getInt("hours"));
+                submission.setComment(resultSet.getString("comment"));
+                submission.setDate(resultSet.getDate("worked_date"));
+                submission.setCompany_name(resultSet.getString("company_name"));
+                submission.setJob_title(resultSet.getString("job_title"));
+
+                submissions.add(submission);
+            }
+
+            return submissions;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
 }

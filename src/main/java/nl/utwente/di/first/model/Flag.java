@@ -7,7 +7,7 @@ public class Flag {
     int eid;
     int week;
     int year;
-    String status; // "": pending; accept: accepted; reject: company rejected; appeal: company rejected and student rejected
+    String status; // pending: not confirmed, but can't interact with it at the moment; accept: accepted; reject: company rejected; appeal: company rejected and student rejected
     int total_hours;
     String company_name;
     String job_title;

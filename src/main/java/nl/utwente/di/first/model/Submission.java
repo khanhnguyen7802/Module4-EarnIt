@@ -9,6 +9,7 @@ public class Submission {
     int eid;
     int hours;
     String comment;
+    String student_name;
     Date date;
     String company_name;
     String job_title;
@@ -59,6 +60,15 @@ public class Submission {
     public void setComment(String comment) {
         this.comment = comment;
     }
+
+    public String getStudent_name() {
+        return student_name;
+    }
+
+    public void setStudent_name(String student_name) {
+        this.student_name = student_name;
+    }
+
     public Date getDate(){
         return date;
     }

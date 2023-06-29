@@ -14,8 +14,6 @@
     <link rel="stylesheet" href="../assets/css/sidebar-1.css">
     <link rel="stylesheet" href="../assets/css/sidebar.css">
     <link rel="stylesheet" href="../assets/css/popup.css">
-
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 </head>
 
@@ -43,16 +41,16 @@
                 <h1 style="margin: 2px 0px 15px;padding: 20px 60px 0px 0px;color: var(--bs-black);margin-right: 357px;padding-top: 0px;margin-bottom: 15px;padding-bottom: 0px;margin-top: 20px;">Schedule</h1>
                 <div class="timetable" style="color: var(--bs-black);">
                     <div class="select date" id="select">
-
+                        
                         <select id="year-dd" style="width: 100px; border-radius: 10px; text-align: center">
-                            <option id="year">---Year---</option>
+                            <option id="year" value="" selected disabled>---Year---</option>
                             <option id="2023" value="2023">2023</option>
                             <option id="2024" value="2024">2024</option>
                             <option id="2025" value="2025">2025</option>
                             <option id="2026" value="2026">2026</option>
                         </select>
                         <select id="week-dd" style="width:100px; border-radius: 10px; text-align: center">
-                            <option id="week">---Week---</option>
+                            <option id="week" value="" selected disabled>---Week---</option>
                             <option id="week1" value="1">Week 1</option>
                             <option id="week2" value="2">Week 2</option>
                             <option id="week3" value="3">Week 3</option>
@@ -105,6 +103,7 @@
                             <option id="week50" value="50">Week 50</option>
                             <option id="week51" value="51">Week 51</option>
                             <option id="week52" value="52">Week 52</option>
+
                         </select>
                         <a id="notification"><i class="far fa-bell" id="bell" style="font-size: 25px; margin-left: 60%; cursor: pointer;"></i></a>
                     </div>
@@ -161,105 +160,97 @@
                         <!--A job item tab with total hours (for overview tab)-->
                         <div class="tab-pane active" id="tab-8">
                             <ul id="list-7" class="list-unstyled" style="margin-left: -32px;position: relative;padding-left: 32px;">
-                                <button type="button" class="collapsible" style="background-color: #777; color: white;cursor: pointer; padding: 10px; width: 100%;border: none;text-align: left;outline: none;font-size: 15px;">Pending</button>
-                                <div class="content" style="padding: 0 18px; display: none; overflow: hidden; background-color: #f1f1f1;">
-                                    <li style="position: relative;padding-bottom: 0px;margin-bottom: 18px;">
-                                        <div class="list-group" style="padding-right: 208px;position: relative;">
-                                            <div class="list-group-item list-group-item-action flex-column align-items-start" style="position: relative;">
-                                                <div style="display: flex;position: relative;"><img class="company_logo" src="../assets/img/Earn%20It%20Logo.svg" style="width: 80px;margin-right: 15px;position: relative;"/>
-                                                    <div style="position: relative;width: 1000px;">
-                                                        <h5 class="mb-1 company_name" style="position: static;">Company</h5>
-                                                        <p class="mb-1 job_title" style="position: static;margin-top: -13px;padding-top: 13px;">Job title</p>
-                                                        <p class="mb-1 hours" style="position: static;margin-top: -13px;padding-top: 13px;">Hours</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
+                                <button type="button" class="collapsible" style="cursor: pointer; padding: 10px; width: 100%;border: none;text-align: left;outline: none;font-size: 15px;border-radius:10px;margin: 10px 0">Pending</button>
+                                <div class="content" id="pending" style="padding: 0 18px; display: none; overflow: hidden;">
+                                    
                                 </div>
-                                <button type="button" class="collapsible" style="background-color: #777; color: white;cursor: pointer; padding: 10px; width: 100%;border: none;text-align: left;outline: none;font-size: 15px;">Rejected</button>
-                                <div class="content" style="padding: 0 18px; display: none; overflow: hidden; background-color: #f1f1f1;">
-                                    <li style="position: relative;padding-bottom: 0px;margin-bottom: 18px;">
-                                        <div class="list-group" style="padding-right: 208px;position: relative;">
-                                            <div class="list-group-item list-group-item-action flex-column align-items-start" style="position: relative;">
-                                                <div style="display: flex;position: relative;"><img class="company_logo" src="../assets/img/Earn%20It%20Logo.svg"                                                                                                    style="width: 80px;margin-right: 15px;position: relative;"/>
-                                                    <div style="position: relative;width: 1000px;">
-                                                        <h5 class="mb-1 company_name" style="position: static;">Company</h5>
-                                                        <p class="mb-1 job_title" style="position: static;margin-top: -13px;padding-top: 13px;">Job title</p>
-                                                        <p class="mb-1 hours" style="position: static;margin-top: -13px;padding-top: 13px;">Hours</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
+                                <button type="button" class="collapsible" style="cursor: pointer; padding: 10px; width: 100%;border: none;text-align: left;outline: none;font-size: 15px;border-radius:10px;margin: 10px 0">Rejected</button>
+                                <div class="content" id="rejected" style="padding: 0 18px; display: none; overflow: hidden;">
+                                    
                                 </div>
-                                <button type="button" class="collapsible" style="background-color: #777; color: white;cursor: pointer; padding: 10px; width: 100%;border: none;text-align: left;outline: none;font-size: 15px;">Accpected</button>
-                                <div class="content" style="padding: 0 18px; display: none; overflow: hidden; background-color: #f1f1f1;">
-                                    <li style="position: relative;padding-bottom: 0px;margin-bottom: 18px;">
-                                        <div class="list-group" style="padding-right: 208px;position: relative;">
-                                            <div class="list-group-item list-group-item-action flex-column align-items-start" style="position: relative;">
-                                                <div style="display: flex;position: relative;"><img class="company_logo" src="../assets/img/Earn%20It%20Logo.svg" style="width: 80px;margin-right: 15px;position: relative;"/>
-                                                    <div style="position: relative;width: 1000px;">
-                                                        <h5 class="mb-1 company_name" style="position: static;">Company</h5>
-                                                        <p class="mb-1 job_title" style="position: static;margin-top: -13px;padding-top: 13px;">Job title</p>
-                                                        <p class="mb-1 hours" style="position: static;margin-top: -13px;padding-top: 13px;">Hours</p>
-                                                    </div>
-                                                    <button class="btn btn-primary z-index submit-button" type="button" style="border-top-left-radius: 20px;border-bottom-left-radius: 20px;border-top-right-radius: 20px;border-bottom-right-radius: 20px;background: rgb(219, 84, 97);border-color: var(--bs-list-group-border-color);height: 40px;position: relative;">Invoice</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
+                                <button type="button" class="collapsible" style="cursor: pointer; padding: 10px; width: 100%;border: none;text-align: left;outline: none;font-size: 15px;border-radius:10px;margin: 10px 0">Accpected</button>
+                                <div class="content" id="accepted" style="padding: 0 18px; display: none; overflow: hidden;">
+                                    
                                 </div>
                             </ul>
                         </div>
+                        
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div id="notification-popup" class="popup">
+    <div id="submission-popup" class="popup">
         <div class="popup-content">
             <div class="popup-header">
-                <h2 id="notification-info" style="display: inline-block">&lt;Notification&gt;</h2>
-                <span id="notification-popup-close" class="close">&times;</span>
+                <h2 id="submission-info" style="display: inline-block">&lt;Job Name&gt; (&lt;Company name&gt;)</h2>
+                <span id="submission-popup-close" class="close">&times;</span>
             </div>
             <div class="popup-body">
-                <div>
-                    <div>Company name</div>
-                    <div>job title</div>
-                    <p id="job-title">&lt;title&gt;</p>
-                    <div>Status:</div>
-                    <p id="status">&lt;status&gt;</p>
-                </div>
+                <h3>Amount of hours worked:</h3>
+                <p id="hours">&lt;hours&gt;</p>
+                <h3>Note on work done:</h3>
+                <p id="notes">
+                    &lt;notes&gt;
+                </p>
             </div>
         </div>
     </div>
-
+    
+    
     <!--Template for a job item tab-->
     <template id="submission-item">
         <li style="position: relative;padding-bottom: 0px;margin-bottom: 18px;">
-            <div class="list-group"><a class="list-group-item list-group-item-action flex-column align-items-start" href="#">
-                <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1 company_name">Company</h5><span class="badge rounded-pill bg-primary align-self-center hours">2 hours</span>
+            <div class="list-group" style="padding-right: 208px;position: relative;">
+                <div
+                    class="list-group-item list-group-item-action flex-column align-items-start"
+                    style="position: relative;">
+                    <div style="display: flex;position: relative;"><img class="company_logo" src="../assets/img/Earn%20It%20Logo.svg"
+                                                                        style="width: 80px;margin-right: 15px;position: relative;"/>
+                        <div style="position: relative;width: 1000px;">
+                            <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1 company_name">Company</h5><span class="badge rounded-pill bg-primary align-self-center hours">2 hours</span>
+                        </div>
+                        <p class="mb-1 job_title">Job title</p><a class="text-muted view-details" style="cursor: pointer;">Click to view notes</a>
+                        </div>
+                    </div>
                 </div>
-                <p class="mb-1 job_title">Job title</p><small class="text-muted">Click to view notes</small>
-            </a></div>
+            </div>
+        </li>
+    </template>
+
+    <template id="flag-item">
+        <li style="position: relative;padding-bottom: 0px;margin-bottom: 18px;">
+            <div class="list-group" style="padding-right: 208px;position: relative;">
+                <div
+                        class="list-group-item list-group-item-action flex-column align-items-start"
+                        style="position: relative;">
+                    <div style="display: flex;position: relative;"><img class="company_logo" src="../assets/img/Earn%20It%20Logo.svg"
+                                                                        style="width: 80px;margin-right: 15px;position: relative;"/>
+                        <div style="position: relative;width: 1000px;">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1 company_name">Company</h5><span class="badge rounded-pill bg-primary align-self-center status"></span>
+                            </div>
+                            <p class="mb-1 job_title">Job title</p><a class="text-muted total-hours" style="cursor: pointer;">Click to view notes</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </li>
     </template>
     <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="../assets/js/sidebar.js"></script>
     <script src="../assets/js/student_schedule.js"></script>
     <script src="../assets/js/logoutScript.js"></script>
-    <script src="../assets/js/invoice.js"></script>
     <script>
-        var coll = document.getElementsByClassName("collapsible");
-        var i;
+        const coll = document.getElementsByClassName("collapsible");
+        let i;
 
         for (i = 0; i < coll.length; i++) {
             coll[i].addEventListener("click", function() {
                 this.classList.toggle("active");
-                var content = this.nextElementSibling;
+                const content = this.nextElementSibling;
                 if (content.style.display === "block") {
                     content.style.display = "none";
                 } else {
