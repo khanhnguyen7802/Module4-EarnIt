@@ -9,7 +9,10 @@ const list_3 = document.getElementById("list-3")
 const list_4 = document.getElementById("list-4")
 const list_5 = document.getElementById("list-5")
 const list_6 = document.getElementById("list-6")
-const list_overview = document.getElementById("list-7")
+
+const pending = document.getElementById("pending")
+const rejected = document.getElementById("rejected")
+const accepted = document.getElementById("accepted")
 
 const submission_popup = document.getElementById("submission-popup")
 const submission_close_button = document.getElementById("submission-popup-close")
@@ -33,7 +36,7 @@ $(window).on("load", function () {
 
 function fetchWeek(week, year) {
     days.map(removeAllChildNodes)
-    removeAllChildNodes(list_overview)
+    //removeAllChildNodes(list_overview)
     fetch(window.location.origin + `/earnit/api/submissions/student/week?week=${week}&year=${year}`)
         .then(response => {
             if (response.ok) {
@@ -51,9 +54,11 @@ function fetchWeek(week, year) {
                 let job_title = new_item.querySelector(".job_title");
                 let viewNotes = new_item.querySelector(".view-details")
                 let hours_badge = new_item.querySelector(".hours")
+                let company_logo = new_item.querySelector(".company_logo")
                 company_name.innerHTML = item["company_name"];
                 job_title.innerHTML = item["job_title"];
                 hours_badge.innerHTML = `${item["hours"]} hours`
+                company_logo.src = (item["logo"] == null) ? company_logo.src : "data:image/svg+xml;base64," + item["logo"];
                 viewNotes.addEventListener("click", function() {
                     let submission_info = document.getElementById("submission-info")
                     let hours = document.getElementById("hours")
@@ -78,13 +83,23 @@ function fetchWeek(week, year) {
                 let company_name = new_flag.querySelector(".company_name");
                 let job_title = new_flag.querySelector(".job_title");
                 let total_hours = new_flag.querySelector(".total-hours")
-                let status = new_flag.querySelector(".status")
+                let company_logo = new_flag.querySelector(".company_logo")
                 company_name.innerHTML = item["company_name"]
                 job_title.innerHTML = item["job_title"];
                 total_hours.innerHTML = `Total hours this week: ${item["total_hours"]}`
-                status.innerHTML = item["status"]
-                
-                list_overview.append(new_flag)
+                company_logo.src = (item["logo"] == null) ? company_logo.src : "data:image/svg+xml;base64," + item["logo"];
+                switch (item["status"]) {
+                    case "pending": 
+                    case "appeal":
+                        pending.append(new_flag)
+                        break;
+                    case "accept":
+                        accepted.append(new_flag)
+                        break;
+                    case "reject":
+                        rejected.append(new_flag)
+                        break;
+                }
             }
     })
 }
