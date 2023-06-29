@@ -127,9 +127,9 @@ function submit(item) {
     console.log(typeof(week));
     flag["year"] = year;
     flag["week"] = week;
-    flag["status"] = "";
+    flag["status"] = "pending";
 
-    fetch(window.location.origin + "/earnit/api/flags", {
+    fetch(window.location.origin + "/earnit/api/flags/add", {
         method: "POST",
         headers: {
             "Content-type": "application/json"
