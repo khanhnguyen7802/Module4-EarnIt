@@ -19,10 +19,9 @@ public class SubmissionResource {
     //TODO: Several check might need to be added to prevent unauthorized requests
 
     /**
-     * Given week, year and eid, return all the daily submission within that time range
+     * Given week and year, return all the daily submission within that time range
      * @param week
      * @param year
-     * @param eid
      * @return all submissions within that specific week
      */
     @GET

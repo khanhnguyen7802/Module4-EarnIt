@@ -88,13 +88,14 @@ public enum SubmissionDAO {
         List<Submission> submissions = new ArrayList<>();
         try {
             Connection connection = DBConnection.createConnection();
+
+            // this query will return all employment's of that student in the given (week, year)
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "SELECT e.eid, comment, hours, worked_date " +
-                            "FROM submission s, employment e, student st " +
-                            "WHERE s.eid = e.eid " +
+                    "SELECT e.eid, comment, hours, worked_date, c.name AS company_name, job_title, c.logo AS logo " +
+                            "FROM submission s, employment e, student st, company c " +
+                            "WHERE s.eid = e.eid AND e.sid = st.id AND c.id = e.cid " +
                             "AND DATE_PART('week', worked_date) = ? " +
                             "AND DATE_PART('year', worked_date) = ? " +
-                            "AND e.sid = st.id " +
                             "AND st.email = ?"
             );
             
@@ -108,6 +109,9 @@ public enum SubmissionDAO {
                 submission.setHours(resultSet.getInt("hours"));
                 submission.setComment(resultSet.getString("comment"));
                 submission.setDate(resultSet.getDate("worked_date"));
+                submission.setCompany_name(resultSet.getString("company_name"));
+                submission.setJob_title(resultSet.getString("job_title"));
+                submission.setLogo(resultSet.getBytes("logo"));
 
                 submissions.add(submission);
             }
