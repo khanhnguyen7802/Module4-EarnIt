@@ -33,4 +33,12 @@ public class FlagsResource {
         return FlagDAO.instance.getAllWeeklyFlags(email, week, year);
     }
 
+    @POST
+    @Path("update")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
+    public String updateStatus(Flag newStatusFlag) {
+        return (FlagDAO.instance.updateStatus(newStatusFlag)) ? "SUCCESS" : "FAILURE";
+    }
+
 }

@@ -100,4 +100,20 @@ public enum FlagDAO {
         return flags;
     }
 
+    public boolean updateStatus(Flag flag) {
+        try {
+            Connection connection = DBConnection.createConnection();
+            String query = "UPDATE flag " +
+                    "SET status = ? " +
+                    "WHERE eid = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, flag.getStatus());
+            preparedStatement.setInt(2, flag.getEid());
+            return preparedStatement.executeUpdate() == 1;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }
