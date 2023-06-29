@@ -25,13 +25,23 @@ public class SubmissionResource {
      * @return all submissions within that specific week
      */
     @GET
-    @Path("week")
+    @Path("student/week")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Submission> getAllSubmissionsByWeek(@QueryParam("week") int week,
                              @QueryParam("year") int year) {
         HttpSession session = req.getSession();
         String email = session.getAttribute("email").toString();
         return SubmissionDAO.instance.getWeeklySubmission(email, week, year);
+    }
+
+    @GET
+    @Path("company/week")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Submission> getAllSubmissionsByWeekForCompany(@QueryParam("week") int week,
+                             @QueryParam("year") int year) {
+        HttpSession session = req.getSession();
+        String email = session.getAttribute("email").toString();
+        return SubmissionDAO.instance.getWeeklySubmissionForCompany(email, week, year);
     }
 
     /**
@@ -64,50 +74,5 @@ public class SubmissionResource {
         return SubmissionDAO.instance.getTotalHoursOfWeek(eid, week, year);
     }
 
-//    @Path("/day")
-//    @GET
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public List<Submission> getDateSubmission(
-//            @QueryParam("date") String date,
-//            @DefaultValue("%%") @QueryParam("flag") String flag
-//    ) {
-//        HttpSession session = req.getSession();
-//        String role = session.getAttribute("role").toString();
-//        String email = session.getAttribute("email").toString();
-//        if (role.equals("STUDENT")) {
-//            return SubmissionDAO.instance.getStudentDateSubmissions(email, date, flag);
-//        } else if (role.equals("COMPANY")) {
-//            return SubmissionDAO.instance.getCompanyDateSubmissions(email, date, flag);
-//        }
-//        return new ArrayList<>();
-//    }
 
-//    @Path("/week")
-//    @GET
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public List<Submission> getWeekSubmission(
-//            @QueryParam("date") String date,
-//            @DefaultValue("%%") @QueryParam("flag") String flag
-//    ) {
-//        HttpSession session = req.getSession();
-//        String role = session.getAttribute("role").toString();
-//        String email = session.getAttribute("email").toString();
-//        if (role.equals("STUDENT")) {
-//            return SubmissionDAO.instance.getStudentWeekSubmissions(email, date, flag);
-//        } else if (role.equals("COMPANY")) {
-//            return SubmissionDAO.instance.getCompanyWeekSubmissions(email, date, flag);
-//        }
-//        return new ArrayList<>();
-//    }
-
-
-//    @Path("/flag")
-//    @POST
-//    @Consumes(MediaType.APPLICATION_JSON)
-//    public void flagSubmission(
-//        @QueryParam("subId") String subId,
-//        @QueryParam("flag") String flag
-//    ) {
-//        SubmissionDAO.instance.flagSubmission(subId, flag);
-//    }
 }
