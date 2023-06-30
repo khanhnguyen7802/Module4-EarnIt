@@ -39,9 +39,10 @@ public enum StudentDAO {
         try (Connection connection = DBConnection.createConnection()) {
             
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "SELECT DISTINCT s.* " +
+                    "SELECT DISTINCT s.*, e.job_title " +
                             "FROM company c, employment e, student s " +
-                            "WHERE c.id = e.cid AND e.sid = s.id AND c.email = ?"
+                            "WHERE c.id = e.cid AND e.sid = s.id " +
+                            "AND c.email = ?"
             );
             preparedStatement.setString(1, email);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -117,6 +118,7 @@ public enum StudentDAO {
             student.setUniversity(resultSet.getString("university"));
             student.setBtw_num(resultSet.getString("btw_number"));
             student.setEmail(resultSet.getString("email"));
+            student.setJob_title(resultSet.getString("job_title"));
             students.add(student);
         }
         return students;

@@ -19,7 +19,9 @@ $(window).on("load", async function () {
 
                     let student_name = new_item.querySelector(".student_name");
                     let job_name = new_item.querySelector(".job_title");
-                    student_name.innerHTML = item.name;
+                    student_name.innerHTML = item["name"];
+                    job_name.innerHTML = item["job_title"];
+                    console.log(job_name)
 
                     ul.append(new_item);
 

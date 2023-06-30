@@ -12,6 +12,8 @@ public class Student extends User {
     String study;
     String skills;
     String btw_num;
+    String job_title;
+
 
     public Student() {
 
@@ -60,5 +62,13 @@ public class Student extends User {
     }
     public String getBtw_num() {
         return btw_num;
+    }
+
+    public String getJob_title() {
+        return job_title;
+    }
+
+    public void setJob_title(String job_title) {
+        this.job_title = job_title;
     }
 }
