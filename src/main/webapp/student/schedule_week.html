@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Student schedule</title>
+    <link rel="icon" href="../assets/img/Earn%20It%20Logo.svg">
     <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora">
     <link rel="stylesheet" href="../assets/fonts/fontawesome-all.min.css">
@@ -41,7 +42,6 @@
                 <h1 style="margin: 2px 0px 15px;padding: 20px 60px 0px 0px;color: var(--bs-black);margin-right: 357px;padding-top: 0px;margin-bottom: 15px;padding-bottom: 0px;margin-top: 20px;">Schedule</h1>
                 <div class="timetable" style="color: var(--bs-black);">
                     <div class="select date" id="select">
-                        
                         <select id="year-dd" style="width: 100px; border-radius: 10px; text-align: center">
                             <option id="year" value="" selected disabled>---Year---</option>
                             <option id="2023" value="2023">2023</option>
@@ -49,6 +49,7 @@
                             <option id="2025" value="2025">2025</option>
                             <option id="2026" value="2026">2026</option>
                         </select>
+
                         <select id="week-dd" style="width:100px; border-radius: 10px; text-align: center">
                             <option id="week" value="" selected disabled>---Week---</option>
                             <option id="week1" value="1">Week 1</option>
@@ -103,7 +104,6 @@
                             <option id="week50" value="50">Week 50</option>
                             <option id="week51" value="51">Week 51</option>
                             <option id="week52" value="52">Week 52</option>
-
                         </select>
                         <a id="notification"><i class="far fa-bell" id="bell" style="font-size: 25px; float:right;margin-right:50px; cursor: pointer;"></i></a>
                     </div>
@@ -164,13 +164,15 @@
                                 <div class="content" id="pending" style="padding: 0 18px; display: none; overflow: hidden;">
                                     
                                 </div>
+
                                 <button type="button" class="collapsible" style="cursor: pointer; padding: 10px; width: 100%;border: none;text-align: left;outline: none;font-size: 15px;border-radius:10px;margin: 10px 0">Rejected</button>
                                 <div class="content" id="rejected" style="padding: 0 18px; display: none; overflow: hidden;">
-                                    
+
                                 </div>
-                                <button type="button" class="collapsible" style="cursor: pointer; padding: 10px; width: 100%;border: none;text-align: left;outline: none;font-size: 15px;border-radius:10px;margin: 10px 0">Accpected</button>
+
+                                <button type="button" class="collapsible" style="cursor: pointer; padding: 10px; width: 100%;border: none;text-align: left;outline: none;font-size: 15px;border-radius:10px;margin: 10px 0">Accepted</button>
                                 <div class="content" id="accepted" style="padding: 0 18px; display: none; overflow: hidden;">
-                                    
+
                                 </div>
                             </ul>
                         </div>

@@ -1,10 +1,8 @@
 package nl.utwente.di.first.resources;
 
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Image;
-import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.text.pdf.draw.LineSeparator;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.ws.rs.*;
@@ -63,12 +61,51 @@ public class InvoicesResource {
             ByteArrayOutputStream out = new ByteArrayOutputStream();
             PdfWriter.getInstance(doc, out);
 
-            doc.add(Image.getInstance(invoice.getLogo()));
+            //adding the logo TODO scale logo
+            Image logo = Image.getInstance(invoice.getLogo());
+            logo.setAlignment(Element.ALIGN_CENTER);
+            doc.add(logo);
 
+            //company details
+            doc.add(Chunk.NEWLINE);
             doc.add(new Paragraph(invoice.getCompany_name()));
-            doc.add(new Paragraph(invoice.getJob_title()));
+            doc.add(new Paragraph(invoice.getCompany_address()));
+            doc.add(new Paragraph(invoice.getKvk_number()));
+
+            //issue date (aligned to the right)
+            Paragraph issueDate = new Paragraph("Factuurdatum: " + String.valueOf(invoice.getDate_of_issue()));
+            issueDate.setAlignment(Element.ALIGN_RIGHT);
+
+            //details
             doc.add(new Paragraph(invoice.getStudent_name()));
+            doc.add(new Paragraph(invoice.getKvk_number()));
+            doc.add(new Paragraph(invoice.getBtw_number()));
+            doc.add(Chunk.NEWLINE);
+
+            //line
+            doc.add(new LineSeparator());
+
+            //week number
+            doc.add(Chunk.NEWLINE);
+            doc.add(new Paragraph("Weeknummer: " + invoice.getWeek()));
+            doc.add(Chunk.NEWLINE);
+
+            //job and salary
+            doc.add(new Paragraph(invoice.getJob_title()));
             doc.add(new Paragraph((float) invoice.getTotal_salary()));
+            doc.add(Chunk.NEWLINE);
+
+            doc.add(new Paragraph("Total Bedrag excl. BTW"));
+            doc.add(new Paragraph("BTW 21%:  " + (invoice.getTotal_salary()*21/100)));
+
+            //line
+            doc.add(Chunk.NEWLINE);
+            doc.add(new LineSeparator());
+            doc.add(Chunk.NEWLINE);
+
+            //final amount
+            doc.add(new Paragraph("EinBedrag:  " + (invoice.getTotal_salary() - invoice.getTotal_salary()*21/100)));
+
             doc.close();
 
             byte[] pdf = out.toByteArray();
@@ -85,6 +122,4 @@ public class InvoicesResource {
     }
 
      */
-
-
 }
