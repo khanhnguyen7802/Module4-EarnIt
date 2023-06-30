@@ -82,7 +82,7 @@ function fetchWeek(week, year) {
                                     if(!response.ok) throw new Error("HTTP Error! Status: " + response.status)
                                     return response.text()
                                 }).then(data => {
-                                    if (data === "SUCCESS") alert("Week was successfully accepted!")
+                                    if (data === "SUCCESS") location.reload()
                                     if (data === "FAILURE") alert("Something went wrong with accepting the weekly submission...")
                                 })
                             
@@ -134,7 +134,7 @@ function fetchWeek(week, year) {
                                         if(!response.ok) throw new Error("HTTP Error! Status: " + response.status)
                                         return response.text()
                                     }).then(data => {
-                                        if (data === "SUCCESS") alert("Week was successfully rejected!")
+                                        if (data === "SUCCESS") location.reload()
                                         if (data === "FAILURE") alert("Something went wrong with rejecting the weekly submission...")
                                     })
                                 })
