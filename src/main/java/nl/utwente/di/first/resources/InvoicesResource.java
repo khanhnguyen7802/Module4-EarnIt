@@ -2,6 +2,7 @@ package nl.utwente.di.first.resources;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Image;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 import jakarta.servlet.http.HttpServletRequest;
@@ -14,6 +15,7 @@ import nl.utwente.di.first.dao.InvoiceDAO;
 import nl.utwente.di.first.model.Invoice;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.List;
 
 @Path("/invoices")
@@ -44,6 +46,7 @@ public class InvoicesResource {
         return (InvoiceDAO.instance.addInvoice(invoice)) ? "SUCCESS" : "FAILURE";
     }
 
+
     /*
     @GET
     @Path("/pdf")
@@ -60,6 +63,8 @@ public class InvoicesResource {
             ByteArrayOutputStream out = new ByteArrayOutputStream();
             PdfWriter.getInstance(doc, out);
 
+            doc.add(Image.getInstance(invoice.getLogo()));
+
             doc.add(new Paragraph(invoice.getCompany_name()));
             doc.add(new Paragraph(invoice.getJob_title()));
             doc.add(new Paragraph(invoice.getStudent_name()));
@@ -73,11 +78,13 @@ public class InvoicesResource {
 
             return response.build();
 
-        }catch(DocumentException e){
+        }catch(DocumentException | IOException e){
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
         }
 
     }
+
      */
+
 
 }
