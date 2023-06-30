@@ -18,6 +18,7 @@ $(window).on("load", function () {
             form.university.value = data.university;
             form.study.value = data.study;
             form.skills.value = data.skills;
+            form.btw_num.value = data.btw_num;
         })
 });
 
@@ -27,7 +28,8 @@ let initialData = {
     name: form.name.value,
     university: form.university.value,
     study: form.study.value,
-    skills: form.skills.value
+    skills: form.skills.value,
+    btw_num: form.btw_num
 };
 
 submit.addEventListener("click", function() {
@@ -44,6 +46,7 @@ submit.addEventListener("click", function() {
     student.study = form.study.value;
     student.skills = form.skills.value;
     student.password = form.password.value;
+    student.btw_num = form.btw_num.value;
 
     // Check if there are any changes
     if (JSON.stringify(student) === JSON.stringify(initialData)) {
