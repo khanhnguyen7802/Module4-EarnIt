@@ -82,6 +82,31 @@ $(window).on("load", function () {
                                                 }
                                                 if (data === "FAILURE") alert("There was an error while trying to resolve this appeal")
                                             })
+
+
+                                            // admin is the final decision, then add to the invoice table
+                                            let invoice = {}
+                                            let currentDate = new Date().toJSON().slice(0, 10)
+                                            invoice.eid = item["eid"]
+                                            invoice.week = item["week"]
+                                            invoice.year = item["year"]
+                                            invoice.total_salary = item["salary_per_hour"] * final_hours
+                                            invoice.date_of_issue = currentDate
+
+                                            fetch(window.location.origin + "/earnit/api/invoices/add", {
+                                                method: "POST",
+                                                headers: {
+                                                    "Content-type": "application/json"
+                                                },
+                                                body: JSON.stringify(invoice)
+                                            }).then(response => {
+                                                if(!response.ok) throw new Error("HTTP Error! Status: " + response.status)
+                                                return response.text()
+                                            }).then(data => {
+                                                if (data === "SUCCESS") alert("Invoice was successfully added!")
+                                                if (data === "FAILURE") alert("Something went wrong with adding the invoice...")
+                                            })
+
                                         }
                                         resolve_popup.style.display = "block"
                                     } else {

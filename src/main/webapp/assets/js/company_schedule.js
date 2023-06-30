@@ -92,6 +92,7 @@ function fetchWeek(week, year) {
                                 let currentDate = new Date().toJSON().slice(0, 10)
                                 invoice.eid = item["eid"]
                                 invoice.week = week
+                                invoice.year = year
                                 invoice.total_salary = item["salary_per_hour"] * total_hours 
                                 invoice.date_of_issue = currentDate 
                                 

@@ -138,6 +138,31 @@ function fetchWeek(week, year) {
                                 if (data === "SUCCESS") alert("Week was successfully accepted!")
                                 if (data === "FAILURE") alert("Something went wrong with accepting the weekly submission...")
                             })
+
+
+                            // if the student accepts the newly suggested hours, then save into the invoice table
+                            let invoice = {}
+                            let currentDate = new Date().toJSON().slice(0, 10)
+                            invoice.eid = item["eid"]
+                            invoice.week = week
+                            invoice.year = year
+                            invoice.total_salary = item["salary_per_hour"] * item["suggested_hours"]
+                            invoice.date_of_issue = currentDate
+
+                            fetch(window.location.origin + "/earnit/api/invoices/add", {
+                                method: "POST",
+                                headers: {
+                                    "Content-type": "application/json"
+                                },
+                                body: JSON.stringify(invoice)
+                            }).then(response => {
+                                if(!response.ok) throw new Error("HTTP Error! Status: " + response.status)
+                                return response.text()
+                            }).then(data => {
+                                if (data === "SUCCESS") alert("Invoice was successfully added!")
+                                if (data === "FAILURE") alert("Something went wrong with adding the invoice...")
+                            })
+
                         })
                         reject.addEventListener("click", function() {
                             let flag = {}
