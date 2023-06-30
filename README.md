@@ -48,7 +48,7 @@ Flag(eid PK, week PK, year PK, week NOT NULL, year NOT NULL, status, suggested_h
 
 ## Files allocation
 
-There are 4 folders and a changelog file in our gitlab repository:
+There are 4 folders and a CHANGELOG file in our gitlab repository:
 
 - Design folder:
 
