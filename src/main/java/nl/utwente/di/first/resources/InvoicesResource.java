@@ -1,8 +1,8 @@
 package nl.utwente.di.first.resources;
 
-import com.itextpdf.text.*;
-import com.itextpdf.text.pdf.PdfWriter;
-import com.itextpdf.text.pdf.draw.LineSeparator;
+//import com.itextpdf.text.*;
+//import com.itextpdf.text.pdf.PdfWriter;
+//import com.itextpdf.text.pdf.draw.LineSeparator;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.ws.rs.*;
