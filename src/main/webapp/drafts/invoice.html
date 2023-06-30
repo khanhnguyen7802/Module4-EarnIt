@@ -5,12 +5,16 @@
     <meta charset="UTF-8">
     <title>Invoice</title>
     <link rel="stylesheet" href="invoice.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 
 <body>
+    <div>
+        <button id="download-button">Download as PDF</button>
+    </div>
 
     <div class="sheet-outer A4">
-    <section class="sheet padding-5mm">
+    <section class="sheet padding-5mm" id="invoice">
         <article>This is an A4 document.</article>
         <img id="logo" src="../assets/img/Earn%20It%20Logo.svg">
 
@@ -59,51 +63,81 @@
 
         <hr class="bold-line">
 
-
     </section>
 
-
-<template id="company-info">
-    <li>Placeholder for company name</li>
-    <li>Placeholder for company location</li>
-    <li>Placeholder for company kvk number</li>
-</template>
-
-<template id="invoice-number">
-    <li>Placeholder for invoice number</li>
-    <li>Placeholder for date of issue</li>
-</template>
-
-<template id="student-info">
-    <li>Placeholder for student name</li>
-    <li>Placeholder for student ID</li>
-    <li>Placeholder for btw number</li>
-</template>
-
-<template id="week-info">
-    <div>Weeknummer</div>
-    <div id="week-number">Placeholder for week number</div>
-</template>
+    </div>
 
 
-<template id="job-info">
-    <div>Placeholder for job title</div>
-    <div>Placeholder for money earned in that week</div>
-</template>
+<template id="invoice-info">
+    <ul class="info">
+        <li id="company-name">Placeholder for company name</li>
+        <li id="company-location">Placeholder for company location</li>
+        <li id="kvk-number">Placeholder for company kvk number</li>
+    </ul>
 
-<template>
-    <div id="excl-btw">Total Bedrag excl. BTW</div>
+    <ul class="info">
+        <li id="invoice-number">Placeholder for invoice number</li>
+        <li id="date-of-issue">Placeholder for date of issue</li>
+    </ul>
+
+    <ul class="info">
+        <li id="student-name">'Insert student name'</li>
+        <li id="student-id">#'Insert student ID'</li>
+        <li id="btw_number">'Insert btw number'</li>
+    </ul>
+
+    <hr class="bold-line">
+
+    <div class="week">
+        <div>Weeknummer</div>
+        <div id="week-number">'Insert week number'</div>
+    </div>
+
+    <div class="title-value">
+        <div id="job-title">'Insert position in the company'</div>
+        <div id="total-salary">'Insert the money earned for that week'</div>
+    </div>
+
+    <div>Total Bedrag excl. BTW</div>
     <div class="tax">
         <div>BTW 21%</div>
-        <div>Placeholder for tax total</div>
+        <div id="tax">'Insert tax value(=value*21/100)'</div>
     </div>
+
+    <hr class="light-line">
+
+    <div class="total-amount">
+        <div>Einbedrag</div>
+        <div id="total-amount">'Insert total amount'</div>
+    </div>
+
+    <hr class="bold-line">
+
 </template>
 
+
+
+
+
+
     <!-- Second page -->
-    <section class="sheet padding-5mm">
-        <article>This is an A4 document.</article>
-    </section>
-    </div>
+<!--    <section class="sheet padding-5mm">-->
+<!--        <article>This is an A4 document.</article>-->
+<!--    </section>-->
+<!--    </div>-->
+
+    <script>
+        const button = document.getElementById('download-button');
+
+        function generatePDF() {
+            // Choose the element that your content will be rendered to.
+            const element = document.getElementById('invoice');
+            // Choose the element and save the PDF for your user.
+            html2pdf().from(element).save();
+        }
+
+        button.addEventListener('click', generatePDF);
+    </script>
 
 </body>
 </html>

@@ -42,4 +42,23 @@ public class FlagsResource {
         return (FlagDAO.instance.updateStatus(newStatusFlag)) ? "SUCCESS" : "FAILURE";
     }
 
+
+    @Path("rejected")
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    public int getTotalRejected() {
+        HttpSession session = req.getSession();
+        String email = session.getAttribute("email").toString();
+
+        return FlagDAO.instance.getTotalRejectedWeeks(email);
+    }
+
+    @Path("rejected/all")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Flag> getWeekYearOfReflected() {
+        HttpSession session = req.getSession();
+        String email = session.getAttribute("email").toString();
+        return FlagDAO.instance.getAllRejectedWeeks(email);
+    }
 }
