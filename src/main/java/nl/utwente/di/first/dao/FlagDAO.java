@@ -102,8 +102,8 @@ public enum FlagDAO {
                 flag.setCompany_name(resultSet.getString("company_name"));
                 flag.setJob_title(resultSet.getString("job_title"));
                 flag.setLogo(resultSet.getBytes("logo"));
-                flag.setSuggested_hours(resultSet.getInt("suggested_hours"));
-
+                int suggested_hours = resultSet.getInt("suggested_hours");
+                if (!resultSet.wasNull()) flag.setSuggested_hours(suggested_hours);
                 flags.add(flag);
                 
             }
@@ -196,4 +196,5 @@ public enum FlagDAO {
         }
     }
 
+    
 }

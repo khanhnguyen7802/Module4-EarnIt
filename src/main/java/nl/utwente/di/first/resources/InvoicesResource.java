@@ -1,19 +1,13 @@
 package nl.utwente.di.first.resources;
 
-//import com.itextpdf.text.*;
-//import com.itextpdf.text.pdf.PdfWriter;
-//import com.itextpdf.text.pdf.draw.LineSeparator;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
 import nl.utwente.di.first.dao.InvoiceDAO;
 import nl.utwente.di.first.model.Invoice;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.util.List;
 
 @Path("/invoices")

@@ -12,7 +12,7 @@ public class Flag {
     String company_name;
     String job_title;
     byte[] logo;
-    int suggested_hours;
+    Integer suggested_hours;
 
     public int getEid() {
         return eid;
@@ -54,11 +54,11 @@ public class Flag {
         this.total_hours = total_hours;
     }
 
-    public int getSuggested_hours() {
+    public Integer getSuggested_hours() {
         return suggested_hours;
     }
 
-    public void setSuggested_hours(int suggested_hours) {
+    public void setSuggested_hours(Integer suggested_hours) {
         this.suggested_hours = suggested_hours;
     }
 
