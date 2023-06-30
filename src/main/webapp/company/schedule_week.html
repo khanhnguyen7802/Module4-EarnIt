@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="../assets/css/Search-Input-responsive.css">
     <link rel="stylesheet" href="../assets/css/sidebar-1.css">
     <link rel="stylesheet" href="../assets/css/sidebar.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/popup.css">
 </head>
 
 <body style="color:var(--bs-gray-100);">
@@ -33,148 +33,239 @@
     <div class="container">
         <div class="row" style="margin:0px -15px;">
             <div class="col" style="margin:0px 10px 0px 30px;">
-                <div style="display: inline-block;padding-right: 0px;padding-bottom: 0px;">
-                    <h1 style="margin: 2px 0px 15px;padding: 20px 60px 0px 0px;color: var(--bs-black);padding-top: 0px;margin-bottom: 15px;padding-bottom: 0px;margin-top: 20px;display: inline-block;margin-right: -1px;">Schedule</h1>
-                </div>
-                <div class="timetable" style="color: var(--bs-black);">
-                    <div>
-                        <ul class="nav nav-tabs" role="tablist" style="padding-bottom: 0px;margin-bottom: 15px;">
-                            <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-1">Monday</a></li>
-                            <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-2">Tuesday</a></li>
-                            <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-3">Wednesday</a></li>
-                            <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-4">Thursday</a></li>
-                            <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-5">Friday</a></li>
-                            <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-6">Saturday</a></li>
-                            <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-7">Sunday</a></li>
-                            <li class="nav-item" role="presentation"><a class="nav-link active" role="tab" data-bs-toggle="tab" href="#tab-8">Overview</a></li>
-                        </ul>
-                        <div class="tab-content">
-                            <div class="tab-pane" role="tabpanel" id="tab-1">
-                                <ul class="list-unstyled" style="margin-left: -32px;position: relative;padding-left: 32px;">
-                                    <li style="position: relative;padding-bottom: 0px;margin-bottom: 18px;">
-                                        <div class="list-group"><a class="list-group-item list-group-item-action flex-column align-items-start" href="#">
-                                                <div class="d-flex w-100 justify-content-between">
-                                                    <h5 class="mb-1">Company</h5><span class="badge rounded-pill bg-primary align-self-center">2 hours</span>
-                                                </div>
-                                                <p class="mb-1">Job title</p><small class="text-muted">Notes</small>
-                                            </a>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="tab-pane" role="tabpanel" id="tab-2">
-                                <ul class="list-unstyled" style="margin-left: -32px;position: relative;padding-left: 32px;">
-                                    <li style="position: relative;padding-bottom: 0px;margin-bottom: 18px;">
-                                        <div class="list-group"><a class="list-group-item list-group-item-action flex-column align-items-start" href="#">
-                                                <div class="d-flex w-100 justify-content-between">
-                                                    <h5 class="mb-1">Company</h5><span class="badge rounded-pill bg-primary align-self-center">3 hours</span>
-                                                </div>
-                                                <p class="mb-1">Job title</p><small class="text-muted">Notes</small>
-                                            </a></div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="tab-pane" role="tabpanel" id="tab-3">
-                                <ul class="list-unstyled" style="margin-left: -32px;position: relative;padding-left: 32px;">
-                                    <li style="position: relative;padding-bottom: 0px;margin-bottom: 18px;">
-                                        <div class="list-group"><a class="list-group-item list-group-item-action flex-column align-items-start" href="#">
-                                                <div class="d-flex w-100 justify-content-between">
-                                                    <h5 class="mb-1">Company</h5><span class="badge rounded-pill bg-primary align-self-center">4 hours</span>
-                                                </div>
-                                                <p class="mb-1">Job title</p><small class="text-muted">Notes</small>
-                                            </a></div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="tab-pane" role="tabpanel" id="tab-4">
-                                <ul class="list-unstyled" style="margin-left: -32px;position: relative;padding-left: 32px;">
-                                    <li style="position: relative;padding-bottom: 0px;margin-bottom: 18px;">
-                                        <div class="list-group"><a class="list-group-item list-group-item-action flex-column align-items-start" href="#">
-                                                <div class="d-flex w-100 justify-content-between">
-                                                    <h5 class="mb-1">Company</h5><span class="badge rounded-pill bg-primary align-self-center">5 hours</span>
-                                                </div>
-                                                <p class="mb-1">Job title</p><small class="text-muted">Notes</small>
-                                            </a></div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="tab-pane" role="tabpanel" id="tab-5">
-                                <ul class="list-unstyled" style="margin-left: -32px;position: relative;padding-left: 32px;">
-                                    <li style="position: relative;padding-bottom: 0px;margin-bottom: 18px;">
-                                        <div class="list-group"><a class="list-group-item list-group-item-action flex-column align-items-start" href="#">
-                                                <div class="d-flex w-100 justify-content-between">
-                                                    <h5 class="mb-1">Company</h5><span class="badge rounded-pill bg-primary align-self-center">6 hours</span>
-                                                </div>
-                                                <p class="mb-1">Job title</p><small class="text-muted">Notes</small>
-                                            </a></div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="tab-pane" role="tabpanel" id="tab-6">
-                                <ul class="list-unstyled" style="margin-left: -32px;position: relative;padding-left: 32px;">
-                                    <li style="position: relative;padding-bottom: 0px;margin-bottom: 18px;">
-                                        <div class="list-group"><a class="list-group-item list-group-item-action flex-column align-items-start" href="#">
-                                                <div class="d-flex w-100 justify-content-between">
-                                                    <h5 class="mb-1">Company</h5><span class="badge rounded-pill bg-primary align-self-center">6 hours</span>
-                                                </div>
-                                                <p class="mb-1">Job title</p><small class="text-muted">Notes</small>
-                                            </a></div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="tab-pane" role="tabpanel" id="tab-7">
-                                <ul class="list-unstyled" style="margin-left: -32px;position: relative;padding-left: 32px;">
-                                    <li style="position: relative;padding-bottom: 0px;margin-bottom: 18px;">
-                                        <div class="list-group"><a class="list-group-item list-group-item-action flex-column align-items-start" href="#">
-                                                <div class="d-flex w-100 justify-content-between">
-                                                    <h5 class="mb-1">Company</h5><span class="badge rounded-pill bg-primary align-self-center">6 hours</span>
-                                                </div>
-                                                <p class="mb-1">Job title</p><small class="text-muted">Notes</small>
-                                            </a></div>
-                                    </li>
-                                </ul>
-                            </div>
+                <h1 style="margin: 2px 0px 15px;padding: 20px 60px 0px 0px;color: var(--bs-black);padding-top: 0px;margin-bottom: 15px;padding-bottom: 0px;margin-top: 20px;display: inline-block;margin-right: -1px;">Schedule</h1>
+                <div class="select date" id="select" style="margin:10px 0">
 
-                            <!-- Overview tab -->
-                            <div class="tab-pane active" role="tabpanel" id="tab-8">
-                                <p style="font-weight: bold;">Unconfirmed</p>
-                                <ul class="list-unstyled" style="margin-left: -32px;position: relative;padding-left: 32px;">
-                                    <li style="position: relative;padding-bottom: 0px;margin-bottom: 18px;">
-                                        <div class="list-group"><div class="list-group-item list-group-item-action flex-column align-items-start" href="#">
-                                                <div class="d-flex w-100 justify-content-between">
-                                                    <h5 class="mb-1">Placeholder for Student</h5>
-                                                </div>
-                                                <p class="mb-1">Placeholder for Job title</p><small class="text-muted">Total hours: 22 hours</small>
-                                                <div style="text-align: right;"><button class="btn btn-primary" type="button" style="height: 26px;border-radius: 13px;background: var(--bs-teal);border-style: none;padding-top: 0px;margin-right: 16px;font-weight: bold;">Accept</button><button class="btn btn-primary" type="button" style="height: 26px;border-radius: 13px;border-style: none;background: var(--bs-red);padding-top: 0px;font-weight: bold;">Reject</button></div>
-                                            </div></div>
-                                    </li>
-                                </ul>
-                                <p style="font-weight: bold;">Confirmed</p>
-                                <ul class="list-unstyled" style="margin-left: -32px;position: relative;padding-left: 32px;">
-                                    <li style="position: relative;padding-bottom: 0px;margin-bottom: 18px;">
-                                        <div class="list-group"><a class="list-group-item list-group-item-action flex-column align-items-start" href="#">
-                                                <div class="d-flex w-100 justify-content-between">
-                                                    <h5 class="mb-1">Student</h5><span class="badge rounded-pill bg-primary align-self-center">Accepted</span>
-                                                </div>
-                                                <p class="mb-1">Job title</p><small class="text-muted">Total hours: 22 hours</small>
-                                            </a></div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
+                    <select id="year-dd" style="width: 100px; border-radius: 10px; text-align: center">
+                        <option id="year" value="" selected disabled>---Year---</option>
+                        <option id="2023" value="2023">2023</option>
+                        <option id="2024" value="2024">2024</option>
+                        <option id="2025" value="2025">2025</option>
+                        <option id="2026" value="2026">2026</option>
+                    </select>
+                    <select id="week-dd" style="width:100px; border-radius: 10px; text-align: center">
+                        <option id="week" value="" selected disabled>---Week---</option>
+                        <option id="week1" value="1">Week 1</option>
+                        <option id="week2" value="2">Week 2</option>
+                        <option id="week3" value="3">Week 3</option>
+                        <option id="week4" value="4">Week 4</option>
+                        <option id="week5" value="5">Week 5</option>
+                        <option id="week6" value="6">Week 6</option>
+                        <option id="week7" value="7">Week 7</option>
+                        <option id="week8" value="8">Week 8</option>
+                        <option id="week9" value="9">Week 9</option>
+                        <option id="week10" value="10">Week 10</option>
+                        <option id="week11" value="11">Week 11</option>
+                        <option id="week12" value="12">Week 12</option>
+                        <option id="week13" value="13">Week 13</option>
+                        <option id="week14" value="14">Week 14</option>
+                        <option id="week15" value="15">Week 15</option>
+                        <option id="week16" value="16">Week 16</option>
+                        <option id="week17" value="17">Week 17</option>
+                        <option id="week18" value="18">Week 18</option>
+                        <option id="week19" value="19">Week 19</option>
+                        <option id="week20" value="20">Week 20</option>
+                        <option id="week21" value="21">Week 21</option>
+                        <option id="week22" value="22">Week 22</option>
+                        <option id="week23" value="23">Week 23</option>
+                        <option id="week24" value="24">Week 24</option>
+                        <option id="week25" value="25">Week 25</option>
+                        <option id="week26" value="26">Week 26</option>
+                        <option id="week27" value="27">Week 27</option>
+                        <option id="week28" value="28">Week 28</option>
+                        <option id="week29" value="29">Week 29</option>
+                        <option id="week30" value="30">Week 30</option>
+                        <option id="week31" value="31">Week 31</option>
+                        <option id="week32" value="32">Week 32</option>
+                        <option id="week33" value="33">Week 33</option>
+                        <option id="week34" value="34">Week 34</option>
+                        <option id="week35" value="35">Week 35</option>
+                        <option id="week36" value="36">Week 36</option>
+                        <option id="week37" value="37">Week 37</option>
+                        <option id="week38" value="38">Week 38</option>
+                        <option id="week39" value="39">Week 39</option>
+                        <option id="week40" value="40">Week 40</option>
+                        <option id="week41" value="41">Week 41</option>
+                        <option id="week42" value="42">Week 42</option>
+                        <option id="week43" value="43">Week 43</option>
+                        <option id="week44" value="44">Week 44</option>
+                        <option id="week45" value="45">Week 45</option>
+                        <option id="week46" value="46">Week 46</option>
+                        <option id="week47" value="47">Week 47</option>
+                        <option id="week48" value="48">Week 48</option>
+                        <option id="week49" value="49">Week 49</option>
+                        <option id="week50" value="50">Week 50</option>
+                        <option id="week51" value="51">Week 51</option>
+                        <option id="week52" value="52">Week 52</option>
+
+                    </select>
+                    <a id="notification"><i class="far fa-bell" id="bell" style="color:black;font-size: 25px; float:right;margin-right:50px; cursor: pointer;"></i></a>
+                </div>
+                <ul id="list-7" class="list-unstyled" style="margin-left: -32px;position: relative;padding-left: 32px;">
+                    <button type="button" class="collapsible" style="cursor: pointer; padding: 10px; width: 100%;border: none;text-align: left;outline: none;font-size: 15px;border-radius:10px;margin: 10px 0">Pending</button>
+                    <div class="content" id="in-progress" style="padding: 0 18px; display: none; overflow: hidden;">
+                        
+                    </div>
+                    <button type="button" class="collapsible" style="cursor: pointer; padding: 10px; width: 100%;border: none;text-align: left;outline: none;font-size: 15px;border-radius:10px;margin: 10px 0">Pending</button>
+                    <div class="content" id="pending" style="padding: 0 18px; display: none; overflow: hidden;">
+
+                    </div>
+                    <button type="button" class="collapsible" style="cursor: pointer; padding: 10px; width: 100%;border: none;text-align: left;outline: none;font-size: 15px;border-radius:10px;margin: 10px 0">Rejected</button>
+                    <div class="content" id="rejected" style="padding: 0 18px; display: none; overflow: hidden;">
+                        
+                    </div>
+                    <button type="button" class="collapsible" style="cursor: pointer; padding: 10px; width: 100%;border: none;text-align: left;outline: none;font-size: 15px;border-radius:10px;margin: 10px 0">Accpected</button>
+                    <div class="content" id="accepted" style="padding: 0 18px; display: none; overflow: hidden;">
+                        
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="flag-popup" class="popup">
+        <div class="popup-content">
+            <div class="popup-header">
+                <h2 id="flag-info" style="display: inline-block">&lt;Job Name&gt; (&lt;Company name&gt;)</h2>
+                <span id="flag-popup-close" class="close">&times;</span>
+            </div>
+            <div class="popup-body">
+                <ul class="nav nav-tabs" style="padding-bottom: 0px;margin: 15px 0;">
+                    <li class="nav-item" id="nav-1"><a class="nav-link active" role="tab" data-bs-toggle="tab" href="#tab-1">Monday</a></li>
+                    <li class="nav-item" id="nav-2"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-2">Tuesday</a></li>
+                    <li class="nav-item" id="nav-3"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-3">Wednesday</a></li>
+                    <li class="nav-item" id="nav-4"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-4">Thursday</a></li>
+                    <li class="nav-item" id="nav-5"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-5">Friday</a></li>
+                    <li class="nav-item" id="nav-6"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-6">Saturday</a></li>
+                    <li class="nav-item" id="nav-7"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-7">Sunday</a></li>
+                </ul>
+
+                <div class="tab-content">
+                    <div class="tab-pane active" id="tab-1">
+                        <ul id="list-0" class="list-unstyled" style="margin-left: -32px;position: relative;padding-left: 32px;">
+                            <h3>Amount of hours worked:</h3>
+                            <p class="hours">&lt;hours&gt;</p>
+                            <h3>Note on work done:</h3>
+                            <p class="notes">&lt;notes&gt;</p>
+                        </ul>
+                    </div>
+                    <div class="tab-pane" id="tab-2">
+                        <ul id="list-1" class="list-unstyled" style="margin-left: -32px;position: relative;padding-left: 32px;">
+                            <h3>Amount of hours worked:</h3>
+                            <p class="hours">&lt;hours&gt;</p>
+                            <h3>Note on work done:</h3>
+                            <p class="notes">&lt;notes&gt;</p>
+                        </ul>
+                    </div>
+                    <div class="tab-pane" id="tab-3">
+                        <ul id="list-2" class="list-unstyled" style="margin-left: -32px;position: relative;padding-left: 32px;">
+                            <h3>Amount of hours worked:</h3>
+                            <p class="hours">&lt;hours&gt;</p>
+                            <h3>Note on work done:</h3>
+                            <p class="notes">&lt;notes&gt;</p>
+                        </ul>
+                    </div>
+                    <div class="tab-pane" id="tab-4">
+                        <ul id="list-3" class="list-unstyled" style="margin-left: -32px;position: relative;padding-left: 32px;">
+                            <h3>Amount of hours worked:</h3>
+                            <p class="hours">&lt;hours&gt;</p>
+                            <h3>Note on work done:</h3>
+                            <p class="notes">&lt;notes&gt;</p>
+                        </ul>
+                    </div>
+                    <div class="tab-pane" id="tab-5">
+                        <ul id="list-4" class="list-unstyled" style="margin-left: -32px;position: relative;padding-left: 32px;">
+                            <h3>Amount of hours worked:</h3>
+                            <p class="hours">&lt;hours&gt;</p>
+                            <h3>Note on work done:</h3>
+                            <p class="notes">&lt;notes&gt;</p>
+                        </ul>
+                    </div>
+                    <div class="tab-pane" id="tab-6">
+                        <ul id="list-5" class="list-unstyled" style="margin-left: -32px;position: relative;padding-left: 32px;">
+                            <h3>Amount of hours worked:</h3>
+                            <p class="hours">&lt;hours&gt;</p>
+                            <h3>Note on work done:</h3>
+                            <p class="notes">&lt;notes&gt;</p>
+                        </ul>
+                    </div>
+                    <div class="tab-pane" id="tab-7">
+                        <ul id="list-6" class="list-unstyled" style="margin-left: -32px;position: relative;padding-left: 32px;">
+                            <h3>Amount of hours worked:</h3>
+                            <p class="hours">&lt;hours&gt;</p>
+                            <h3>Note on work done:</h3>
+                            <p class="notes">&lt;notes&gt;</p>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <div id="offer-popup" class="popup">
+        <div class="popup-content">
+            <div class="popup-header">
+                <h2 id="offer-info" style="display: inline-block">&lt;Job Name&gt; (&lt;Company name&gt;)</h2>
+                <span id="offer-popup-close" class="close">&times;</span>
+            </div>
+            <div class="popup-body">
+                <form>
+                    <div class="form-group"><label class="form-label" for="hours">Enter counter-offer for amount of hours:</label><input class="form-control form-control" type="number" id="hours" placeholder="Enter the number of hours"></div>
+                    <button class="btn btn-dark" type="button" style="margin-top: 28px;" id="send-offer">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <template id="flag-item">
+        <li style="position: relative;padding-bottom: 0;margin-bottom: 18px;">
+            <div class="list-group" style="padding-right: 208px;position: relative;">
+                <div
+                        class="list-group-item list-group-item-action flex-column align-items-start"
+                        style="position: relative;">
+                    <div style="display: flex;position: relative;">
+                        <img class="company_logo" src="../assets/img/Earn%20It%20Logo.svg" style="width: 80px;margin-right: 15px;position: relative;" alt="Company Logo"/>
+                        <div style="position: relative;width: 1000px;">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1 company_name">Company</h5>
+                                <span class="badge rounded-pill bg-primary align-self-center status"></span>
+                            </div>
+                            <p class="mb-1 job_title">Job title</p>
+                            <a class="text-muted view-details" style="cursor: pointer;">Click to view notes</a>
+                            <div class="buttons" style="text-align: right;display: none">
+                                <button class="btn btn-primary accept" type="button" style="height: 26px;border-radius: 13px;background: var(--bs-teal);border-style: none;padding-top: 0px;margin-right: 8px;font-weight: bold;">Accept</button>
+                                <button class="btn btn-primary reject" type="button" style="height: 26px;border-radius: 13px;border-style: none;background: var(--bs-red);padding-top: 0px;margin-left:8px;font-weight: bold;">Reject</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </template>
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="../assets/js/sidebar.js"></script>
     <script src="../assets/js/logoutScript.js"></script>
-    <script src="../assets/js/bootstrap/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/company_schedule.js"></script>
+    <script>
+        const coll = document.getElementsByClassName("collapsible");
+        let i;
+
+        for (i = 0; i < coll.length; i++) {
+            coll[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                const content = this.nextElementSibling;
+                if (content.style.display === "block") {
+                    content.style.display = "none";
+                } else {
+                    content.style.display = "block";
+                }
+            });
+        }
+    </script>
 </body>
 
 </html>

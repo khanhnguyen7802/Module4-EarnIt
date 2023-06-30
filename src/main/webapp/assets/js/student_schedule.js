@@ -36,7 +36,9 @@ $(window).on("load", function () {
 
 function fetchWeek(week, year) {
     days.map(removeAllChildNodes)
-    //removeAllChildNodes(list_overview)
+    removeAllChildNodes(pending)
+    removeAllChildNodes(rejected)
+    removeAllChildNodes(accepted)
     fetch(window.location.origin + `/earnit/api/submissions/student/week?week=${week}&year=${year}`)
         .then(response => {
             if (response.ok) {

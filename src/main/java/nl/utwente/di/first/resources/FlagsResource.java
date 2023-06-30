@@ -31,7 +31,8 @@ public class FlagsResource {
 
         HttpSession session = req.getSession();
         String email = session.getAttribute("email").toString();
-        return FlagDAO.instance.getAllWeeklyFlags(email, week, year);
+        String role = session.getAttribute("role").toString();
+        return FlagDAO.instance.getAllWeeklyFlags(email, role, week, year);
     }
 
     @POST

@@ -59,8 +59,21 @@ public enum FlagDAO {
      * @param year - the year being investigated
      * @return a list of Flag (i.e. weekly submission) of a student
      */
-    public List<Flag> getAllWeeklyFlags(String email, int week, int year) {
+    public List<Flag> getAllWeeklyFlags(String email, String role, int week, int year) {
         try (Connection connection = DBConnection.createConnection()) {
+            String roleAbbrev;
+            switch (role) {
+                case "STUDENT":
+                    roleAbbrev = "st";
+                    break;
+                case "COMPANY":
+                    roleAbbrev = "c";
+                    break;
+                default:
+                    //TODO Think of a good way to handle unexpected things (this case in the switch *should* never occur, because the API should only be called if the user is logged in as either a student or company)
+                    roleAbbrev = "st";
+                    break;
+            }
             
             PreparedStatement preparedStatement = connection.prepareStatement(
                     "SELECT e.eid, SUM(hours) AS total_hours, c.name AS company_name, job_title, c.logo AS logo, f.status, f.suggested_hours " +
@@ -69,8 +82,8 @@ public enum FlagDAO {
                             "AND f.week = ?" +
                             "AND DATE_PART('week', worked_date) = f.week " +
                             "AND DATE_PART('year', worked_date) = ? " +
-                            "AND st.email = ? " +
-                            "GROUP BY e.eid, c.name, job_title, c.logo, f.status, f.week"
+                            "AND "+ roleAbbrev +".email = ? " +
+                            "GROUP BY e.eid, c.name, job_title, c.logo, f.status, f.week, f.suggested_hours"
             );
 
             preparedStatement.setInt(1, week);
@@ -106,11 +119,13 @@ public enum FlagDAO {
             
             String query = "UPDATE flag " +
                     "SET status = ?, suggested_hours = ? " +
-                    "WHERE eid = ?";
+                    "WHERE eid = ? AND week = ? AND year = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, flag.getStatus());
             preparedStatement.setInt(2, flag.getSuggested_hours());
             preparedStatement.setInt(3, flag.getEid());
+            preparedStatement.setInt(4, flag.getWeek());
+            preparedStatement.setInt(5, flag.getYear());
             return preparedStatement.executeUpdate() == 1;
 
         } catch (SQLException e) {
