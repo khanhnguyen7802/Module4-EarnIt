@@ -45,7 +45,7 @@ submit.addEventListener("click", function() {
     company.contact = form.contact.value === "" ? null : sanitize(form.contact.value);
     company.location = form.location.value === "" ? null : sanitize(form.location.value);
     company.kvk_num = form.kvk_num.value === "" ? null : sanitize(form.kvk_num.value);
-    company.password = form.password.value === "" ? initialData.password.value : sanitize(form.password.value);
+    // company.password = form.password.value === "" ? initialData.password.value : sanitize(form.password.value);
 
     // Check if there are any changes
     if (JSON.stringify(company) === JSON.stringify(initialData)) {

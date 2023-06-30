@@ -81,27 +81,26 @@ public enum StudentDAO {
         try (Connection connection = DBConnection.createConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(
                     "UPDATE student " +
-                            "SET email = ?, password = ?, salt = ?, name = ?, university = ?, study = ?, skills = ?, btw_number = ? " +
+                            "SET email = ?, name = ?, university = ?, study = ?, skills = ?, btw_number = ? " +
                             "WHERE email = ?"
             );
-            byte[] byteSalt = Security.getSalt();
-            String salt = Security.toHex(byteSalt);
-            String securePassword = Security.saltSHA256(student.getPassword(), byteSalt);
+//            byte[] byteSalt = Security.getSalt();
+//            String salt = Security.toHex(byteSalt);
+//            String securePassword = Security.saltSHA256(student.getPassword(), byteSalt);
 
             preparedStatement.setString(1, student.getEmail());
-            preparedStatement.setString(2, securePassword);
-            preparedStatement.setString(3, salt);
-            preparedStatement.setString(4, student.getName());
+//            preparedStatement.setString(2, securePassword);
+//            preparedStatement.setString(3, salt);
+            preparedStatement.setString(2, student.getName());
 //            preparedStatement.setDate(5, Date.valueOf(student.getBirth()));
-            preparedStatement.setString(5, student.getUniversity());
-            preparedStatement.setString(6, student.getStudy());
-            preparedStatement.setString(7, student.getSkills());
-            preparedStatement.setString(8, student.getBtw_num());
+            preparedStatement.setString(3, student.getUniversity());
+            preparedStatement.setString(4, student.getStudy());
+            preparedStatement.setString(5, student.getSkills());
+            preparedStatement.setString(6, student.getBtw_num());
+            preparedStatement.setString(7, email);
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
     }

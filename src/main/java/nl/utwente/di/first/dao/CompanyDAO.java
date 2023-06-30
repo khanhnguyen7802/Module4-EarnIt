@@ -104,26 +104,25 @@ public enum CompanyDAO {
         try (Connection connection = DBConnection.createConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(
                     "UPDATE company " +
-                            "SET email = ?, password = ?, salt = ?, name = ?, location = ?, field = ?, contact = ?, kvk_number = ? " +
+                            "SET email = ?, name = ?, location = ?, field = ?, contact = ?, kvk_number = ? " +
                             "WHERE email = ?"
             );
-            byte[] byteSalt = Security.getSalt();
-            String salt = Security.toHex(byteSalt);
-            String securePassword = Security.saltSHA256(company.getPassword(), byteSalt);
+//            byte[] byteSalt = Security.getSalt();
+//            String salt = Security.toHex(byteSalt);
+//            String securePassword = Security.saltSHA256(company.getPassword(), byteSalt);
 
             preparedStatement.setString(1, company.getEmail());
-            preparedStatement.setString(2, securePassword);
-            preparedStatement.setString(3, salt);
-            preparedStatement.setString(4, company.getName());
-            preparedStatement.setString(5, company.getLocation());
-            preparedStatement.setString(6, company.getField());
-            preparedStatement.setString(7, company.getContact());
-            preparedStatement.setString(8, company.getKvk_num());
+//            preparedStatement.setString(2, securePassword);
+//            preparedStatement.setString(3, salt);
+            preparedStatement.setString(2, company.getName());
+            preparedStatement.setString(3, company.getLocation());
+            preparedStatement.setString(4, company.getField());
+            preparedStatement.setString(5, company.getContact());
+            preparedStatement.setString(6, company.getKvk_num());
+            preparedStatement.setString(7, email);
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
     }

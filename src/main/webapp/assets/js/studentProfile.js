@@ -48,7 +48,7 @@ submit.addEventListener("click", function() {
     student.study = form.study.value === "" ? null : sanitize(form.study.value);
     student.skills = form.skills.value === "" ? null : sanitize(form.skills.value);
     student.btw_num = form.btw_num.value === "" ? null : sanitize(form.btw_num.value);
-    student.password = form.password.value === "" ? initialData.password.value : sanitize(form.password.value);
+    // student.password = form.password.value === "" ? initialData.password.value : sanitize(form.password.value);
 
     // Check if there are any changes
     if (JSON.stringify(student) === JSON.stringify(initialData)) {
