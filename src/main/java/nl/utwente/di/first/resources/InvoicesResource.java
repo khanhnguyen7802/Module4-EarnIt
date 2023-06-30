@@ -1,8 +1,5 @@
 package nl.utwente.di.first.resources;
 
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Paragraph;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.ws.rs.*;
@@ -41,23 +38,23 @@ public class InvoicesResource {
         return (InvoiceDAO.instance.addInvoice(invoice)) ? "SUCCESS" : "FAILURE";
     }
 
-    @GET
-    @Path("/pdf")
-    @Produces("application/pdf")
-    public Document getInvoice(@QueryParam("eid") int eid,
-                               @QueryParam("week") int week,
-                               @QueryParam("year") int year){
-
-        Invoice invoice = InvoiceDAO.instance.getInvoice(eid, week, year);
-
-        Document doc = new Document();
-        try{
-            doc.add(new Paragraph(invoice.getCompany_name()));
-            doc.add(new Paragraph(invoice.getJob_title()));
-            doc.add(new Paragraph(invoice.getStudent_name()));
-            doc.add(new Paragraph((float) invoice.getTotal_salary()));
-        }catch(DocumentException e){/*TODO*/};
-        return doc;
-    }
+//    @GET
+//    @Path("/pdf")
+//    @Produces("application/pdf")
+//    public Document getInvoice(@QueryParam("eid") int eid,
+//                               @QueryParam("week") int week,
+//                               @QueryParam("year") int year){
+//
+//        Invoice invoice = InvoiceDAO.instance.getInvoice(eid, week, year);
+//
+//        Document doc = new Document();
+//        try{
+//            doc.add(new Paragraph(invoice.getCompany_name()));
+//            doc.add(new Paragraph(invoice.getJob_title()));
+//            doc.add(new Paragraph(invoice.getStudent_name()));
+//            doc.add(new Paragraph((float) invoice.getTotal_salary()));
+//        }catch(DocumentException e){/*TODO*/};
+//        return doc;
+//    }
 
 }

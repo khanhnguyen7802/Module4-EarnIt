@@ -16,6 +16,7 @@ public class Invoice {
     int week_number;
     String job_title;
     byte[] logo;
+    String status;
 
     public Invoice() {
 
@@ -124,5 +125,13 @@ public class Invoice {
 
     public void setLogo(byte[] logo) {
         this.logo = logo;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
