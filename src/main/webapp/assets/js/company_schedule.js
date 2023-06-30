@@ -13,6 +13,16 @@ const in_progress = document.getElementById("in-progress")
 const weekNumberSelect = document.getElementById("week-dd");
 const yearNumberSelect = document.getElementById("year-dd");
 
+const list_0 = document.getElementById("list-0")
+const list_1 = document.getElementById("list-1")
+const list_2 = document.getElementById("list-2")
+const list_3 = document.getElementById("list-3")
+const list_4 = document.getElementById("list-4")
+const list_5 = document.getElementById("list-5")
+const list_6 = document.getElementById("list-6")
+
+let days = [list_6, list_0, list_1, list_2, list_3, list_4, list_5]
+
 weekNumberSelect.addEventListener("change", function() {
     if (weekNumberSelect.value !== "" && yearNumberSelect.value !== "") fetchWeek(weekNumberSelect.value, yearNumberSelect.value)
 })
@@ -53,7 +63,22 @@ function fetchWeek(week, year) {
                 company_logo.src = (item["logo"] == null) ? company_logo.src : "data:image/svg+xml;base64," + item["logo"];
                 view_details.addEventListener("click", function() {
                     let flag_info = document.getElementById("flag-info")
-                    //TODO decide whether or not to do a seperate fetch or get the data at the beginning (probably better to do a separate fetch)
+                    fetch(window.location.origin + `/earnit/api/submissions/company/week?eid=${item["eid"]}&week=${week}&year=${year}`)
+                        .then(response => {
+                            if (response.ok) {
+                                return response.json();
+                            } else {
+                                throw new Error('Request failed with status ' + response.status);
+                            }
+                        })
+                        .then(json => {
+                            console.log(json);
+                            for (let item of json) {
+                                console.log(item)
+                                days[new Date(item["date"]).getDay()].querySelector(".hours").innerHTML = item["hours"]
+                                days[new Date(item["date"]).getDay()].querySelector(".notes").innerHTML = item["comment"]
+                            }
+                        })
                     flag_info.innerHTML = `${item["job_title"] == null ? "Not specified" : item["job_title"]} (${item["company_name"]})`
                     flag_popup.style.display = "flex"
                 })

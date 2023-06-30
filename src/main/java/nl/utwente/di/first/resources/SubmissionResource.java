@@ -37,11 +37,11 @@ public class SubmissionResource {
     @GET
     @Path("company/week")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Submission> getAllSubmissionsByWeekForCompany(@QueryParam("week") int week,
+    public List<Submission> getAllSubmissionsByWeekForCompany(@QueryParam("eid") int eid, @QueryParam("week") int week,
                              @QueryParam("year") int year) {
         HttpSession session = req.getSession();
         String email = session.getAttribute("email").toString();
-        return SubmissionDAO.instance.getWeeklySubmissionForCompany(email, week, year);
+        return SubmissionDAO.instance.getWeeklySubmissionForCompany(eid, email, week, year);
     }
 
     /**

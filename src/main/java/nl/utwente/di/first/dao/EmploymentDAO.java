@@ -25,8 +25,7 @@ public enum EmploymentDAO {
                            "WHERE status = 'appeal' " +
                            "AND eid = e.eid) AS appeal_amount " +
                            "FROM student s, company c, employment e, flag f  " +
-                           "WHERE s.id = e.sid AND c.id = e.cid AND f.eid = e.eid  " +
-                           "GROUP BY e.eid, e.sid, e.cid, s.name, c.name, job_title, job_description, salary_per_hour, c.logo";
+                           "WHERE s.id = e.sid AND c.id = e.cid AND f.eid = e.eid";
         
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(query);

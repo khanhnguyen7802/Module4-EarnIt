@@ -127,23 +127,25 @@ public enum SubmissionDAO {
     }
 
 
-    public List<Submission> getWeeklySubmissionForCompany(String email, int week, int year) {
+    public List<Submission> getWeeklySubmissionForCompany(int eid, String email, int week, int year) {
         List<Submission> submissions = new ArrayList<>();
         try (Connection connection = DBConnection.createConnection()) {
 
             // this query will return all students together with employment for a company in the given (week, year)
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "SELECT e.eid, comment, hours, worked_date, s.name AS student_name, job_title " +
+                    "SELECT e.eid, comment, hours, worked_date, st.name AS student_name, job_title " +
                             "FROM submission s, employment e, student st, company c " +
                             "WHERE s.eid = e.eid AND e.sid = st.id AND c.id = e.cid " +
                             "AND DATE_PART('week', worked_date) = ? " +
                             "AND DATE_PART('year', worked_date) = ? " +
+                            "AND e.eid = ?" +
                             "AND c.email = ?"
             );
 
             preparedStatement.setInt(1, week);
             preparedStatement.setInt(2, year);
-            preparedStatement.setString(3, email);
+            preparedStatement.setInt(3, eid);
+            preparedStatement.setString(4, email);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 Submission submission = new Submission();
@@ -152,7 +154,6 @@ public enum SubmissionDAO {
                 submission.setHours(resultSet.getInt("hours"));
                 submission.setComment(resultSet.getString("comment"));
                 submission.setDate(resultSet.getDate("worked_date"));
-                submission.setCompany_name(resultSet.getString("company_name"));
                 submission.setJob_title(resultSet.getString("job_title"));
 
                 submissions.add(submission);
