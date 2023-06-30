@@ -21,34 +21,34 @@ fetch(window.location.origin + `/earnit/api/invoices/week?eid=${eid}&week=${week
                 const new_item = invoiceTemplate.content.cloneNode(true);
 
                 let company_name = new_item.querySelector("#company-name");
-                company_name.textContent = item["company_name"];
+                company_name.textContent = "Company name: ".concat(item["company_name"]);
                 let company_address = new_item.querySelector("#company-location")
                 // console.log(item["company_address"])
-                company_address.textContent = item["company_address"]
+                company_address.textContent = "Location: ".concat(item["company_address"])
                 let kvk_number = new_item.querySelector("#kvk-number")
-                kvk_number.textContent = "kvk number: ".concat(item["kvk_number"])
+                kvk_number.textContent = "KVK number: ".concat(item["kvk_number"])
                 let invoice_number = new_item.querySelector("#invoice-number")
-                invoice_number.textContent = "invoice number: ".concat(item["iid"])
+                invoice_number.textContent = "Invoice number: ".concat(item["iid"])
                 let date_of_issue = new_item.querySelector("#date-of-issue")
-                date_of_issue.textContent = new Date().toJSON().slice(0, 10);
+                date_of_issue.textContent = "Date of issue: ".concat(new Date().toJSON().slice(0, 10));
 
                 let student_name = new_item.querySelector("#student-name")
-                student_name.textContent = item["student_name"]
+                student_name.textContent = "Student name: ".concat(item["student_name"])
                 let btw_number = new_item.querySelector("#btw-number")
-                btw_number.textContent = "btw number: ".concat(item["btw_number"])
+                btw_number.textContent = "BTW number: ".concat(item["btw_number"])
 
                 let week_number = new_item.querySelector("#week-number")
                 week_number.textContent = week
                 let job_name = new_item.querySelector("#job-title")
-                job_name.textContent = "Position: ".concat(item["job_title"])
+                job_name.textContent = "Position - ".concat(item["job_title"])
                 let total_salary = new_item.querySelector("#total-salary")
-                total_salary.textContent = item["total_salary"]
+                total_salary.textContent = "Gross worth: ".concat(item["total_salary"])
                 total_salary.value = item["total_salary"]
                 let tax_value = new_item.querySelector("#tax")
                 tax_value.textContent = item["total_salary"] * (21 / 100)
                 tax_value.value = item["total_salary"] * (21 / 100)
                 let total_amount = new_item.querySelector("#total-amount")
-                total_amount.textContent = total_salary.value - tax_value.value
+                total_amount.textContent = (Math.round((total_salary.value - tax_value.value) * 100) / 100).toFixed(2)
 
                 sectionInvoice.append(new_item)
 
