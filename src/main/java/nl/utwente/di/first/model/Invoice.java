@@ -14,7 +14,6 @@ public class Invoice {
     String kvk_number;
     String student_name;
     String btw_number;
-    int week_number;
     String job_title;
     byte[] logo;
     String status;
@@ -102,14 +101,6 @@ public class Invoice {
 
     public void setBtw_number(String btw_number) {
         this.btw_number = btw_number;
-    }
-
-    public int getWeek_number() {
-        return week_number;
-    }
-
-    public void setWeek_number(int week_number) {
-        this.week_number = week_number;
     }
 
     public String getJob_title() {

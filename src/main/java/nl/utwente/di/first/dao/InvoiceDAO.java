@@ -34,7 +34,6 @@ public enum InvoiceDAO {
             invoice.setKvk_number(resultSet.getString("kvk_number"));
             invoice.setStudent_name(resultSet.getString("student_name"));
             invoice.setBtw_number(resultSet.getString("btw_number"));
-            invoice.setWeek_number(resultSet.getInt("week_number"));
             invoice.setJob_title(resultSet.getString("job_title"));
             invoice.setLogo(resultSet.getBytes("logo"));
             invoice.setStatus(resultSet.getString("status"));
@@ -76,12 +75,12 @@ public enum InvoiceDAO {
             
             // this query will return all invoices for a student within the time range
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "SELECT DISTINCT i.iid AS invoice_number, i.week AS week_number, i.year, " +
+                    "SELECT DISTINCT i.iid AS invoice_number, i.week AS week_number, i.year, i.eid, " +
                             "c.name AS company_name, s.name AS student_name, c.logo AS logo, s.id AS student_id, c.location AS company_address, " +
                             "f.status, e.job_title, total_salary, date_of_issue, c.kvk_number, s.btw_number " +
                             "FROM invoice i, company c, employment e, student s, flag f " +
                             "WHERE i.eid = e.eid AND e.cid = c.id AND s.id = e.sid AND f.eid = e.eid " +
-                            "AND f.eid = ? AND week = ? AND year = ? "
+                            "AND f.eid = ? AND i.week = ? AND i.year = ? "
             );
             preparedStatement.setInt(1, eid);
             preparedStatement.setInt(2, week);
