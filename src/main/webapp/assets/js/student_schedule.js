@@ -111,7 +111,7 @@ function fetchWeek(week, year) {
                             sessionStorage.setItem("eid", item["eid"])
                             sessionStorage.setItem("week", week)
                             sessionStorage.setItem("year", year)
-                            window.open("../excluded/invoice.html");
+                            window.open("../student/invoice.html");
                             
                             })
                         

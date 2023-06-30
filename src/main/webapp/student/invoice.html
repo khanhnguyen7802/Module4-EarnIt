@@ -4,64 +4,64 @@
 <head>
     <meta charset="UTF-8">
     <title>Invoice</title>
-    <link rel="stylesheet" href="invoice.css">
+    <link rel="stylesheet" href="../assets/css/invoice.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 
 <body>
-    <div>
+    <div id="button" style="position:absolute; right:23%; top:30px; z-index: 1; border-radius:4px">
         <button id="download-button">Download as PDF</button>
     </div>
 
     <div class="sheet-outer A4">
     <section class="sheet padding-5mm" id="invoice">
-        <article>This is an A4 document.</article>
+<!--        <article>This is an A4 document.</article>-->
         <img id="logo" src="../assets/img/Earn%20It%20Logo.svg">
 
-        <ul class="info">
-            <li>'Insert company name'</li>
-            <li>'Insert address'</li>
-            <li>'Insert kvk number'</li>
-        </ul>
+<!--        <ul class="info">-->
+<!--            <li>'Insert company name'</li>-->
+<!--            <li>'Insert address'</li>-->
+<!--            <li>'Insert kvk number'</li>-->
+<!--        </ul>-->
 
-        <ul class="info">
-            <li>Factuurnummer : 'Insert invoice number'</li>
-            <li>Factuurdatum : 'Insert date of issue'</li>
-        </ul>
+<!--        <ul class="info">-->
+<!--            <li>Factuurnummer : 'Insert invoice number'</li>-->
+<!--            <li>Factuurdatum : 'Insert date of issue'</li>-->
+<!--        </ul>-->
 
-        <ul class="info">
-            <li>'Insert student name'</li>
-            <li>#'Insert student ID'</li>
-            <li>'Insert kvk number'</li>
-            <li>'Insert btw number'</li>
-        </ul>
+<!--        <ul class="info">-->
+<!--            <li>'Insert student name'</li>-->
+<!--            <li>#'Insert student ID'</li>-->
+<!--            <li>'Insert kvk number'</li>-->
+<!--            <li>'Insert btw number'</li>-->
+<!--        </ul>-->
 
-        <hr class="bold-line">
+<!--        <hr class="bold-line">-->
 
-        <div class="week">
-            <div>Weeknummer</div>
-            <div>'Insert week number'</div>
-        </div>
+<!--        <div class="week">-->
+<!--            <div>Weeknummer</div>-->
+<!--            <div>'Insert week number'</div>-->
+<!--        </div>-->
 
-        <div class="title-value">
-            <div>'Insert position in the company'</div>
-            <div>'Insert the money earned for that week'</div>
-        </div>
+<!--        <div class="title-value">-->
+<!--            <div>'Insert position in the company'</div>-->
+<!--            <div>'Insert the money earned for that week'</div>-->
+<!--        </div>-->
 
-        <div id="excl-btw">Total Bedrag excl. BTW</div>
-        <div class="tax">
-            <div>BTW 21%</div>
-            <div>'Insert tax value(=value*21/100)'</div>
-        </div>
+<!--        <div id="excl-btw">Total Bedrag excl. BTW</div>-->
+<!--        <div class="tax">-->
+<!--            <div>BTW 21%</div>-->
+<!--            <div>'Insert tax value(=value*21/100)'</div>-->
+<!--        </div>-->
 
-        <hr class="light-line">
+<!--        <hr class="light-line">-->
 
-        <div class="total-amount">
-            <div>Einbedrag</div>
-            <div>'Insert total amount'</div>
-        </div>
+<!--        <div class="total-amount">-->
+<!--            <div>Einbedrag</div>-->
+<!--            <div>'Insert total amount'</div>-->
+<!--        </div>-->
 
-        <hr class="bold-line">
+<!--        <hr class="bold-line">-->
 
     </section>
 
@@ -82,8 +82,8 @@
 
     <ul class="info">
         <li id="student-name">'Insert student name'</li>
-        <li id="student-id">#'Insert student ID'</li>
-        <li id="btw_number">'Insert btw number'</li>
+<!--        <li id="student-id">#'Insert student ID'</li>-->
+        <li id="btw-number">'Insert btw number'</li>
     </ul>
 
     <hr class="bold-line">
@@ -98,7 +98,7 @@
         <div id="total-salary">'Insert the money earned for that week'</div>
     </div>
 
-    <div>Total Bedrag excl. BTW</div>
+    <div id="excl-btw">Total Bedrag excl. BTW</div>
     <div class="tax">
         <div>BTW 21%</div>
         <div id="tax">'Insert tax value(=value*21/100)'</div>
@@ -114,9 +114,6 @@
     <hr class="bold-line">
 
 </template>
-
-
-
 
 
 
@@ -139,5 +136,6 @@
         button.addEventListener('click', generatePDF);
     </script>
 
+    <script src="../assets/js/createInvoice.js"></script>
 </body>
 </html>

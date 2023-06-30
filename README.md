@@ -52,28 +52,99 @@ When you're ready to make this README your own, just edit this file and use the 
 Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
 
 ## Name
-Choose a self-explaining name for your project.
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+Earn It Project 
+Group 5
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+##Project description
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+The goal of this project is to develop a new platform where students can submit their hours and companies can approve them, with an invoice automatically generated upon approval.
+
+The platform will have three main types of users:
+- Students
+- Companies
+- Earn It Staff
+
+Students will be able to view jobs they're linked to and fill in their hours worked on a day-by-day basis. At the end of each week, students will confirm their hours and send them to the company for approval. Additionally, students will be able to include notes or comments to provide context or explain any discrepancies related to their hours worked. Once approved, an invoice is generated, and all invoices from the past year will be accessible to the student.
+
+Companies will be able to view all students they've hired and approve hours worked at the end of each week. If a company notices any suspicious submissions, they can flag them, and the Earn It staff will investigate. Invoices will be generated once hours are approved and kept accessible to the company, which can decide how long they want to keep them before deletion.
+
+Earn It Staff will link students and companies for a role and have an overview of all students and companies on the platform. They won't necessarily see the hours breakdown but will be able to view all flagged submissions and resolve them by accepting or rejecting the hours. It can be assumed that the decision will be made through conversations that happen outside the platform.
+
+
+## Tools
+
+-- During the procedure of project implementation, we are using Trello board to have a visual idea of all the requirements and user stories. Moreover, it is used to split the cards there, namely the responsibilities to each of the members of the group. You can access our Trello board via the link: https://trello.com/b/BNmNTXqN/m4-project 
+
+--During the course, scrum master of that week receives an email with a username and password for the Provider Platform-as-a-Service (PaaS). These login credentials are shared among all group members. Here you can find the URL to access the platform 
+
+--To use the sorted data, the database schema was created and added to our GitLab. You can find the database schema below: 
+
+User(id PK, email NOT NULL, password NOT NULL, salt NOT NULL)
+
+Student(id PK, email NOT NULL, password NOT NULL, salt NOT NULL, name NOT NULL, university, birthdate NOT NULL, study NOT NULL, skills, btw_number, UNIQUE(btw_number))
+
+Company(id PK, email NOT NULL, password NOT NULL, salt NOT NULL, name NOT NULL, location NOT NULL, field, contact NOT NULL, kvk_number, logo, UNIQUE(kvk_number))
+
+Admin(id PK, email NOT NULL, password NOT NULL, salt NOT NULL)
+
+Employment(eid PK, sid NOT NULL, cid NOT NULL, job_title, job_description, salary_per_hour, FK sid REF Student(id), FK cid REF Company(id), UNIQUE(sid, cid))
+
+Submission(submission_id PK, hours NOT NULL, eid NOT NULL, comment, worked_date, FK eid REF Employment(eid), UNIQUE(worked_date, eid))
+
+Invoice(iid PK, week, eid NOT NULL,  total_salary, date_of_issue, FK eid REF Employment(eid), UNIQUE(eid))
+
+Flag(eid PK, week PK, year PK, week NOT NULL, year NOT NULL, status, suggested_hours, FK eid REF Employment(eid))
+
+
 
 ## Installation
+
 Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
 
 ## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+
+The primary usage of our project based on the idea to link students and company with each other and ensure the interaction between them, involving the Earn It staff and, to the certain extent, Earn It platform. As a very useful and captivating example, imagine the situation when the company should review the progress of every employee (in our case student), as well as each student should submit his or her working hours and progress. With our contribution and implementation of this project, the steps mentioned above will not be so time-consuming and stressful, as student and company are able to do everything in a platform digitally, with the interaction of Admin, who can either approve flagged submissions by company, or deny it.
 
 ## Support
 Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
 
 ## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+
+The roadmap is sorted by the releases order:
+
+For Student:
+
+1. Show linked jobs 
+2. Login 
+3. Logout
+4. Page restriction
+5. Search companies
+6. Registration
+7. Submit progress
+8. List students invoices
+9. Export
+10. Review progress of each week
+
+For Company:
+
+1. Login 
+2. Logout 
+3. List linked students
+4. Registration 
+5. Search students
+6. View submitted submissions 
+7. Flagging submissions 
+8. List employees' invoices 
+9. Export 
+
+For admin:
+
+1. Linking jobs 
+2. Search function
+3. Manage flagged submissions 
+4. Create new jobs 
+
 
 ## Contributing
 State if you are open to contributions and what your requirements are for accepting them.
@@ -83,10 +154,14 @@ For people who want to make changes to your project, it's helpful to have some d
 You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
 
 ## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
 
-## License
-For open source projects, say how it is licensed.
+The people who made a contribution to the project are the group members:
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+Radu Mungu (back-end developer),
+Khanh Nguyen (back-end developer),
+Cuong Bui (front-end developer),
+Kamran Babayev (front-end developer),
+Indigo Carelsz (back-end developer),
+Hieu Chu (front-end developer)
+
+In addition, we, as the developers of Earn It Group 5, would ike to express gratitude to our Mentor, Remus Niculescu, who was guiding us during the whole path of the project and provided us with all updates, relating to the Sprint Reviews requirements and client's preferences. 
