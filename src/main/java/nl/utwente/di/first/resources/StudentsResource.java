@@ -5,6 +5,7 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 import nl.utwente.di.first.dao.StudentDAO;
 import nl.utwente.di.first.model.Student;
 
@@ -30,16 +31,15 @@ public class StudentsResource {
 
     /**
      * Given a student's email
-     * @param sid id of the student whose information is being requested.
      * @return the personal information of that specific student
      */
-    @Path("{sid}")
+    @Path("/profile")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Student getStudent(
-            @PathParam("sid") String sid
-    ) {
-        return StudentDAO.instance.getStudent(sid);
+    public Student getCurrentProfile() {
+        HttpSession session = req.getSession();
+        String email = session.getAttribute("email").toString();
+        return StudentDAO.instance.getStudent(email);
     }
     
     @Path("all")
@@ -50,32 +50,13 @@ public class StudentsResource {
     }
 
     @Path("/update")
-    @PUT
-    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public void updateStudent(
-            @FormParam("email") String email,
-            @FormParam("password") String password,
-            @FormParam("name") String name,
-            @FormParam("birth") String birth,
-            @FormParam("university") String university,
-            @FormParam("study") String study,
-            @FormParam("skills") String skills,
-            @FormParam("btw_num") String btw_num
-    ) {
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response updateStudent(Student student) {
         HttpSession session = req.getSession();
         String currentEmail = session.getAttribute("email").toString();
-        Student student = new Student();
-        student.setEmail(email);
-        student.setPassword(password);
-        student.setName(name);
-        student.setBirth(birth);
-        student.setUniversity(university);
-        student.setStudy(study);
-        student.setSkills(skills);
-        student.setBtw_num(btw_num);
-
         StudentDAO.instance.updateStudent(currentEmail, student);
-
         session.setAttribute("email", student.getEmail());
+        return Response.ok("SUCCESS").build();
     }
 }

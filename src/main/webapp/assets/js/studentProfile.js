@@ -1,59 +1,75 @@
-const saveChanges = document.getElementById("save_changes");
-const studentUniversity = document.getElementById("university");
-const studentStudy = document.getElementById("study");
-const studentSkills = document.getElementById("skills");
-const emailField = document.getElementById("email");
-const passwordField = document.getElementById("new_password");
-const confirmPassword = document.getElementById("comfirm_password"); // Corrected ID
+const form = document.getElementById("form");
+const submit = document.getElementById("save_button");
+
+$(window).on("load", function () {
+    fetch(window.location.origin + "/earnit/api/students/profile")
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Request failed with status ' + response.status);
+            }
+        })
+        .then(json => {
+            console.log(json);
+            const data = json[0];
+            form.email.value = data.email;
+            form.name.value = data.name;
+            form.university.value = data.university;
+            form.study.value = data.study;
+            form.skills.value = data.skills;
+        })
+});
 
 // Initial data
 let initialData = {
-    email: emailField.value,
-    password: passwordField.value,
-    university: studentUniversity.value,
-    study: studentStudy.value,
-    skills: studentSkills.value
+    email: form.email.value,
+    name: form.name.value,
+    university: form.university.value,
+    study: form.study.value,
+    skills: form.skills.value
 };
 
-saveChanges.addEventListener("click", function() {
-    let user = {};
+submit.addEventListener("click", function() {
+    let student = {};
 
-    if (passwordField.value !== confirmPassword.value) {
+    if (form.password.value !== form.confirm_pass.value) {
         alert("Passwords do not match!");
         return;
     }
 
-    user.email = emailField.value;
-    user.password = passwordField.value;
-    user.university = studentUniversity.value;
-    user.study = studentStudy.value;
-    user.skills = studentSkills.value;
+    student.email = form.email.value;
+    student.name = form.name.value;
+    student.university = form.university.value;
+    student.study = form.study.value;
+    student.skills = form.skills.value;
+    student.password = form.password.value;
 
     // Check if there are any changes
-    if (JSON.stringify(user) === JSON.stringify(initialData)) {
-        alert("No changes detected.");
+    if (JSON.stringify(student) === JSON.stringify(initialData)) {
+        alert("No changes detected!");
         return;
     }
 
-    if (student_tab.ariaSelected === "true") {
-        fetch(window.location.origin + "/earnit/api/students", {
-            method: "PUT",
-            headers: {
-                "Content-type": "application/json"
-            },
-            body: JSON.stringify(user)
+    fetch(window.location.origin + "/earnit/api/students/update", {
+        method: "POST",
+        headers: {
+            "Content-type": "application/json"
+        },
+        body: JSON.stringify(student)
+    })
+        .then(response => {
+            if (!response.ok) throw new Error("HTTP Error! Status: " + response.status);
+            return response.text();
         })
-            .then(response => {
-                if (!response.ok) throw new Error("HTTP Error! Status: " + response.status);
-                return response.text();
-            })
-            .then(data => {
-                // TODO: Replace this with redirect
-                if (data === "SUCCESS") alert("Success!");
-                if (data === "FAILURE") alert("Oof, failure...");
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-    }
+        .then(data => {
+            if (data === "SUCCESS"){
+                window.location.href = "./student_profile";
+            } else {
+                alert("Please try again");
+            }
+        })
+        .catch(error => {
+            console.error(error);
+        });
 });

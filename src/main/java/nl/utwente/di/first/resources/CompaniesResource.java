@@ -5,6 +5,7 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 import nl.utwente.di.first.dao.CompanyDAO;
 import nl.utwente.di.first.dao.StudentDAO;
 import nl.utwente.di.first.model.Company;
@@ -34,13 +35,13 @@ public class CompaniesResource {
      * @param cid the id of the company which is requested.
      * @return the information of that specific company
      */
-    @Path("{cid}")
+    @Path("/profile")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Company getCompany(
-            @PathParam("cid") String cid
-    ) {
-        return CompanyDAO.instance.getCompany(cid);
+    public Company getCurrentProfile() {
+        HttpSession session = req.getSession();
+        String email = session.getAttribute("email").toString();
+        return CompanyDAO.instance.getCompany(email);
     }
 
     @Path("all")
@@ -51,30 +52,13 @@ public class CompaniesResource {
     }
 
     @Path("/update")
-    @PUT
-    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public void updateCompany(
-            @FormParam("email") String email,
-            @FormParam("password") String password,
-            @FormParam("name") String name,
-            @FormParam("location") String location,
-            @FormParam("field") String field,
-            @FormParam("contact") String contact,
-            @FormParam("btw_num") String kvk_num
-    ) {
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response updateCompany(Company company) {
         HttpSession session = req.getSession();
         String currentEmail = session.getAttribute("email").toString();
-        Company company = new Company();
-        company.setEmail(email);
-        company.setPassword(password);
-        company.setName(name);
-        company.setLocation(location);
-        company.setField(field);
-        company.setContact(contact);
-        company.setKvk_num(kvk_num);
-
         CompanyDAO.instance.updateCompany(currentEmail, company);
-
         session.setAttribute("email", company.getEmail());
+        return Response.ok("SUCCESS").build();
     }
 }
