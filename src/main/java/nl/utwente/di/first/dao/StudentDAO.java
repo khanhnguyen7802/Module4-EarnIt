@@ -74,6 +74,22 @@ public enum StudentDAO {
         }
     }
 
+    public void updateStudent(String email, Student student) {
+
+        try (Connection connection = DBConnection.createConnection()) {
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                    "UPDATE student " +
+                            "SET email = ?, "
+            );
+            preparedStatement.setString(1, email);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            List<Student> results = getQuery(resultSet);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     private List<Student> getQuery(ResultSet resultSet) throws SQLException {
         List<Student> students = new ArrayList<>();
         while (resultSet.next()) {

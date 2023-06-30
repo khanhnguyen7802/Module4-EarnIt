@@ -3,8 +3,8 @@ const studentUniversity = document.getElementById("university");
 const studentStudy = document.getElementById("study");
 const studentSkills = document.getElementById("skills");
 const emailField = document.getElementById("email");
-const passwordField = document.getElementById("newpassword");
-const confirmPassword = document.getElementById("comfirmpassword"); // Corrected ID
+const passwordField = document.getElementById("new_password");
+const confirmPassword = document.getElementById("comfirm_password"); // Corrected ID
 
 // Initial data
 let initialData = {

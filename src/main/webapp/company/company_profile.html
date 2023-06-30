@@ -20,16 +20,16 @@
 <body>
 <ul class="nav flex-column shadow d-flex sidebar mobile-hid">
     <li class="nav-item logo-holder">
-        <div class="text-center text-white logo py-4 mx-4"><a class="active text-decoration-none" id="title" href="#" style="color: var(--bs-gray-100);padding-top: 30px;padding-bottom: 36px;"><img src="../assets/img/Earn%20It%20Logo.svg" style="width: 100px;"></a></div>
+        <div class="text-center text-white logo py-4 mx-4"><a class="active text-decoration-none" id="title" href="#" style="color: var(--bs-gray-100);padding-top: 30px;padding-bottom: 36px;"><img src="../assets/img/Earn%20It%20Logo.svg" style="width: 100px;background: white;border-radius: 50%"></a></div>
     </li>
     <li class="nav-item">
-        <a class="nav-link text-start py-1 px-0" href="../student/jobs.html"><i class="fas fa-building mx-3" style="color: var(--bs-gray-100);"></i><span class="text-nowrap mx-2" style="color: var(--bs-white);">Jobs</span></a>
+        <a class="nav-link text-start py-1 px-0" href="../company/employees.html"><i class="fas fa-user-graduate mx-3" style="color: var(--bs-gray-100);"></i><span class="text-nowrap mx-2" style="color: var(--bs-white);">Students</span></a>
     </li>
-    <li class="nav-item"><a class="nav-link text-start py-1 px-0" href="../student/schedule_week.html"><i class="far fa-calendar-alt mx-3" style="color: var(--bs-gray-100);"></i><span class="text-nowrap mx-2" style="color: var(--bs-gray-100);">Schedule</span></a></li>
+    <li class="nav-item"><a class="nav-link text-start py-1 px-0" href="../company/schedule_week.html"><i class="far fa-calendar-alt mx-3" style="color: var(--bs-gray-100);"></i><span class="text-nowrap mx-2" style="color: var(--bs-gray-100);">Schedule</span></a></li>
     <li class="nav-item dropdown show"><a class="nav-link text-start dropdown-toggle py-1 px-0 position-relative" aria-expanded="true" data-bs-toggle="dropdown" href="#">
         <i class="fas fa-sliders-h mx-3" style="color: var(--bs-white);"></i><span class="text-nowrap mx-2" style="color: var(--bs-white);">Settings</span><i class="fas fa-caret-down float-none float-lg-end fa-sm" style="color: var(--bs-white);margin-right: 20px;margin-top: 5px;"></i></a>
         <div class="border-0 bounce animated dropdown-menu show fadeIn" data-bs-popper="none">
-            <a class="dropdown-item" href="./studentProfile.html" style="color: var(--bs-black);background: rgb(219, 84, 97);font-weight: bold;"><i class="far fa-user" style="text-align: justify;margin-left: -8px;margin-right: 25px;"></i><span>Edit profile</span></a>
+            <a class="dropdown-item" href="company_profile.html" style="color: var(--bs-black);background: rgb(219, 84, 97);font-weight: bold;"><i class="far fa-user" style="text-align: justify;margin-left: -8px;margin-right: 25px;"></i><span>Edit profile</span></a>
             <a class="dropdown-item" id="logoutButton" onclick="logout()" style="cursor: pointer;color: var(--bs-black);background: rgb(219, 84, 97);font-weight: bold;"><i class="fas fa-sign-out-alt" style="padding-left: 0px;margin-left: -8px;margin-right: 25px;"></i><span>Logout</span></a>
         </div>
     </li>
@@ -49,8 +49,8 @@
                                     <input class="form-control" type="text" id="email" placeholder="Email" style="width: 450px; margin-right: 30px">
                                 </td>
                                 <td>
-                                    <div class="col" for="university">University:</div>
-                                    <input class="form-control" type="text" id="university" placeholder="University" style="width: 500px">
+                                    <div class="col" for="contact">Contact:</div>
+                                    <input class="form-control" type="text" id="contact" placeholder="Contact number/Email" style="width: 500px">
                                 </td>
                             </tr>
                             </tbody>
@@ -58,15 +58,27 @@
 
                         <table class="row_2">
                             <tbody>
+                            <tr>
+                                <td>
+                                    <div class="col" for="name">Name:</div>
+                                    <input class="form-control" type="text" id="name" placeholder="Name" style="width: 450px; margin-right: 30px">
+                                </td>
+                                <td>
+                                    <div class="col" for="location">Location:</div>
+                                    <input class="form-control" type="text" id="location" placeholder="Location" style="width: 500px">
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                        <table class="row_3">
+                            <tbody>
                                 <tr>
                                     <td>
-                                        <div class="col" for="study">Study:</div>
-                                        <input class="form-control" type="text" id="study" placeholder="Study" style="width: 450px; margin-right: 30px">
+                                        <div class="col" for="field">Field:</div>
+                                        <input class="form-control" type="text" id="field" placeholder="Field" style="width: 450px; margin-right: 30px">
                                     </td>
-                                    <td>
-                                        <div class="col" for="skills">Skills:</div>
-                                        <input class="form-control" type="text" id="skills" placeholder="Skills" style="width: 500px">
-                                    </td>
+
                                 </tr>
                             </tbody>
                         </table>
@@ -75,12 +87,12 @@
                             <tbody>
                             <tr>
                                 <td>
-                                    <div class="col" for="newpassword">New password:</div>
-                                    <input class="form-control" id="newpassword" type="password" placeholder="New password..." style="width: 450px; margin-right: 30px">
+                                    <div class="col" for="new_password">New password:</div>
+                                    <input class="form-control" id="new_password" type="password" placeholder="New password..." style="width: 450px; margin-right: 30px">
                                 </td>
                                 <td>
-                                    <div class="col" for="comfirmpassword">Confirm password:</div>
-                                    <input class="form-control" id="comfirmpassword" type="password" placeholder="Confirm password..." style="width: 500px">
+                                    <div class="col" for="comfirm_password">Confirm password:</div>
+                                    <input class="form-control" id="comfirm_password" type="password" placeholder="Confirm password..." style="width: 500px">
                                 </td>
                             </tr>
                             </tbody>
