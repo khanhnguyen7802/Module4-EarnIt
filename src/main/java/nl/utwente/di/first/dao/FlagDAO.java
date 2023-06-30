@@ -123,7 +123,11 @@ public enum FlagDAO {
                     "WHERE eid = ? AND week = ? AND year = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, flag.getStatus());
-            preparedStatement.setInt(2, flag.getSuggested_hours());
+            if ((flag.getSuggested_hours() != null)) {
+                preparedStatement.setInt(2, flag.getSuggested_hours());
+            } else {
+                preparedStatement.setNull(2, Types.INTEGER);
+            }
             preparedStatement.setInt(3, flag.getEid());
             preparedStatement.setInt(4, flag.getWeek());
             preparedStatement.setInt(5, flag.getYear());
