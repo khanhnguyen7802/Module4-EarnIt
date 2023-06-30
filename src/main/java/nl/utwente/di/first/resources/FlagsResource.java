@@ -6,6 +6,8 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import nl.utwente.di.first.dao.FlagDAO;
+import nl.utwente.di.first.model.Company;
+import nl.utwente.di.first.model.Employment;
 import nl.utwente.di.first.model.Flag;
 
 import java.util.List;
@@ -61,5 +63,13 @@ public class FlagsResource {
         HttpSession session = req.getSession();
         String email = session.getAttribute("email").toString();
         return FlagDAO.instance.getAllRejectedWeeks(email);
+    }
+    
+    @POST
+    @Path("appeals")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Flag> getAppealsByEmployment(Employment employment) {
+        return FlagDAO.instance.getAppealsByEmployment(employment);
     }
 }

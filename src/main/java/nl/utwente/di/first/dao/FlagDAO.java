@@ -1,5 +1,6 @@
 package nl.utwente.di.first.dao;
 
+import nl.utwente.di.first.model.Employment;
 import nl.utwente.di.first.model.Flag;
 import nl.utwente.di.first.util.DBConnection;
 
@@ -195,6 +196,39 @@ public enum FlagDAO {
             throw new RuntimeException(e);
         }
     }
-
     
+    
+    public List<Flag> getAppealsByEmployment(Employment employment) {
+        try (Connection connection = DBConnection.createConnection()) {
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                    "SELECT e.eid, SUM(hours) AS total_hours, c.name AS company_name, job_title, c.logo AS logo, f.status, f.suggested_hours, e.salary_per_hour, f.week, f.year " +
+                    "FROM submission s, employment e, student st, company c, flag f " +
+                    "WHERE s.eid = e.eid AND e.sid = st.id AND c.id = e.cid AND f.eid = e.eid AND e.eid = ? AND f.status = 'appeal'" +
+                    "GROUP BY e.eid, c.name, job_title, c.logo, f.status, f.week, f.year, f.suggested_hours, e.salary_per_hour"
+            );
+        
+            preparedStatement.setInt(1, employment.getEid());
+            ResultSet resultSet = preparedStatement.executeQuery();
+        
+            List<Flag> flags = new ArrayList<>();
+            while (resultSet.next()) {
+                Flag flag = new Flag();
+                flag.setEid(resultSet.getInt("eid"));
+                flag.setWeek(resultSet.getInt("week"));
+                flag.setYear(resultSet.getInt("year"));
+                flag.setStatus(resultSet.getString("status"));
+                flag.setTotal_hours(resultSet.getInt("total_hours"));
+                flag.setCompany_name(resultSet.getString("company_name"));
+                flag.setJob_title(resultSet.getString("job_title"));
+                flag.setLogo(resultSet.getBytes("logo"));
+                int suggested_hours = resultSet.getInt("suggested_hours");
+                if (!resultSet.wasNull()) flag.setSuggested_hours(suggested_hours);
+                flags.add(flag);
+            
+            }
+            return flags;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
