@@ -4,6 +4,7 @@ import java.sql.Date;
 
 public class Invoice {
     int week;
+    int year; 
     double total_salary;
     Date date_of_issue;
     int eid;
@@ -133,5 +134,13 @@ public class Invoice {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+    
+    public void setYear(int year) {
+        this.year = year;
+    }
+    
+    public int getYear() {
+        return this.year; 
     }
 }

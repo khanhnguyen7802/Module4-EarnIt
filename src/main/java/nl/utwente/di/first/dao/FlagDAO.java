@@ -76,14 +76,14 @@ public enum FlagDAO {
             }
             
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "SELECT e.eid, SUM(hours) AS total_hours, c.name AS company_name, job_title, c.logo AS logo, f.status, f.suggested_hours " +
+                    "SELECT e.eid, SUM(hours) AS total_hours, c.name AS company_name, job_title, c.logo AS logo, f.status, f.suggested_hours, e.salary_per_hour " +
                             "FROM submission s, employment e, student st, company c, flag f " +
                             "WHERE s.eid = e.eid AND e.sid = st.id AND c.id = e.cid AND f.eid = e.eid " +
                             "AND f.week = ?" +
                             "AND DATE_PART('week', worked_date) = f.week " +
                             "AND DATE_PART('year', worked_date) = ? " +
                             "AND "+ roleAbbrev +".email = ? " +
-                            "GROUP BY e.eid, c.name, job_title, c.logo, f.status, f.week, f.suggested_hours"
+                            "GROUP BY e.eid, c.name, job_title, c.logo, f.status, f.week, f.suggested_hours, e.salary_per_hour"
             );
 
             preparedStatement.setInt(1, week);

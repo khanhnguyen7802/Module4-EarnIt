@@ -103,6 +103,18 @@ function fetchWeek(week, year) {
                         break;
                     case "accept":
                         accepted.append(new_flag)
+                        
+                        // TODO:
+                        
+                        download_button.style.display = "block"
+                        download_button.addEventListener("click", function() {
+                            sessionStorage.setItem("eid", item["eid"])
+                            sessionStorage.setItem("week", week)
+                            sessionStorage.setItem("year", year)
+                            window.open("../excluded/invoice.html");
+                            
+                            })
+                        
                         break;
                     case "reject":
                         buttons.style.display = "block"

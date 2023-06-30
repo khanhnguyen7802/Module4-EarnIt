@@ -47,6 +47,7 @@ function fetchWeek(week, year) {
                 let accept = new_flag.querySelector(".accept")
                 let reject = new_flag.querySelector(".reject")
                 let status = new_flag.querySelector(".status")
+                let total_hours = item["total_hours"]
                 company_name.innerHTML = item["company_name"]
                 job_title.innerHTML = item["job_title"]
                 company_logo.src = (item["logo"] == null) ? company_logo.src : "data:image/svg+xml;base64," + item["logo"];
@@ -84,6 +85,30 @@ function fetchWeek(week, year) {
                                     if (data === "SUCCESS") alert("Week was successfully accepted!")
                                     if (data === "FAILURE") alert("Something went wrong with accepting the weekly submission...")
                                 })
+                            
+                                
+                                // if the company accepts, then save into the invoice table 
+                                let invoice = {}
+                                let currentDate = new Date().toJSON().slice(0, 10)
+                                invoice.eid = item["eid"]
+                                invoice.week = week
+                                invoice.total_salary = item["salary_per_hour"] * total_hours 
+                                invoice.date_of_issue = currentDate 
+                                
+                                fetch(window.location.origin + "/earnit/api/invoices/add", {
+                                    method: "POST",
+                                    headers: {
+                                        "Content-type": "application/json"
+                                    },
+                                    body: JSON.stringify(invoice)
+                                }).then(response => {
+                                    if(!response.ok) throw new Error("HTTP Error! Status: " + response.status)
+                                    return response.text()
+                                }).then(data => {
+                                    if (data === "SUCCESS") alert("Invoice was successfully added!")
+                                    if (data === "FAILURE") alert("Something went wrong with adding the invoice...")
+                                })
+                            
                             })
                             reject.addEventListener("click", function() {
                                 // a small pop up form to fill in the suggested hours

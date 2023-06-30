@@ -18,11 +18,11 @@ public class InvoicesResource {
     @GET
     @Path("week")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Invoice> getAllInvoicesByWeek(@QueryParam("week") int week,
+    public List<Invoice> getAllInvoicesByWeek(@QueryParam("eid") int eid, @QueryParam("week") int week,
                                                     @QueryParam("year") int year) {
-        HttpSession session = req.getSession();
-        String email = session.getAttribute("email").toString();
-        return InvoiceDAO.instance.getWeeklyInvoices(email, week, year);
+//        HttpSession session = req.getSession();
+//        String email = session.getAttribute("email").toString();
+        return InvoiceDAO.instance.getWeeklyInvoices(eid, week, year);
     }
 
     /**
