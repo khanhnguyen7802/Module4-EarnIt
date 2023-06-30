@@ -1,62 +1,10 @@
 # di22-earnit5
 
+**Earn It Project**
 
+_Group 5_
 
-## Getting started
-
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
-
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
-
-## Add your files
-
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
-
-```
-cd existing_repo
-git remote add origin https://gitlab.utwente.nl/s2990210/di22-earnit5.git
-git branch -M main
-git push -uf origin main
-```
-
-## Integrate with your tools
-
-- [ ] [Set up project integrations](https://gitlab.utwente.nl/s2990210/di22-earnit5/-/settings/integrations)
-
-## Collaborate with your team
-
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
-
-## Test and Deploy
-
-Use the built-in continuous integration in GitLab.
-
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
-
-***
-
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-
-Earn It Project 
-Group 5
-
-##Project description
+## Project description
 
 The goal of this project is to develop a new platform where students can submit their hours and companies can approve them, with an invoice automatically generated upon approval.
 
@@ -74,11 +22,11 @@ Earn It Staff will link students and companies for a role and have an overview o
 
 ## Tools
 
--- During the procedure of project implementation, we are using Trello board to have a visual idea of all the requirements and user stories. Moreover, it is used to split the cards there, namely the responsibilities to each of the members of the group. You can access our Trello board via the link: https://trello.com/b/BNmNTXqN/m4-project 
+- During the procedure of project implementation, we are using Trello board to have a visual idea of all the requirements and user stories. Moreover, it is used to split the cards there, namely the responsibilities to each of the members of the group. You can access our Trello board via the link: https://trello.com/b/BNmNTXqN/m4-project 
 
---During the course, scrum master of that week receives an email with a username and password for the Provider Platform-as-a-Service (PaaS). These login credentials are shared among all group members. Here you can find the URL to access the platform 
+- During the course, scrum master of that week receives an email with a username and password for the Provider Platform-as-a-Service (PaaS). These login credentials are shared among all group members. Here you can find the URL to access the platform: http://earnit5.paas.hosted-by-previder.com/earnit/login 
 
---To use the sorted data, the database schema was created and added to our GitLab. You can find the database schema below: 
+- To use the sorted data, the database schema was created and added to our GitLab. You can find the database schema below: 
 
 User(id PK, email NOT NULL, password NOT NULL, salt NOT NULL)
 
@@ -98,17 +46,41 @@ Flag(eid PK, week PK, year PK, week NOT NULL, year NOT NULL, status, suggested_h
 
 
 
-## Installation
+## Files allocation
 
+There are 4 folders and a changelog file in our gitlab repository:
+
+- Design folder:
+
+Contains all the UML Diagrams (Class daigram, Use Case Diagram) which were used to have a visual idea to create the foundation for the project, Story map, SQL Database Schema.
+
+- Meetings folder:
+
+Contains Assignments Folders with 3 more folders: Assignment 1, Assignment 2, Assignment 3 respectively. Each of them contains all the documents we needed to create, such as Report on UML diagrams, Security analysis, Testing Report, and some additional documents for Academic skills Workshops. 
+
+- Src folder:
+
+Contains the main complete project source code and testing code with other testing-related recources.
 
 
 ## Usage
 
-The primary usage of our project based on the idea to link students and company with each other and ensure the interaction between them, involving the Earn It staff and, to the certain extent, Earn It platform. As a very useful and captivating example, imagine the situation when the company should review the progress of every employee (in our case student), as well as each student should submit his or her working hours and progress. With our contribution and implementation of this project, the steps mentioned above will not be so time-consuming and stressful, as student and company are able to do everything in a platform digitally, with the interaction of Admin, who can either approve flagged submissions by company, or deny it.
+The primary usage of our project based on the idea to link students and company with each other and ensure the interaction between them, involving the Earn It staff and, to the certain extent, Earn It platform.
+
+As a very useful and captivating example, imagine the situation when the company should review the progress of every employee (in our case student), as well as each student should submit his or her working hours and progress. 
+
+With our contribution and implementation of this project, the steps mentioned above will not be so time-consuming and stressful, as student and company are able to do everything in a platform digitally, with the interaction of Admin, who can either approve flagged submissions by company, or deny it.
 
 ## Support
 
-If there is a struggle with interacting with our platform, you can immediately contact one of our group members throughout our student emails, contact numbers, Discord, or directly message us via Canvas.
+If there is a struggle with interacting with our platform, you can immediately contact one of our group members through our student emails, contact numbers, Discord, or directly message us via Canvas.
+
+Radu Mungu s3091554,
+Khanh Nguyen s2950944,
+Cuong Bui s2966174,
+Kamran Babayev s2882582,
+Indigo Carelsz s2990210,
+Hieu Chu s2948923.
 
 ## Roadmap
 
@@ -158,4 +130,4 @@ Kamran Babayev (front-end developer),
 Indigo Carelsz (back-end developer),
 Hieu Chu (front-end developer)
 
-In addition, we, as the developers of Earn It Group 5, would ike to express gratitude to our Mentor, Remus Niculescu, who was guiding us during the whole path of the project and provided us with all updates, relating to the Sprint Reviews requirements and client's preferences. 
+In addition, we, as the developers of Earn It Group 5, would like to express gratitude to our Mentor, Remus Niculescu (TA), who was guiding us during the whole path of the project and provided us with all updates, relating to the Sprint Reviews requirements and client's preferences. 
