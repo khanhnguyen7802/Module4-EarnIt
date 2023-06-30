@@ -63,7 +63,7 @@ public enum FlagDAO {
         try (Connection connection = DBConnection.createConnection()) {
             
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "SELECT e.eid, SUM(hours) AS total_hours, c.name AS company_name, job_title, c.logo AS logo, f.status " +
+                    "SELECT e.eid, SUM(hours) AS total_hours, c.name AS company_name, job_title, c.logo AS logo, f.status, f.suggested_hours " +
                             "FROM submission s, employment e, student st, company c, flag f " +
                             "WHERE s.eid = e.eid AND e.sid = st.id AND c.id = e.cid AND f.eid = e.eid " +
                             "AND f.week = ?" +
@@ -89,7 +89,8 @@ public enum FlagDAO {
                 flag.setCompany_name(resultSet.getString("company_name"));
                 flag.setJob_title(resultSet.getString("job_title"));
                 flag.setLogo(resultSet.getBytes("logo"));
-        
+                flag.setSuggested_hours(resultSet.getInt("suggested_hours"));
+
                 flags.add(flag);
                 
             }
@@ -99,35 +100,82 @@ public enum FlagDAO {
         }
     }
 
-    private List<Flag> getQuery(ResultSet resultSet) throws SQLException {
-        List<Flag> flags = new ArrayList<>();
-        while (resultSet.next()) {
-            Flag flag = new Flag();
-            flag.setEid(resultSet.getInt("eid"));
-            flag.setWeek(resultSet.getInt("week"));
-            flag.setYear(resultSet.getInt("year"));
-            flag.setStatus(resultSet.getString("status"));
-            flag.setTotal_hours(resultSet.getInt("total_hours"));
-            flag.setCompany_name(resultSet.getString("company_name"));
-            flag.setJob_title(resultSet.getString("job_title"));
-            flag.setLogo(resultSet.getBytes("logo"));
-
-            flags.add(flag);
-        }
-        return flags;
-    }
 
     public boolean updateStatus(Flag flag) {
         try (Connection connection = DBConnection.createConnection();) {
             
             String query = "UPDATE flag " +
-                    "SET status = ? " +
+                    "SET status = ?, suggested_hours = ? " +
                     "WHERE eid = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, flag.getStatus());
-            preparedStatement.setInt(2, flag.getEid());
+            preparedStatement.setInt(2, flag.getSuggested_hours());
+            preparedStatement.setInt(3, flag.getEid());
             return preparedStatement.executeUpdate() == 1;
 
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Return the number of rejected weeks
+     * @param email
+     * @return the number of weeks that are rejected
+     */
+    public int getTotalRejectedWeeks(String email) {
+        try (Connection connection = DBConnection.createConnection()) {
+
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                    "SELECT COUNT(*) AS total_rejected " +
+                            "FROM flag f, employment e, student s " +
+                            "WHERE s.id = e.sid AND f.eid = e.eid " +
+                            "AND f.status = 'reject' " +
+                            "AND s.email = ?"
+            );
+            preparedStatement.setString(1, email);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            int result = 0;
+            while (resultSet.next()) {
+                result = resultSet.getInt("total_rejected");
+            }
+
+            return result;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    /**
+     * Return the (week+year) of all reflected weeks
+     * @param email
+     * @return (week+year) for all reflected weeks
+     */
+    public List<Flag> getAllRejectedWeeks(String email) {
+        try (Connection connection = DBConnection.createConnection()) {
+
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                    "SELECT week, year " +
+                            "FROM flag f, employment e, student st " +
+                            "WHERE f.eid = e.eid AND e.sid = st.id " +
+                            "AND status='rejected' " +
+                            "AND st.email = ?"
+                            );
+
+            preparedStatement.setString(1, email);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            List<Flag> flags = new ArrayList<>();
+            while (resultSet.next()) {
+                Flag flag = new Flag();
+                flag.setWeek(resultSet.getInt("week"));
+                flag.setYear(resultSet.getInt("year"));
+
+                flags.add(flag);
+            }
+            return flags;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
