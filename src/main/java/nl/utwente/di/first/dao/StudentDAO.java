@@ -47,7 +47,21 @@ public enum StudentDAO {
             preparedStatement.setString(1, email);
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            return getQuery(resultSet);
+            List<Student> students = new ArrayList<>();
+            while (resultSet.next()) {
+                Student student = new Student();
+                student.setId(resultSet.getInt("id"));
+                student.setBirth(resultSet.getString("birthdate"));
+                student.setName(resultSet.getString("name"));
+                student.setSkills(resultSet.getString("skills"));
+                student.setStudy(resultSet.getString("study"));
+                student.setUniversity(resultSet.getString("university"));
+                student.setBtw_num(resultSet.getString("btw_number"));
+                student.setEmail(resultSet.getString("email"));
+                student.setJob_title(resultSet.getString("job_title"));
+                students.add(student);
+            }
+            return students;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -118,7 +132,7 @@ public enum StudentDAO {
             student.setUniversity(resultSet.getString("university"));
             student.setBtw_num(resultSet.getString("btw_number"));
             student.setEmail(resultSet.getString("email"));
-            student.setJob_title(resultSet.getString("job_title"));
+//            student.setJob_title(resultSet.getString("job_title"));
             students.add(student);
         }
         return students;
