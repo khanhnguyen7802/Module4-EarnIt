@@ -55,7 +55,8 @@ $(window).on("load", function () {
                                 // let comment = document.getElementById("comment")
                                 let final_hours = document.getElementById("final-hours")
                                 let send_resolve = document.getElementById("send-resolve")
-                                function loadNewAppeal() {
+
+                                function loadNewAppeal(item) {
                                     let currAppeal= openAppeals.shift()
                                     if (currAppeal !== undefined) {
                                         console.log(currAppeal)
@@ -113,7 +114,7 @@ $(window).on("load", function () {
                                         closeResolvePopup()
                                     }
                                 }
-                                loadNewAppeal()
+                                loadNewAppeal(item)
                             })
                             
                         })
