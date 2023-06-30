@@ -48,4 +48,34 @@ public class StudentsResource {
     public List<Student> getAllStudents() {
         return StudentDAO.instance.getAllStudents();
     }
+
+    @Path("/update")
+    @PUT
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    public void updateStudent(
+            @FormParam("email") String email,
+            @FormParam("password") String password,
+            @FormParam("name") String name,
+            @FormParam("birth") String birth,
+            @FormParam("university") String university,
+            @FormParam("study") String study,
+            @FormParam("skills") String skills,
+            @FormParam("btw_num") String btw_num
+    ) {
+        HttpSession session = req.getSession();
+        String currentEmail = session.getAttribute("email").toString();
+        Student student = new Student();
+        student.setEmail(email);
+        student.setPassword(password);
+        student.setName(name);
+        student.setBirth(birth);
+        student.setUniversity(university);
+        student.setStudy(study);
+        student.setSkills(skills);
+        student.setBtw_num(btw_num);
+
+        StudentDAO.instance.updateStudent(currentEmail, student);
+
+        session.setAttribute("email", student.getEmail());
+    }
 }

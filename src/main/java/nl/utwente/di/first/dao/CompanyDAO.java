@@ -2,7 +2,9 @@ package nl.utwente.di.first.dao;
 
 import nl.utwente.di.first.model.Company;
 import nl.utwente.di.first.util.DBConnection;
+import nl.utwente.di.first.util.Security;
 
+import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -94,6 +96,34 @@ public enum CompanyDAO {
             List<Company> results = getQuery(resultSet);
             return (results.isEmpty()) ? null : results.get(0);
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void updateCompany(String email, Company company) {
+
+        try (Connection connection = DBConnection.createConnection()) {
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                    "UPDATE company " +
+                            "SET email = ?, password = ?, salt = ?, name = ?, location = ?, field = ?, contact = ?, kvk_number = ? " +
+                            "WHERE email = ?"
+            );
+            byte[] byteSalt = Security.getSalt();
+            String salt = Security.toHex(byteSalt);
+            String securePassword = Security.saltSHA256(company.getPassword(), byteSalt);
+
+            preparedStatement.setString(1, company.getEmail());
+            preparedStatement.setString(2, securePassword);
+            preparedStatement.setString(3, salt);
+            preparedStatement.setString(4, company.getName());
+            preparedStatement.setString(5, company.getLocation());
+            preparedStatement.setString(6, company.getField());
+            preparedStatement.setString(7, company.getContact());
+            preparedStatement.setString(8, company.getKvk_num());
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
     }

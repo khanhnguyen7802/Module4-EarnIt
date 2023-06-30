@@ -2,7 +2,9 @@ package nl.utwente.di.first.dao;
 
 import nl.utwente.di.first.model.Student;
 import nl.utwente.di.first.util.DBConnection;
+import nl.utwente.di.first.util.Security;
 
+import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -79,13 +81,27 @@ public enum StudentDAO {
         try (Connection connection = DBConnection.createConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(
                     "UPDATE student " +
-                            "SET email = ?, "
+                            "SET email = ?, password = ?, salt = ?, name = ?, birthdate = ?, university = ?, study = ?, skills = ?, btw_number = ? " +
+                            "WHERE email = ?"
             );
-            preparedStatement.setString(1, email);
-            ResultSet resultSet = preparedStatement.executeQuery();
+            byte[] byteSalt = Security.getSalt();
+            String salt = Security.toHex(byteSalt);
+            String securePassword = Security.saltSHA256(student.getPassword(), byteSalt);
 
-            List<Student> results = getQuery(resultSet);
+            preparedStatement.setString(1, student.getEmail());
+            preparedStatement.setString(2, securePassword);
+            preparedStatement.setString(3, salt);
+            preparedStatement.setString(4, student.getName());
+            preparedStatement.setDate(5, Date.valueOf(student.getBirth()));
+            preparedStatement.setString(6, student.getUniversity());
+            preparedStatement.setString(7, student.getStudy());
+            preparedStatement.setString(8, student.getSkills());
+            preparedStatement.setString(9, student.getBtw_num());
+
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
     }

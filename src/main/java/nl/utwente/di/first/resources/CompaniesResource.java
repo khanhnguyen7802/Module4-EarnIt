@@ -2,14 +2,13 @@ package nl.utwente.di.first.resources;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.PathParam;
-import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import nl.utwente.di.first.dao.CompanyDAO;
+import nl.utwente.di.first.dao.StudentDAO;
 import nl.utwente.di.first.model.Company;
+import nl.utwente.di.first.model.Student;
 
 import java.util.List;
 
@@ -49,5 +48,33 @@ public class CompaniesResource {
     @Produces(MediaType.APPLICATION_JSON)
     public List<Company> getAllCompanies() {
         return CompanyDAO.instance.getAllCompany();
+    }
+
+    @Path("/update")
+    @PUT
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    public void updateCompany(
+            @FormParam("email") String email,
+            @FormParam("password") String password,
+            @FormParam("name") String name,
+            @FormParam("location") String location,
+            @FormParam("field") String field,
+            @FormParam("contact") String contact,
+            @FormParam("btw_num") String kvk_num
+    ) {
+        HttpSession session = req.getSession();
+        String currentEmail = session.getAttribute("email").toString();
+        Company company = new Company();
+        company.setEmail(email);
+        company.setPassword(password);
+        company.setName(name);
+        company.setLocation(location);
+        company.setField(field);
+        company.setContact(contact);
+        company.setKvk_num(kvk_num);
+
+        CompanyDAO.instance.updateCompany(currentEmail, company);
+
+        session.setAttribute("email", company.getEmail());
     }
 }
