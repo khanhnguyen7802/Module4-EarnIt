@@ -57,8 +57,6 @@ function fetchWeek(week, year) {
                     flag_popup.style.display = "flex"
                 })
                 
-                if (item["status"])
-                
                 switch (item["status"]) {
                     case "appeal":
                     case "pending":
