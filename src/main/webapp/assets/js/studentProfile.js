@@ -12,13 +12,12 @@ $(window).on("load", function () {
         })
         .then(json => {
             console.log(json);
-            const data = json[0];
-            form.email.value = data.email;
-            form.name.value = data.name;
-            form.university.value = data.university;
-            form.study.value = data.study;
-            form.skills.value = data.skills;
-            form.btw_num.value = data.btw_num;
+            form.email.value = json.email;
+            form.name.value = json.name;
+            form.university.value = json.university;
+            form.study.value = json.study;
+            form.skills.value = json.skills;
+            form.btw_num.value = json.btw_num;
         })
 });
 
@@ -44,7 +43,7 @@ submit.addEventListener("click", function() {
     student.name = sanitize(form.name.value);
     student.university = sanitize(form.university.value);
     student.study = sanitize(form.study.value);
-    student.skills = sanitize(form.skills.value);
+    student.skills = form.skills.value === "" ? null : sanitize(form.skills.value);
     student.password = sanitize(form.password.value);
     student.btw_num = sanitize(form.btw_num.value);
 
