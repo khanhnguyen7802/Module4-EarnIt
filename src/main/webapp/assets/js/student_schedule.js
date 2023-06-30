@@ -86,19 +86,68 @@ function fetchWeek(week, year) {
                 let job_title = new_flag.querySelector(".job_title");
                 let total_hours = new_flag.querySelector(".total-hours")
                 let company_logo = new_flag.querySelector(".company_logo")
+                let buttons = new_flag.querySelector(".buttons")
+                let accept = new_flag.querySelector(".accept")
+                let reject = new_flag.querySelector(".reject")
+                let status = new_flag.querySelector(".status")
+                let download_button = new_flag.querySelector(".download-invoice")
                 company_name.innerHTML = item["company_name"]
                 job_title.innerHTML = item["job_title"];
-                total_hours.innerHTML = `Total hours this week: ${item["total_hours"]}`
+                total_hours.innerHTML = (item["suggested_hours"] == null) ? `Total hours this week: ${item["total_hours"]}` : `Total hours this week: <s>${item["total_hours"]}</s> &rarr; ${item["suggested_hours"]}`
                 company_logo.src = (item["logo"] == null) ? company_logo.src : "data:image/svg+xml;base64," + item["logo"];
                 switch (item["status"]) {
-                    case "pending": 
                     case "appeal":
+                        status.innerHTML = "Submission has been sent to admin for review"
+                    case "pending":
                         pending.append(new_flag)
                         break;
                     case "accept":
                         accepted.append(new_flag)
                         break;
                     case "reject":
+                        buttons.style.display = "block"
+                        accept.addEventListener("click", function() {
+                            let flag = {}
+                            flag.eid = item["eid"]
+                            flag.week = week
+                            flag.year = year
+                            flag.status = "accept"
+                            flag.suggested_hours = item["suggested_hours"]
+                            fetch(window.location.origin + "/earnit/api/flags/update", {
+                                method: "POST",
+                                headers: {
+                                    "Content-type": "application/json"
+                                },
+                                body: JSON.stringify(flag)
+                            }).then(response => {
+                                if(!response.ok) throw new Error("HTTP Error! Status: " + response.status)
+                                return response.text()
+                            }).then(data => {
+                                if (data === "SUCCESS") alert("Week was successfully accepted!")
+                                if (data === "FAILURE") alert("Something went wrong with accepting the weekly submission...")
+                            })
+                        })
+                        reject.addEventListener("click", function() {
+                            let flag = {}
+                            flag.eid = item["eid"]
+                            flag.week = week
+                            flag.year = year
+                            flag.status = "appeal"
+                            flag.suggested_hours = item["suggested_hours"]
+                            fetch(window.location.origin + "/earnit/api/flags/update", {
+                                method: "POST",
+                                headers: {
+                                    "Content-type": "application/json"
+                                },
+                                body: JSON.stringify(flag)
+                            }).then(response => {
+                                if(!response.ok) throw new Error("HTTP Error! Status: " + response.status)
+                                return response.text()
+                            }).then(data => {
+                                if (data === "SUCCESS") alert("Week was successfully accepted!")
+                                if (data === "FAILURE") alert("Something went wrong with accepting the weekly submission...")
+                            })
+                        })
                         rejected.append(new_flag)
                         break;
                 }
