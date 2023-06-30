@@ -8,8 +8,8 @@ submit_button.addEventListener("click", function () {
         err_msg.innerHTML = "Please input both a username and a password to login."
     } else {
         let user = {
-            email: email_field.value,
-            password: password_field.value
+            email: sanitize(email_field.value),
+            password: sanitize(password_field.value)
         };
         fetch(window.location.origin + "/earnit/api/login", {
             method: "POST",

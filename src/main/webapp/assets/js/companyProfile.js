@@ -40,12 +40,12 @@ submit.addEventListener("click", function() {
         return;
     }
 
-    company.email = form.email.value;
-    company.name = form.name.value;
-    company.field = form.field.value;
-    company.contact = form.contact.value;
-    company.location = form.location.value;
-    company.kvk_num = form.kvk_num.value;
+    company.email = sanitize(form.email.value);
+    company.name = sanitize(form.name.value);
+    company.field = sanitize(form.field.value);
+    company.contact = sanitize(form.contact.value);
+    company.location = sanitize(form.location.value);
+    company.kvk_num = sanitize(form.kvk_num.value);
 
     // Check if there are any changes
     if (JSON.stringify(company) === JSON.stringify(initialData)) {

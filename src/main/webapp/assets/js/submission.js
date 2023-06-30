@@ -18,4 +18,4 @@ $(window).on("load", function () {
         })
 })
 
-//TODO: Add an event listener to the Submit button that send a POST request with body to submissions API
+//Unused

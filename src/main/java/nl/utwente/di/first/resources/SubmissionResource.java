@@ -70,9 +70,6 @@ public class SubmissionResource {
     public int getTotalHours(@QueryParam("week") int week,
                                 @QueryParam("year") int year,
                                 @QueryParam("eid") int eid) {
-
         return SubmissionDAO.instance.getTotalHoursOfWeek(eid, week, year);
     }
-
-
 }

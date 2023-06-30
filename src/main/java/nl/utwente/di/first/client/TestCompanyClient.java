@@ -38,6 +38,12 @@ public class TestCompanyClient {
         System.out.println("Response:\n" + results);
 
         //Try to get the list of submission in the current week
+        System.out.println("Fetching submissions in a week...");
+        results = target.path(url_pattern).path("submissions").path("students").path("week")
+                .queryParam("week", 1).queryParam("year", 2023)
+                .request(MediaType.APPLICATION_JSON)
+                .get(String.class);
+        System.out.println("Response:\n" + results);
 
         client.close();
     }

@@ -93,9 +93,9 @@ function submit(item) {
     let hours = document.getElementById("hours")
     let date = document.getElementById("date")
     let comment = document.getElementById("comment")
-    submission["hours"] = hours.value
-    submission["date"] = date.value;
-    submission["comment"] = comment.value;
+    submission["hours"] = sanitize(hours.value);
+    submission["date"] = sanitize(date.value);
+    submission["comment"] = sanitize(comment.value);
 
     fetch(window.location.origin + "/earnit/api/submissions/add", {
         method: "POST",

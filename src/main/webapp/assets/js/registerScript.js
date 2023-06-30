@@ -66,12 +66,12 @@ submit_button.addEventListener("click", function () {
         if (!student_valid){
             return
         } else {
-            user.name = full_name.value;
-            user.birth = student_birthdate.value;
-            user.university = student_university.value === "" ? null: student_university.value;
-            user.study = student_study.value;
-            user.skills = student_skills.value === "" ? null : student_skills.value;
-            user.btw_num = btw_number.value === "" ? null : btw_number.value;
+            user.name = sanitize(full_name.value);
+            user.birth = sanitize(student_birthdate.value);
+            user.university = student_university.value === "" ? null: sanitize(student_university.value);
+            user.study = sanitize(student_study.value);
+            user.skills = student_skills.value === "" ? null : sanitize(student_skills.value);
+            user.btw_num = btw_number.value === "" ? null : sanitize(btw_number.value);
             fetch(window.location.origin + "/earnit/api/register/student", {
                 method: "POST",
                 headers: {
@@ -102,11 +102,11 @@ submit_button.addEventListener("click", function () {
         });
         if (!company_valid) {
         } else {
-            user.name = company_name.value;
-            user.location = location_field.value;
-            user.field = field_field.value === "" ? null : field_field.value
-            user.contact = contact_name.value;
-            user.kvk_num = kvk_number.value === "" ? null : kvk_number.value;
+            user.name = sanitize(company_name.value);
+            user.location = sanitize(location_field.value);
+            user.field = field_field.value === "" ? null : sanitize(field_field.value);
+            user.contact = sanitize(contact_name.value);
+            user.kvk_num = kvk_number.value === "" ? null : sanitize(kvk_number.value);
             user.logo = logo_data;
             fetch(window.location.origin + "/earnit/api/register/company", {
                 method: "POST",

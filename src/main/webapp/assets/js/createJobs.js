@@ -48,9 +48,9 @@ submit_button.addEventListener("click", function () {
     })
     let newJob = {
         cid: JSON.parse(companySelect.value)["cid"],
-        job_description: job_description.value,
-        job_title: job_title.value,
-        salary_per_hour: salary.value
+        job_description: sanitize(job_description.value),
+        job_title: sanitize(job_title.value),
+        salary_per_hour: sanitize(salary.value)
     }
     if (!valid) return
     fetch(window.location.origin + "/earnit/api/employments/new" , {

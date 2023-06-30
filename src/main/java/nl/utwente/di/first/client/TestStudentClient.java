@@ -19,7 +19,6 @@ public class TestStudentClient {
         WebTarget target = client.target(getBaseURI());
 
         //Login as a student, a response "STUDENT" is expected
-        //TODO: Maybe integrate with JUnit
         User student = new User();
         student.setEmail("student1@gmail.com");
         student.setPassword("student1");
@@ -30,14 +29,20 @@ public class TestStudentClient {
         System.out.println("Response:\n" + results);
 
         //Try to get the list of company
-        System.out.println("Fetching companies");
+        System.out.println("Fetching companies...");
         results = target.path(url_pattern).path("companies")
                         .request(MediaType.APPLICATION_JSON).get(String.class);
         System.out.println("Response:\n" + results);
 
         //Try to get the list of submission in the current week
-
-        //TODO: Test submission-related APIs
+        System.out.println("Fetching submissions in a week...");
+        results = target.path(url_pattern).path("submissions").path("students").path("week")
+                .queryParam("week", 1).queryParam("year", 2023)
+                .request(MediaType.APPLICATION_JSON)
+                .get(String.class);
+        System.out.println("Response:\n" + results);
+        //TODO: week number and year
+        //TODO: fetching the flags api
         client.close();
     }
 }

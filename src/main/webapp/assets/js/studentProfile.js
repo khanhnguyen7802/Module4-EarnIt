@@ -40,13 +40,13 @@ submit.addEventListener("click", function() {
         return;
     }
 
-    student.email = form.email.value;
-    student.name = form.name.value;
-    student.university = form.university.value;
-    student.study = form.study.value;
-    student.skills = form.skills.value;
-    student.password = form.password.value;
-    student.btw_num = form.btw_num.value;
+    student.email = sanitize(form.email.value);
+    student.name = sanitize(form.name.value);
+    student.university = sanitize(form.university.value);
+    student.study = sanitize(form.study.value);
+    student.skills = sanitize(form.skills.value);
+    student.password = sanitize(form.password.value);
+    student.btw_num = sanitize(form.btw_num.value);
 
     // Check if there are any changes
     if (JSON.stringify(student) === JSON.stringify(initialData)) {
