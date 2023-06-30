@@ -12,13 +12,12 @@ $(window).on("load", function () {
         })
         .then(json => {
             console.log(json);
-            const data = json[0];
-            form.email.value = data.email;
-            form.name.value = data.name;
-            form.field.value = data.field;
-            form.contact.value = data.contact;
-            form.location.value = data.location;
-            form.kvk_num.value = data.kvk_num;
+            form.email.value = json.email;
+            form.name.value = json.name;
+            form.field.value = json.field;
+            form.contact.value = json.contact;
+            form.location.value = json.location;
+            form.kvk_num.value = json.kvk_num;
         })
 });
 
@@ -42,10 +41,11 @@ submit.addEventListener("click", function() {
 
     company.email = sanitize(form.email.value);
     company.name = sanitize(form.name.value);
-    company.field = sanitize(form.field.value);
-    company.contact = sanitize(form.contact.value);
-    company.location = sanitize(form.location.value);
-    company.kvk_num = sanitize(form.kvk_num.value);
+    company.field = form.field.value === "" ? null : sanitize(form.field.value);
+    company.contact = form.contact.value === "" ? null : sanitize(form.contact.value);
+    company.location = form.location.value === "" ? null : sanitize(form.location.value);
+    company.kvk_num = form.kvk_num.value === "" ? null : sanitize(form.kvk_num.value);
+    company.password = form.password.value === "" ? initialData.password.value : sanitize(form.password.value);
 
     // Check if there are any changes
     if (JSON.stringify(company) === JSON.stringify(initialData)) {

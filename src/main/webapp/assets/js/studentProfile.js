@@ -14,6 +14,7 @@ $(window).on("load", function () {
             console.log(json);
             form.email.value = json.email;
             form.name.value = json.name;
+            // form.birth.value = json.birth;
             form.university.value = json.university;
             form.study.value = json.study;
             form.skills.value = json.skills;
@@ -25,6 +26,7 @@ $(window).on("load", function () {
 let initialData = {
     email: form.email.value,
     name: form.name.value,
+    // birth: form.birth.value,
     university: form.university.value,
     study: form.study.value,
     skills: form.skills.value,
@@ -41,11 +43,12 @@ submit.addEventListener("click", function() {
 
     student.email = sanitize(form.email.value);
     student.name = sanitize(form.name.value);
-    student.university = sanitize(form.university.value);
-    student.study = sanitize(form.study.value);
+    // student.birth = form.birth.value;
+    student.university = form.university.value === "" ? null : sanitize(form.university.value);
+    student.study = form.study.value === "" ? null : sanitize(form.study.value);
     student.skills = form.skills.value === "" ? null : sanitize(form.skills.value);
-    student.password = sanitize(form.password.value);
-    student.btw_num = sanitize(form.btw_num.value);
+    student.btw_num = form.btw_num.value === "" ? null : sanitize(form.btw_num.value);
+    student.password = form.password.value === "" ? initialData.password.value : sanitize(form.password.value);
 
     // Check if there are any changes
     if (JSON.stringify(student) === JSON.stringify(initialData)) {

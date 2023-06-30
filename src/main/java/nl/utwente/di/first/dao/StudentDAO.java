@@ -81,7 +81,7 @@ public enum StudentDAO {
         try (Connection connection = DBConnection.createConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(
                     "UPDATE student " +
-                            "SET email = ?, password = ?, salt = ?, name = ?, birthdate = ?, university = ?, study = ?, skills = ?, btw_number = ? " +
+                            "SET email = ?, password = ?, salt = ?, name = ?, university = ?, study = ?, skills = ?, btw_number = ? " +
                             "WHERE email = ?"
             );
             byte[] byteSalt = Security.getSalt();
@@ -92,11 +92,11 @@ public enum StudentDAO {
             preparedStatement.setString(2, securePassword);
             preparedStatement.setString(3, salt);
             preparedStatement.setString(4, student.getName());
-            preparedStatement.setDate(5, Date.valueOf(student.getBirth()));
-            preparedStatement.setString(6, student.getUniversity());
-            preparedStatement.setString(7, student.getStudy());
-            preparedStatement.setString(8, student.getSkills());
-            preparedStatement.setString(9, student.getBtw_num());
+//            preparedStatement.setDate(5, Date.valueOf(student.getBirth()));
+            preparedStatement.setString(5, student.getUniversity());
+            preparedStatement.setString(6, student.getStudy());
+            preparedStatement.setString(7, student.getSkills());
+            preparedStatement.setString(8, student.getBtw_num());
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
