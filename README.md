@@ -100,14 +100,15 @@ Flag(eid PK, week PK, year PK, week NOT NULL, year NOT NULL, status, suggested_h
 
 ## Installation
 
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+
 
 ## Usage
 
 The primary usage of our project based on the idea to link students and company with each other and ensure the interaction between them, involving the Earn It staff and, to the certain extent, Earn It platform. As a very useful and captivating example, imagine the situation when the company should review the progress of every employee (in our case student), as well as each student should submit his or her working hours and progress. With our contribution and implementation of this project, the steps mentioned above will not be so time-consuming and stressful, as student and company are able to do everything in a platform digitally, with the interaction of Admin, who can either approve flagged submissions by company, or deny it.
 
 ## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+
+If there is a struggle with interacting with our platform, you can immediately contact one of our group members throughout our student emails, contact numbers, Discord, or directly message us via Canvas.
 
 ## Roadmap
 
@@ -145,13 +146,6 @@ For admin:
 3. Manage flagged submissions 
 4. Create new jobs 
 
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
 
 ## Authors and acknowledgment
 

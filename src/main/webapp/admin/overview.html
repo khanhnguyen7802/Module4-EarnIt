@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Overview</title>
   <link rel="icon" href="../assets/img/Earn%20It%20Logo.svg">
-  <link rel="stylesheet" href="../assets/css/overviewStaff.css">
   <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="../assets/fonts/fontawesome-all.min.css">
   <link rel="stylesheet" href="../assets/css/Pretty-Search-Form-.css">
@@ -13,6 +12,7 @@
   <link rel="stylesheet" href="../assets/css/Search-Input-responsive.css">
   <link rel="stylesheet" href="../assets/css/sidebar-1.css">
   <link rel="stylesheet" href="../assets/css/sidebar.css">
+  <link rel="stylesheet" href="../assets/css/popup.css">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
   <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
@@ -38,37 +38,90 @@
   </li>
 </ul>
 
-<div class="center">
-  <!--for table header-->
-  <div class="tbl-header">
-    <table>
-      <thead>
-      <tr>
-        <th>Student name</th>
-        <th>Company name</th>
-        <th>Job title</th>
-      </tr>
-      </thead>
-    </table>
-  </div>
+<div class="container" id="main-screen">
+  <div class="row" style="margin: 0px -15px;">
+    <div class="col" style="margin: 0px 10px 0px 30px;">
+      <h1 style="margin: 2px 0px 15px;padding: 20px 60px 0px 0px;color: var(--bs-black);margin-right: 357px;padding-top: 0px;margin-bottom: 15px;padding-bottom: 0px;margin-top: 20px;">
+        Overview</h1>
+      <div class="list-group" style="position: relative;">
+        <ul id="list-7" class="list-unstyled" style="margin-left: -32px;position: relative;padding-left: 32px;">
+          <button type="button" class="collapsible" style="cursor: pointer; padding: 10px; width: 100%;border: none;text-align: left;outline: none;font-size: 15px;border-radius:10px;margin: 10px 0">Important!</button>
+          <div class="content" id="important" style="padding: 0 18px; display: none; overflow: hidden;">
+           
+          </div>
+          <button type="button" class="collapsible" style="cursor: pointer; padding: 10px; width: 100%;border: none;text-align: left;outline: none;font-size: 15px;border-radius:10px;margin: 10px 0">Other Employments</button>
+          <div class="content" id="other" style="padding: 0 18px; display: none; overflow: hidden;">
 
-  <!--for table content (fetch data)-->
-  <div class="tbl-content">
-    <table>
-      <tbody id="table-body"></tbody>
-    </table>
+          </div>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="resolve-popup" class="popup">
+  <div class="popup-content">
+    <div class="popup-header">
+      <h2 id="resolve-info" style="display: inline-block">&lt;Student&gt; &LeftRightArrow; &lt;Job Name&gt; (&lt;Company name&gt;)</h2>
+      <span id="resolve-popup-close" class="close">&times;</span>
+    </div>
+    <div class="popup-body">
+      <h3>Students submission:</h3>
+      <p id="original-hours">&lt;hours&gt;</p>
+      <h3>Company submission:</h3>
+      <p id="suggested-hours">&lt;Job description&gt;</p>
+      <h3>Notes by student:</h3>
+      <p id="comment">&lt;Comment&gt;</p>
+      <form>
+        <div class="form-group"><label class="form-label" for="final-hours">Final Submission:</label><input class="form-control form-control" type="number" id="final-hours" placeholder="Enter the amount of hours..."></div>
+        <button class="btn btn-dark" type="button" style="margin-top: 28px;" id="send-resolve">Resolve</button>
+      </form>
+    </div>
   </div>
 </div>
 
 <template id="employment-item">
-  <tr>
-    <td id="student-name"> Student name </td>
-    <td id="company-name"> Company name </td>
-    <td id="job-title"> Job title </td>
-  </tr>
+  <li style="position: relative;padding-bottom: 0px;margin-bottom: 18px;">
+    <div class="list-group" style="padding-right: 208px;position: relative;">
+      <div
+              class="list-group-item list-group-item-action flex-column align-items-start"
+              style="position: relative;">
+        <div style="display: flex;position: relative;">
+          <img class="company_logo" src="../assets/img/Earn%20It%20Logo.svg" style="width: 80px;margin-right: 15px;position: relative;"/>
+          <div style="position: relative;width: 1000px;">
+            <h5 class="mb-1 student_name" style="position: static;">Company</h5>
+            <p class="mb-1 job_info" style="position: static;margin-top: -13px;padding-top: 13px;">Job
+              title</p>
+          </div>
+          <div class="resolve-buttons" style="display: none">
+            <span class="badge rounded-pill bg-primary align-top appeal-amount" style="position: absolute; right: 0;top: 0;"></span>
+            <button class="btn btn-primary z-index align-bottom resolve" type="button" style="position:absolute;bottom:0;right:0;border-top-left-radius: 20px;border-bottom-left-radius: 20px;border-top-right-radius: 20px;border-bottom-right-radius: 20px;background: rgb(219, 84, 97);border-color: var(--bs-list-group-border-color);height: 40px;">Resolve</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </li>
+
 </template>
 
 <script src="../assets/js/overviewList.js"></script>
 <script src="../assets/js/logoutScript.js"></script>
+<script>
+  const coll = document.getElementsByClassName("collapsible");
+  let i;
+
+  for (i = 0; i < coll.length; i++) {
+    coll[i].addEventListener("click", function() {
+      this.classList.toggle("active");
+      const content = this.nextElementSibling;
+      if (content.style.display === "block") {
+        content.style.display = "none";
+      } else {
+        content.style.display = "block";
+      }
+    });
+  }
+</script>
 </body>
 </html>

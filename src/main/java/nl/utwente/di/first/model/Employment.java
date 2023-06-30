@@ -13,6 +13,7 @@ public class Employment {
     String job_title;
     double salary_per_hour;
     byte[] logo;
+    int appeal_amount;
     
     
     public int getSid() {
@@ -85,5 +86,13 @@ public class Employment {
     
     public void setLogo(byte[] logo) {
         this.logo = logo;
+    }
+    
+    public int getAppeal_amount() {
+        return appeal_amount;
+    }
+    
+    public void setAppeal_amount(int appeal_amount) {
+        this.appeal_amount = appeal_amount;
     }
 }

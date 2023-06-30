@@ -21,10 +21,17 @@ public class EmploymentsResource {
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Employment> getEmploymentList() {
+    public List<Employment> getEmploymentListByEmail() {
         HttpSession session = req.getSession();
         String email = session.getAttribute("email").toString();
-        return EmploymentDAO.instance.getAllEmployments(email);
+        return EmploymentDAO.instance.getAllEmploymentsByEmail(email);
+    }
+    
+    @GET
+    @Path("all")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Employment> getEmploymentList() {
+        return EmploymentDAO.instance.getAllEmployments();
     }
     
     @GET
